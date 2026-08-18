@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Great+Vibes&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="page2.css">
 </head>
@@ -17,10 +18,21 @@
 <body>
 
     <!-- =========================================
+         CINEMATIC TRANSITION
+    ========================================== -->
+
+    <div id="pageTransition"></div>
+
+
+    <!-- =========================================
          BACKGROUND
     ========================================== -->
 
     <div class="background-glow"></div>
+
+    <div class="light-orb orb-one"></div>
+    <div class="light-orb orb-two"></div>
+    <div class="light-orb orb-three"></div>
 
     <div class="stars">
         <span>✦</span>
@@ -33,7 +45,8 @@
         <span>✧</span>
     </div>
 
-    <div class="petals">
+    <div class="floating-hearts">
+        <span>♡</span>
         <span>♡</span>
         <span>♡</span>
         <span>♡</span>
@@ -41,12 +54,15 @@
         <span>♡</span>
     </div>
 
+    <div class="film-grain"></div>
+
 
     <!-- =========================================
-         PAGE 2
+         MAIN PAGE
     ========================================== -->
 
     <main id="page2">
+
 
         <!-- =====================================
              SCENE 1
@@ -106,7 +122,7 @@
                     JUST SOMETHING FROM ME
                 </p>
 
-                <div class="typing-message">
+                <div class="handwritten-message">
 
                     <p id="messageLine1"></p>
 
@@ -153,6 +169,7 @@
 
                 <div class="timeline">
 
+
                     <!-- MEMORY 1 -->
 
                     <article class="memory memory-left">
@@ -164,8 +181,15 @@
                         <div class="memory-card">
 
                             <div class="photo-placeholder">
-                                <span>📸</span>
-                                <small>YOUR PHOTO 01</small>
+
+                                <div class="photo-inner">
+                                    <span>📸</span>
+
+                                    <small>
+                                        YOUR PHOTO 01
+                                    </small>
+                                </div>
+
                             </div>
 
                             <div class="memory-text">
@@ -202,8 +226,15 @@
                         <div class="memory-card">
 
                             <div class="photo-placeholder">
-                                <span>📸</span>
-                                <small>YOUR PHOTO 02</small>
+
+                                <div class="photo-inner">
+                                    <span>📸</span>
+
+                                    <small>
+                                        YOUR PHOTO 02
+                                    </small>
+                                </div>
+
                             </div>
 
                             <div class="memory-text">
@@ -240,8 +271,15 @@
                         <div class="memory-card">
 
                             <div class="photo-placeholder">
-                                <span>📸</span>
-                                <small>YOUR PHOTO 03</small>
+
+                                <div class="photo-inner">
+                                    <span>📸</span>
+
+                                    <small>
+                                        YOUR PHOTO 03
+                                    </small>
+                                </div>
+
                             </div>
 
                             <div class="memory-text">
@@ -279,8 +317,15 @@
                         <div class="memory-card">
 
                             <div class="photo-placeholder">
-                                <span>📸</span>
-                                <small>YOUR PHOTO 04</small>
+
+                                <div class="photo-inner">
+                                    <span>📸</span>
+
+                                    <small>
+                                        YOUR PHOTO 04
+                                    </small>
+                                </div>
+
                             </div>
 
                             <div class="memory-text">
@@ -333,18 +378,24 @@
                 </div>
 
                 <p class="small-heading">
-                    BEFORE WE MOVE ON...
+                    ONE LAST THING
                 </p>
 
                 <h2>
                     You know what's crazy?
                 </h2>
 
-                <p class="pause-text">
+                <p
+                    class="pause-text"
+                    id="pauseText"
+                >
                     Those are only a few of my favorite moments.
                 </p>
 
-                <p class="big-final-text">
+                <p
+                    class="big-final-text"
+                    id="finalText"
+                >
                     And I still have so much more
                     to show you. ❤️
                 </p>
@@ -367,6 +418,13 @@
          MUSIC
     ========================================== -->
 
+    <div
+        id="musicStatus"
+        class="music-status"
+    >
+        ♫ Music on
+    </div>
+
     <button
         id="musicButton"
         class="music-button"
@@ -383,4 +441,5 @@
     <script src="page2.js"></script>
 
 </body>
+
 </html>
