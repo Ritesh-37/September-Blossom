@@ -1,9 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    /* =========================================
-       ELEMENTS
-    ========================================== */
-
     const transition =
         document.getElementById("pageTransition");
 
@@ -52,8 +48,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const continueButton =
         document.getElementById("continueButton");
 
-    const musicButton =
-        document.getElementById("musicButton");
+    const starContainer =
+        document.getElementById("stars");
 
 
     /* =========================================
@@ -66,28 +62,28 @@ document.addEventListener("DOMContentLoaded", function () {
             title: "Our Beginning",
             icon: "💫",
             text:
-                "It all started with something so simple. I sent you a follow request... and one day, you accepted it. Then came one tiny word that started something much bigger than either of us knew... \"Hi.\" ❤️"
+                'It all started with something so simple. I sent you a follow request... and one day, you accepted it. Then came one tiny word that started something much bigger than either of us knew... "Hi." ❤️'
         },
 
         {
             title: "12.03.26",
             icon: "📅",
             text:
-                "12.03.26 — the day we started talking. A simple date on a calendar, but one that became the beginning of so many little moments, conversations and memories."
+                "12.03.26 — the day we started talking. Just a date on a calendar, but one that became the beginning of so many conversations, little moments and memories."
         },
 
         {
             title: "That First Day",
             icon: "🥹",
             text:
-                "One of my favorite little memories... you falling asleep on my lap when we were together for the first day. Maybe it was just a small moment, but it made me feel incredibly lucky."
+                "One of my favorite little memories... you falling asleep on my lap when we were together for the first day. Maybe it was a small moment, but it made me feel incredibly lucky."
         },
 
         {
             title: "A Little Confession",
             icon: "😂",
             text:
-                "The first time I heard your voice, I told you that you sounded very young. Looking back... I have absolutely no idea why I thought saying that was a good idea. 😂"
+                'The first time I heard your voice, I told you that you sounded very young. Looking back... I have absolutely no idea why I thought saying that was a good idea. 😂'
         },
 
         {
@@ -115,9 +111,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let currentMemory = null;
 
+    const discoveredStars = [];
+
 
     /* =========================================
-       PAGE LOAD
+       PAGE FADE IN
     ========================================== */
 
     setTimeout(function () {
@@ -128,13 +126,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =========================================
-       CREATE BACKGROUND STARS
+       BACKGROUND STARS
     ========================================== */
 
-    const starContainer =
-        document.getElementById("stars");
-
-    for (let i = 0; i < 80; i++) {
+    for (let i = 0; i < 90; i++) {
 
         const star =
             document.createElement("span");
@@ -143,7 +138,9 @@ document.addEventListener("DOMContentLoaded", function () {
             "background-star";
 
         star.textContent =
-            Math.random() > .8 ? "✦" : "•";
+            Math.random() > .82
+                ? "✦"
+                : "•";
 
         star.style.left =
             Math.random() * 100 + "%";
@@ -158,7 +155,134 @@ document.addEventListener("DOMContentLoaded", function () {
             (2 + Math.random() * 4) + "s";
 
         starContainer.appendChild(star);
+
     }
+
+
+    /* =========================================
+       SHOOTING STARS
+    ========================================== */
+
+    function createShootingStar() {
+
+        if (!universe.classList.contains("active")) {
+            return;
+        }
+
+        const shootingStar =
+            document.createElement("div");
+
+        shootingStar.className =
+            "shooting-star";
+
+        shootingStar.style.left =
+            (60 + Math.random() * 40) + "%";
+
+        shootingStar.style.top =
+            (5 + Math.random() * 35) + "%";
+
+        document.body.appendChild(
+            shootingStar
+        );
+
+        setTimeout(function () {
+
+            shootingStar.remove();
+
+        }, 1500);
+
+    }
+
+
+    setInterval(
+        createShootingStar,
+        5000
+    );
+
+
+    /* =========================================
+       MOUSE STAR REACTION
+    ========================================== */
+
+    document.addEventListener(
+        "mousemove",
+        function (event) {
+
+            const mouseX =
+                event.clientX;
+
+            const mouseY =
+                event.clientY;
+
+            memoryStars.forEach(
+                function (star) {
+
+                    const rect =
+                        star.getBoundingClientRect();
+
+                    const centerX =
+                        rect.left +
+                        rect.width / 2;
+
+                    const centerY =
+                        rect.top +
+                        rect.height / 2;
+
+                    const distance =
+                        Math.sqrt(
+                            Math.pow(
+                                mouseX - centerX,
+                                2
+                            ) +
+                            Math.pow(
+                                mouseY - centerY,
+                                2
+                            )
+                        );
+
+                    if (distance < 180) {
+
+                        const move =
+                            Math.max(
+                                0,
+                                (180 - distance) / 180
+                            );
+
+                        const directionX =
+                            centerX < mouseX
+                                ? -1
+                                : 1;
+
+                        const directionY =
+                            centerY < mouseY
+                                ? -1
+                                : 1;
+
+                        star.style.transform =
+                            "translate(" +
+                            directionX *
+                            move *
+                            8 +
+                            "px, " +
+                            directionY *
+                            move *
+                            8 +
+                            "px) scale(" +
+                            (1 + move * .15) +
+                            ")";
+
+                    } else {
+
+                        star.style.transform =
+                            "";
+
+                    }
+
+                }
+            );
+
+        }
+    );
 
 
     /* =========================================
@@ -169,13 +293,22 @@ document.addEventListener("DOMContentLoaded", function () {
         "click",
         function () {
 
-            introScreen.classList.remove("active");
+            introScreen.classList.remove(
+                "active"
+            );
 
-            setTimeout(function () {
+            setTimeout(
+                function () {
 
-                universe.classList.add("active");
+                    universe.classList.add(
+                        "active"
+                    );
 
-            }, 700);
+                    createShootingStar();
+
+                },
+                700
+            );
 
         }
     );
@@ -185,47 +318,55 @@ document.addEventListener("DOMContentLoaded", function () {
        OPEN MEMORY
     ========================================== */
 
-    memoryStars.forEach(function (star) {
+    memoryStars.forEach(
+        function (star) {
 
-        star.addEventListener(
-            "click",
-            function () {
+            star.addEventListener(
+                "click",
+                function () {
 
-                const index =
-                    Number(
-                        star.dataset.memory
+                    const index =
+                        Number(
+                            star.dataset.memory
+                        );
+
+                    currentMemory =
+                        index;
+
+                    const memory =
+                        memories[index];
+
+                    memoryTitle.textContent =
+                        memory.title;
+
+                    memoryIcon.textContent =
+                        memory.icon;
+
+                    memoryText.textContent =
+                        memory.text;
+
+                    memoryNumber.textContent =
+                        "MEMORY " +
+                        String(
+                            index + 1
+                        ).padStart(
+                            2,
+                            "0"
+                        );
+
+                    memoryModal.classList.add(
+                        "show"
                     );
 
-                currentMemory = index;
+                }
+            );
 
-                const memory =
-                    memories[index];
-
-
-                memoryTitle.textContent =
-                    memory.title;
-
-                memoryIcon.textContent =
-                    memory.icon;
-
-                memoryText.textContent =
-                    memory.text;
-
-                memoryNumber.textContent =
-                    "MEMORY " +
-                    String(index + 1).padStart(2, "0");
-
-
-                memoryModal.classList.add("show");
-
-            }
-        );
-
-    });
+        }
+    );
 
 
     /* =========================================
-       MARK MEMORY AS DISCOVERED
+       MARK AS DISCOVERED
     ========================================== */
 
     memoryDone.addEventListener(
@@ -233,8 +374,7 @@ document.addEventListener("DOMContentLoaded", function () {
         function () {
 
             if (
-                currentMemory !== null
-                &&
+                currentMemory !== null &&
                 !memoryStars[currentMemory]
                     .classList
                     .contains("discovered")
@@ -244,9 +384,21 @@ document.addEventListener("DOMContentLoaded", function () {
                     .classList
                     .add("discovered");
 
+                discoveredStars.push(
+                    currentMemory
+                );
+
                 discovered++;
 
                 updateProgress();
+
+                if (
+                    discoveredStars.length > 1
+                ) {
+
+                    drawConstellation();
+
+                }
 
             }
 
@@ -267,17 +419,140 @@ document.addEventListener("DOMContentLoaded", function () {
             " / 6 discovered";
 
         progressFill.style.width =
-            ((discovered / 6) * 100) +
+            (discovered / 6 * 100) +
             "%";
 
 
         if (discovered === 6) {
 
-            setTimeout(function () {
+            setTimeout(
+                function () {
 
-                universeComplete.classList.add("show");
+                    universeComplete
+                        .classList
+                        .add("show");
 
-            }, 900);
+                },
+                1200
+            );
+
+        }
+
+    }
+
+
+    /* =========================================
+       CONSTELLATION
+    ========================================== */
+
+    function drawConstellation() {
+
+        document
+            .querySelectorAll(
+                ".constellation-line"
+            )
+            .forEach(
+                function (line) {
+
+                    line.remove();
+
+                }
+            );
+
+
+        for (
+            let i = 0;
+            i < discoveredStars.length - 1;
+            i++
+        ) {
+
+            const first =
+                memoryStars[
+                    discoveredStars[i]
+                ];
+
+            const second =
+                memoryStars[
+                    discoveredStars[i + 1]
+                ];
+
+            const firstRect =
+                first.getBoundingClientRect();
+
+            const secondRect =
+                second.getBoundingClientRect();
+
+            const x1 =
+                firstRect.left +
+                firstRect.width / 2;
+
+            const y1 =
+                firstRect.top +
+                firstRect.height / 2;
+
+            const x2 =
+                secondRect.left +
+                secondRect.width / 2;
+
+            const y2 =
+                secondRect.top +
+                secondRect.height / 2;
+
+            const dx =
+                x2 - x1;
+
+            const dy =
+                y2 - y1;
+
+            const distance =
+                Math.sqrt(
+                    dx * dx +
+                    dy * dy
+                );
+
+            const angle =
+                Math.atan2(
+                    dy,
+                    dx
+                ) *
+                180 /
+                Math.PI;
+
+            const line =
+                document.createElement(
+                    "div"
+                );
+
+            line.className =
+                "constellation-line";
+
+            line.style.width =
+                distance + "px";
+
+            line.style.left =
+                x1 + "px";
+
+            line.style.top =
+                y1 + "px";
+
+            line.style.transform =
+                "rotate(" +
+                angle +
+                "deg)";
+
+            document.body.appendChild(
+                line
+            );
+
+            requestAnimationFrame(
+                function () {
+
+                    line.classList.add(
+                        "visible"
+                    );
+
+                }
+            );
 
         }
 
@@ -290,7 +565,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function closeModal() {
 
-        memoryModal.classList.remove("show");
+        memoryModal.classList.remove(
+            "show"
+        );
 
         currentMemory = null;
 
@@ -304,7 +581,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =========================================
-       CLOSE WHEN CLICKING BACKDROP
+       CLICK OUTSIDE
     ========================================== */
 
     memoryModal.addEventListener(
@@ -313,7 +590,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (
                 event.target.classList
-                    .contains("modal-backdrop")
+                    .contains(
+                        "modal-backdrop"
+                    )
             ) {
 
                 closeModal();
@@ -325,7 +604,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =========================================
-       ESC KEY
+       ESCAPE
     ========================================== */
 
     document.addEventListener(
@@ -333,9 +612,10 @@ document.addEventListener("DOMContentLoaded", function () {
         function (event) {
 
             if (
-                event.key === "Escape"
-                &&
-                memoryModal.classList.contains("show")
+                event.key === "Escape" &&
+                memoryModal.classList.contains(
+                    "show"
+                )
             ) {
 
                 closeModal();
@@ -347,51 +627,30 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =========================================
-       CONTINUE TO PAGE 4
+       PAGE 4
     ========================================== */
 
     continueButton.addEventListener(
         "click",
         function () {
 
-            universeComplete.classList.remove("show");
+            universeComplete
+                .classList
+                .remove("show");
 
-            transition.classList.remove("fade-out");
+            transition.classList.remove(
+                "fade-out"
+            );
 
-            setTimeout(function () {
+            setTimeout(
+                function () {
 
-                window.location.href =
-                    "page4.html";
+                    window.location.href =
+                        "page4.html";
 
-            }, 900);
-
-        }
-    );
-
-
-    /* =========================================
-       MUSIC BUTTON
-    ========================================== */
-
-    let musicOn = false;
-
-    musicButton.addEventListener(
-        "click",
-        function () {
-
-            musicOn = !musicOn;
-
-            if (musicOn) {
-
-                musicButton.textContent =
-                    "🔊";
-
-            } else {
-
-                musicButton.textContent =
-                    "♫";
-
-            }
+                },
+                900
+            );
 
         }
     );
