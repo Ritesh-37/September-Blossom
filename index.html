@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -9,134 +10,224 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>🎂 A Secret Awaits</title>
+    <title>🎂 A Secret Awaits...</title>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
+
 
 <body>
 
 <!-- =====================================================
-     FLOATING PREMIUM BACKGROUND
+     BACKGROUND EFFECTS
 ===================================================== -->
 
-<div id="floating-items"></div>
+<div class="background-glow glow-1"></div>
+<div class="background-glow glow-2"></div>
+<div class="background-glow glow-3"></div>
 
-<canvas id="fireworks"></canvas>
+<div class="particles"></div>
 
 
 <!-- =====================================================
-     🔐 NEW FIRST PAGE — PASSWORD SCREEN
+     PASSWORD PAGE
 ===================================================== -->
 
-<section id="password-screen" class="screen active">
+<section id="password-screen" class="password-screen">
 
-    <div class="password-page">
 
-        <!-- LEFT SIDE -->
-        <div class="password-left">
+    <!-- =================================================
+         LEFT SIDE — PHOTO
+    ================================================== -->
 
-            <div class="profile-glow"></div>
+    <div class="photo-section">
 
-            <!-- =================================================
-                 📸 YOUR PHOTO GOES HERE
-                 
-                 LATER:
-                 Replace the URL below with:
-                 media/my-photo.jpg
-                 
-                 and put your photo inside the media folder.
-            ================================================== -->
+        <div class="photo-frame">
 
-            <div class="profile-frame">
+            <!--
+            =================================================
+            IMPORTANT:
 
-                <img
-                    src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800&q=85"
-                    alt="Your Photo"
-                    id="your-photo"
-                >
+            LATER replace:
 
-            </div>
+            media/my-photo.jpg
 
-            <div class="profile-caption">
+            with YOUR OWN PHOTO.
 
-                <div class="caption-line"></div>
+            Keep your image named:
 
-                <h2>
-                    Abey oh Chirkoot!!
-                </h2>
+            my-photo.jpg
 
-                <p>
-                    Password Daal 😭
-                </p>
+            and put it inside the "media" folder.
+            =================================================
+            -->
 
-            </div>
+            <img
+                src="media/my-photo.jpg"
+                alt="My Photo"
+                class="profile-photo"
+            >
+
+            <div class="neon-corner corner-top-left"></div>
+            <div class="neon-corner corner-top-right"></div>
+            <div class="neon-corner corner-bottom-left"></div>
+            <div class="neon-corner corner-bottom-right"></div>
 
         </div>
 
 
-        <!-- RIGHT SIDE -->
-        <div class="password-right">
+        <div class="photo-text">
 
-            <div class="secret-label">
-                ✦ PRIVATE ACCESS ✦
+            <div class="warning-symbol">
+                ⚠
             </div>
 
-            <h1>
-                Hey,<br>
-                <span>you.</span>
-            </h1>
+            <h2>
+                Abey oh Chirkoot!!
+            </h2>
 
-            <p class="password-intro">
-                Before entering this little world,
-                prove that you're actually supposed
-                to be here.
+            <p>
+                Password Daal 😤
             </p>
 
-            <div class="password-box">
+        </div>
 
-                <label for="password-input">
-                    ENTER THE SECRET PASSWORD
-                </label>
+    </div>
 
-                <div class="password-input-wrapper">
 
-                    <input
-                        type="password"
-                        id="password-input"
-                        placeholder="Type password..."
-                        autocomplete="off"
-                    >
 
-                    <button
-                        class="password-toggle"
-                        onclick="togglePassword()"
-                        type="button"
-                    >
-                        👁
-                    </button>
+    <!-- =================================================
+         RIGHT SIDE — PASSWORD
+    ================================================== -->
 
-                </div>
+    <div class="password-section">
 
-                <button
-                    class="unlock-button"
-                    onclick="checkPassword()"
-                    type="button"
-                >
-                    UNLOCK
-                    <span>→</span>
-                </button>
 
-                <p
-                    id="password-error"
-                    class="password-error"
-                ></p>
+        <div class="security-label">
 
-            </div>
+            <span class="status-dot"></span>
 
-            <div class="little-warning">
-                🔒 This place is not for everyone.
-            </div>
+            PRIVATE ACCESS
+
+        </div>
+
+
+        <h1>
+            Oye Ruk! 👀
+        </h1>
+
+
+        <p class="subtitle">
+
+            If you think you know the password...
+
+            <br>
+
+            <span>
+                Prove it.
+
+            </span>
+
+        </p>
+
+
+
+        <!-- PASSWORD DISPLAY -->
+
+        <div
+            id="password-display"
+            class="password-display"
+        >
+
+            <span>_</span>
+            <span>_</span>
+            <span>_</span>
+            <span>_</span>
+            <span>_</span>
+            <span>_</span>
+            <span>_</span>
+            <span>_</span>
+
+        </div>
+
+
+        <p
+            id="password-message"
+            class="password-message"
+        ></p>
+
+
+
+        <!-- =================================================
+             NUMERIC KEYPAD
+        ================================================== -->
+
+        <div class="keypad">
+
+            <button onclick="pressNumber('1')">
+                1
+            </button>
+
+            <button onclick="pressNumber('2')">
+                2
+            </button>
+
+            <button onclick="pressNumber('3')">
+                3
+            </button>
+
+
+            <button onclick="pressNumber('4')">
+                4
+            </button>
+
+            <button onclick="pressNumber('5')">
+                5
+            </button>
+
+            <button onclick="pressNumber('6')">
+                6
+            </button>
+
+
+            <button onclick="pressNumber('7')">
+                7
+            </button>
+
+            <button onclick="pressNumber('8')">
+                8
+            </button>
+
+            <button onclick="pressNumber('9')">
+                9
+            </button>
+
+
+            <button
+                class="clear-key"
+                onclick="clearPassword()"
+            >
+                C
+            </button>
+
+            <button onclick="pressNumber('0')">
+                0
+            </button>
+
+            <button
+                class="enter-key"
+                onclick="checkPassword()"
+            >
+                ↵
+            </button>
+
+        </div>
+
+
+        <div class="hint">
+
+            🔐 ENTER 8 DIGITS
 
         </div>
 
@@ -147,48 +238,66 @@
 
 
 <!-- =====================================================
-     😂 WRONG PASSWORD MEME
+     WRONG PASSWORD MEME POPUP
 ===================================================== -->
 
 <div
-    id="wrong-password-popup"
-    class="overlay wrong-password-overlay"
+    id="wrong-popup"
+    class="wrong-popup"
 >
 
-    <div class="meme-card">
+
+    <div class="wrong-card">
+
 
         <button
-            class="close-button"
-            onclick="closeWrongPassword()"
+            class="popup-close"
+            onclick="closeWrongPopup()"
         >
             ×
         </button>
 
+
+        <div class="wrong-title">
+            ❌ WRONG PASSWORD
+        </div>
+
+
         <!--
-            LATER YOU CAN REPLACE THIS TEXT WITH YOUR
-            ACTUAL "ABEY SAALE" MEME GIF/IMAGE.
+        =================================================
+        LATER:
+
+        Replace this image with your famous
+        "Abey Saale" meme.
+
+        File:
+
+        media/wrong-meme.jpg
+        =================================================
         -->
 
-        <div class="meme-emoji">
-            😂
-        </div>
+        <img
+            src="media/wrong-meme.jpg"
+            alt="Wrong Password Meme"
+            class="meme-image"
+        >
 
-        <h1>
-            ABEY SAALE!
-        </h1>
+
+        <h2>
+            ABEY SAALE! 😂
+        </h2>
+
 
         <p>
-            Password galat hai bhai 😭
+            Password yaad nahi hai kya?
         </p>
 
-        <div class="meme-subtext">
-            Try again, Chirkoot.
-        </div>
 
         <button
-            onclick="closeWrongPassword()"
+            class="try-again"
+            onclick="closeWrongPopup()"
         >
-            Okay okay 😭
+            😭 TRY AGAIN
         </button>
 
     </div>
@@ -198,104 +307,65 @@
 
 
 <!-- =====================================================
-     🎬 WELCOME VIDEO + MUSIC
+     WELCOME VIDEO
 ===================================================== -->
 
 <div
     id="welcome-popup"
-    class="overlay welcome-overlay"
+    class="welcome-popup"
 >
+
 
     <div class="welcome-card">
 
-        <div class="welcome-top">
-            ✦ ACCESS GRANTED ✦
+
+        <div class="welcome-label">
+            ACCESS GRANTED
         </div>
 
+
         <h2>
-            Welcome, troublemaker. ❤️
+            🎉 Welcome!
         </h2>
 
+
         <p>
-            You actually knew the password...
-            I'm impressed.
+            Finally... you remembered the password.
         </p>
 
 
-        <!-- =================================================
-             🎥 WELCOME VIDEO
+        <!--
+        =================================================
+        LATER:
 
-             LATER:
-             Put your video inside media/welcome.mp4
+        Put your welcome video here:
 
-             Then this will automatically use your video.
-        ================================================== -->
+        media/welcome.mp4
 
-        <div class="welcome-video-wrapper">
+        The video will play WITH SOUND after the
+        correct password is entered.
+        =================================================
+        -->
 
-            <video
-                id="welcome-video"
-                controls
-                playsinline
-            >
-
-                <source
-                    src="media/welcome.mp4"
-                    type="video/mp4"
-                >
-
-                Your browser does not support video.
-
-            </video>
-
-            <div
-                id="video-placeholder"
-                class="video-placeholder"
-            >
-
-                <div>🎬</div>
-
-                <span>
-                    Your welcome video will appear here
-                </span>
-
-                <small>
-                    Add <strong>welcome.mp4</strong>
-                    to the media folder
-                </small>
-
-            </div>
-
-        </div>
-
-
-        <!-- =================================================
-             🎵 WELCOME MUSIC
-
-             LATER:
-             Put your music inside:
-             media/welcome.mp3
-        ================================================== -->
-
-        <audio
-            id="welcome-music"
-            controls
+        <video
+            id="welcome-video"
+            class="welcome-video"
+            playsinline
         >
 
             <source
-                src="media/welcome.mp3"
-                type="audio/mpeg"
+                src="media/welcome.mp4"
+                type="video/mp4"
             >
 
-        </audio>
+            Your browser does not support video.
+
+        </video>
 
 
-        <button
-            class="enter-adventure-button"
-            onclick="enterAdventure()"
-        >
-            ENTER THE ADVENTURE ✨
-        </button>
+        <p class="video-note">
+            🎬 Sit back...
+        </p>
 
     </div>
 
@@ -304,69 +374,32 @@
 
 
 <!-- =====================================================
-     ORIGINAL START SCREEN
+     YOUR ORIGINAL GAME PAGE
 ===================================================== -->
 
-<section id="start-screen" class="screen">
+<section
+    id="game-screen"
+    class="screen"
+>
 
-    <div class="main-card">
-
-        <div class="big-emoji">🎂</div>
-
-        <div class="tiny-title">
-            A SECRET BIRTHDAY ADVENTURE
-        </div>
-
-        <h1>
-            Happy Birthday! 💗
-        </h1>
-
-        <p class="intro">
-
-            Someone has hidden a whole
-            birthday adventure inside this website.
-
-            <br><br>
-
-            There are secrets,
-            riddles,
-            memories,
-            surprises and one
-            <strong>VERY BIG FINAL SURPRISE.</strong>
-
-            <br><br>
-
-            Are you ready?
-
-        </p>
-
-        <button onclick="startGame()">
-            🎀 START ADVENTURE
-        </button>
-
-    </div>
-
-</section>
-
-
-
-<!-- =====================================================
-     MAIN GAME
-===================================================== -->
-
-<section id="game-screen" class="screen">
 
     <div class="game-header">
 
         <div class="progress">
+
             💗
             <span id="progress-count">0</span>
             / 10
+
         </div>
 
+
         <div class="game-title">
+
             🎀 Birthday Adventure
+
         </div>
+
 
         <div class="header-buttons">
 
@@ -377,6 +410,7 @@
                 ?
             </button>
 
+
             <button
                 class="small-button"
                 onclick="toggleNightMode()"
@@ -384,6 +418,7 @@
             >
                 🌙
             </button>
+
 
             <button
                 class="small-button"
@@ -398,8 +433,11 @@
     </div>
 
 
+
     <div class="map-title">
+
         🗺️ THE SECRET BIRTHDAY MAP
+
     </div>
 
 
@@ -409,47 +447,88 @@
         <div class="map-line line-b"></div>
         <div class="map-line line-c"></div>
 
-        <button class="map-node node-1" onclick="openChallenge(0)">
+
+        <button
+            class="map-node node-1"
+            onclick="openChallenge(0)"
+        >
             🎀<small>1</small>
         </button>
 
-        <button class="map-node node-2" onclick="openChallenge(1)">
+
+        <button
+            class="map-node node-2"
+            onclick="openChallenge(1)"
+        >
             💌<small>2</small>
         </button>
 
-        <button class="map-node node-3" onclick="openChallenge(2)">
+
+        <button
+            class="map-node node-3"
+            onclick="openChallenge(2)"
+        >
             📸<small>3</small>
         </button>
 
-        <button class="map-node node-4" onclick="openChallenge(3)">
+
+        <button
+            class="map-node node-4"
+            onclick="openChallenge(3)"
+        >
             🎥<small>4</small>
         </button>
 
-        <button class="map-node node-5" onclick="openChallenge(4)">
+
+        <button
+            class="map-node node-5"
+            onclick="openChallenge(4)"
+        >
             ⭐<small>5</small>
         </button>
 
-        <button class="map-node node-6" onclick="openChallenge(5)">
+
+        <button
+            class="map-node node-6"
+            onclick="openChallenge(5)"
+        >
             🦋<small>6</small>
         </button>
 
-        <button class="map-node node-7" onclick="openChallenge(6)">
+
+        <button
+            class="map-node node-7"
+            onclick="openChallenge(6)"
+        >
             🎂<small>7</small>
         </button>
 
-        <button class="map-node node-8" onclick="openChallenge(7)">
+
+        <button
+            class="map-node node-8"
+            onclick="openChallenge(7)"
+        >
             💖<small>8</small>
         </button>
 
-        <button class="map-node node-9" onclick="openChallenge(8)">
+
+        <button
+            class="map-node node-9"
+            onclick="openChallenge(8)"
+        >
             🌈<small>9</small>
         </button>
 
-        <button class="map-node node-10" onclick="openChallenge(9)">
+
+        <button
+            class="map-node node-10"
+            onclick="openChallenge(9)"
+        >
             🔮<small>10</small>
         </button>
 
     </div>
+
 
 
     <div class="center-message">
@@ -458,9 +537,11 @@
             🗺️
         </div>
 
+
         <h2>
             Explore Everything
         </h2>
+
 
         <p>
             Solve the ten mysteries,
@@ -468,9 +549,11 @@
             contains everything...
         </p>
 
+
         <div id="game-hint">
             🔐 Everything is locked...
         </div>
+
 
         <div class="center-tools">
 
@@ -478,17 +561,21 @@
                 💌 Secret Letter
             </button>
 
+
             <button onclick="openGallery()">
                 📸 Memories
             </button>
+
 
             <button onclick="openVideoRoom()">
                 🎥 Video Room
             </button>
 
+
             <button onclick="openRandomSurprise()">
                 🎁 Random Surprise
             </button>
+
 
             <button onclick="openCountdown()">
                 ⏰ Countdown
@@ -497,6 +584,7 @@
         </div>
 
     </div>
+
 
 
     <button
@@ -512,18 +600,24 @@
 
 
 <!-- =====================================================
-     QUESTION POPUP
+     YOUR ORIGINAL POPUPS
 ===================================================== -->
 
 <div id="challenge-popup" class="overlay">
 
     <div class="challenge-card">
 
-        <button class="close-button" onclick="closeChallenge()">
+        <button
+            class="close-button"
+            onclick="closeChallenge()"
+        >
             ×
         </button>
 
-        <div id="challenge-emoji" class="challenge-emoji">
+        <div
+            id="challenge-emoji"
+            class="challenge-emoji"
+        >
             🔐
         </div>
 
@@ -550,7 +644,10 @@
             🔓 UNLOCK
         </button>
 
-        <p id="wrong-answer" class="wrong-answer"></p>
+        <p
+            id="wrong-answer"
+            class="wrong-answer"
+        ></p>
 
     </div>
 
@@ -558,19 +655,21 @@
 
 
 
-<!-- =====================================================
-     SURPRISE POPUP
-===================================================== -->
-
 <div id="surprise-popup" class="overlay">
 
     <div class="surprise-card">
 
-        <button class="close-button" onclick="closeSurprise()">
+        <button
+            class="close-button"
+            onclick="closeSurprise()"
+        >
             ×
         </button>
 
-        <div id="surprise-emoji" class="surprise-emoji">
+        <div
+            id="surprise-emoji"
+            class="surprise-emoji"
+        >
             💗
         </div>
 
@@ -582,7 +681,10 @@
             Surprise!
         </h2>
 
-        <div id="surprise-content" class="surprise-content"></div>
+        <div
+            id="surprise-content"
+            class="surprise-content"
+        ></div>
 
         <button onclick="closeSurprise()">
             💕 CONTINUE
@@ -593,10 +695,6 @@
 </div>
 
 
-
-<!-- =====================================================
-     SECRET LETTER
-===================================================== -->
 
 <div id="letter-popup" class="overlay">
 
@@ -609,7 +707,10 @@
             ×
         </button>
 
-        <div class="envelope" onclick="openLetter()">
+        <div
+            class="envelope"
+            onclick="openLetter()"
+        >
 
             <div class="envelope-flap">
                 💌
@@ -621,11 +722,18 @@
 
         </div>
 
-        <div id="letter-content" class="letter-content">
+        <div
+            id="letter-content"
+            class="letter-content"
+        >
 
-            <h2>💌 A Letter For You</h2>
+            <h2>
+                💌 A Letter For You
+            </h2>
 
-            <p>Dear Birthday Star,</p>
+            <p>
+                Dear Birthday Star,
+            </p>
 
             <p>
                 Today is your day.
@@ -656,10 +764,6 @@
 
 
 
-<!-- =====================================================
-     PHOTO GALLERY
-===================================================== -->
-
 <div id="gallery-popup" class="overlay">
 
     <div class="gallery-card">
@@ -671,7 +775,9 @@
             ×
         </button>
 
-        <h2>📸 Memory Gallery</h2>
+        <h2>
+            📸 Memory Gallery
+        </h2>
 
         <p>
             A tiny museum of memories 💗
@@ -685,20 +791,11 @@
 
         </div>
 
-        <p class="gallery-note">
-            Add your own pictures to the
-            <strong>media</strong> folder!
-        </p>
-
     </div>
 
 </div>
 
 
-
-<!-- =====================================================
-     VIDEO ROOM
-===================================================== -->
 
 <div id="video-popup" class="overlay">
 
@@ -711,16 +808,30 @@
             ×
         </button>
 
-        <h2>🎥 Secret Cinema</h2>
+        <h2>
+            🎥 Secret Cinema
+        </h2>
 
-        <p>Grab some popcorn 🍿</p>
+        <p>
+            Grab some popcorn 🍿
+        </p>
 
         <video controls playsinline>
-            <source src="media/video1.mp4" type="video/mp4">
+
+            <source
+                src="media/video1.mp4"
+                type="video/mp4"
+            >
+
         </video>
 
         <video controls playsinline>
-            <source src="media/video2.mp4" type="video/mp4">
+
+            <source
+                src="media/video2.mp4"
+                type="video/mp4"
+            >
+
         </video>
 
     </div>
@@ -728,10 +839,6 @@
 </div>
 
 
-
-<!-- =====================================================
-     COUNTDOWN
-===================================================== -->
 
 <div id="countdown-popup" class="overlay">
 
@@ -744,11 +851,17 @@
             ×
         </button>
 
-        <div class="big-emoji">🎂</div>
+        <div class="big-emoji">
+            🎂
+        </div>
 
-        <h2>Birthday Countdown</h2>
+        <h2>
+            Birthday Countdown
+        </h2>
 
-        <p>Until the big day...</p>
+        <p>
+            Until the big day...
+        </p>
 
         <div class="countdown">
 
@@ -774,19 +887,11 @@
 
         </div>
 
-        <p id="birthday-message">
-            🎉 Almost there!
-        </p>
-
     </div>
 
 </div>
 
 
-
-<!-- =====================================================
-     INSTRUCTIONS
-===================================================== -->
 
 <div id="instructions-popup" class="overlay">
 
@@ -799,37 +904,18 @@
             ×
         </button>
 
-        <h2>🎮 How To Play</h2>
+        <h2>
+            🎮 How To Play
+        </h2>
 
         <p>
-
             🗺️ Explore the map.
             <br><br>
-
             🔐 Solve riddles.
             <br><br>
-
             🎁 Unlock surprises.
             <br><br>
-
             🕵️ Look carefully for secrets.
-            <br><br>
-
-            💌 Open the letter.
-            <br><br>
-
-            📸 Explore the memories.
-            <br><br>
-
-            🎥 Visit the cinema.
-            <br><br>
-
-            🌙 Try night mode.
-            <br><br>
-
-            ✨ And don't forget:
-            <strong>not everything is visible.</strong>
-
         </p>
 
     </div>
@@ -838,26 +924,22 @@
 
 
 
-<!-- =====================================================
-     EASTER EGG
-===================================================== -->
-
 <div id="easter-popup" class="overlay">
 
     <div class="easter-card">
 
-        <div class="big-emoji">🥚</div>
+        <div class="big-emoji">
+            🥚
+        </div>
 
-        <h2>YOU FOUND THE SECRET!</h2>
+        <h2>
+            YOU FOUND THE SECRET!
+        </h2>
 
         <p>
             Okay... you're either very clever
             or extremely good at clicking random
             things. 😂
-        </p>
-
-        <p>
-            Either way, you deserve this:
         </p>
 
         <h1>
@@ -874,15 +956,9 @@
 
 
 
-<!-- =====================================================
-     FINAL CINEMATIC
-===================================================== -->
-
 <div id="final-popup" class="overlay cinematic">
 
     <div class="final-cinematic">
-
-        <div class="cinematic-stars"></div>
 
         <div class="final-content">
 
@@ -897,34 +973,26 @@
             <h1>
                 Happy Birthday,
                 <span id="final-name">
-                    Tisha
+                    Birthday Star
                 </span>!
             </h1>
 
             <p id="cinematic-message">
-
                 You found every secret.
-
                 <br><br>
-
                 But the real surprise was never
                 the website.
-
                 <br><br>
-
                 It was the reminder that someone
                 thinks you're worth celebrating.
-
                 <br><br>
-
                 💗 Stay amazing.
+                <br>
                 Keep smiling.
+                <br>
                 Keep dreaming.
-
                 <br><br>
-
                 🎂 HAPPY BIRTHDAY! 🎂
-
             </p>
 
             <button onclick="massiveParty()">
@@ -939,18 +1007,13 @@
 
 
 
-<!-- =====================================================
-     CONFETTI
-===================================================== -->
-
 <div id="confetti-container"></div>
 
 
-<!-- =====================================================
-     ORIGINAL BIRTHDAY MUSIC
-===================================================== -->
-
-<audio id="birthday-music" loop>
+<audio
+    id="birthday-music"
+    loop
+>
 
     <source
         src="media/birthday.mp3"
@@ -963,4 +1026,5 @@
 <script src="script.js"></script>
 
 </body>
+
 </html>
