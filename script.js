@@ -1,43 +1,42 @@
-/* =========================================================
-   🎀 BIRTHDAY WEBSITE
-   Everything you need to customize is near the top.
-========================================================= */
+/* =====================================================
+   🎂 BIRTHDAY ADVENTURE
+   CUSTOMIZE THIS SECTION
+===================================================== */
 
 
-/* =========================================================
-   ✏️ CHANGE THE BIRTHDAY PERSON'S NAME
-========================================================= */
+/* =====================================================
+   👤 NAME
+===================================================== */
 
 const birthdayPerson = "Birthday Star";
 
 
-/* =========================================================
-   🎁 YOUR 10 SURPRISES
-=========================================================
+/* =====================================================
+   🎂 BIRTHDAY DATE
+=====================================================
 
-   For every surprise you can change:
+   Change this to the birthday.
 
-   emoji
-   title
-   question
-   answer
-   message
+   Example:
 
-   The answer is NOT case-sensitive.
+   "2026-09-15T00:00:00"
 
-   "Paris"
-   "paris"
-   "PARIS"
+   IMPORTANT:
+   Use:
 
-   will all work.
-========================================================= */
+   YYYY-MM-DD
 
+===================================================== */
+
+const birthdayDate =
+    "2026-09-15T00:00:00";
+
+
+/* =====================================================
+   🎁 10 MAIN SURPRISES
+===================================================== */
 
 const surprises = [
-
-    /* -----------------------------------------------------
-       SURPRISE 1
-    ----------------------------------------------------- */
 
     {
         emoji: "🎀",
@@ -54,20 +53,16 @@ const surprises = [
             <h3>🎀 You found the first surprise!</h3>
 
             <p>
-                The adventure has officially begun! 💗
+                The adventure has officially begun!
+                💗
             </p>
 
             <p>
-                There are still 9 more secrets waiting
-                for you...
+                Nine more secrets remain...
             </p>
         `
     },
 
-
-    /* -----------------------------------------------------
-       SURPRISE 2
-    ----------------------------------------------------- */
 
     {
         emoji: "💌",
@@ -84,8 +79,8 @@ const surprises = [
             <h3>💌 A Secret Message</h3>
 
             <p>
-                Happy Birthday to one of the most
-                amazing people ever! 🥹💗
+                Happy Birthday to one of the
+                most amazing people ever! 🥹💗
             </p>
 
             <p>
@@ -95,12 +90,8 @@ const surprises = [
     },
 
 
-    /* -----------------------------------------------------
-       SURPRISE 3
-    ----------------------------------------------------- */
-
     {
-        emoji: "🌸",
+        emoji: "📸",
 
         title: "A Special Photo",
 
@@ -119,20 +110,15 @@ const surprises = [
 
             <img
                 src="media/photo1.jpg"
-                alt="A special birthday photo"
+                alt="Special memory"
             >
 
             <p>
-                This photo is officially part of
-                the birthday museum now. 😂💗
+                A memory worth keeping forever. 💗
             </p>
         `
     },
 
-
-    /* -----------------------------------------------------
-       SURPRISE 4
-    ----------------------------------------------------- */
 
     {
         emoji: "🎥",
@@ -146,30 +132,26 @@ const surprises = [
             "age",
 
         message: `
-            <h3>🎥 SECRET VIDEO UNLOCKED!</h3>
+            <h3>🎥 SECRET VIDEO!</h3>
 
             <video
                 controls
                 playsinline
             >
+
                 <source
                     src="media/video1.mp4"
                     type="video/mp4"
                 >
 
-                Your browser cannot play this video.
             </video>
 
             <p>
-                Hope you like it! 💗
+                🍿 Enjoy!
             </p>
         `
     },
 
-
-    /* -----------------------------------------------------
-       SURPRISE 5
-    ----------------------------------------------------- */
 
     {
         emoji: "⭐",
@@ -183,12 +165,12 @@ const surprises = [
             "star",
 
         message: `
-            <h3>🌟 My Birthday Wish For You</h3>
+            <h3>🌟 My Birthday Wish</h3>
 
             <p>
-                May you have a year filled with
-                happiness, amazing memories,
-                laughter and dreams coming true.
+                May this year bring you happiness,
+                laughter, adventures and dreams
+                coming true.
             </p>
 
             <p>
@@ -198,10 +180,6 @@ const surprises = [
         `
     },
 
-
-    /* -----------------------------------------------------
-       SURPRISE 6
-    ----------------------------------------------------- */
 
     {
         emoji: "🦋",
@@ -229,10 +207,6 @@ const surprises = [
     },
 
 
-    /* -----------------------------------------------------
-       SURPRISE 7
-    ----------------------------------------------------- */
-
     {
         emoji: "🎂",
 
@@ -245,23 +219,19 @@ const surprises = [
             "cake",
 
         message: `
-            <h3>🎂 IMPORTANT ANNOUNCEMENT 🎂</h3>
+            <h3>🎂 IMPORTANT ANNOUNCEMENT</h3>
 
             <p>
-                This website officially declares that
-                birthday cake has zero calories.
+                Birthday cake has officially
+                been declared calorie-free.
             </p>
 
             <p>
-                Yes, I made the rules. 😂💗
+                Yes, I made the rules. 😂
             </p>
         `
     },
 
-
-    /* -----------------------------------------------------
-       SURPRISE 8
-    ----------------------------------------------------- */
 
     {
         emoji: "💖",
@@ -282,21 +252,12 @@ const surprises = [
             </p>
 
             <p>
-                This is your official reminder that
-                you are loved, appreciated and
-                incredibly special.
-            </p>
-
-            <p>
-                Never forget that. 🌸
+                Never forget that someone
+                thinks you're special.
             </p>
         `
     },
 
-
-    /* -----------------------------------------------------
-       SURPRISE 9
-    ----------------------------------------------------- */
 
     {
         emoji: "🌈",
@@ -310,11 +271,11 @@ const surprises = [
             "b",
 
         message: `
-            <h3>🌈 You Made It Here!</h3>
+            <h3>🌈 You Made It!</h3>
 
             <p>
-                Every little surprise was just an excuse
-                to remind you that someone thinks
+                Every little surprise was just
+                an excuse to remind you that
                 you're pretty amazing.
             </p>
 
@@ -324,10 +285,6 @@ const surprises = [
         `
     },
 
-
-    /* -----------------------------------------------------
-       SURPRISE 10
-    ----------------------------------------------------- */
 
     {
         emoji: "🔮",
@@ -348,12 +305,8 @@ const surprises = [
             </p>
 
             <p>
-                But wait...
-            </p>
-
-            <p>
-                There is still one final celebration
-                waiting for you. 🎉
+                But there is still one giant
+                celebration waiting...
             </p>
         `
     }
@@ -361,36 +314,38 @@ const surprises = [
 ];
 
 
-
-/* =========================================================
-   DON'T CHANGE BELOW THIS LINE
-========================================================= */
-
+/* =====================================================
+   VARIABLES
+===================================================== */
 
 let currentChallenge = 0;
 
 let unlocked = [];
 
+let musicPlaying = false;
+
+let easterClicks = 0;
 
 
-/* =========================================================
+/* =====================================================
    START GAME
-========================================================= */
+===================================================== */
 
 function startGame() {
 
     showScreen("game-screen");
 
-    createConfetti(60);
+    createConfetti(80);
+
+    startMusic();
 
     updateProgress();
 }
 
 
-
-/* =========================================================
-   CHANGE SCREEN
-========================================================= */
+/* =====================================================
+   SCREEN
+===================================================== */
 
 function showScreen(id) {
 
@@ -402,17 +357,15 @@ function showScreen(id) {
 
         });
 
-
     document
         .getElementById(id)
         .classList.add("active");
 }
 
 
-
-/* =========================================================
-   OPEN QUESTION
-========================================================= */
+/* =====================================================
+   OPEN CHALLENGE
+===================================================== */
 
 function openChallenge(index) {
 
@@ -421,11 +374,6 @@ function openChallenge(index) {
     const challenge =
         surprises[index];
 
-
-    /*
-       If already unlocked,
-       show the surprise again.
-    */
 
     if (unlocked[index]) {
 
@@ -483,10 +431,9 @@ function openChallenge(index) {
 }
 
 
-
-/* =========================================================
+/* =====================================================
    CHECK ANSWER
-========================================================= */
+===================================================== */
 
 function checkAnswer() {
 
@@ -515,17 +462,20 @@ function checkAnswer() {
         );
 
 
-    if (userAnswer === correctAnswer) {
+    if (
+        userAnswer ===
+        correctAnswer
+    ) {
 
         unlocked[currentChallenge] =
             true;
 
 
         error.textContent =
-            "🎉 Correct!";
+            "🎉 CORRECT!";
 
 
-        createConfetti(70);
+        createConfetti(80);
 
         updateProgress();
 
@@ -545,30 +495,36 @@ function checkAnswer() {
     else {
 
         error.textContent =
-            "❌ Not quite! Try again 💗";
+            "❌ Nope! Try again! 💗";
 
-        input.classList.remove("shake");
+
+        input.classList.remove(
+            "shake"
+        );
 
         void input.offsetWidth;
 
-        input.classList.add("shake");
+        input.classList.add(
+            "shake"
+        );
     }
 }
 
 
-
-/* =========================================================
+/* =====================================================
    ENTER KEY
-========================================================= */
+===================================================== */
 
 document.addEventListener(
     "keydown",
-    function(event) {
+    event => {
 
         if (
             event.key === "Enter" &&
             document
-                .getElementById("challenge-popup")
+                .getElementById(
+                    "challenge-popup"
+                )
                 .classList.contains("show")
         ) {
 
@@ -579,10 +535,9 @@ document.addEventListener(
 );
 
 
-
-/* =========================================================
-   CLOSE QUESTION
-========================================================= */
+/* =====================================================
+   CLOSE CHALLENGE
+===================================================== */
 
 function closeChallenge() {
 
@@ -594,10 +549,9 @@ function closeChallenge() {
 }
 
 
-
-/* =========================================================
+/* =====================================================
    SHOW SURPRISE
-========================================================= */
+===================================================== */
 
 function showSurprise(index) {
 
@@ -630,12 +584,8 @@ function showSurprise(index) {
         .classList.add("show");
 
 
-    createConfetti(40);
+    createConfetti(50);
 
-
-    /*
-       Check if all 10 are unlocked.
-    */
 
     if (
         unlocked.filter(Boolean).length ===
@@ -649,14 +599,14 @@ function showSurprise(index) {
             showFinal();
 
         }, 1800);
+
     }
 }
 
 
-
-/* =========================================================
+/* =====================================================
    CLOSE SURPRISE
-========================================================= */
+===================================================== */
 
 function closeSurprise() {
 
@@ -668,10 +618,9 @@ function closeSurprise() {
 }
 
 
-
-/* =========================================================
+/* =====================================================
    PROGRESS
-========================================================= */
+===================================================== */
 
 function updateProgress() {
 
@@ -713,10 +662,9 @@ function updateProgress() {
 }
 
 
-
-/* =========================================================
-   FINAL CELEBRATION
-========================================================= */
+/* =====================================================
+   FINAL CINEMATIC
+===================================================== */
 
 function showFinal() {
 
@@ -734,40 +682,36 @@ function showFinal() {
 
 
     createConfetti(200);
+
+    fireworksShow();
 }
 
 
-
-/* =========================================================
+/* =====================================================
    MASSIVE PARTY
-========================================================= */
+===================================================== */
 
 function massiveParty() {
 
-    createConfetti(300);
+    createConfetti(350);
 
+    fireworksShow();
 
-    document
-        .getElementById(
-            "final-popup"
-        )
-        .classList.remove("show");
+    setTimeout(
+        fireworksShow,
+        800
+    );
 
-
-    setTimeout(() => {
-
-        alert(
-            "🎉 HAPPY BIRTHDAY!!! 🎂💗🎊"
-        );
-
-    }, 800);
+    setTimeout(
+        fireworksShow,
+        1600
+    );
 }
 
 
-
-/* =========================================================
+/* =====================================================
    INSTRUCTIONS
-========================================================= */
+===================================================== */
 
 function showInstructions() {
 
@@ -789,10 +733,345 @@ function closeInstructions() {
 }
 
 
+/* =====================================================
+   GENERIC CLOSE
+===================================================== */
 
-/* =========================================================
+function closeOverlay(id) {
+
+    document
+        .getElementById(id)
+        .classList.remove("show");
+}
+
+
+/* =====================================================
+   LETTER
+===================================================== */
+
+function openEnvelope() {
+
+    document
+        .getElementById(
+            "letter-popup"
+        )
+        .classList.add("show");
+}
+
+
+function openLetter() {
+
+    const envelope =
+        document.querySelector(
+            ".envelope"
+        );
+
+    const letter =
+        document.getElementById(
+            "letter-content"
+        );
+
+
+    envelope.classList.add("open");
+
+    setTimeout(() => {
+
+        letter.classList.add("open");
+
+    }, 700);
+}
+
+
+/* =====================================================
+   GALLERY
+===================================================== */
+
+function openGallery() {
+
+    document
+        .getElementById(
+            "gallery-popup"
+        )
+        .classList.add("show");
+}
+
+
+/* =====================================================
+   VIDEO ROOM
+===================================================== */
+
+function openVideoRoom() {
+
+    document
+        .getElementById(
+            "video-popup"
+        )
+        .classList.add("show");
+}
+
+
+/* =====================================================
+   RANDOM SURPRISE
+===================================================== */
+
+function openRandomSurprise() {
+
+    const randomIndex =
+        Math.floor(
+            Math.random() *
+            surprises.length
+        );
+
+
+    /*
+       If locked, show its question.
+       If unlocked, show the surprise.
+    */
+
+    openChallenge(
+        randomIndex
+    );
+}
+
+
+/* =====================================================
+   COUNTDOWN
+===================================================== */
+
+function openCountdown() {
+
+    document
+        .getElementById(
+            "countdown-popup"
+        )
+        .classList.add("show");
+
+    updateCountdown();
+}
+
+
+function updateCountdown() {
+
+    const target =
+        new Date(birthdayDate)
+            .getTime();
+
+
+    const now =
+        new Date().getTime();
+
+
+    let difference =
+        target - now;
+
+
+    /*
+       If birthday already passed,
+       show next year's birthday.
+    */
+
+    if (difference < 0) {
+
+        const oldDate =
+            new Date(birthdayDate);
+
+
+        const nextDate =
+            new Date(
+                oldDate.getFullYear() + 1,
+                oldDate.getMonth(),
+                oldDate.getDate(),
+                oldDate.getHours(),
+                oldDate.getMinutes()
+            );
+
+
+        difference =
+            nextDate.getTime() -
+            now;
+    }
+
+
+    const days =
+        Math.floor(
+            difference /
+            (1000 * 60 * 60 * 24)
+        );
+
+
+    const hours =
+        Math.floor(
+            (difference /
+            (1000 * 60 * 60)) %
+            24
+        );
+
+
+    const minutes =
+        Math.floor(
+            (difference /
+            (1000 * 60)) %
+            60
+        );
+
+
+    const seconds =
+        Math.floor(
+            (difference / 1000) %
+            60
+        );
+
+
+    document.getElementById(
+        "days"
+    ).textContent =
+        days;
+
+
+    document.getElementById(
+        "hours"
+    ).textContent =
+        hours;
+
+
+    document.getElementById(
+        "minutes"
+    ).textContent =
+        minutes;
+
+
+    document.getElementById(
+        "seconds"
+    ).textContent =
+        seconds;
+}
+
+
+setInterval(
+    updateCountdown,
+    1000
+);
+
+
+/* =====================================================
+   MUSIC
+===================================================== */
+
+function startMusic() {
+
+    const music =
+        document.getElementById(
+            "birthday-music"
+        );
+
+
+    music.volume = 0.25;
+
+
+    /*
+       Browsers may block
+       automatic music.
+
+       That's normal.
+    */
+
+    music.play()
+        .then(() => {
+
+            musicPlaying = true;
+
+            updateMusicButton();
+
+        })
+        .catch(() => {
+
+            musicPlaying = false;
+
+        });
+}
+
+
+function toggleMusic() {
+
+    const music =
+        document.getElementById(
+            "birthday-music"
+        );
+
+
+    if (
+        music.paused
+    ) {
+
+        music.play();
+
+        musicPlaying = true;
+
+    }
+
+    else {
+
+        music.pause();
+
+        musicPlaying = false;
+
+    }
+
+
+    updateMusicButton();
+}
+
+
+function updateMusicButton() {
+
+    document.getElementById(
+        "music-button"
+    ).textContent =
+        musicPlaying
+            ? "🔊"
+            : "🎵";
+}
+
+
+/* =====================================================
+   NIGHT MODE
+===================================================== */
+
+function toggleNightMode() {
+
+    document.body.classList.toggle(
+        "night"
+    );
+
+
+    const button =
+        document.getElementById(
+            "theme-button"
+        );
+
+
+    if (
+        document.body.classList.contains(
+            "night"
+        )
+    ) {
+
+        button.textContent =
+            "☀️";
+
+    }
+
+    else {
+
+        button.textContent =
+            "🌙";
+    }
+}
+
+
+/* =====================================================
    CONFETTI
-========================================================= */
+===================================================== */
 
 function createConfetti(amount) {
 
@@ -853,13 +1132,6 @@ function createConfetti(amount) {
             "s";
 
 
-        piece.style.animationDelay =
-            (
-                Math.random() * 0.5
-            ) +
-            "s";
-
-
         piece.style.width =
             (
                 6 +
@@ -890,10 +1162,9 @@ function createConfetti(amount) {
 }
 
 
-
-/* =========================================================
-   FLOATING HEARTS / STARS
-========================================================= */
+/* =====================================================
+   FLOATING HEARTS
+===================================================== */
 
 const floatingItems = [
 
@@ -973,14 +1244,251 @@ setInterval(
 );
 
 
+/* =====================================================
+   EASTER EGG
+===================================================== */
 
-/* =========================================================
+function activateEasterEgg() {
+
+    easterClicks++;
+
+
+    /*
+       The secret button needs
+       5 clicks.
+    */
+
+    if (
+        easterClicks >= 5
+    ) {
+
+        document
+            .getElementById(
+                "easter-popup"
+            )
+            .classList.add("show");
+
+
+        createConfetti(100);
+
+        easterClicks = 0;
+    }
+}
+
+
+/* =====================================================
+   SECRET FIREWORKS
+===================================================== */
+
+function secretFireworks() {
+
+    closeOverlay(
+        "easter-popup"
+    );
+
+    fireworksShow();
+
+    createConfetti(250);
+}
+
+
+/* =====================================================
+   FIREWORKS ENGINE
+===================================================== */
+
+const canvas =
+    document.getElementById(
+        "fireworks"
+    );
+
+const ctx =
+    canvas.getContext(
+        "2d"
+    );
+
+
+let fireworks = [];
+
+
+function resizeCanvas() {
+
+    canvas.width =
+        window.innerWidth;
+
+    canvas.height =
+        window.innerHeight;
+}
+
+
+resizeCanvas();
+
+
+window.addEventListener(
+    "resize",
+    resizeCanvas
+);
+
+
+function fireworksShow() {
+
+    for (
+        let i = 0;
+        i < 5;
+        i++
+    ) {
+
+        setTimeout(() => {
+
+            createFirework(
+                Math.random() *
+                canvas.width,
+
+                Math.random() *
+                canvas.height *
+                0.6
+            );
+
+        }, i * 250);
+    }
+
+
+    animateFireworks();
+}
+
+
+function createFirework(x, y) {
+
+    const colors = [
+
+        "#ff5ca8",
+        "#ffd45c",
+        "#7de2ff",
+        "#c982ff",
+        "#ffffff"
+
+    ];
+
+
+    const color =
+        colors[
+            Math.floor(
+                Math.random() *
+                colors.length
+            )
+        ];
+
+
+    for (
+        let i = 0;
+        i < 60;
+        i++
+    ) {
+
+        const angle =
+            Math.random() *
+            Math.PI *
+            2;
+
+
+        const speed =
+            2 +
+            Math.random() * 5;
+
+
+        fireworks.push({
+
+            x: x,
+
+            y: y,
+
+            vx:
+                Math.cos(angle) *
+                speed,
+
+            vy:
+                Math.sin(angle) *
+                speed,
+
+            life: 80,
+
+            color: color
+        });
+    }
+}
+
+
+function animateFireworks() {
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+
+    fireworks =
+        fireworks.filter(
+            particle => {
+
+                particle.x +=
+                    particle.vx;
+
+                particle.y +=
+                    particle.vy;
+
+                particle.vy +=
+                    0.04;
+
+                particle.life--;
+
+
+                ctx.globalAlpha =
+                    particle.life / 80;
+
+                ctx.fillStyle =
+                    particle.color;
+
+
+                ctx.beginPath();
+
+                ctx.arc(
+                    particle.x,
+                    particle.y,
+                    3,
+                    0,
+                    Math.PI * 2
+                );
+
+                ctx.fill();
+
+
+                return particle.life > 0;
+            }
+        );
+
+
+    ctx.globalAlpha = 1;
+
+
+    if (
+        fireworks.length > 0
+    ) {
+
+        requestAnimationFrame(
+            animateFireworks
+        );
+    }
+}
+
+
+/* =====================================================
    STARTUP
-========================================================= */
+===================================================== */
 
 document.addEventListener(
     "DOMContentLoaded",
-    function() {
+    () => {
 
         createConfetti(30);
 
