@@ -1,284 +1,400 @@
+/* =========================================
+   BASIC RESET
+========================================= */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+html,
 body {
-    min-height: 100vh;
-    font-family: Georgia, "Times New Roman", serif;
-    background: #d91e3f;
-    color: #ffffff;
-    overflow: hidden;
+    width: 100%;
+    min-height: 100%;
 }
 
-.background {
+body {
+    overflow: hidden;
+    font-family: "Poppins", sans-serif;
+    background:
+        radial-gradient(
+            circle at center,
+            #e64a61 0%,
+            #d93650 35%,
+            #bd2742 70%,
+            #971d36 100%
+        );
+    color: #ffffff;
+}
+
+
+/* =========================================
+   BACKGROUND
+========================================= */
+
+.background-glow {
+    position: fixed;
+    width: 600px;
+    height: 600px;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    background: rgba(255, 255, 255, 0.07);
+
+    border-radius: 50%;
+
+    filter: blur(80px);
+
+    pointer-events: none;
+}
+
+body::before {
+    content: "";
+
     position: fixed;
     inset: 0;
-    overflow: hidden;
+
+    background-image:
+        radial-gradient(
+            rgba(255, 255, 255, 0.08) 1px,
+            transparent 1px
+        );
+
+    background-size: 28px 28px;
+
+    opacity: 0.35;
+
     pointer-events: none;
+}
+
+
+/* =========================================
+   SCREEN SYSTEM
+========================================= */
+
+.screen {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: scale(1.03);
+
+    transition:
+        opacity 0.8s ease,
+        visibility 0.8s ease,
+        transform 0.8s ease;
+
+    z-index: 5;
+}
+
+.screen.active {
+    opacity: 1;
+    visibility: visible;
+
+    transform: scale(1);
+}
+
+
+/* =========================================
+   SPARKLES
+========================================= */
+
+.sparkles {
+    position: fixed;
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 2;
+}
+
+.sparkles span {
+    position: absolute;
+
+    color: rgba(255, 255, 255, 0.7);
+
+    font-size: 14px;
+
+    animation:
+        sparkleFloat 5s infinite ease-in-out;
+}
+
+.sparkles span:nth-child(1) {
+    top: 15%;
+    left: 20%;
+}
+
+.sparkles span:nth-child(2) {
+    top: 24%;
+    left: 80%;
+
+    animation-delay: 1s;
+}
+
+.sparkles span:nth-child(3) {
+    top: 70%;
+    left: 15%;
+
+    animation-delay: 2s;
+}
+
+.sparkles span:nth-child(4) {
+    top: 80%;
+    left: 82%;
+
+    animation-delay: 1.5s;
+}
+
+.sparkles span:nth-child(5) {
+    top: 40%;
+    left: 10%;
+
+    animation-delay: 2.5s;
+}
+
+.sparkles span:nth-child(6) {
+    top: 55%;
+    left: 90%;
+
+    animation-delay: 0.8s;
+}
+
+.sparkles span:nth-child(7) {
+    top: 12%;
+    left: 62%;
+
+    animation-delay: 3s;
+}
+
+.sparkles span:nth-child(8) {
+    top: 88%;
+    left: 42%;
+
+    animation-delay: 2s;
+}
+
+@keyframes sparkleFloat {
+
+    0%,
+    100% {
+        opacity: 0.2;
+        transform: translateY(0) scale(0.8);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateY(-15px) scale(1.2);
+    }
+}
+
+
+/* =========================================
+   FLOATING HEARTS
+========================================= */
+
+.hearts {
+    position: fixed;
+    inset: 0;
+
+    overflow: hidden;
+
+    pointer-events: none;
+
+    z-index: 1;
+}
+
+.hearts span {
+    position: absolute;
+    bottom: -30px;
+
+    color: rgba(255, 255, 255, 0.18);
+
+    font-size: 18px;
+
+    animation: heartFloat 9s linear infinite;
+}
+
+.hearts span:nth-child(1) {
+    left: 12%;
+    animation-delay: 1s;
+}
+
+.hearts span:nth-child(2) {
+    left: 35%;
+    animation-delay: 4s;
+}
+
+.hearts span:nth-child(3) {
+    left: 58%;
+    animation-delay: 2s;
+}
+
+.hearts span:nth-child(4) {
+    left: 76%;
+    animation-delay: 6s;
+}
+
+.hearts span:nth-child(5) {
+    left: 90%;
+    animation-delay: 3s;
+}
+
+@keyframes heartFloat {
+
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    15% {
+        opacity: 0.8;
+    }
+
+    80% {
+        opacity: 0.4;
+    }
+
+    100% {
+        transform: translateY(-110vh) rotate(25deg);
+        opacity: 0;
+    }
+}
+
+
+/* =========================================
+   CORNER DECORATIONS
+========================================= */
+
+.corner-decoration {
+    position: fixed;
+
+    width: 180px;
+    height: 150px;
+
+    z-index: 4;
+
+    pointer-events: none;
+
+    animation: decorationFloat 6s ease-in-out infinite;
+}
+
+.top-left {
+    top: 0;
+    left: 0;
+}
+
+.top-right {
+    top: 0;
+    right: 0;
+
+    transform: scaleX(-1);
+}
+
+.bottom-left {
+    bottom: 0;
+    left: 0;
+
+    transform: scaleY(-1);
+}
+
+.bottom-right {
+    bottom: 0;
+    right: 0;
+
+    transform: scale(-1);
 }
 
 .flower {
     position: absolute;
-    color: #ffffff;
-    font-size: 70px;
-    opacity: 0.85;
-    animation: floatFlower 6s ease-in-out infinite;
-}
 
-.flower-one {
-    top: 8%;
-    left: 7%;
-}
+    color: #fff;
 
-.flower-two {
-    top: 18%;
-    right: 8%;
-    font-size: 55px;
-    animation-delay: 1s;
-}
+    font-size: 58px;
 
-.flower-three {
-    bottom: 12%;
-    left: 10%;
-    font-size: 60px;
-    animation-delay: 2s;
-}
+    text-shadow:
+        0 0 15px rgba(255, 255, 255, 0.3);
 
-.flower-four {
-    bottom: 8%;
-    right: 12%;
-    font-size: 75px;
-    animation-delay: 3s;
+    animation: flowerSway 4s ease-in-out infinite;
 }
 
 .leaf {
     position: absolute;
+
+    color: #4f9b59;
+
     font-size: 65px;
-    opacity: 0.9;
-    animation: floatLeaf 7s ease-in-out infinite;
+
+    transform: rotate(-25deg);
+
+    left: 60px;
+    top: 55px;
 }
 
-.leaf-one {
-    top: 5%;
-    left: 35%;
+.leaf.second {
+    left: 20px;
+    top: 80px;
+
+    font-size: 48px;
+
+    transform: rotate(25deg);
 }
 
-.leaf-two {
-    top: 30%;
-    right: 3%;
-    animation-delay: 1.5s;
+@keyframes flowerSway {
+
+    0%,
+    100% {
+        transform: rotate(-4deg);
+    }
+
+    50% {
+        transform: rotate(5deg);
+    }
 }
 
-.leaf-three {
-    bottom: 5%;
-    left: 35%;
-    animation-delay: 3s;
+@keyframes decorationFloat {
+
+    0%,
+    100% {
+        margin-top: 0;
+    }
+
+    50% {
+        margin-top: 5px;
+    }
 }
 
-.leaf-four {
-    bottom: 25%;
-    right: 30%;
-    animation-delay: 4s;
-}
 
-.container {
+/* =========================================
+   GIFT SCREEN
+========================================= */
+
+.gift-container {
     position: relative;
-    z-index: 2;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 25px;
-}
 
-.card {
-    width: min(520px, 100%);
-    padding: 50px 40px;
+    width: min(90%, 520px);
+
     text-align: center;
 
-    background: rgba(255, 255, 255, 0.14);
-    border: 1px solid rgba(255, 255, 255, 0.35);
-    border-radius: 30px;
-
-    box-shadow:
-        0 25px 70px rgba(80, 0, 15, 0.35),
-        inset 0 1px 1px rgba(255, 255, 255, 0.3);
-
-    backdrop-filter: blur(15px);
-
-    animation: cardAppear 1.2s ease;
-}
-
-.heart {
-    width: 70px;
-    height: 70px;
-    margin: 0 auto 20px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    background: #ffffff;
-    color: #d91e3f;
-
-    border-radius: 50%;
-    font-size: 32px;
-
-    box-shadow: 0 10px 30px rgba(70, 0, 10, 0.25);
-
-    animation: heartbeat 2s ease-in-out infinite;
-}
-
-.small-text {
-    margin-bottom: 12px;
-    font-size: 16px;
-    letter-spacing: 2px;
-    opacity: 0.9;
-}
-
-h1 {
-    margin-bottom: 18px;
-    font-size: clamp(35px, 7vw, 55px);
-    font-weight: 500;
-}
-
-.message {
-    font-size: 18px;
-    line-height: 1.6;
-    margin-bottom: 15px;
-}
-
-.question {
-    font-size: 17px;
-    margin-bottom: 28px;
-    font-style: italic;
-}
-
-.password-box {
-    display: flex;
-    flex-direction: column;
-    gap: 13px;
-}
-
-#password {
-    width: 100%;
-    padding: 16px 18px;
-
-    border: 2px solid rgba(255, 255, 255, 0.6);
-    border-radius: 50px;
-
-    background: rgba(255, 255, 255, 0.95);
-    color: #7e1029;
-
-    font-size: 16px;
-    text-align: center;
-
-    outline: none;
-}
-
-#password::placeholder {
-    color: #9d6b76;
-}
-
-#password:focus {
-    border-color: #ffffff;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.35);
-}
-
-#unlockButton,
-.popup button {
-    padding: 16px 22px;
-
-    border: none;
-    border-radius: 50px;
-
-    background: #ffffff;
-    color: #b91435;
-
-    font-size: 16px;
-    font-weight: bold;
-
-    cursor: pointer;
-
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-#unlockButton:hover,
-.popup button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(70, 0, 10, 0.25);
-}
-
-#unlockButton:active,
-.popup button:active {
-    transform: scale(0.97);
-}
-
-.hint {
-    margin-top: 20px;
-    font-size: 13px;
-    opacity: 0.75;
-}
-
-.popup-overlay {
-    position: fixed;
-    inset: 0;
     z-index: 10;
 
-    display: none;
-    justify-content: center;
-    align-items: center;
-
-    padding: 25px;
-
-    background: rgba(70, 0, 15, 0.55);
-    backdrop-filter: blur(8px);
+    animation: giftAppear 1.2s ease forwards;
 }
 
-.popup-overlay.show {
-    display: flex;
-    animation: fadeIn 0.3s ease;
-}
+@keyframes giftAppear {
 
-.popup {
-    width: min(400px, 100%);
-    padding: 35px 30px;
-
-    text-align: center;
-
-    background: #ffffff;
-    color: #9e1531;
-
-    border-radius: 28px;
-
-    box-shadow: 0 25px 70px rgba(50, 0, 10, 0.4);
-
-    animation: popupAppear 0.4s ease;
-}
-
-.popup-icon {
-    font-size: 50px;
-    margin-bottom: 10px;
-}
-
-.popup h2 {
-    margin-bottom: 12px;
-    font-size: 30px;
-}
-
-.popup p {
-    margin-bottom: 25px;
-    font-size: 17px;
-    line-height: 1.5;
-    color: #6f2638;
-}
-
-@keyframes cardAppear {
     from {
         opacity: 0;
-        transform: translateY(35px) scale(0.95);
+        transform: translateY(25px) scale(0.95);
     }
 
     to {
@@ -287,35 +403,556 @@ h1 {
     }
 }
 
-@keyframes popupAppear {
+.tiny-bow {
+    font-size: 42px;
+
+    margin-bottom: 12px;
+
+    animation: bowBounce 3s ease-in-out infinite;
+}
+
+@keyframes bowBounce {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(-2deg);
+    }
+
+    50% {
+        transform: translateY(-7px) rotate(2deg);
+    }
+}
+
+
+/* =========================================
+   ENVELOPE
+========================================= */
+
+.envelope {
+    position: relative;
+
+    width: 340px;
+    max-width: 90vw;
+
+    height: 245px;
+
+    margin: 0 auto 28px;
+
+    cursor: pointer;
+
+    transition: transform 0.4s ease;
+}
+
+.envelope:hover {
+    transform: translateY(-8px) rotate(-1deg);
+}
+
+.envelope-body {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px;
+
+    background: rgba(255, 250, 244, 0.96);
+
+    color: #9c2943;
+
+    border-radius: 18px;
+
+    border: 1px solid rgba(255, 255, 255, 0.7);
+
+    box-shadow:
+        0 25px 60px rgba(80, 0, 20, 0.3),
+        0 0 35px rgba(255, 255, 255, 0.08);
+
+    z-index: 2;
+}
+
+.envelope-top {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 110px;
+
+    background: #fff4ed;
+
+    clip-path: polygon(
+        0 0,
+        100% 0,
+        50% 100%
+    );
+
+    border-radius: 18px 18px 0 0;
+
+    z-index: 3;
+
+    pointer-events: none;
+}
+
+.seal {
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #d93650;
+
+    color: #fff;
+
+    border-radius: 50%;
+
+    font-size: 18px;
+
+    box-shadow: 0 5px 15px rgba(160, 20, 50, 0.25);
+
+    margin-bottom: 10px;
+
+    z-index: 4;
+}
+
+.envelope-small {
+    font-size: 10px;
+
+    letter-spacing: 3px;
+
+    font-weight: 600;
+
+    opacity: 0.7;
+
+    z-index: 4;
+}
+
+.envelope h1 {
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 36px;
+
+    letter-spacing: 4px;
+
+    margin: 3px 0 7px;
+
+    z-index: 4;
+}
+
+.envelope-message {
+    font-size: 12px;
+
+    line-height: 1.6;
+
+    max-width: 230px;
+
+    opacity: 0.75;
+
+    z-index: 4;
+}
+
+
+/* =========================================
+   MAIN CONTENT
+========================================= */
+
+.main-content {
+    width: min(90%, 800px);
+
+    text-align: center;
+
+    position: relative;
+
+    z-index: 10;
+}
+
+.bow {
+    font-size: 50px;
+
+    margin-bottom: 10px;
+
+    animation: bowBounce 3s ease-in-out infinite;
+}
+
+.eyebrow {
+    font-size: 11px;
+
+    letter-spacing: 4px;
+
+    font-weight: 600;
+
+    opacity: 0.8;
+
+    margin-bottom: 12px;
+}
+
+.main-content h2 {
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: clamp(42px, 6vw, 76px);
+
+    line-height: 0.98;
+
+    font-weight: 700;
+
+    text-shadow:
+        0 5px 25px rgba(90, 0, 20, 0.25);
+
+    margin-bottom: 20px;
+}
+
+.subtitle {
+    font-family: "Great Vibes", cursive;
+
+    font-size: clamp(25px, 3vw, 34px);
+
+    margin-bottom: 35px;
+
+    color: #fff5f2;
+}
+
+
+/* =========================================
+   LUXURY BUTTON
+========================================= */
+
+.luxury-button {
+    position: relative;
+
+    border: none;
+
+    padding: 16px 30px;
+
+    border-radius: 999px;
+
+    background: #fff8f2;
+
+    color: #a72843;
+
+    font-family: "Poppins", sans-serif;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.4px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 12px 30px rgba(70, 0, 20, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+
+    overflow: hidden;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.luxury-button::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -100%;
+
+    width: 60%;
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.8),
+        transparent
+    );
+
+    transform: skewX(-20deg);
+
+    transition: left 0.7s ease;
+}
+
+.luxury-button:hover {
+    transform: translateY(-4px) scale(1.03);
+
+    box-shadow:
+        0 16px 35px rgba(70, 0, 20, 0.28),
+        0 0 25px rgba(255, 255, 255, 0.15);
+}
+
+.luxury-button:hover::before {
+    left: 140%;
+}
+
+.luxury-button:active {
+    transform: scale(0.96);
+}
+
+
+/* =========================================
+   PASSWORD SCREEN
+========================================= */
+
+.password-card {
+    position: relative;
+
+    width: min(92%, 470px);
+
+    padding: 45px 35px 40px;
+
+    text-align: center;
+
+    background: rgba(255, 248, 243, 0.96);
+
+    color: #9d2943;
+
+    border-radius: 28px;
+
+    box-shadow:
+        0 30px 70px rgba(65, 0, 20, 0.35);
+
+    animation: cardAppear 0.7s ease forwards;
+}
+
+@keyframes cardAppear {
+
     from {
         opacity: 0;
-        transform: scale(0.8);
+        transform: translateY(30px) scale(0.94);
     }
 
     to {
         opacity: 1;
-        transform: scale(1);
+        transform: translateY(0) scale(1);
     }
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
+.card-bow {
+    font-size: 35px;
 
-    to {
-        opacity: 1;
-    }
+    margin-bottom: 5px;
 }
 
-@keyframes heartbeat {
+.lock-icon {
+    font-size: 38px;
+
+    margin-bottom: 8px;
+}
+
+.card-label {
+    font-size: 10px;
+
+    letter-spacing: 4px;
+
+    font-weight: 700;
+
+    opacity: 0.65;
+
+    margin-bottom: 10px;
+}
+
+.password-card h2 {
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 31px;
+
+    line-height: 1.1;
+
+    margin-bottom: 10px;
+}
+
+.card-text {
+    font-size: 13px;
+
+    line-height: 1.6;
+
+    color: #b05166;
+
+    margin-bottom: 24px;
+}
+
+.password-card label {
+    display: block;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    margin-bottom: 9px;
+
+    opacity: 0.7;
+}
+
+#password-input {
+    width: 180px;
+
+    display: block;
+
+    margin: 0 auto 20px;
+
+    padding: 13px 18px;
+
+    border: 2px solid rgba(169, 40, 67, 0.2);
+
+    border-radius: 14px;
+
+    outline: none;
+
+    background: #fff;
+
+    color: #9d2943;
+
+    text-align: center;
+
+    font-size: 22px;
+
+    letter-spacing: 9px;
+
+    font-weight: 700;
+
+    transition:
+        border 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+#password-input:focus {
+    border-color: #d93650;
+
+    box-shadow:
+        0 0 0 4px rgba(217, 54, 80, 0.1);
+}
+
+.password-hint {
+    min-height: 20px;
+
+    margin-top: 12px;
+
+    font-size: 12px;
+
+    color: #c52e4c;
+}
+
+
+/* =========================================
+   POPUPS
+========================================= */
+
+.popup-overlay {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(65, 0, 20, 0.35);
+
+    backdrop-filter: blur(8px);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        opacity 0.4s ease,
+        visibility 0.4s ease;
+
+    z-index: 100;
+}
+
+.popup-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.popup-card {
+    width: min(90%, 390px);
+
+    padding: 38px 30px;
+
+    background: #fffaf5;
+
+    color: #9d2943;
+
+    border-radius: 25px;
+
+    text-align: center;
+
+    box-shadow:
+        0 30px 70px rgba(55, 0, 20, 0.4);
+
+    transform: translateY(20px) scale(0.94);
+
+    transition: transform 0.4s ease;
+}
+
+.popup-overlay.show .popup-card {
+    transform: translateY(0) scale(1);
+}
+
+.popup-icon {
+    font-size: 45px;
+
+    margin-bottom: 10px;
+}
+
+.popup-card h2 {
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 30px;
+
+    margin-bottom: 10px;
+}
+
+.popup-card p {
+    font-size: 14px;
+
+    line-height: 1.6;
+
+    color: #ad4a62;
+
+    margin-bottom: 7px;
+}
+
+.popup-card .popup-small {
+    margin-bottom: 22px;
+}
+
+.success-label {
+    font-size: 10px !important;
+
+    letter-spacing: 3px;
+
+    font-weight: 700;
+
+    margin-bottom: 12px !important;
+}
+
+
+/* =========================================
+   UNLOCK ANIMATION
+========================================= */
+
+.unlock-success {
+    animation: unlockPulse 0.6s ease;
+}
+
+@keyframes unlockPulse {
+
     0% {
         transform: scale(1);
     }
 
-    50% {
-        transform: scale(1.1);
+    35% {
+        transform: scale(1.04);
+        box-shadow: 0 0 35px rgba(255, 255, 255, 0.7);
     }
 
     100% {
@@ -323,55 +960,112 @@ h1 {
     }
 }
 
-@keyframes floatFlower {
-    0% {
-        transform: translateY(0) rotate(0deg);
-    }
 
-    50% {
-        transform: translateY(-15px) rotate(8deg);
-    }
-
-    100% {
-        transform: translateY(0) rotate(0deg);
-    }
-}
-
-@keyframes floatLeaf {
-    0% {
-        transform: translateY(0) rotate(0deg);
-    }
-
-    50% {
-        transform: translateY(-18px) rotate(-8deg);
-    }
-
-    100% {
-        transform: translateY(0) rotate(0deg);
-    }
-}
+/* =========================================
+   RESPONSIVE MOBILE DESIGN
+========================================= */
 
 @media (max-width: 600px) {
 
-    .card {
-        padding: 40px 25px;
-        border-radius: 25px;
+    .background-glow {
+        width: 380px;
+        height: 380px;
+    }
+
+    .corner-decoration {
+        width: 105px;
+        height: 100px;
     }
 
     .flower {
-        font-size: 45px;
+        font-size: 38px;
     }
 
     .leaf {
+        font-size: 42px;
+
+        left: 35px;
+        top: 40px;
+    }
+
+    .leaf.second {
+        left: 10px;
+        top: 55px;
+
+        font-size: 34px;
+    }
+
+    .main-content h2 {
+        font-size: clamp(38px, 11vw, 55px);
+
+        line-height: 1.02;
+    }
+
+    .eyebrow {
+        font-size: 9px;
+
+        letter-spacing: 2px;
+    }
+
+    .subtitle {
+        font-size: 25px;
+
+        margin-bottom: 28px;
+    }
+
+    .bow {
         font-size: 40px;
     }
 
-    .message {
-        font-size: 16px;
+    .envelope {
+        height: 225px;
     }
 
-    .question {
-        font-size: 15px;
+    .envelope h1 {
+        font-size: 30px;
     }
 
+    .password-card {
+        padding: 35px 22px;
+    }
+
+    .password-card h2 {
+        font-size: 27px;
+    }
+
+    .luxury-button {
+        padding: 15px 25px;
+        font-size: 13px;
+    }
+}
+
+
+/* =========================================
+   VERY SMALL PHONES
+========================================= */
+
+@media (max-height: 650px) {
+
+    .envelope {
+        transform: scale(0.82);
+
+        margin-top: -20px;
+        margin-bottom: 0;
+    }
+
+    .envelope:hover {
+        transform: scale(0.84) translateY(-5px);
+    }
+
+    .tiny-bow {
+        margin-bottom: -8px;
+    }
+
+    .main-content h2 {
+        font-size: 38px;
+    }
+
+    .subtitle {
+        margin-bottom: 18px;
+    }
 }
