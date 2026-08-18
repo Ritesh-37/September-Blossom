@@ -1,81 +1,262 @@
-const passwordInput = document.getElementById("password");
-const unlockButton = document.getElementById("unlockButton");
+/* =========================================
+   PAGE 1 - BIRTHDAY SURPRISE
+========================================= */
 
-const wrongPopup = document.getElementById("wrongPopup");
-const welcomePopup = document.getElementById("welcomePopup");
+document.addEventListener("DOMContentLoaded", function () {
 
-const wrongClose = document.getElementById("wrongClose");
-const welcomeClose = document.getElementById("welcomeClose");
+    /* -------------------------------------
+       GET ELEMENTS
+    ------------------------------------- */
+
+    const giftScreen = document.getElementById("gift-screen");
+    const entranceScreen = document.getElementById("entrance-screen");
+    const passwordScreen = document.getElementById("password-screen");
+
+    const envelope = document.getElementById("envelope");
+    const openGiftButton = document.getElementById("open-gift-btn");
+
+    const curiousButton = document.getElementById("curious-btn");
+
+    const passwordInput = document.getElementById("password-input");
+    const unlockButton = document.getElementById("unlock-btn");
+
+    const wrongPopup = document.getElementById("wrong-popup");
+    const tryAgainButton = document.getElementById("try-again-btn");
+
+    const successPopup = document.getElementById("success-popup");
+    const continueButton = document.getElementById("continue-btn");
+
+    const passwordHint = document.getElementById("password-hint");
+
+    const backgroundMusic = document.getElementById("background-music");
 
 
-/*
-    CHANGE THE PASSWORD HERE.
+    /* -------------------------------------
+       SECRET PASSWORD
+    ------------------------------------- */
 
-    Example:
-    const correctPassword = "tisha";
-
-    You can replace "tisha" with whatever password you want.
-*/
-
-const correctPassword = "tisha";
+    const correctPassword = "0309";
 
 
-unlockButton.addEventListener("click", function () {
+    /* -------------------------------------
+       SHOW SCREEN FUNCTION
+    ------------------------------------- */
 
-    const enteredPassword = passwordInput.value.trim();
+    function showScreen(screenToShow) {
 
-    if (enteredPassword === correctPassword) {
+        const screens = [
+            giftScreen,
+            entranceScreen,
+            passwordScreen
+        ];
 
-        welcomePopup.classList.add("show");
+        screens.forEach(function (screen) {
 
-    } else {
+            screen.classList.remove("active");
 
-        wrongPopup.classList.add("show");
+        });
+
+        setTimeout(function () {
+
+            screenToShow.classList.add("active");
+
+        }, 150);
 
     }
 
-});
 
+    /* -------------------------------------
+       START MUSIC
+    ------------------------------------- */
 
-passwordInput.addEventListener("keydown", function (event) {
+    function startMusic() {
 
-    if (event.key === "Enter") {
-        unlockButton.click();
+        if (!backgroundMusic) {
+            return;
+        }
+
+        backgroundMusic.volume = 0.35;
+
+        const playPromise = backgroundMusic.play();
+
+        if (playPromise !== undefined) {
+
+            playPromise.catch(function () {
+
+                console.log("Music could not start automatically.");
+
+            });
+
+        }
+
     }
 
-});
+
+    /* -------------------------------------
+       OPEN THE GIFT
+    ------------------------------------- */
+
+    function openGift() {
+
+        envelope.classList.add("unlock-success");
+
+        openGiftButton.disabled = true;
+
+        setTimeout(function () {
+
+            showScreen(entranceScreen);
+
+        }, 700);
+
+    }
 
 
-wrongClose.addEventListener("click", function () {
+    openGiftButton.addEventListener("click", openGift);
 
-    wrongPopup.classList.remove("show");
-
-    passwordInput.value = "";
-    passwordInput.focus();
-
-});
+    envelope.addEventListener("click", openGift);
 
 
-welcomeClose.addEventListener("click", function () {
+    /* -------------------------------------
+       OPEN PASSWORD SCREEN
+    ------------------------------------- */
 
-    welcomePopup.classList.remove("show");
+    curiousButton.addEventListener("click", function () {
 
-});
+        showScreen(passwordScreen);
+
+        setTimeout(function () {
+
+            passwordInput.focus();
+
+        }, 700);
+
+    });
 
 
-wrongPopup.addEventListener("click", function (event) {
+    /* -------------------------------------
+       CHECK PASSWORD
+    ------------------------------------- */
 
-    if (event.target === wrongPopup) {
+    function checkPassword() {
+
+        const enteredPassword = passwordInput.value.trim();
+
+        passwordHint.textContent = "";
+
+        if (enteredPassword === correctPassword) {
+
+            unlockButton.disabled = true;
+
+            passwordInput.classList.add("unlock-success");
+
+            startMusic();
+
+            setTimeout(function () {
+
+                successPopup.classList.add("show");
+
+            }, 500);
+
+        } else {
+
+            passwordInput.value = "";
+
+            wrongPopup.classList.add("show");
+
+        }
+
+    }
+
+
+    unlockButton.addEventListener("click", checkPassword);
+
+
+    /* -------------------------------------
+       ENTER KEY ALSO UNLOCKS
+    ------------------------------------- */
+
+    passwordInput.addEventListener("keydown", function (event) {
+
+        if (event.key === "Enter") {
+
+            checkPassword();
+
+        }
+
+    });
+
+
+    /* -------------------------------------
+       TRY AGAIN
+    ------------------------------------- */
+
+    tryAgainButton.addEventListener("click", function () {
+
         wrongPopup.classList.remove("show");
-    }
 
-});
+        setTimeout(function () {
+
+            passwordInput.focus();
+
+        }, 300);
+
+    });
 
 
-welcomePopup.addEventListener("click", function (event) {
+    /* -------------------------------------
+       CONTINUE TO PAGE 2
+    ------------------------------------- */
 
-    if (event.target === welcomePopup) {
-        welcomePopup.classList.remove("show");
-    }
+    continueButton.addEventListener("click", function () {
+
+        /*
+         * Page 2 will be created later.
+         *
+         * For now, this keeps the button from
+         * causing an error while Page 2 is
+         * being designed.
+         */
+
+        successPopup.classList.remove("show");
+
+        passwordScreen.classList.remove("active");
+
+        setTimeout(function () {
+
+            alert(
+                "Page 2 is ready to be created next! ❤️"
+            );
+
+            passwordScreen.classList.add("active");
+
+        }, 500);
+
+    });
+
+
+    /* -------------------------------------
+       CLOSE POPUP IF USER CLICKS OUTSIDE
+    ------------------------------------- */
+
+    wrongPopup.addEventListener("click", function (event) {
+
+        if (event.target === wrongPopup) {
+
+            wrongPopup.classList.remove("show");
+
+        }
+
+    });
+
+
+    successPopup.addEventListener("click", function (event) {
+
+        if (event.target === successPopup) {
+
+            successPopup.classList.remove("show");
+
+        }
+
+    });
 
 });
