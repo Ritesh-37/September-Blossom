@@ -1,35 +1,263 @@
 /* =====================================================
    🎂 BIRTHDAY ADVENTURE
-   CUSTOMIZE THIS SECTION
 ===================================================== */
 
 
 /* =====================================================
-   👤 NAME
+   🔐 FIRST PAGE PASSWORD
+=====================================================
+
+   CHANGE THE PASSWORD HERE.
+
+   For now the password is:
+
+   chirkoot
+
 ===================================================== */
 
-const birthdayPerson = "Birthday Star";
+const secretPassword = "chirkoot";
+
+
+/* =====================================================
+   👤 BIRTHDAY PERSON
+===================================================== */
+
+const birthdayPerson = "Tisha";
 
 
 /* =====================================================
    🎂 BIRTHDAY DATE
-=====================================================
-
-   Change this to the birthday.
-
-   Example:
-
-   "2026-09-15T00:00:00"
-
-   IMPORTANT:
-   Use:
-
-   YYYY-MM-DD
-
 ===================================================== */
 
 const birthdayDate =
     "2026-09-15T00:00:00";
+
+
+/* =====================================================
+   🔐 PASSWORD SCREEN
+===================================================== */
+
+function checkPassword() {
+
+    const input =
+        document.getElementById(
+            "password-input"
+        );
+
+    const error =
+        document.getElementById(
+            "password-error"
+        );
+
+    const enteredPassword =
+        input.value
+            .trim()
+            .toLowerCase();
+
+
+    if (
+        enteredPassword ===
+        secretPassword.toLowerCase()
+    ) {
+
+        error.textContent = "";
+
+        openWelcomePopup();
+
+    }
+
+    else {
+
+        error.textContent =
+            "Wrong password... 😭";
+
+        input.classList.remove(
+            "password-shake"
+        );
+
+        void input.offsetWidth;
+
+        input.classList.add(
+            "password-shake"
+        );
+
+
+        setTimeout(() => {
+
+            document
+                .getElementById(
+                    "wrong-password-popup"
+                )
+                .classList.add("show");
+
+        }, 250);
+
+    }
+}
+
+
+/* =====================================================
+   ENTER KEY FOR PASSWORD
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        const passwordScreen =
+            document.getElementById(
+                "password-screen"
+            );
+
+
+        if (
+            event.key === "Enter" &&
+            passwordScreen &&
+            passwordScreen.classList.contains("active")
+        ) {
+
+            checkPassword();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   PASSWORD VISIBILITY
+===================================================== */
+
+function togglePassword() {
+
+    const input =
+        document.getElementById(
+            "password-input"
+        );
+
+
+    if (
+        input.type === "password"
+    ) {
+
+        input.type = "text";
+
+    }
+
+    else {
+
+        input.type = "password";
+
+    }
+}
+
+
+/* =====================================================
+   WRONG PASSWORD POPUP
+===================================================== */
+
+function closeWrongPassword() {
+
+    document
+        .getElementById(
+            "wrong-password-popup"
+        )
+        .classList.remove("show");
+
+
+    document
+        .getElementById(
+            "password-input"
+        )
+        .focus();
+}
+
+
+/* =====================================================
+   🎬 WELCOME POPUP
+===================================================== */
+
+function openWelcomePopup() {
+
+    const popup =
+        document.getElementById(
+            "welcome-popup"
+        );
+
+
+    popup.classList.add("show");
+
+
+    const video =
+        document.getElementById(
+            "welcome-video"
+        );
+
+
+    /*
+       Try to play the welcome video.
+
+       Browsers may block autoplay if
+       the video contains sound.
+
+       The user can press play manually.
+    */
+
+    video.play()
+        .catch(() => {});
+
+
+    const music =
+        document.getElementById(
+            "welcome-music"
+        );
+
+
+    music.volume = 0.35;
+
+    music.play()
+        .catch(() => {});
+
+}
+
+
+/* =====================================================
+   ENTER THE MAIN ADVENTURE
+===================================================== */
+
+function enterAdventure() {
+
+    const welcomeMusic =
+        document.getElementById(
+            "welcome-music"
+        );
+
+
+    const welcomeVideo =
+        document.getElementById(
+            "welcome-video"
+        );
+
+
+    welcomeMusic.pause();
+
+    welcomeVideo.pause();
+
+
+    document
+        .getElementById(
+            "welcome-popup"
+        )
+        .classList.remove("show");
+
+
+    setTimeout(() => {
+
+        showScreen("start-screen");
+
+    }, 400);
+
+}
 
 
 /* =====================================================
@@ -357,6 +585,7 @@ function showScreen(id) {
 
         });
 
+
     document
         .getElementById(id)
         .classList.add("active");
@@ -502,7 +731,9 @@ function checkAnswer() {
             "shake"
         );
 
+
         void input.offsetWidth;
+
 
         input.classList.add(
             "shake"
@@ -774,6 +1005,7 @@ function openLetter() {
 
     envelope.classList.add("open");
 
+
     setTimeout(() => {
 
         letter.classList.add("open");
@@ -823,11 +1055,6 @@ function openRandomSurprise() {
         );
 
 
-    /*
-       If locked, show its question.
-       If unlocked, show the surprise.
-    */
-
     openChallenge(
         randomIndex
     );
@@ -865,11 +1092,6 @@ function updateCountdown() {
         target - now;
 
 
-    /*
-       If birthday already passed,
-       show next year's birthday.
-    */
-
     if (difference < 0) {
 
         const oldDate =
@@ -887,8 +1109,7 @@ function updateCountdown() {
 
 
         difference =
-            nextDate.getTime() -
-            now;
+            nextDate.getTime() - now;
     }
 
 
@@ -967,13 +1188,6 @@ function startMusic() {
 
     music.volume = 0.25;
 
-
-    /*
-       Browsers may block
-       automatic music.
-
-       That's normal.
-    */
 
     music.play()
         .then(() => {
@@ -1253,11 +1467,6 @@ function activateEasterEgg() {
     easterClicks++;
 
 
-    /*
-       The secret button needs
-       5 clicks.
-    */
-
     if (
         easterClicks >= 5
     ) {
@@ -1490,7 +1699,14 @@ document.addEventListener(
     "DOMContentLoaded",
     () => {
 
-        createConfetti(30);
+        createConfetti(20);
+
+        /*
+           Make sure the first page is shown
+           when the website opens.
+        */
+
+        showScreen("password-screen");
 
     }
 );
