@@ -1,110 +1,97 @@
 /* =========================================================
-   PASSWORD
+   =========================================================
+   WEBSITE SETTINGS
+   =========================================================
 ========================================================= */
 
 const CORRECT_PASSWORD = "0309";
 
 let enteredPassword = "";
 
-let popupType = "";
+let audioContext = null;
+
+let birthdayMusicTimer = null;
 
 let musicPlaying = false;
 
-
-/* =========================================================
-   AUDIO SYSTEM
-   We create sounds directly with Web Audio.
-   This means you do NOT need an audio folder.
-========================================================= */
-
-let audioContext = null;
-
-let musicTimer = null;
-
-let musicNoteIndex = 0;
+let currentNoteIndex = 0;
 
 
 /* =========================================================
-   CREATE AUDIO CONTEXT
+   PAGE ELEMENTS
 ========================================================= */
 
-function getAudioContext() {
+const page1 =
+    document.getElementById("page1");
 
-    if (!audioContext) {
+const page2 =
+    document.getElementById("page2");
 
-        audioContext =
-            new (
-                window.AudioContext ||
-                window.webkitAudioContext
-            )();
+const page3 =
+    document.getElementById("page3");
+
+const popupOverlay =
+    document.getElementById("popup-overlay");
+
+
+/* =========================================================
+   PAGE SWITCHING
+========================================================= */
+
+function showPage(pageNumber) {
+
+    page1.classList.remove("active");
+
+    page2.classList.remove("active");
+
+    page3.classList.remove("active");
+
+
+    if (pageNumber === 1) {
+
+        page1.classList.add("active");
+
+        history.replaceState(
+            null,
+            "",
+            "#secret"
+        );
 
     }
 
-    if (
-        audioContext.state ===
-        "suspended"
-    ) {
 
-        audioContext.resume();
+    if (pageNumber === 2) {
+
+        page2.classList.add("active");
+
+        history.replaceState(
+            null,
+            "",
+            "#birthday"
+        );
+
+
+        /*
+           Start birthday music when Page 2
+           becomes active.
+        */
+
+        startBirthdayMusic();
 
     }
 
-    return audioContext;
-}
 
+    if (pageNumber === 3) {
 
-/* =========================================================
-   PLAY SIMPLE TONE
-========================================================= */
+        page3.classList.add("active");
 
-function playTone(
-    frequency,
-    duration = 0.15,
-    type = "sine",
-    volume = 0.08
-) {
+        history.replaceState(
+            null,
+            "",
+            "#next"
+        );
 
-    const ctx =
-        getAudioContext();
-
-    const oscillator =
-        ctx.createOscillator();
-
-    const gain =
-        ctx.createGain();
-
-
-    oscillator.type =
-        type;
-
-    oscillator.frequency.value =
-        frequency;
-
-
-    gain.gain.setValueAtTime(
-        volume,
-        ctx.currentTime
-    );
-
-
-    gain.gain.exponentialRampToValueAtTime(
-        0.001,
-        ctx.currentTime + duration
-    );
-
-
-    oscillator.connect(gain);
-
-    gain.connect(
-        ctx.destination
-    );
-
-
-    oscillator.start();
-
-    oscillator.stop(
-        ctx.currentTime + duration
-    );
+    }
 }
 
 
@@ -126,9 +113,7 @@ function updateDisplay() {
         );
 
 
-    if (
-        enteredPassword.length > 0
-    ) {
+    if (enteredPassword.length > 0) {
 
         display.classList.add(
             "filled"
@@ -139,13 +124,12 @@ function updateDisplay() {
         display.classList.remove(
             "filled"
         );
-
     }
 }
 
 
 /* =========================================================
-   PRESS NUMBER
+   NUMBER BUTTON
 ========================================================= */
 
 function pressKey(number) {
@@ -153,9 +137,7 @@ function pressKey(number) {
     if (
         enteredPassword.length >= 8
     ) {
-
         return;
-
     }
 
 
@@ -164,18 +146,11 @@ function pressKey(number) {
     updateDisplay();
 
     clearMessage();
-
-    playTone(
-        440,
-        0.08,
-        "sine",
-        0.035
-    );
 }
 
 
 /* =========================================================
-   DELETE
+   DELETE BUTTON
 ========================================================= */
 
 function deleteKey() {
@@ -189,26 +164,29 @@ function deleteKey() {
     updateDisplay();
 
     clearMessage();
-
-    playTone(
-        250,
-        0.08,
-        "sine",
-        0.03
-    );
 }
 
 
 /* =========================================================
-   SHOW POPUP
+   CLEAR MESSAGE
+========================================================= */
+
+function clearMessage() {
+
+    const message =
+        document.getElementById(
+            "password-message"
+        );
+
+    message.textContent = "";
+}
+
+
+/* =========================================================
+   SHOW WRONG/CORRECT POPUP
 ========================================================= */
 
 function showPopup(type) {
-
-    const overlay =
-        document.getElementById(
-            "popup-overlay"
-        );
 
     const doodle =
         document.getElementById(
@@ -226,12 +204,7 @@ function showPopup(type) {
         );
 
 
-    popupType = type;
-
-
-    if (
-        type === "wrong"
-    ) {
+    if (type === "wrong") {
 
         doodle.textContent =
             "🥺💗";
@@ -242,20 +215,10 @@ function showPopup(type) {
         hearts.textContent =
             "♡ ✿ ♡";
 
-
-        playTone(
-            220,
-            0.2,
-            "sine",
-            0.06
-        );
-
     }
 
 
-    if (
-        type === "correct"
-    ) {
+    if (type === "correct") {
 
         doodle.textContent =
             "🎀💗✨";
@@ -267,42 +230,10 @@ function showPopup(type) {
         hearts.textContent =
             "♡ ✿ ♡ ✿ ♡";
 
-
-        playTone(
-            523,
-            0.12,
-            "sine",
-            0.05
-        );
-
-        setTimeout(
-            () => {
-                playTone(
-                    659,
-                    0.12,
-                    "sine",
-                    0.05
-                );
-            },
-            120
-        );
-
-        setTimeout(
-            () => {
-                playTone(
-                    784,
-                    0.2,
-                    "sine",
-                    0.05
-                );
-            },
-            240
-        );
-
     }
 
 
-    overlay.classList.add(
+    popupOverlay.classList.add(
         "show"
     );
 }
@@ -314,41 +245,32 @@ function showPopup(type) {
 
 function closePopup() {
 
-    const overlay =
-        document.getElementById(
-            "popup-overlay"
-        );
+    const isCorrectPopup =
+        document
+            .getElementById("popup-message")
+            .innerHTML
+            .includes("Welcome");
 
 
-    overlay.classList.remove(
+    popupOverlay.classList.remove(
         "show"
     );
 
 
     /*
-       IMPORTANT:
-       Page 2 opens ONLY after
-       the correct welcome popup
-       has been closed.
+       ONLY after the correct popup
+       is closed do we enter Page 2.
     */
 
-    if (
-        popupType === "correct"
-    ) {
+    if (isCorrectPopup) {
 
-        setTimeout(
-            () => {
+        setTimeout(() => {
 
-                openPage2();
+            showPage(2);
 
-            },
-            300
-        );
+        }, 350);
 
     }
-
-
-    popupType = "";
 }
 
 
@@ -383,7 +305,7 @@ function checkPassword() {
 
                 {
                     transform:
-                        "scale(1.1)"
+                        "scale(1.08)"
                 },
 
                 {
@@ -396,20 +318,16 @@ function checkPassword() {
                 duration:
                     450
             }
-
         );
 
 
-        setTimeout(
-            () => {
+        setTimeout(() => {
 
-                showPopup(
-                    "correct"
-                );
+            showPopup(
+                "correct"
+            );
 
-            },
-            300
-        );
+        }, 350);
 
 
         return;
@@ -430,22 +348,22 @@ function checkPassword() {
 
             {
                 transform:
-                    "translateX(-8px)"
+                    "translateX(-9px)"
             },
 
             {
                 transform:
-                    "translateX(8px)"
+                    "translateX(9px)"
             },
 
             {
                 transform:
-                    "translateX(-6px)"
+                    "translateX(-7px)"
             },
 
             {
                 transform:
-                    "translateX(6px)"
+                    "translateX(7px)"
             },
 
             {
@@ -456,402 +374,27 @@ function checkPassword() {
 
         {
             duration:
-                350
-        }
-    );
-
-
-    setTimeout(
-        () => {
-
-            showPopup(
-                "wrong"
-            );
-
-        },
-        300
-    );
-
-
-    setTimeout(
-        () => {
-
-            enteredPassword = "";
-
-            updateDisplay();
-
-        },
-        700
-    );
-}
-
-
-/* =========================================================
-   CLEAR PASSWORD MESSAGE
-========================================================= */
-
-function clearMessage() {
-
-    const message =
-        document.getElementById(
-            "password-message"
-        );
-
-    message.textContent = "";
-}
-
-
-/* =========================================================
-   OPEN PAGE 2
-========================================================= */
-
-function openPage2() {
-
-    const page1 =
-        document.getElementById(
-            "page1"
-        );
-
-    const page2 =
-        document.getElementById(
-            "page2"
-        );
-
-
-    page1.style.display =
-        "none";
-
-    page2.style.display =
-        "block";
-
-
-    /*
-       Start birthday music
-       after entering Page 2.
-    */
-
-    startBirthdayMusic();
-}
-
-
-/* =========================================================
-   BIRTHDAY MUSIC
-========================================================= */
-
-/*
-   Simple generated birthday-style melody.
-
-   This avoids requiring an external
-   MP3 file in GitHub.
-*/
-
-const birthdayNotes = [
-
-    262,
-    262,
-    294,
-    262,
-    349,
-    330,
-
-    262,
-    262,
-    294,
-    262,
-    392,
-    349,
-
-    262,
-    262,
-    523,
-    440,
-    349,
-    330,
-    294,
-
-    466,
-    466,
-    440,
-    349,
-    392,
-    349
-
-];
-
-
-function playBirthdayNote() {
-
-    if (
-        !musicPlaying
-    ) {
-
-        return;
-
-    }
-
-
-    const note =
-        birthdayNotes[
-            musicNoteIndex %
-            birthdayNotes.length
-        ];
-
-
-    playTone(
-        note,
-        0.28,
-        "triangle",
-        0.035
-    );
-
-
-    musicNoteIndex++;
-
-
-    musicTimer =
-        setTimeout(
-            playBirthdayNote,
-            360
-        );
-}
-
-
-/* =========================================================
-   START MUSIC
-========================================================= */
-
-function startBirthdayMusic() {
-
-    getAudioContext();
-
-    musicPlaying = true;
-
-    musicNoteIndex = 0;
-
-    clearTimeout(
-        musicTimer
-    );
-
-    playBirthdayNote();
-
-    updateMusicButton();
-}
-
-
-/* =========================================================
-   STOP MUSIC
-========================================================= */
-
-function stopBirthdayMusic() {
-
-    musicPlaying = false;
-
-    clearTimeout(
-        musicTimer
-    );
-
-    musicTimer = null;
-
-    updateMusicButton();
-}
-
-
-/* =========================================================
-   TOGGLE MUSIC
-========================================================= */
-
-function toggleMusic() {
-
-    if (
-        musicPlaying
-    ) {
-
-        stopBirthdayMusic();
-
-    } else {
-
-        startBirthdayMusic();
-
-    }
-}
-
-
-/* =========================================================
-   MUSIC BUTTON TEXT
-========================================================= */
-
-function updateMusicButton() {
-
-    const button =
-        document.getElementById(
-            "music-button"
-        );
-
-
-    if (
-        musicPlaying
-    ) {
-
-        button.textContent =
-            "🔊 Music On";
-
-    } else {
-
-        button.textContent =
-            "🔇 Music Off";
-
-    }
-}
-
-
-/* =========================================================
-   DUCK SOUND
-========================================================= */
-
-function duckSound() {
-
-    getAudioContext();
-
-
-    /*
-       Two tones make the
-       sound more duck-like.
-    */
-
-    playTone(
-        330,
-        0.18,
-        "sawtooth",
-        0.06
-    );
-
-
-    setTimeout(
-        () => {
-
-            playTone(
-                220,
-                0.2,
-                "sawtooth",
-                0.05
-            );
-
-        },
-        100
-    );
-}
-
-
-/* =========================================================
-   FARMHOUSE DOOR
-========================================================= */
-
-function openFarmDoor() {
-
-    /*
-       Door click sound.
-    */
-
-    playTone(
-        180,
-        0.12,
-        "square",
-        0.05
-    );
-
-
-    setTimeout(
-        () => {
-
-            playTone(
-                100,
-                0.18,
-                "square",
-                0.035
-            );
-
-        },
-        100
-    );
-
-
-    /*
-       Small door animation.
-    */
-
-    const door =
-        document.getElementById(
-            "farm-door"
-        );
-
-
-    door.animate(
-
-        [
-            {
-                transform:
-                    "scaleX(1)"
-            },
-
-            {
-                transform:
-                    "scaleX(0.92)"
-            },
-
-            {
-                transform:
-                    "scaleX(1)"
-            }
-        ],
-
-        {
-            duration:
                 400
         }
     );
 
 
-    /*
-       Give the sound a moment,
-       then go to Page 3.
-    */
+    setTimeout(() => {
 
-    setTimeout(
-        () => {
-
-            openPage3();
-
-        },
-        650
-    );
-}
-
-
-/* =========================================================
-   OPEN PAGE 3
-========================================================= */
-
-function openPage3() {
-
-    const page2 =
-        document.getElementById(
-            "page2"
+        showPopup(
+            "wrong"
         );
 
-    const page3 =
-        document.getElementById(
-            "page3"
-        );
+    }, 300);
 
 
-    stopBirthdayMusic();
+    setTimeout(() => {
 
+        enteredPassword = "";
 
-    page2.style.display =
-        "none";
+        updateDisplay();
 
-    page3.style.display =
-        "flex";
+    }, 700);
 }
 
 
@@ -868,39 +411,69 @@ document.addEventListener(
             event.key <= "9"
         ) {
 
-            pressKey(
-                event.key
-            );
+            /*
+               Only accept keyboard password
+               input while Page 1 is active.
+            */
+
+            if (
+                page1.classList.contains(
+                    "active"
+                )
+            ) {
+
+                pressKey(
+                    event.key
+                );
+            }
 
         }
 
 
         else if (
-            event.key ===
-            "Backspace"
+            event.key === "Backspace"
         ) {
 
-            deleteKey();
+            if (
+                page1.classList.contains(
+                    "active"
+                )
+            ) {
+
+                deleteKey();
+            }
 
         }
 
 
         else if (
-            event.key ===
-            "Enter"
+            event.key === "Enter"
         ) {
 
-            checkPassword();
+            if (
+                page1.classList.contains(
+                    "active"
+                )
+            ) {
+
+                checkPassword();
+            }
 
         }
 
 
         else if (
-            event.key ===
-            "Escape"
+            event.key === "Escape"
         ) {
 
-            closePopup();
+            if (
+                popupOverlay.classList.contains(
+                    "show"
+                )
+            ) {
+
+                closePopup();
+            }
 
         }
 
@@ -909,7 +482,500 @@ document.addEventListener(
 
 
 /* =========================================================
-   INITIALIZE
+   AUDIO ENGINE
+   =========================================================
+
+   No audio files are required.
+
+   The sounds are created using Web Audio API.
+
+========================================================= */
+
+function getAudioContext() {
+
+    if (!audioContext) {
+
+        audioContext =
+            new (
+                window.AudioContext ||
+                window.webkitAudioContext
+            )();
+
+    }
+
+
+    if (
+        audioContext.state ===
+        "suspended"
+    ) {
+
+        audioContext.resume();
+
+    }
+
+
+    return audioContext;
+}
+
+
+/* =========================================================
+   GENERIC TONE
+========================================================= */
+
+function playTone(
+    frequency,
+    duration,
+    type = "sine",
+    volume = 0.05
+) {
+
+    const ctx =
+        getAudioContext();
+
+
+    const oscillator =
+        ctx.createOscillator();
+
+
+    const gain =
+        ctx.createGain();
+
+
+    oscillator.type =
+        type;
+
+    oscillator.frequency.value =
+        frequency;
+
+
+    gain.gain.setValueAtTime(
+        0,
+        ctx.currentTime
+    );
+
+
+    gain.gain.linearRampToValueAtTime(
+        volume,
+        ctx.currentTime + 0.015
+    );
+
+
+    gain.gain.exponentialRampToValueAtTime(
+        0.001,
+        ctx.currentTime + duration
+    );
+
+
+    oscillator.connect(
+        gain
+    );
+
+    gain.connect(
+        ctx.destination
+    );
+
+
+    oscillator.start();
+
+    oscillator.stop(
+        ctx.currentTime +
+        duration +
+        0.03
+    );
+}
+
+
+/* =========================================================
+   DOOR CLICK SOUND
+========================================================= */
+
+function playDoorSound() {
+
+    const ctx =
+        getAudioContext();
+
+
+    playTone(
+        190,
+        0.08,
+        "square",
+        0.055
+    );
+
+
+    setTimeout(() => {
+
+        playTone(
+            125,
+            0.12,
+            "square",
+            0.035
+        );
+
+    }, 75);
+}
+
+
+/* =========================================================
+   DUCK SOUND
+========================================================= */
+
+function playDuckSound() {
+
+    const ctx =
+        getAudioContext();
+
+
+    const oscillator =
+        ctx.createOscillator();
+
+
+    const gain =
+        ctx.createGain();
+
+
+    oscillator.type =
+        "sawtooth";
+
+
+    oscillator.frequency.setValueAtTime(
+        520,
+        ctx.currentTime
+    );
+
+
+    oscillator.frequency.exponentialRampToValueAtTime(
+        300,
+        ctx.currentTime + 0.18
+    );
+
+
+    gain.gain.setValueAtTime(
+        0,
+        ctx.currentTime
+    );
+
+
+    gain.gain.linearRampToValueAtTime(
+        0.11,
+        ctx.currentTime + 0.02
+    );
+
+
+    gain.gain.exponentialRampToValueAtTime(
+        0.001,
+        ctx.currentTime + 0.22
+    );
+
+
+    oscillator.connect(
+        gain
+    );
+
+    gain.connect(
+        ctx.destination
+    );
+
+
+    oscillator.start();
+
+    oscillator.stop(
+        ctx.currentTime + 0.25
+    );
+}
+
+
+/* =========================================================
+   HAPPY BIRTHDAY MELODY
+   =========================================================
+
+   Approximate Happy Birthday melody.
+
+========================================================= */
+
+const birthdayNotes = [
+
+    [264, 0.28],
+    [264, 0.28],
+    [297, 0.55],
+    [264, 0.55],
+    [352, 0.55],
+    [330, 1.0],
+
+    [264, 0.28],
+    [264, 0.28],
+    [297, 0.55],
+    [264, 0.55],
+    [396, 0.55],
+    [352, 1.0],
+
+    [264, 0.28],
+    [264, 0.28],
+    [528, 0.55],
+    [440, 0.55],
+    [352, 0.55],
+    [330, 0.55],
+    [297, 0.9],
+
+    [470, 0.28],
+    [470, 0.28],
+    [440, 0.55],
+    [352, 0.55],
+    [396, 0.55],
+    [352, 1.0]
+
+];
+
+
+/* =========================================================
+   PLAY NEXT BIRTHDAY NOTE
+========================================================= */
+
+function playNextBirthdayNote() {
+
+    if (!musicPlaying) {
+        return;
+    }
+
+
+    const note =
+        birthdayNotes[
+            currentNoteIndex
+        ];
+
+
+    playTone(
+        note[0],
+        note[1] * 0.85,
+        "sine",
+        0.035
+    );
+
+
+    currentNoteIndex++;
+
+
+    if (
+        currentNoteIndex >=
+        birthdayNotes.length
+    ) {
+
+        currentNoteIndex = 0;
+    }
+
+
+    birthdayMusicTimer =
+        setTimeout(
+            playNextBirthdayNote,
+            note[1] * 1000 + 70
+        );
+}
+
+
+/* =========================================================
+   START BIRTHDAY MUSIC
+========================================================= */
+
+function startBirthdayMusic() {
+
+    if (musicPlaying) {
+        return;
+    }
+
+
+    getAudioContext();
+
+
+    musicPlaying = true;
+
+    currentNoteIndex = 0;
+
+
+    const button =
+        document.getElementById(
+            "music-button"
+        );
+
+
+    button.textContent =
+        "🎵";
+
+
+    playNextBirthdayNote();
+}
+
+
+/* =========================================================
+   STOP BIRTHDAY MUSIC
+========================================================= */
+
+function stopBirthdayMusic() {
+
+    musicPlaying = false;
+
+
+    if (
+        birthdayMusicTimer
+    ) {
+
+        clearTimeout(
+            birthdayMusicTimer
+        );
+
+        birthdayMusicTimer =
+            null;
+    }
+
+
+    const button =
+        document.getElementById(
+            "music-button"
+        );
+
+
+    button.textContent =
+        "🔇";
+}
+
+
+/* =========================================================
+   TOGGLE MUSIC
+========================================================= */
+
+function toggleMusic(event) {
+
+    event.stopPropagation();
+
+
+    if (musicPlaying) {
+
+        stopBirthdayMusic();
+
+    } else {
+
+        startBirthdayMusic();
+
+    }
+}
+
+
+/* =========================================================
+   DUCK CLICK
+========================================================= */
+
+function duckClicked(event) {
+
+    /*
+       Prevent the click from behaving
+       like a page-level click.
+    */
+
+    event.stopPropagation();
+
+
+    playDuckSound();
+
+
+    const duckFamily =
+        document.getElementById(
+            "duck-family"
+        );
+
+
+    /*
+       Cute little bounce when clicked.
+    */
+
+    duckFamily.animate(
+
+        [
+            {
+                transform:
+                    "scale(1)"
+            },
+
+            {
+                transform:
+                    "scale(1.12)"
+            },
+
+            {
+                transform:
+                    "scale(1)"
+            }
+        ],
+
+        {
+            duration:
+                300
+        }
+    );
+}
+
+
+/* =========================================================
+   FARM HOUSE DOOR
+========================================================= */
+
+function openFarmDoor() {
+
+    playDoorSound();
+
+
+    const door =
+        document.getElementById(
+            "farm-door"
+        );
+
+
+    /*
+       Small opening animation.
+    */
+
+    door.animate(
+
+        [
+            {
+                transform:
+                    "perspective(300px) rotateY(0deg)"
+            },
+
+            {
+                transform:
+                    "perspective(300px) rotateY(-45deg)"
+            },
+
+            {
+                transform:
+                    "perspective(300px) rotateY(-75deg)"
+            }
+        ],
+
+        {
+            duration:
+                650,
+
+            fill:
+                "forwards"
+        }
+    );
+
+
+    /*
+       Move to Page 3 after
+       the door animation.
+    */
+
+    setTimeout(() => {
+
+        showPage(3);
+
+    }, 850);
+}
+
+
+/* =========================================================
+   INITIAL PAGE
 ========================================================= */
 
 document.addEventListener(
@@ -918,35 +984,29 @@ document.addEventListener(
 
         updateDisplay();
 
-        updateMusicButton();
+        showPage(1);
 
+    }
+);
+
+
+/* =========================================================
+   PREVENT RIGHT-CLICK ON PAGE
+   Optional cute-surprise behavior.
+========================================================= */
+
+document.addEventListener(
+    "contextmenu",
+    function(event) {
 
         /*
-           Clicking outside popup
-           closes it.
+           We don't actually disable
+           right-click because it can
+           annoy users.
+
+           This listener is intentionally
+           left empty.
         */
-
-        const overlay =
-            document.getElementById(
-                "popup-overlay"
-            );
-
-
-        overlay.addEventListener(
-            "click",
-            function(event) {
-
-                if (
-                    event.target ===
-                    overlay
-                ) {
-
-                    closePopup();
-
-                }
-
-            }
-        );
 
     }
 );
