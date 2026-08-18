@@ -17,17 +17,29 @@
 
     <div class="background-decor">
 
+        <!-- White flowers -->
         <span class="flower flower-1">✿</span>
         <span class="flower flower-2">✿</span>
-        <span class="flower flower-3">✿</span>
+        <span class="flower flower-3">❀</span>
         <span class="flower flower-4">✿</span>
-        <span class="flower flower-5">✿</span>
+        <span class="flower flower-5">❀</span>
         <span class="flower flower-6">✿</span>
+        <span class="flower flower-7">✿</span>
+        <span class="flower flower-8">❀</span>
+        <span class="flower flower-9">✿</span>
+        <span class="flower flower-10">❀</span>
+        <span class="flower flower-11">✿</span>
+        <span class="flower flower-12">❀</span>
 
+        <!-- Green leaves -->
         <span class="leaf leaf-1">🌿</span>
         <span class="leaf leaf-2">🍃</span>
         <span class="leaf leaf-3">🌿</span>
         <span class="leaf leaf-4">🍃</span>
+        <span class="leaf leaf-5">🌿</span>
+        <span class="leaf leaf-6">🍃</span>
+        <span class="leaf leaf-7">🌿</span>
+        <span class="leaf leaf-8">🍃</span>
 
     </div>
 
@@ -50,7 +62,7 @@
 
             <!-- Small decorative flowers -->
             <div class="decor-flower flower-left">✿</div>
-            <div class="decor-flower flower-right">✿</div>
+            <div class="decor-flower flower-right">❀</div>
 
             <!-- Heart frame -->
             <div class="heart-frame">
@@ -60,8 +72,6 @@
                     <!--
                     ==================================================
                     YOUR PHOTO GOES HERE
-
-                    For now this uses a random placeholder image.
 
                     LATER:
                     Replace the URL below with your own image.
@@ -148,6 +158,52 @@
         </section>
 
     </main>
+
+
+    <!-- ==================================================
+         POPUP OVERLAY
+    =================================================== -->
+
+    <div
+        id="popup-overlay"
+        class="popup-overlay"
+    >
+
+        <div
+            id="popup-box"
+            class="popup-box"
+        >
+
+            <button
+                class="popup-close"
+                onclick="closePopup()"
+                aria-label="Close popup"
+            >
+                ×
+            </button>
+
+            <div
+                id="popup-doodle"
+                class="popup-doodle"
+            >
+                ♡
+            </div>
+
+            <div
+                id="popup-message"
+                class="popup-message"
+            ></div>
+
+            <div
+                id="popup-hearts"
+                class="popup-hearts"
+            >
+                ♡ ✿ ♡
+            </div>
+
+        </div>
+
+    </div>
 
 
     <script src="script.js"></script>
