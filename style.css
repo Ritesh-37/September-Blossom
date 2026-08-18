@@ -1,0 +1,938 @@
+/* =====================================================
+   BASIC RESET
+===================================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+
+body {
+    min-height: 100vh;
+
+    overflow: hidden;
+
+    font-family:
+        "Trebuchet MS",
+        Arial,
+        sans-serif;
+
+    color: #62385f;
+
+    background:
+
+        radial-gradient(
+            circle at 10% 20%,
+            #ffd7ec,
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 90% 80%,
+            #dcd0ff,
+            transparent 30%
+        ),
+
+        linear-gradient(
+            135deg,
+            #fff2fa,
+            #f3edff
+        );
+}
+
+
+/* =====================================================
+   SCREEN SYSTEM
+===================================================== */
+
+.screen {
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transform: scale(1.04);
+
+    transition:
+        opacity 0.6s ease,
+        transform 0.6s ease;
+}
+
+
+.screen.active {
+    opacity: 1;
+
+    pointer-events: auto;
+
+    transform: scale(1);
+}
+
+
+/* =====================================================
+   MAIN CARD
+===================================================== */
+
+.main-card {
+    width: min(650px, 94%);
+
+    padding: 45px 30px;
+
+    text-align: center;
+
+    border-radius: 35px;
+
+    background:
+        rgba(255, 255, 255, 0.78);
+
+    backdrop-filter: blur(18px);
+
+    border:
+        2px solid
+        rgba(255, 255, 255, 0.8);
+
+    box-shadow:
+        0 30px 80px
+        rgba(140, 75, 160, 0.2);
+
+    animation:
+        floatingCard 4s ease-in-out infinite;
+}
+
+
+@keyframes floatingCard {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+
+/* =====================================================
+   TEXT
+===================================================== */
+
+h1 {
+    color: #ec5ca8;
+
+    font-size:
+        clamp(2.5rem, 8vw, 5rem);
+
+    line-height: 1.05;
+
+    text-shadow:
+        3px 3px 0 #ffd5e8;
+}
+
+
+h2 {
+    color: #a154c6;
+
+    margin-bottom: 18px;
+}
+
+
+p {
+    line-height: 1.7;
+
+    font-size: 1.1rem;
+}
+
+
+.intro {
+    margin-top: 20px;
+}
+
+
+.tiny-title {
+    color: #b45bb6;
+
+    font-size: 0.8rem;
+
+    font-weight: bold;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 15px;
+}
+
+
+.big-emoji {
+    font-size: 5rem;
+
+    animation:
+        emojiBounce
+        1.5s
+        infinite
+        alternate;
+}
+
+
+@keyframes emojiBounce {
+
+    from {
+        transform:
+            rotate(-5deg)
+            scale(1);
+    }
+
+    to {
+        transform:
+            rotate(5deg)
+            scale(1.1);
+    }
+}
+
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+button {
+    border: none;
+
+    padding: 14px 23px;
+
+    margin-top: 22px;
+
+    border-radius: 999px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ed68ad,
+            #9864dc
+        );
+
+    color: white;
+
+    font-weight: bold;
+
+    font-size: 1rem;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 10px 25px
+        rgba(150, 90, 210, 0.3);
+
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
+}
+
+
+button:hover {
+    transform:
+        translateY(-5px)
+        scale(1.05);
+
+    box-shadow:
+        0 15px 30px
+        rgba(150, 90, 210, 0.4);
+}
+
+
+button:active {
+    transform: scale(0.94);
+}
+
+
+/* =====================================================
+   GAME HEADER
+===================================================== */
+
+.game-header {
+    position: fixed;
+
+    top: 20px;
+
+    left: 20px;
+    right: 20px;
+
+    z-index: 50;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+
+.progress {
+    background:
+        rgba(255, 255, 255, 0.78);
+
+    padding: 10px 18px;
+
+    border-radius: 999px;
+
+    font-weight: bold;
+
+    box-shadow:
+        0 8px 20px
+        rgba(100, 50, 100, 0.1);
+}
+
+
+.game-title {
+    font-weight: bold;
+
+    color: #a154c6;
+}
+
+
+.small-button {
+    margin: 0;
+
+    width: 42px;
+    height: 42px;
+
+    padding: 0;
+}
+
+
+/* =====================================================
+   CENTER MESSAGE
+===================================================== */
+
+.center-message {
+    width: min(420px, 70%);
+
+    text-align: center;
+
+    padding: 35px 20px;
+
+    border-radius: 30px;
+
+    background:
+        rgba(255, 255, 255, 0.55);
+
+    backdrop-filter: blur(10px);
+}
+
+
+.center-emoji {
+    font-size: 4rem;
+
+    animation:
+        emojiBounce
+        1.5s
+        infinite
+        alternate;
+}
+
+
+#game-hint {
+    margin-top: 20px;
+
+    color: #a154c6;
+
+    font-weight: bold;
+}
+
+
+/* =====================================================
+   SURPRISE BUTTONS
+===================================================== */
+
+.surprise-button {
+    position: fixed;
+
+    width: 72px;
+    height: 72px;
+
+    padding: 0;
+
+    margin: 0;
+
+    border-radius: 50%;
+
+    font-size: 1.7rem;
+
+    z-index: 60;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-direction: column;
+}
+
+
+.surprise-button span {
+    font-size: 0.65rem;
+
+    margin-top: -3px;
+}
+
+
+.surprise-button:hover {
+    animation:
+        wiggle
+        0.4s;
+}
+
+
+@keyframes wiggle {
+
+    0% {
+        transform: rotate(0);
+    }
+
+    25% {
+        transform: rotate(-12deg);
+    }
+
+    50% {
+        transform: rotate(12deg);
+    }
+
+    75% {
+        transform: rotate(-8deg);
+    }
+
+    100% {
+        transform: rotate(0);
+    }
+}
+
+
+/* =====================================================
+   BUTTON POSITIONS
+===================================================== */
+
+.button-1 {
+    top: 18%;
+    left: 5%;
+}
+
+
+.button-2 {
+    top: 40%;
+    left: 4%;
+}
+
+
+.button-3 {
+    bottom: 15%;
+    left: 6%;
+}
+
+
+.button-4 {
+    top: 22%;
+    left: 20%;
+}
+
+
+.button-5 {
+    bottom: 20%;
+    left: 20%;
+}
+
+
+.button-6 {
+    top: 22%;
+    right: 20%;
+}
+
+
+.button-7 {
+    bottom: 20%;
+    right: 20%;
+}
+
+
+.button-8 {
+    top: 18%;
+    right: 5%;
+}
+
+
+.button-9 {
+    top: 40%;
+    right: 4%;
+}
+
+
+.button-10 {
+    bottom: 15%;
+    right: 6%;
+}
+
+
+/* =====================================================
+   POPUPS
+===================================================== */
+
+.overlay {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1000;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background:
+        rgba(70, 30, 75, 0.45);
+
+    backdrop-filter: blur(6px);
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.3s;
+}
+
+
+.overlay.show {
+    opacity: 1;
+
+    pointer-events: auto;
+}
+
+
+.challenge-card,
+.surprise-card,
+.instruction-card,
+.final-card {
+    position: relative;
+
+    width: min(600px, 94%);
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    padding: 40px 25px;
+
+    text-align: center;
+
+    border-radius: 32px;
+
+    background: #fff9fd;
+
+    box-shadow:
+        0 30px 90px
+        rgba(0, 0, 0, 0.25);
+
+    animation:
+        popupIn
+        0.5s ease;
+}
+
+
+@keyframes popupIn {
+
+    0% {
+        transform:
+            scale(0.5)
+            rotate(-4deg);
+    }
+
+    70% {
+        transform:
+            scale(1.04)
+            rotate(1deg);
+    }
+
+    100% {
+        transform:
+            scale(1)
+            rotate(0);
+    }
+}
+
+
+.close-button {
+    position: absolute;
+
+    top: 12px;
+    right: 15px;
+
+    width: 38px;
+    height: 38px;
+
+    padding: 0;
+
+    margin: 0;
+
+    font-size: 1.5rem;
+
+    background: #f3d7ee;
+
+    color: #884b84;
+}
+
+
+.challenge-emoji,
+.surprise-emoji {
+    font-size: 4rem;
+
+    margin-bottom: 10px;
+}
+
+
+.challenge-card input {
+    width: 90%;
+
+    margin-top: 25px;
+
+    padding: 15px 18px;
+
+    border:
+        2px solid
+        #eccce5;
+
+    border-radius: 999px;
+
+    outline: none;
+
+    font-size: 1rem;
+
+    text-align: center;
+}
+
+
+.challenge-card input:focus {
+    border-color: #c17add;
+
+    box-shadow:
+        0 0 15px
+        rgba(193, 122, 221, 0.2);
+}
+
+
+.wrong-answer {
+    min-height: 25px;
+
+    margin-top: 15px;
+
+    color: #e2537f;
+
+    font-weight: bold;
+}
+
+
+/* =====================================================
+   SURPRISE CONTENT
+===================================================== */
+
+.surprise-content {
+    margin-top: 20px;
+}
+
+
+.surprise-content p {
+    margin-bottom: 15px;
+}
+
+
+.surprise-content h3 {
+    color: #ec5ca8;
+
+    margin-bottom: 15px;
+}
+
+
+.surprise-content img {
+    display: block;
+
+    max-width: 100%;
+
+    max-height: 350px;
+
+    margin: 20px auto;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 12px 30px
+        rgba(100, 50, 100, 0.2);
+}
+
+
+.surprise-content video {
+    display: block;
+
+    width: 100%;
+
+    max-height: 400px;
+
+    margin: 20px auto;
+
+    border-radius: 20px;
+
+    background: #222;
+}
+
+
+/* =====================================================
+   FINAL SCREEN
+===================================================== */
+
+.final-card {
+    background:
+        linear-gradient(
+            135deg,
+            #fff5fb,
+            #f4edff
+        );
+}
+
+
+.final-card h1 {
+    font-size:
+        clamp(
+            2rem,
+            7vw,
+            4rem
+        );
+}
+
+
+.final-emoji {
+    font-size: 5rem;
+
+    animation:
+        emojiBounce
+        1s
+        infinite
+        alternate;
+}
+
+
+/* =====================================================
+   FLOATING DECORATIONS
+===================================================== */
+
+.floating {
+    position: fixed;
+
+    z-index: 1;
+
+    pointer-events: none;
+
+    animation:
+        floatUp
+        linear
+        forwards;
+}
+
+
+@keyframes floatUp {
+
+    0% {
+        transform:
+            translateY(110vh)
+            rotate(0);
+
+        opacity: 0;
+    }
+
+    15% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform:
+            translateY(-120vh)
+            rotate(360deg);
+
+        opacity: 0;
+    }
+}
+
+
+/* =====================================================
+   CONFETTI
+===================================================== */
+
+.confetti {
+    position: fixed;
+
+    top: -30px;
+
+    z-index: 3000;
+
+    width: 9px;
+    height: 17px;
+
+    pointer-events: none;
+
+    animation:
+        confettiFall
+        linear
+        forwards;
+}
+
+
+@keyframes confettiFall {
+
+    to {
+        transform:
+            translateY(110vh)
+            rotate(720deg);
+    }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+    .game-title {
+        display: none;
+    }
+
+
+    .surprise-button {
+        width: 58px;
+        height: 58px;
+
+        font-size: 1.3rem;
+    }
+
+
+    .button-1 {
+        top: 15%;
+        left: 3%;
+    }
+
+
+    .button-2 {
+        top: 38%;
+        left: 2%;
+    }
+
+
+    .button-3 {
+        bottom: 13%;
+        left: 3%;
+    }
+
+
+    .button-4 {
+        top: 24%;
+        left: 17%;
+    }
+
+
+    .button-5 {
+        bottom: 17%;
+        left: 17%;
+    }
+
+
+    .button-6 {
+        top: 24%;
+        right: 17%;
+    }
+
+
+    .button-7 {
+        bottom: 17%;
+        right: 17%;
+    }
+
+
+    .button-8 {
+        top: 15%;
+        right: 3%;
+    }
+
+
+    .button-9 {
+        top: 38%;
+        right: 2%;
+    }
+
+
+    .button-10 {
+        bottom: 13%;
+        right: 3%;
+    }
+
+
+    .center-message {
+        width: 55%;
+
+        padding:
+            20px 10px;
+    }
+
+
+    .center-emoji {
+        font-size: 2.5rem;
+    }
+
+
+    .center-message h2 {
+        font-size: 1.2rem;
+    }
+
+
+    .center-message p {
+        font-size: 0.9rem;
+    }
+
+
+    .main-card {
+        padding:
+            30px 18px;
+    }
+
+
+    .main-card button {
+        width: 90%;
+    }
+
+
+    .challenge-card,
+    .surprise-card,
+    .instruction-card,
+    .final-card {
+        padding:
+            35px 18px;
+    }
+
+}
