@@ -1,12 +1,10 @@
-/* =========================================
-   PAGE 1 - BIRTHDAY SURPRISE
-========================================= */
-
 document.addEventListener("DOMContentLoaded", function () {
 
-    /* -------------------------------------
-       GET ELEMENTS
-    ------------------------------------- */
+    /* =========================================
+       ELEMENTS
+    ========================================== */
+
+    const loadingScreen = document.getElementById("loading-screen");
 
     const giftScreen = document.getElementById("gift-screen");
     const entranceScreen = document.getElementById("entrance-screen");
@@ -26,21 +24,33 @@ document.addEventListener("DOMContentLoaded", function () {
     const successPopup = document.getElementById("success-popup");
     const continueButton = document.getElementById("continue-btn");
 
+    const backgroundMusic = document.getElementById("background-music");
+    const musicControl = document.getElementById("music-control");
+
     const passwordHint = document.getElementById("password-hint");
 
-    const backgroundMusic = document.getElementById("background-music");
 
-
-    /* -------------------------------------
-       SECRET PASSWORD
-    ------------------------------------- */
+    /* =========================================
+       PASSWORD
+    ========================================== */
 
     const correctPassword = "0309";
 
 
-    /* -------------------------------------
-       SHOW SCREEN FUNCTION
-    ------------------------------------- */
+    /* =========================================
+       INITIAL LOADING
+    ========================================== */
+
+    setTimeout(function () {
+
+        loadingScreen.classList.add("hide");
+
+    }, 1400);
+
+
+    /* =========================================
+       SHOW SCREEN
+    ========================================== */
 
     function showScreen(screenToShow) {
 
@@ -51,9 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
         ];
 
         screens.forEach(function (screen) {
-
             screen.classList.remove("active");
-
         });
 
         setTimeout(function () {
@@ -65,9 +73,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    /* -------------------------------------
-       START MUSIC
-    ------------------------------------- */
+    /* =========================================
+       MUSIC
+    ========================================== */
 
     function startMusic() {
 
@@ -81,24 +89,54 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (playPromise !== undefined) {
 
-            playPromise.catch(function () {
+            playPromise
+                .then(function () {
 
-                console.log("Music could not start automatically.");
+                    musicControl.classList.add("visible");
+                    musicControl.classList.remove("muted");
 
-            });
+                })
+                .catch(function () {
+
+                    musicControl.classList.add("visible");
+                    musicControl.classList.add("muted");
+
+                });
 
         }
-
     }
 
 
-    /* -------------------------------------
-       OPEN THE GIFT
-    ------------------------------------- */
+    musicControl.addEventListener("click", function () {
+
+        if (backgroundMusic.paused) {
+
+            backgroundMusic.play();
+
+            musicControl.classList.remove("muted");
+
+        } else {
+
+            backgroundMusic.pause();
+
+            musicControl.classList.add("muted");
+
+        }
+
+    });
+
+
+    /* =========================================
+       OPEN ENVELOPE
+    ========================================== */
 
     function openGift() {
 
-        envelope.classList.add("unlock-success");
+        if (envelope.classList.contains("opening")) {
+            return;
+        }
+
+        envelope.classList.add("opening");
 
         openGiftButton.disabled = true;
 
@@ -106,7 +144,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             showScreen(entranceScreen);
 
-        }, 700);
+        }, 850);
 
     }
 
@@ -116,9 +154,9 @@ document.addEventListener("DOMContentLoaded", function () {
     envelope.addEventListener("click", openGift);
 
 
-    /* -------------------------------------
-       OPEN PASSWORD SCREEN
-    ------------------------------------- */
+    /* =========================================
+       ENTER MAIN SURPRISE
+    ========================================== */
 
     curiousButton.addEventListener("click", function () {
 
@@ -133,9 +171,9 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
-    /* -------------------------------------
-       CHECK PASSWORD
-    ------------------------------------- */
+    /* =========================================
+       PASSWORD CHECK
+    ========================================== */
 
     function checkPassword() {
 
@@ -147,15 +185,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
             unlockButton.disabled = true;
 
-            passwordInput.classList.add("unlock-success");
+            unlockButton.textContent = "CHECKING... 👀";
 
-            startMusic();
+            passwordInput.classList.add("unlock-success");
 
             setTimeout(function () {
 
+                unlockButton.textContent = "✓ IT'S HER! ❤️";
+
+            }, 600);
+
+            setTimeout(function () {
+
+                startMusic();
+
                 successPopup.classList.add("show");
 
-            }, 500);
+            }, 1100);
 
         } else {
 
@@ -171,9 +217,9 @@ document.addEventListener("DOMContentLoaded", function () {
     unlockButton.addEventListener("click", checkPassword);
 
 
-    /* -------------------------------------
-       ENTER KEY ALSO UNLOCKS
-    ------------------------------------- */
+    /* =========================================
+       ENTER KEY
+    ========================================== */
 
     passwordInput.addEventListener("keydown", function (event) {
 
@@ -186,9 +232,21 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
-    /* -------------------------------------
+    /* =========================================
+       ONLY ALLOW NUMBERS
+    ========================================== */
+
+    passwordInput.addEventListener("input", function () {
+
+        passwordInput.value =
+            passwordInput.value.replace(/\D/g, "");
+
+    });
+
+
+    /* =========================================
        TRY AGAIN
-    ------------------------------------- */
+    ========================================== */
 
     tryAgainButton.addEventListener("click", function () {
 
@@ -203,28 +261,23 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
-    /* -------------------------------------
+    /* =========================================
        CONTINUE TO PAGE 2
-    ------------------------------------- */
+    ========================================== */
 
     continueButton.addEventListener("click", function () {
 
-        /*
-         * Page 2 will be created later.
-         *
-         * For now, this keeps the button from
-         * causing an error while Page 2 is
-         * being designed.
-         */
-
         successPopup.classList.remove("show");
 
-        passwordScreen.classList.remove("active");
+        /*
+         * Page 2 will replace this temporary
+         * action when we build the next page.
+         */
 
         setTimeout(function () {
 
             alert(
-                "Page 2 is ready to be created next! ❤️"
+                "Page 2 will be connected here next! ❤️"
             );
 
             passwordScreen.classList.add("active");
@@ -234,9 +287,9 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
-    /* -------------------------------------
-       CLOSE POPUP IF USER CLICKS OUTSIDE
-    ------------------------------------- */
+    /* =========================================
+       CLOSE POPUPS BY CLICKING OUTSIDE
+    ========================================== */
 
     wrongPopup.addEventListener("click", function (event) {
 
