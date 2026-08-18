@@ -2,202 +2,231 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <title>A Little Birthday Secret 💗</title>
+    <title>For My Special Someone 💗</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+<!-- =========================================================
+     =========================================================
+     PAGE 1 — PASSWORD PAGE
+     =========================================================
+========================================================= -->
+
+<section id="page1" class="site-page page1">
+
+    <!-- Background decorations -->
+
+    <div class="background-decor">
+
+        <!-- WHITE FLOWERS -->
+        <span class="flower flower-1">✿</span>
+        <span class="flower flower-2">❀</span>
+        <span class="flower flower-3">✿</span>
+        <span class="flower flower-4">❀</span>
+        <span class="flower flower-5">✿</span>
+        <span class="flower flower-6">❀</span>
+        <span class="flower flower-7">✿</span>
+        <span class="flower flower-8">❀</span>
+        <span class="flower flower-9">✿</span>
+        <span class="flower flower-10">❀</span>
+        <span class="flower flower-11">✿</span>
+        <span class="flower flower-12">❀</span>
+        <span class="flower flower-13">✿</span>
+        <span class="flower flower-14">❀</span>
+        <span class="flower flower-15">✿</span>
+        <span class="flower flower-16">❀</span>
+        <span class="flower flower-17">✿</span>
+        <span class="flower flower-18">❀</span>
+        <span class="flower flower-19">✿</span>
+        <span class="flower flower-20">❀</span>
+        <span class="flower flower-21">✿</span>
+        <span class="flower flower-22">❀</span>
+
+        <!-- GREEN LEAVES -->
+        <span class="leaf leaf-1">🌿</span>
+        <span class="leaf leaf-2">🍃</span>
+        <span class="leaf leaf-3">🌿</span>
+        <span class="leaf leaf-4">🍃</span>
+        <span class="leaf leaf-5">🌿</span>
+        <span class="leaf leaf-6">🍃</span>
+        <span class="leaf leaf-7">🌿</span>
+        <span class="leaf leaf-8">🍃</span>
+        <span class="leaf leaf-9">🌿</span>
+        <span class="leaf leaf-10">🍃</span>
+        <span class="leaf leaf-11">🌿</span>
+        <span class="leaf leaf-12">🍃</span>
+        <span class="leaf leaf-13">🌿</span>
+        <span class="leaf leaf-14">🍃</span>
+    </div>
+
+
+    <!-- Main Page 1 -->
+
+    <main class="page1-content">
+
+        <!-- LEFT PHOTO -->
+
+        <section class="photo-section">
+
+            <div class="pink-layer"></div>
+            <div class="white-layer"></div>
+
+            <div class="decor-flower flower-left">
+                ✿
+            </div>
+
+            <div class="decor-flower flower-right">
+                ❀
+            </div>
+
+            <div class="heart-frame">
+
+                <div class="heart-photo">
+
+                    <!--
+                    ==================================================
+                    YOUR PHOTO GOES HERE
+                    ==================================================
+
+                    Later replace this URL with:
+
+                    src="media/myphoto.jpg"
+
+                    -->
+
+                    <img
+                        src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=800&q=80"
+                        alt="Birthday photo"
+                    >
+
+                </div>
+
+            </div>
+
+            <div class="photo-caption">
+                <span>♡</span>
+                A little piece of happiness
+                <span>♡</span>
+            </div>
+
+        </section>
+
+
+        <!-- RIGHT PASSWORD -->
+
+        <section class="password-section">
+
+            <div class="password-decoration">
+                ♡
+            </div>
+
+            <p class="small-heading">
+                A LITTLE SECRET AWAITS
+            </p>
+
+            <h1>
+                Enter The Password
+            </h1>
+
+            <p class="subtitle">
+                Only someone special knows the way in... 🌸
+            </p>
+
+            <div
+                id="password-display"
+                class="password-display"
+            ></div>
+
+
+            <!-- KEYPAD -->
+
+            <div class="keypad">
+
+                <button
+                    class="key"
+                    onclick="pressKey('1')"
+                >1</button>
+
+                <button
+                    class="key"
+                    onclick="pressKey('2')"
+                >2</button>
+
+                <button
+                    class="key"
+                    onclick="pressKey('3')"
+                >3</button>
+
+
+                <button
+                    class="key"
+                    onclick="pressKey('4')"
+                >4</button>
+
+                <button
+                    class="key"
+                    onclick="pressKey('5')"
+                >5</button>
+
+                <button
+                    class="key"
+                    onclick="pressKey('6')"
+                >6</button>
+
+
+                <button
+                    class="key"
+                    onclick="pressKey('7')"
+                >7</button>
+
+                <button
+                    class="key"
+                    onclick="pressKey('8')"
+                >8</button>
+
+                <button
+                    class="key"
+                    onclick="pressKey('9')"
+                >9</button>
+
+
+                <button
+                    class="key special"
+                    onclick="deleteKey()"
+                >×</button>
+
+                <button
+                    class="key"
+                    onclick="pressKey('0')"
+                >0</button>
+
+                <button
+                    class="key special"
+                    onclick="checkPassword()"
+                >↵</button>
+
+            </div>
+
+            <p
+                id="password-message"
+                class="password-message"
+            ></p>
+
+        </section>
+
+    </main>
+
+
     <!-- =====================================================
-         PAGE 1
-    ====================================================== -->
-
-    <section id="page1" class="page page1">
-
-        <!-- BACKGROUND DECORATIONS -->
-
-        <div class="background-decor">
-
-            <!-- WHITE FLOWERS -->
-
-            <span class="flower flower-1">✿</span>
-            <span class="flower flower-2">❀</span>
-            <span class="flower flower-3">✿</span>
-            <span class="flower flower-4">❁</span>
-            <span class="flower flower-5">✿</span>
-            <span class="flower flower-6">❀</span>
-            <span class="flower flower-7">✿</span>
-            <span class="flower flower-8">❁</span>
-            <span class="flower flower-9">❀</span>
-            <span class="flower flower-10">✿</span>
-            <span class="flower flower-11">❁</span>
-            <span class="flower flower-12">✿</span>
-            <span class="flower flower-13">❀</span>
-            <span class="flower flower-14">✿</span>
-            <span class="flower flower-15">❁</span>
-            <span class="flower flower-16">✿</span>
-            <span class="flower flower-17">❀</span>
-            <span class="flower flower-18">✿</span>
-            <span class="flower flower-19">❁</span>
-            <span class="flower flower-20">❀</span>
-            <span class="flower flower-21">✿</span>
-            <span class="flower flower-22">❁</span>
-
-            <!-- GREEN LEAVES -->
-
-            <span class="leaf leaf-1">🌿</span>
-            <span class="leaf leaf-2">🍃</span>
-            <span class="leaf leaf-3">🌿</span>
-            <span class="leaf leaf-4">🍃</span>
-            <span class="leaf leaf-5">🌿</span>
-            <span class="leaf leaf-6">🍃</span>
-            <span class="leaf leaf-7">🌿</span>
-            <span class="leaf leaf-8">🍃</span>
-            <span class="leaf leaf-9">🌿</span>
-            <span class="leaf leaf-10">🍃</span>
-            <span class="leaf leaf-11">🌿</span>
-            <span class="leaf leaf-12">🍃</span>
-            <span class="leaf leaf-13">🌿</span>
-            <span class="leaf leaf-14">🍃</span>
-
-        </div>
-
-
-        <!-- MAIN PAGE 1 -->
-
-        <main class="page1-content">
-
-            <!-- LEFT -->
-
-            <section class="photo-section">
-
-                <div class="pink-layer"></div>
-
-                <div class="white-layer"></div>
-
-                <div class="decor-flower flower-left">✿</div>
-
-                <div class="decor-flower flower-right">❀</div>
-
-
-                <!-- TWO HEART LAYERS -->
-
-                <div class="heart-frame">
-
-                    <div class="heart-back"></div>
-
-                    <div class="heart-photo-frame">
-
-                        <!-- PLACEHOLDER PHOTO -->
-
-                        <img
-                            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=800&q=80"
-                            alt="Birthday memory"
-                        >
-
-                    </div>
-
-                </div>
-
-
-                <div class="photo-caption">
-
-                    <span>♡</span>
-
-                    A little piece of happiness
-
-                    <span>♡</span>
-
-                </div>
-
-            </section>
-
-
-            <!-- RIGHT -->
-
-            <section class="password-section">
-
-                <div class="password-decoration">
-                    ♡
-                </div>
-
-                <p class="small-heading">
-                    A LITTLE SECRET AWAITS
-                </p>
-
-                <h1>
-                    Enter The Password
-                </h1>
-
-                <p class="subtitle">
-                    Only someone special knows the way in... 🌸
-                </p>
-
-
-                <div
-                    id="password-display"
-                    class="password-display"
-                ></div>
-
-
-                <!-- KEYPAD -->
-
-                <div class="keypad">
-
-                    <button class="key" onclick="pressKey('1')">1</button>
-                    <button class="key" onclick="pressKey('2')">2</button>
-                    <button class="key" onclick="pressKey('3')">3</button>
-
-                    <button class="key" onclick="pressKey('4')">4</button>
-                    <button class="key" onclick="pressKey('5')">5</button>
-                    <button class="key" onclick="pressKey('6')">6</button>
-
-                    <button class="key" onclick="pressKey('7')">7</button>
-                    <button class="key" onclick="pressKey('8')">8</button>
-                    <button class="key" onclick="pressKey('9')">9</button>
-
-                    <button
-                        class="key special"
-                        onclick="deleteKey()"
-                    >
-                        ×
-                    </button>
-
-                    <button
-                        class="key"
-                        onclick="pressKey('0')"
-                    >
-                        0
-                    </button>
-
-                    <button
-                        class="key special"
-                        onclick="checkPassword()"
-                    >
-                        ↵
-                    </button>
-
-                </div>
-
-
-                <p
-                    id="password-message"
-                    class="password-message"
-                ></p>
-
-            </section>
-
-        </main>
-
-    </section>
-
-
-
-    <!-- =====================================================
-         WELCOME / WRONG PASSWORD POPUP
+         PASSWORD POPUP
     ====================================================== -->
 
     <div
@@ -205,14 +234,12 @@
         class="popup-overlay"
     >
 
-        <div
-            id="popup-box"
-            class="popup-box"
-        >
+        <div class="popup-box">
 
             <button
                 class="popup-close"
                 onclick="closePopup()"
+                aria-label="Close"
             >
                 ×
             </button>
@@ -240,310 +267,418 @@
 
     </div>
 
+</section>
+
+
+
+<!-- =========================================================
+     =========================================================
+     PAGE 2 — BIRTHDAY FARM
+     =========================================================
+========================================================= -->
+
+<section
+    id="page2"
+    class="site-page page2"
+>
+
+    <!-- =====================================================
+         SKY
+    ====================================================== -->
+
+    <div class="sky">
+
+        <div class="sun"></div>
+
+        <!-- Clouds -->
+
+        <div class="cloud cloud-one">
+            ☁️
+        </div>
+
+        <div class="cloud cloud-two">
+            ☁️
+        </div>
+
+        <div class="cloud cloud-three">
+            ☁️
+        </div>
+
+    </div>
 
 
     <!-- =====================================================
-         PAGE 2
+         BIRTHDAY DECORATIONS
     ====================================================== -->
 
-    <section
-        id="page2"
-        class="page page2"
-    >
+    <div class="party-decor">
 
-        <!-- =================================================
-             SKY
-        ================================================== -->
+        <span class="balloon balloon-red">🎈</span>
+        <span class="balloon balloon-pink">🎈</span>
+        <span class="balloon balloon-yellow">🎈</span>
+        <span class="balloon balloon-blue">🎈</span>
+        <span class="balloon balloon-purple">🎈</span>
 
-        <div class="birthday-sky">
+        <span class="confetti c1">✦</span>
+        <span class="confetti c2">✧</span>
+        <span class="confetti c3">✿</span>
+        <span class="confetti c4">★</span>
+        <span class="confetti c5">✦</span>
+        <span class="confetti c6">♡</span>
+        <span class="confetti c7">✧</span>
+        <span class="confetti c8">★</span>
+        <span class="confetti c9">✿</span>
+        <span class="confetti c10">♡</span>
 
-            <!-- BALLOONS -->
-
-            <div class="balloon balloon-red">🎈</div>
-            <div class="balloon balloon-yellow">🎈</div>
-            <div class="balloon balloon-blue">🎈</div>
-            <div class="balloon balloon-pink">🎈</div>
-            <div class="balloon balloon-purple">🎈</div>
-
-            <!-- CONFETTI -->
-
-            <div class="confetti c1">✦</div>
-            <div class="confetti c2">•</div>
-            <div class="confetti c3">✦</div>
-            <div class="confetti c4">•</div>
-            <div class="confetti c5">✧</div>
-            <div class="confetti c6">•</div>
-            <div class="confetti c7">✦</div>
-            <div class="confetti c8">•</div>
-            <div class="confetti c9">✧</div>
-            <div class="confetti c10">•</div>
-            <div class="confetti c11">✦</div>
-            <div class="confetti c12">✧</div>
+    </div>
 
 
-            <!-- BIRTHDAY TITLE -->
+    <!-- =====================================================
+         BIG HAPPY BIRTHDAY
+    ====================================================== -->
 
-            <h2 class="birthday-title">
+    <h1 class="birthday-title">
+        <span>H</span>
+        <span>A</span>
+        <span>P</span>
+        <span>P</span>
+        <span>Y</span>
 
-                <span>H</span>
-                <span>A</span>
-                <span>P</span>
-                <span>P</span>
-                <span>Y</span>
+        <span class="birthday-space"></span>
 
-                <span class="birthday-space"></span>
+        <span>B</span>
+        <span>I</span>
+        <span>R</span>
+        <span>T</span>
+        <span>H</span>
+        <span>D</span>
+        <span>A</span>
+        <span>Y</span>
+        <span>!</span>
+    </h1>
 
-                <span>B</span>
-                <span>I</span>
-                <span>R</span>
-                <span>T</span>
-                <span>H</span>
-                <span>D</span>
-                <span>A</span>
-                <span>Y</span>
 
-                <span>🎉</span>
+    <p class="birthday-subtitle">
+        A little birthday magic, made just for you 💕
+    </p>
 
-            </h2>
+
+    <!-- =====================================================
+         LEFT PHOTO FRAME
+    ====================================================== -->
+
+    <div class="birthday-photo-frame">
+
+        <!-- Red ribbons -->
+
+        <div class="ribbon ribbon-top">
+            <div class="ribbon-loop left"></div>
+            <div class="ribbon-loop right"></div>
+            <div class="ribbon-knot"></div>
+            <div class="ribbon-tail left-tail"></div>
+            <div class="ribbon-tail right-tail"></div>
+        </div>
+
+
+        <div class="photo-frame-inner">
+
+            <img
+                src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80"
+                alt="Birthday memory"
+            >
+
+        </div>
+
+        <p class="frame-caption">
+            A beautiful memory ♡
+        </p>
+
+    </div>
+
+
+    <!-- =====================================================
+         FARM LANDSCAPE
+    ====================================================== -->
+
+    <div class="farm-scene">
+
+        <!-- Far grass -->
+
+        <div class="far-ground"></div>
+
+
+        <!-- Sunflower field -->
+
+        <div class="sunflower-field">
+
+            <div class="sunflower sf1">
+                <div class="stem"></div>
+                <div class="flower-head">
+                    <span>🌻</span>
+                </div>
+            </div>
+
+            <div class="sunflower sf2">
+                <div class="stem"></div>
+                <div class="flower-head">
+                    <span>🌻</span>
+                </div>
+            </div>
+
+            <div class="sunflower sf3">
+                <div class="stem"></div>
+                <div class="flower-head">
+                    <span>🌻</span>
+                </div>
+            </div>
+
+            <div class="sunflower sf4">
+                <div class="stem"></div>
+                <div class="flower-head">
+                    <span>🌻</span>
+                </div>
+            </div>
+
+            <div class="sunflower sf5">
+                <div class="stem"></div>
+                <div class="flower-head">
+                    <span>🌻</span>
+                </div>
+            </div>
+
+            <div class="sunflower sf6">
+                <div class="stem"></div>
+                <div class="flower-head">
+                    <span>🌻</span>
+                </div>
+            </div>
+
+            <div class="sunflower sf7">
+                <div class="stem"></div>
+                <div class="flower-head">
+                    <span>🌻</span>
+                </div>
+            </div>
+
+            <div class="sunflower sf8">
+                <div class="stem"></div>
+                <div class="flower-head">
+                    <span>🌻</span>
+                </div>
+            </div>
+
+            <div class="sunflower sf9">
+                <div class="stem"></div>
+                <div class="flower-head">
+                    <span>🌻</span>
+                </div>
+            </div>
+
+            <div class="sunflower sf10">
+                <div class="stem"></div>
+                <div class="flower-head">
+                    <span>🌻</span>
+                </div>
+            </div>
+
+            <div class="sunflower sf11">
+                <div class="stem"></div>
+                <div class="flower-head">
+                    <span>🌻</span>
+                </div>
+            </div>
+
+            <div class="sunflower sf12">
+                <div class="stem"></div>
+                <div class="flower-head">
+                    <span>🌻</span>
+                </div>
+            </div>
+
+            <div class="sunflower sf13">
+                <div class="stem"></div>
+                <div class="flower-head">
+                    <span>🌻</span>
+                </div>
+            </div>
+
+            <div class="sunflower sf14">
+                <div class="stem"></div>
+                <div class="flower-head">
+                    <span>🌻</span>
+                </div>
+            </div>
+
+            <div class="sunflower sf15">
+                <div class="stem"></div>
+                <div class="flower-head">
+                    <span>🌻</span>
+                </div>
+            </div>
 
         </div>
 
 
         <!-- =================================================
-             FARM LANDSCAPE
+             FARM HOUSE
         ================================================== -->
 
-        <div class="farm-background">
+        <div class="farm-house">
 
-            <!-- FAR CLOUDS -->
+            <div class="house-roof"></div>
 
-            <div class="cloud cloud-1">☁️</div>
-            <div class="cloud cloud-2">☁️</div>
-            <div class="cloud cloud-3">☁️</div>
+            <div class="house-body">
 
-
-            <!-- SUNFLOWER FIELD -->
-
-            <div class="sunflower-field">
-
-                <div class="sunflower s1">🌻</div>
-                <div class="sunflower s2">🌻</div>
-                <div class="sunflower s3">🌻</div>
-                <div class="sunflower s4">🌻</div>
-                <div class="sunflower s5">🌻</div>
-                <div class="sunflower s6">🌻</div>
-                <div class="sunflower s7">🌻</div>
-                <div class="sunflower s8">🌻</div>
-                <div class="sunflower s9">🌻</div>
-                <div class="sunflower s10">🌻</div>
-                <div class="sunflower s11">🌻</div>
-                <div class="sunflower s12">🌻</div>
-                <div class="sunflower s13">🌻</div>
-                <div class="sunflower s14">🌻</div>
-                <div class="sunflower s15">🌻</div>
-                <div class="sunflower s16">🌻</div>
-                <div class="sunflower s17">🌻</div>
-                <div class="sunflower s18">🌻</div>
-                <div class="sunflower s19">🌻</div>
-                <div class="sunflower s20">🌻</div>
-
-            </div>
-
-
-            <!-- FARMHOUSE -->
-
-            <div class="farmhouse">
-
-                <div class="hut-roof"></div>
-
-                <div class="hut-body">
-
-                    <div class="hut-window window-left"></div>
-
-                    <div class="hut-window window-right"></div>
-
-                    <!-- DOOR -->
-
-                    <div
-                        id="farm-door"
-                        class="farm-door"
-                        onclick="openFarmDoor()"
-                    >
-
-                        <div class="door-knob"></div>
-
-                        <div
-                            id="open-label"
-                            class="open-label"
-                        >
-                            Open
-                        </div>
-
-                    </div>
-
+                <div class="house-window window-one">
+                    <span></span>
                 </div>
 
-                <!-- CHIMNEY -->
-
-                <div class="chimney"></div>
-
-            </div>
-
-
-            <!-- WINDMILL -->
-
-            <div class="windmill">
-
-                <div class="windmill-tower"></div>
-
-                <div class="windmill-top">
-
-                    <div
-                        class="windmill-blades"
-                    >
-
-                        <div class="blade blade1"></div>
-                        <div class="blade blade2"></div>
-                        <div class="blade blade3"></div>
-                        <div class="blade blade4"></div>
-
-                    </div>
-
-                    <div class="windmill-center"></div>
-
+                <div class="house-window window-two">
+                    <span></span>
                 </div>
 
-            </div>
+                <!-- DOOR -->
 
-
-            <!-- WIND LINES -->
-
-            <div class="wind-lines">
-
-                <span>〰</span>
-                <span>〰</span>
-                <span>〰</span>
-
-            </div>
-
-        </div>
-
-
-        <!-- =================================================
-             LEFT PHOTO
-        ================================================== -->
-
-        <div class="birthday-photo-frame">
-
-            <div class="ribbon ribbon-top-left"></div>
-
-            <div class="ribbon ribbon-top-right"></div>
-
-            <div class="ribbon ribbon-bottom-left"></div>
-
-            <div class="ribbon ribbon-bottom-right"></div>
-
-
-            <div class="photo-inner">
-
-                <img
-                    src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=700&q=80"
-                    alt="Birthday memory"
+                <div
+                    id="farm-door"
+                    class="farm-door"
+                    onclick="openFarmDoor()"
                 >
 
+                    <div class="door-handle"></div>
+
+                </div>
+
+                <!-- Door hover popup -->
+
+                <div
+                    id="door-tooltip"
+                    class="door-tooltip"
+                >
+                    Open
+                </div>
+
             </div>
 
-            <div class="frame-caption">
-                A little memory 💕
-            </div>
+            <div class="house-chimney"></div>
 
         </div>
 
 
         <!-- =================================================
-             DUCK FAMILY
+             WIND TOWER
         ================================================== -->
 
-        <div
-            id="duck-family"
-            class="duck-family"
-        >
+        <div class="wind-tower">
 
-            <button
-                class="duck mother-duck"
-                onclick="duckSound()"
-            >
-                🦆
-            </button>
+            <div class="tower-blades">
 
-            <button
-                class="duck baby-duck"
-                onclick="duckSound()"
-            >
-                🐥
-            </button>
+                <div class="blade blade-one"></div>
+                <div class="blade blade-two"></div>
+                <div class="blade blade-three"></div>
+                <div class="blade blade-four"></div>
 
-            <button
-                class="duck baby-duck"
-                onclick="duckSound()"
-            >
-                🐥
-            </button>
+                <div class="blade-center"></div>
 
-            <button
-                class="duck baby-duck"
-                onclick="duckSound()"
-            >
-                🐥
-            </button>
+            </div>
+
+            <div class="tower-pole"></div>
 
         </div>
 
 
-        <!-- MUSIC BUTTON -->
+        <!-- Wind lines -->
 
-        <button
-            id="music-button"
-            class="music-button"
-            onclick="toggleMusic()"
-        >
-            🎵 Music
-        </button>
+        <div class="wind-line wind-one">
+            ~~~
+        </div>
 
-    </section>
+        <div class="wind-line wind-two">
+            ~~~
+        </div>
 
+        <div class="wind-line wind-three">
+            ~~~
+        </div>
+
+    </div>
 
 
     <!-- =====================================================
-         PAGE 3
+         DUCK FAMILY
     ====================================================== -->
 
-    <section
-        id="page3"
-        class="page page3"
+    <div
+        id="duck-family"
+        class="duck-family"
+        onclick="duckClicked(event)"
     >
 
-        <div class="page3-content">
-
-            <div class="page3-icon">
-                💕
-            </div>
-
-            <h2>
-                Another little surprise awaits...
-            </h2>
-
-            <p>
-                Page 3 will be built next. 🌸
-            </p>
-
+        <div class="duck mother-duck">
+            🦆
         </div>
 
-    </section>
+        <div class="duckling duckling-one">
+            🐥
+        </div>
+
+        <div class="duckling duckling-two">
+            🐥
+        </div>
+
+        <div class="duckling duckling-three">
+            🐥
+        </div>
+
+    </div>
+
+
+    <!-- Music indicator -->
+
+    <button
+        id="music-button"
+        class="music-button"
+        onclick="toggleMusic(event)"
+        aria-label="Toggle birthday music"
+    >
+        🎵
+    </button>
+
+</section>
 
 
 
-    <script src="script.js"></script>
+<!-- =========================================================
+     =========================================================
+     PAGE 3 — NEXT PAGE
+     =========================================================
+========================================================= -->
+
+<section
+    id="page3"
+    class="site-page page3"
+>
+
+    <div class="page3-sparkles">
+        ✦ ✧ ✦ ✧ ✦
+    </div>
+
+    <h1>
+        There's More... 💗
+    </h1>
+
+    <p>
+        Your next surprise is waiting here. 🌸
+    </p>
+
+    <div class="page3-heart">
+        💕
+    </div>
+
+</section>
+
+
+<script src="script.js"></script>
 
 </body>
 </html>
