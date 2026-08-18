@@ -2,26 +2,57 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>🎂 Birthday Secret</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
 </head>
+
 
 <body>
 
     <!-- =================================================
+         BACKGROUND EFFECTS
+    ================================================== -->
+
+    <div class="glow glow-one"></div>
+    <div class="glow glow-two"></div>
+    <div class="glow glow-three"></div>
+
+    <div class="floating-heart heart-one">♡</div>
+    <div class="floating-heart heart-two">♡</div>
+    <div class="floating-heart heart-three">♡</div>
+    <div class="floating-heart heart-four">♡</div>
+
+
+    <!-- =================================================
          FIRST PAGE
-         PASSWORD ENTRY SCREEN
     ================================================== -->
 
     <main class="entry-page">
 
-        <!-- LEFT SIDE : PHOTO -->
+
+        <!-- =============================================
+             LEFT SIDE
+        ============================================== -->
 
         <section class="photo-section">
+
+            <div class="photo-label">
+                CLASSIFIED • BIRTHDAY ACCESS
+            </div>
+
 
             <!--
                 YOUR PHOTO GOES HERE
@@ -29,49 +60,74 @@
                 Current file:
                 media/EntryImg.jpg
 
-                If your image is PNG, change .jpg to .png
+                If you ever change your photo,
+                simply replace EntryImg.jpg
+                with your new image.
             -->
 
             <div class="photo-frame">
 
-                <img
-                    src="media/EntryImg.jpg"
-                    alt="My Photo"
-                >
+                <div class="photo-inner">
+
+                    <img
+                        src="media/EntryImg.jpg"
+                        alt="Birthday Secret"
+                    >
+
+                </div>
 
             </div>
 
-            <h1>
-                Abey oh Chirkoot!! 😤
-            </h1>
 
-            <p>
-                Password Daal 🔐
-            </p>
+            <div class="photo-caption">
+
+                <h1>
+                    Abey oh Chirkoot!! 😤
+                </h1>
+
+                <p>
+                    Password Daal 🔐
+                </p>
+
+            </div>
+
+
+            <div class="photo-line"></div>
+
+            <div class="photo-small-text">
+                YOU KNOW THE PASSWORD... RIGHT?
+            </div>
 
         </section>
 
 
-        <!-- RIGHT SIDE : PASSWORD -->
+
+        <!-- =============================================
+             RIGHT SIDE
+        ============================================== -->
 
         <section class="password-section">
 
+
             <div class="password-card">
 
-                <div class="lock">
+
+                <div class="lock-icon">
                     🔐
                 </div>
 
-                <p class="small-heading">
-                    CLASSIFIED ACCESS
-                </p>
+
+                <div class="card-label">
+                    PRIVATE ACCESS
+                </div>
+
 
                 <h2>
-                    Enter The Secret Password
+                    Enter The Secret
                 </h2>
 
-                <p class="instruction">
-                    Only the chosen one can enter 👀
+                <p class="card-subtitle">
+                    Only the chosen one gets inside.
                 </p>
 
 
@@ -81,7 +137,9 @@
                     id="password-display"
                     class="password-display"
                 >
-                    _
+                    <span id="password-text">
+                        ENTER PASSWORD
+                    </span>
                 </div>
 
 
@@ -89,23 +147,125 @@
 
                 <div class="keypad">
 
-                    <button onclick="pressKey('1')">1</button>
-                    <button onclick="pressKey('2')">2</button>
-                    <button onclick="pressKey('3')">3</button>
 
-                    <button onclick="pressKey('4')">4</button>
-                    <button onclick="pressKey('5')">5</button>
-                    <button onclick="pressKey('6')">6</button>
+                    <button
+                        class="number-key"
+                        onclick="pressKey('1')"
+                    >
+                        1
+                    </button>
 
-                    <button onclick="pressKey('7')">7</button>
-                    <button onclick="pressKey('8')">8</button>
-                    <button onclick="pressKey('9')">9</button>
+                    <button
+                        class="number-key"
+                        onclick="pressKey('2')"
+                    >
+                        2
+                    </button>
 
-                    <button onclick="clearPassword()">C</button>
-                    <button onclick="pressKey('0')">0</button>
-                    <button onclick="checkPassword()">✓</button>
+                    <button
+                        class="number-key"
+                        onclick="pressKey('3')"
+                    >
+                        3
+                    </button>
+
+
+                    <button
+                        class="number-key"
+                        onclick="pressKey('4')"
+                    >
+                        4
+                    </button>
+
+                    <button
+                        class="number-key"
+                        onclick="pressKey('5')"
+                    >
+                        5
+                    </button>
+
+                    <button
+                        class="number-key"
+                        onclick="pressKey('6')"
+                    >
+                        6
+                    </button>
+
+
+                    <button
+                        class="number-key"
+                        onclick="pressKey('7')"
+                    >
+                        7
+                    </button>
+
+                    <button
+                        class="number-key"
+                        onclick="pressKey('8')"
+                    >
+                        8
+                    </button>
+
+                    <button
+                        class="number-key"
+                        onclick="pressKey('9')"
+                    >
+                        9
+                    </button>
+
+
+                    <button
+                        class="number-key special-key"
+                        onclick="clearPassword()"
+                    >
+                        C
+                    </button>
+
+                    <button
+                        class="number-key"
+                        onclick="pressKey('0')"
+                    >
+                        0
+                    </button>
+
+                    <button
+                        class="number-key special-key"
+                        onclick="deleteLast()"
+                    >
+                        ←
+                    </button>
 
                 </div>
+
+
+                <!-- UNLOCK BUTTON -->
+
+                <button
+                    class="unlock-button"
+                    onclick="checkPassword()"
+                >
+
+                    <span>
+                        UNLOCK
+                    </span>
+
+                    <span class="unlock-arrow">
+                        →
+                    </span>
+
+                </button>
+
+
+                <div
+                    id="password-status"
+                    class="password-status"
+                ></div>
+
+
+                <div class="card-footer">
+                    🎂 Birthday Access Portal
+                </div>
+
 
             </div>
 
@@ -114,71 +274,106 @@
     </main>
 
 
+
     <!-- =================================================
-         WRONG PASSWORD MEME
+         WRONG PASSWORD POPUP
     ================================================== -->
 
     <div
-        id="meme-popup"
-        class="meme-popup"
+        id="wrong-popup"
+        class="popup-overlay"
     >
 
-        <div class="meme-box">
+        <div class="meme-popup">
 
-            <!--
-                YOUR MEME GOES HERE
 
-                Current file:
-                media/AbeySaale.jpg
+            <!-- CLOSE BUTTON — TOP LEFT -->
 
-                If your meme is PNG,
-                change .jpg to .png
-            -->
+            <button
+                class="popup-close"
+                onclick="closeWrongPopup()"
+            >
+                ×
+            </button>
+
+
+            <div class="popup-title">
+                ACCESS DENIED
+            </div>
+
 
             <img
                 src="media/AbeySaale.jpg"
-                alt="Abey Saale Meme"
+                alt="Wrong Password Meme"
+                class="meme-image"
             >
 
-            <button onclick="closeMeme()">
-                ✕ CUT IT 😂
-            </button>
+
+            <div class="popup-bottom-text">
+                <strong>ABEY SAALE 😂</strong>
+                <span>Password galat hai!</span>
+            </div>
+
 
         </div>
 
     </div>
 
 
+
     <!-- =================================================
-         WELCOME VIDEO
+         WELCOME VIDEO POPUP
     ================================================== -->
 
     <div
         id="welcome-popup"
-        class="welcome-popup"
+        class="popup-overlay"
     >
 
-        <div class="welcome-box">
+        <div class="video-popup">
+
+
+            <!-- CLOSE BUTTON — TOP LEFT -->
+
+            <button
+                class="popup-close"
+                onclick="closeWelcomePopup()"
+            >
+                ×
+            </button>
+
+
+            <div class="video-heading">
+                <span>✨</span>
+
+                ACCESS GRANTED
+
+                <span>✨</span>
+            </div>
+
 
             <h2>
-                🎉 ACCESS GRANTED!
+                Welcome, Chirkoot! 😂
             </h2>
 
+
             <p>
-                Welcome, Chirkoot. 😂
+                You actually knew the password.
             </p>
 
+
             <!--
-                FOR NOW WE USE A PLACEHOLDER VIDEO.
+                WELCOME VIDEO
 
-                Later you can put your own video inside
-                the media folder and change the source to:
+                Put your video inside the media folder
+                and name it:
 
-                media/welcome.mp4
+                welcome.mp4
             -->
 
             <video
                 id="welcome-video"
+                class="welcome-video"
                 controls
                 playsinline
             >
@@ -192,240 +387,31 @@
 
             </video>
 
-            <button onclick="continueToNextPage()">
-                🎀 CONTINUE
-            </button>
+
+            <div class="video-footer">
+                🎂 Your birthday adventure begins...
+            </div>
+
+
+            <!--
+                LATER, WHEN WE CREATE PAGE 2,
+                WE CAN ADD A BUTTON HERE TO OPEN IT.
+
+                For now this page DOES NOT redirect,
+                so nothing will crash.
+            -->
 
         </div>
 
     </div>
 
 
+
     <!-- =================================================
-         FIRST PAGE JAVASCRIPT
+         JAVASCRIPT
     ================================================== -->
 
-    <script>
-
-        /* ================================================
-           SECRET PASSWORD
-        ================================================ */
-
-        const correctPassword = "03092005";
-
-
-        let enteredPassword = "";
-
-
-        /* ================================================
-           NUMBER BUTTON
-        ================================================ */
-
-        function pressKey(number) {
-
-            if (enteredPassword.length >= 8) {
-                return;
-            }
-
-            enteredPassword += number;
-
-            updateDisplay();
-        }
-
-
-        /* ================================================
-           DISPLAY PASSWORD
-        ================================================ */
-
-        function updateDisplay() {
-
-            const display =
-                document.getElementById(
-                    "password-display"
-                );
-
-            if (enteredPassword.length === 0) {
-
-                display.textContent = "_";
-
-                return;
-            }
-
-
-            display.textContent =
-                "•".repeat(
-                    enteredPassword.length
-                );
-        }
-
-
-        /* ================================================
-           CLEAR PASSWORD
-        ================================================ */
-
-        function clearPassword() {
-
-            enteredPassword = "";
-
-            updateDisplay();
-        }
-
-
-        /* ================================================
-           CHECK PASSWORD
-        ================================================ */
-
-        function checkPassword() {
-
-            if (
-                enteredPassword ===
-                correctPassword
-            ) {
-
-                openWelcomeVideo();
-
-            }
-
-            else {
-
-                showWrongPassword();
-
-            }
-        }
-
-
-        /* ================================================
-           WRONG PASSWORD
-        ================================================ */
-
-        function showWrongPassword() {
-
-            const popup =
-                document.getElementById(
-                    "meme-popup"
-                );
-
-            popup.classList.add("show");
-
-            enteredPassword = "";
-
-            updateDisplay();
-        }
-
-
-        /* ================================================
-           CLOSE MEME
-        ================================================ */
-
-        function closeMeme() {
-
-            document
-                .getElementById(
-                    "meme-popup"
-                )
-                .classList.remove("show");
-        }
-
-
-        /* ================================================
-           CORRECT PASSWORD
-        ================================================ */
-
-        function openWelcomeVideo() {
-
-            const popup =
-                document.getElementById(
-                    "welcome-popup"
-                );
-
-            const video =
-                document.getElementById(
-                    "welcome-video"
-                );
-
-
-            popup.classList.add("show");
-
-
-            /*
-                Try to play the video
-                automatically.
-
-                Because the user has just
-                clicked the password button,
-                most browsers will allow sound.
-            */
-
-            video.currentTime = 0;
-
-            video.play()
-                .catch(() => {
-
-                    console.log(
-                        "Video autoplay was blocked."
-                    );
-
-                });
-        }
-
-
-        /* ================================================
-           NEXT PAGE
-
-           FOR NOW THIS JUST SHOWS A MESSAGE.
-
-           Later we will connect this to your
-           actual Birthday Adventure page.
-        ================================================ */
-
-        function continueToNextPage() {
-
-            alert(
-                "🎉 Page 1 complete! Next page coming soon."
-            );
-        }
-
-
-        /* ================================================
-           KEYBOARD SUPPORT
-
-           You can also type numbers from your keyboard.
-        ================================================ */
-
-        document.addEventListener(
-            "keydown",
-            function(event) {
-
-                if (
-                    event.key >= "0" &&
-                    event.key <= "9"
-                ) {
-
-                    pressKey(event.key);
-
-                }
-
-
-                if (event.key === "Enter") {
-
-                    checkPassword();
-
-                }
-
-
-                if (
-                    event.key === "Backspace" ||
-                    event.key === "Escape"
-                ) {
-
-                    clearPassword();
-
-                }
-
-            }
-        );
-
-    </script>
+    <script src="script.js"></script>
 
 </body>
 
