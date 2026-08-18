@@ -1,18 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>A Little Birthday Secret 💗</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
 </head>
+
 
 <body>
 
-    <!-- BACKGROUND DECORATIONS -->
+    <!-- =====================================================
+         INTRO SCREEN
+    ====================================================== -->
+
+    <div
+        id="intro-screen"
+        class="intro-screen"
+    >
+
+        <div class="intro-heart">
+            ♡
+        </div>
+
+        <p>
+            A little birthday secret...
+        </p>
+
+    </div>
+
+
+    <!-- =====================================================
+         FLOATING BACKGROUND
+    ====================================================== -->
+
     <div class="background-decor">
+
+        <!-- Flowers -->
 
         <span class="flower flower-1">✿</span>
         <span class="flower flower-2">✿</span>
@@ -20,42 +56,94 @@
         <span class="flower flower-4">✿</span>
         <span class="flower flower-5">✿</span>
         <span class="flower flower-6">✿</span>
+        <span class="flower flower-7">✿</span>
+        <span class="flower flower-8">✿</span>
+
+
+        <!-- Leaves -->
 
         <span class="leaf leaf-1">🌿</span>
         <span class="leaf leaf-2">🍃</span>
         <span class="leaf leaf-3">🌿</span>
         <span class="leaf leaf-4">🍃</span>
+        <span class="leaf leaf-5">🌿</span>
+
+
+        <!-- Floating petals -->
+
+        <span class="petal petal-1">♡</span>
+        <span class="petal petal-2">♡</span>
+        <span class="petal petal-3">♡</span>
+        <span class="petal petal-4">♡</span>
+        <span class="petal petal-5">♡</span>
+        <span class="petal petal-6">♡</span>
+        <span class="petal petal-7">♡</span>
+        <span class="petal petal-8">♡</span>
 
     </div>
 
 
-    <!-- MAIN PAGE -->
-    <main class="page">
+    <!-- =====================================================
+         MAIN PAGE
+    ====================================================== -->
 
-        <!-- LEFT SIDE -->
-        <section class="photo-section">
+    <main
+        class="page"
+        id="main-page"
+    >
+
+
+        <!-- =================================================
+             LEFT SIDE
+        ================================================== -->
+
+        <section
+            class="photo-section parallax-left"
+        >
+
+            <div class="photo-glow"></div>
 
             <div class="pink-layer"></div>
+
             <div class="white-layer"></div>
 
-            <div class="decor-flower flower-left">✿</div>
-            <div class="decor-flower flower-right">✿</div>
 
-            <!-- HEART PHOTO -->
+            <!-- Decorative flowers -->
+
+            <div class="decor-flower flower-left">
+                ✿
+            </div>
+
+            <div class="decor-flower flower-right">
+                ✿
+            </div>
+
+
+            <!-- Small leaf decoration -->
+
+            <div class="photo-leaf leaf-a">
+                🌿
+            </div>
+
+            <div class="photo-leaf leaf-b">
+                🍃
+            </div>
+
+
+            <!-- HEART -->
+
             <div class="heart-frame">
 
                 <div class="heart-photo">
 
-                    <!--
-                    ==================================================
-                    YOUR PHOTO GOES HERE
+                    <!-- =================================================
+                         YOUR PHOTO GOES HERE
+                         
+                         LATER replace this URL with your own image.
 
-                    Later replace the URL with your own image.
-
-                    Example:
-                    src="media/myphoto.jpg"
-                    ==================================================
-                    -->
+                         Example:
+                         src="media/myphoto.jpg"
+                    ================================================== -->
 
                     <img
                         src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=800&q=80"
@@ -66,72 +154,336 @@
 
             </div>
 
+
+            <!-- Caption -->
+
             <div class="photo-caption">
+
                 <span>♡</span>
+
                 A little piece of happiness
+
                 <span>♡</span>
+
+            </div>
+
+
+            <div class="tiny-caption">
+
+                made with a little bit of love ✨
+
             </div>
 
         </section>
 
 
-        <!-- RIGHT SIDE -->
-        <section class="password-section">
 
-            <div class="password-decoration">
-                ♡
+        <!-- =================================================
+             RIGHT SIDE
+        ================================================== -->
+
+        <section
+            class="password-section parallax-right"
+        >
+
+            <div class="glass-card">
+
+
+                <!-- Top heart -->
+
+                <div class="password-decoration">
+                    ♡
+                </div>
+
+
+                <!-- Small heading -->
+
+                <p class="small-heading">
+                    A LITTLE SECRET AWAITS
+                </p>
+
+
+                <!-- Main heading -->
+
+                <h1>
+                    Enter The Password
+                </h1>
+
+
+                <!-- Subtitle -->
+
+                <p class="subtitle">
+                    Only someone special knows
+                    the way in... 🌸
+                </p>
+
+
+                <!-- Decorative line -->
+
+                <div class="heading-line">
+
+                    <span></span>
+
+                    <b>♡</b>
+
+                    <span></span>
+
+                </div>
+
+
+                <!-- PASSWORD DISPLAY -->
+
+                <div
+                    id="password-display"
+                    class="password-display"
+                ></div>
+
+
+                <!-- KEYPAD -->
+
+                <div class="keypad">
+
+
+                    <button
+                        class="key"
+                        onclick="pressKey('1')"
+                    >
+                        1
+                    </button>
+
+
+                    <button
+                        class="key"
+                        onclick="pressKey('2')"
+                    >
+                        2
+                    </button>
+
+
+                    <button
+                        class="key"
+                        onclick="pressKey('3')"
+                    >
+                        3
+                    </button>
+
+
+                    <button
+                        class="key"
+                        onclick="pressKey('4')"
+                    >
+                        4
+                    </button>
+
+
+                    <button
+                        class="key"
+                        onclick="pressKey('5')"
+                    >
+                        5
+                    </button>
+
+
+                    <button
+                        class="key"
+                        onclick="pressKey('6')"
+                    >
+                        6
+                    </button>
+
+
+                    <button
+                        class="key"
+                        onclick="pressKey('7')"
+                    >
+                        7
+                    </button>
+
+
+                    <button
+                        class="key"
+                        onclick="pressKey('8')"
+                    >
+                        8
+                    </button>
+
+
+                    <button
+                        class="key"
+                        onclick="pressKey('9')"
+                    >
+                        9
+                    </button>
+
+
+                    <button
+                        class="key special"
+                        onclick="deleteKey()"
+                    >
+                        ×
+                    </button>
+
+
+                    <button
+                        class="key"
+                        onclick="pressKey('0')"
+                    >
+                        0
+                    </button>
+
+
+                    <button
+                        class="key special enter-key"
+                        onclick="checkPassword()"
+                    >
+                        ↵
+                    </button>
+
+                </div>
+
+
+                <!-- Message -->
+
+                <p
+                    id="password-message"
+                    class="password-message"
+                ></p>
+
+
+                <p class="hint">
+                    enter the secret code ♡
+                </p>
+
             </div>
-
-            <p class="small-heading">
-                A LITTLE SECRET AWAITS
-            </p>
-
-            <h1>
-                Enter The Password
-            </h1>
-
-            <p class="subtitle">
-                Only someone special knows the way in... 🌸
-            </p>
-
-
-            <!-- PASSWORD DISPLAY -->
-            <div
-                id="password-display"
-                class="password-display"
-            ></div>
-
-
-            <!-- NUMERIC KEYPAD -->
-            <div class="keypad">
-
-                <button class="key" onclick="pressKey('1')">1</button>
-                <button class="key" onclick="pressKey('2')">2</button>
-                <button class="key" onclick="pressKey('3')">3</button>
-
-                <button class="key" onclick="pressKey('4')">4</button>
-                <button class="key" onclick="pressKey('5')">5</button>
-                <button class="key" onclick="pressKey('6')">6</button>
-
-                <button class="key" onclick="pressKey('7')">7</button>
-                <button class="key" onclick="pressKey('8')">8</button>
-                <button class="key" onclick="pressKey('9')">9</button>
-
-                <button class="key special" onclick="deleteKey()">×</button>
-                <button class="key" onclick="pressKey('0')">0</button>
-                <button class="key special" onclick="checkPassword()">↵</button>
-
-            </div>
-
-
-            <p id="password-message" class="password-message"></p>
 
         </section>
 
     </main>
 
 
+
+    <!-- =====================================================
+         WRONG PASSWORD POPUP
+    ====================================================== -->
+
+    <div
+        id="wrong-popup"
+        class="popup-overlay"
+    >
+
+        <div class="popup-card wrong-card">
+
+            <button
+                class="popup-close"
+                onclick="closePopup('wrong-popup')"
+            >
+                ×
+            </button>
+
+
+            <div class="doodle">
+
+                ♡
+
+                <span class="doodle-face">
+                    :(
+                </span>
+
+                ♡
+
+            </div>
+
+
+            <div class="popup-flower">
+                ✿
+            </div>
+
+
+            <h2>
+                Baby!!!! 😭💗
+            </h2>
+
+
+            <p>
+                You've entered the
+                <strong>wrong password!</strong>
+            </p>
+
+
+            <span class="popup-subtext">
+                Try again, silly ♡
+            </span>
+
+
+            <button
+                class="popup-button"
+                onclick="closePopup('wrong-popup')"
+            >
+                I'll try again 💕
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         CORRECT PASSWORD POPUP
+    ====================================================== -->
+
+    <div
+        id="success-popup"
+        class="popup-overlay"
+    >
+
+        <div class="popup-card success-card">
+
+            <div class="success-sparkles">
+                ✨ ♡ ✨
+            </div>
+
+
+            <div class="success-heart">
+                💗
+            </div>
+
+
+            <h2>
+                Yayyyy! 🥹💗
+            </h2>
+
+
+            <p>
+                You remembered the secret!
+            </p>
+
+
+            <span class="popup-subtext">
+                Welcome, birthday girl ✨
+            </span>
+
+
+            <div class="popup-divider">
+                ♡
+            </div>
+
+
+            <button
+                class="popup-button"
+                onclick="closePopup('success-popup')"
+            >
+                Continue ♡
+            </button>
+
+        </div>
+
+    </div>
+
+
+
     <script src="script.js"></script>
 
 </body>
+
 </html>
