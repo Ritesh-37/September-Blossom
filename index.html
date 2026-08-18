@@ -1,109 +1,248 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>A Little Surprise ❤️</title>
+    <title>For Tisha ❤️</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Great+Vibes&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <div class="background">
+    <!-- Background decorations -->
+    <div class="background-glow"></div>
 
-        <div class="flower flower-one">✿</div>
-        <div class="flower flower-two">✿</div>
-        <div class="flower flower-three">✿</div>
-        <div class="flower flower-four">✿</div>
+    <div class="sparkles">
+        <span>✦</span>
+        <span>✧</span>
+        <span>✦</span>
+        <span>·</span>
+        <span>✧</span>
+        <span>✦</span>
+        <span>·</span>
+        <span>✧</span>
+    </div>
 
-        <div class="leaf leaf-one">🍃</div>
-        <div class="leaf leaf-two">🍃</div>
-        <div class="leaf leaf-three">🍃</div>
-        <div class="leaf leaf-four">🍃</div>
-
+    <div class="hearts">
+        <span>♥</span>
+        <span>♥</span>
+        <span>♥</span>
+        <span>♥</span>
+        <span>♥</span>
     </div>
 
 
-    <main class="container">
+    <!-- ============================= -->
+    <!-- STAGE 0: SEALED GIFT           -->
+    <!-- ============================= -->
 
-        <section class="card">
+    <main id="gift-screen" class="screen active">
 
-            <div class="heart">♥</div>
+        <div class="corner-decoration top-left">
+            <span class="flower">✿</span>
+            <span class="leaf">❧</span>
+            <span class="leaf second">❧</span>
+        </div>
 
-            <p class="small-text">
-                A little surprise for you...
-            </p>
+        <div class="corner-decoration top-right">
+            <span class="flower">✿</span>
+            <span class="leaf">❧</span>
+            <span class="leaf second">❧</span>
+        </div>
 
-            <h1>
-                Hello, Beautiful ❤️
-            </h1>
+        <div class="corner-decoration bottom-left">
+            <span class="flower">✿</span>
+            <span class="leaf">❧</span>
+            <span class="leaf second">❧</span>
+        </div>
 
-            <p class="message">
-                Someone has prepared something very special for you.
-            </p>
-
-            <p class="question">
-                But first... can you unlock it? 🔐
-            </p>
+        <div class="corner-decoration bottom-right">
+            <span class="flower">✿</span>
+            <span class="leaf">❧</span>
+            <span class="leaf second">❧</span>
+        </div>
 
 
-            <div class="password-box">
+        <section class="gift-container">
 
-                <input
-                    type="password"
-                    id="password"
-                    placeholder="Enter the secret password"
-                    autocomplete="off"
-                >
+            <div class="tiny-bow">🎀</div>
 
-                <button
-                    type="button"
-                    id="unlockButton"
-                >
-                    Unlock My Surprise ✨
-                </button>
+            <div id="envelope" class="envelope">
+
+                <div class="envelope-top"></div>
+
+                <div class="envelope-body">
+
+                    <div class="seal">♥</div>
+
+                    <p class="envelope-small">
+                        A LITTLE SOMETHING
+                    </p>
+
+                    <h1>
+                        FOR TISHA
+                    </h1>
+
+                    <p class="envelope-message">
+                        Do not open unless you're ready
+                        for a little surprise. 👀
+                    </p>
+
+                </div>
 
             </div>
 
-
-            <p class="hint">
-                Hint: It's something only you would know 💕
-            </p>
+            <button id="open-gift-btn" class="luxury-button">
+                OPEN IT 💌
+            </button>
 
         </section>
 
     </main>
 
 
-    <!-- Wrong Password Popup -->
+    <!-- ============================= -->
+    <!-- STAGE 1: MAIN ENTRANCE         -->
+    <!-- ============================= -->
 
-    <div
-        class="popup-overlay"
-        id="wrongPopup"
-    >
+    <main id="entrance-screen" class="screen">
 
-        <div class="popup">
+        <div class="corner-decoration top-left">
+            <span class="flower">✿</span>
+            <span class="leaf">❧</span>
+            <span class="leaf second">❧</span>
+        </div>
+
+        <div class="corner-decoration top-right">
+            <span class="flower">✿</span>
+            <span class="leaf">❧</span>
+            <span class="leaf second">❧</span>
+        </div>
+
+        <div class="corner-decoration bottom-left">
+            <span class="flower">✿</span>
+            <span class="leaf">❧</span>
+            <span class="leaf second">❧</span>
+        </div>
+
+        <div class="corner-decoration bottom-right">
+            <span class="flower">✿</span>
+            <span class="leaf">❧</span>
+            <span class="leaf second">❧</span>
+        </div>
+
+
+        <section class="main-content">
+
+            <div class="bow">🎀</div>
+
+            <p class="eyebrow">
+                A VERY IMPORTANT MESSAGE...
+            </p>
+
+            <h2>
+                WAIT… YOU ACTUALLY<br>
+                FOUND THIS? 👀
+            </h2>
+
+            <p class="subtitle">
+                Well… I suppose there's no turning back now. 😏
+            </p>
+
+            <button id="curious-btn" class="luxury-button">
+                Okay, I'm curious 👀
+            </button>
+
+        </section>
+
+    </main>
+
+
+    <!-- ============================= -->
+    <!-- STAGE 2: PASSWORD              -->
+    <!-- ============================= -->
+
+    <main id="password-screen" class="screen">
+
+        <section class="password-card">
+
+            <div class="card-bow">🎀</div>
+
+            <div class="lock-icon">
+                🔐
+            </div>
+
+            <p class="card-label">
+                SECRET ACCESS
+            </p>
+
+            <h2>
+                Hmm… before I let you in… 🤨
+            </h2>
+
+            <p class="card-text">
+                I need to make sure you're actually
+                the birthday girl. 🎀
+            </p>
+
+            <label for="password-input">
+                Enter the magic code
+            </label>
+
+            <input
+                id="password-input"
+                type="password"
+                maxlength="4"
+                inputmode="numeric"
+                placeholder="••••"
+                autocomplete="off"
+            >
+
+            <button id="unlock-btn" class="luxury-button">
+                UNLOCK MY SURPRISE ❤️
+            </button>
+
+            <p id="password-hint" class="password-hint"></p>
+
+        </section>
+
+    </main>
+
+
+    <!-- ============================= -->
+    <!-- STAGE 3: WRONG PASSWORD        -->
+    <!-- ============================= -->
+
+    <div id="wrong-popup" class="popup-overlay">
+
+        <div class="popup-card">
 
             <div class="popup-icon">
-                🤍
+                🥺
             </div>
 
             <h2>
-                Baby!!!!
+                BABYYYY!!!! 😭😂
             </h2>
 
             <p>
-                You've entered the wrong password. 🥺
+                You really thought that was
+                the password?
             </p>
 
-            <button
-                type="button"
-                id="wrongClose"
-            >
-                Try Again 💕
+            <p class="popup-small">
+                Try again, silly. ❤️
+            </p>
+
+            <button id="try-again-btn" class="luxury-button">
+                Okay okay 😭
             </button>
 
         </div>
@@ -111,41 +250,47 @@
     </div>
 
 
-    <!-- Correct Password Popup -->
+    <!-- ============================= -->
+    <!-- STAGE 4: SUCCESS               -->
+    <!-- ============================= -->
 
-    <div
-        class="popup-overlay"
-        id="welcomePopup"
-    >
+    <div id="success-popup" class="popup-overlay">
 
-        <div class="popup">
+        <div class="popup-card success-card">
 
             <div class="popup-icon">
-                💗
+                💌
             </div>
 
+            <p class="success-label">
+                ACCESS GRANTED
+            </p>
+
             <h2>
-                Welcome, Baby! ✨
+                Okay… you really are her. 😂❤️
             </h2>
 
             <p>
-                You got it right! Your little surprise is waiting for you. 🥰
+                Welcome to your little surprise,
+                Tisha. 🌸
             </p>
 
-            <button
-                type="button"
-                id="welcomeClose"
-            >
-                Let's Go! 💕
+            <button id="continue-btn" class="luxury-button">
+                LET'S GO →
             </button>
 
         </div>
 
     </div>
+
+
+    <!-- Background music -->
+    <audio id="background-music" loop>
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
 
 
     <script src="script.js"></script>
 
 </body>
-
 </html>
