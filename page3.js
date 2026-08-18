@@ -1,5 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
 
+    /* =========================================
+       ELEMENTS
+    ========================================== */
+
     const transition =
         document.getElementById("pageTransition");
 
@@ -50,6 +54,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const starContainer =
         document.getElementById("stars");
+
+
+    /* =========================================
+       CHECK REQUIRED ELEMENTS
+    ========================================== */
+
+    if (
+        !introScreen ||
+        !universe ||
+        !exploreButton ||
+        !memoryModal
+    ) {
+        console.error(
+            "Page 3: Required HTML elements are missing."
+        );
+
+        return;
+    }
 
 
     /* =========================================
@@ -118,45 +140,65 @@ document.addEventListener("DOMContentLoaded", function () {
        PAGE FADE IN
     ========================================== */
 
-    setTimeout(function () {
+    if (transition) {
 
-        transition.classList.add("fade-out");
+        setTimeout(function () {
 
-    }, 300);
+            transition.classList.add(
+                "fade-out"
+            );
+
+        }, 300);
+
+    }
 
 
     /* =========================================
-       BACKGROUND STARS
+       CREATE BACKGROUND STARS
     ========================================== */
 
-    for (let i = 0; i < 90; i++) {
+    function createBackgroundStars() {
 
-        const star =
-            document.createElement("span");
+        if (!starContainer) {
+            return;
+        }
 
-        star.className =
-            "background-star";
+        for (let i = 0; i < 100; i++) {
 
-        star.textContent =
-            Math.random() > .82
-                ? "✦"
-                : "•";
+            const star =
+                document.createElement("span");
 
-        star.style.left =
-            Math.random() * 100 + "%";
+            star.className =
+                "background-star";
 
-        star.style.top =
-            Math.random() * 100 + "%";
+            star.textContent =
+                Math.random() > 0.8
+                    ? "✦"
+                    : "•";
 
-        star.style.animationDelay =
-            Math.random() * 4 + "s";
+            star.style.left =
+                Math.random() * 100 + "%";
 
-        star.style.animationDuration =
-            (2 + Math.random() * 4) + "s";
+            star.style.top =
+                Math.random() * 100 + "%";
 
-        starContainer.appendChild(star);
+            star.style.animationDelay =
+                Math.random() * 4 + "s";
+
+            star.style.animationDuration =
+                2 +
+                Math.random() * 4 +
+                "s";
+
+            starContainer.appendChild(
+                star
+            );
+
+        }
 
     }
+
+    createBackgroundStars();
 
 
     /* =========================================
@@ -165,7 +207,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function createShootingStar() {
 
-        if (!universe.classList.contains("active")) {
+        if (
+            !universe.classList.contains(
+                "active"
+            )
+        ) {
             return;
         }
 
@@ -176,10 +222,14 @@ document.addEventListener("DOMContentLoaded", function () {
             "shooting-star";
 
         shootingStar.style.left =
-            (60 + Math.random() * 40) + "%";
+            65 +
+            Math.random() * 35 +
+            "%";
 
         shootingStar.style.top =
-            (5 + Math.random() * 35) + "%";
+            5 +
+            Math.random() * 35 +
+            "%";
 
         document.body.appendChild(
             shootingStar
@@ -189,7 +239,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             shootingStar.remove();
 
-        }, 1500);
+        }, 1600);
 
     }
 
@@ -201,7 +251,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =========================================
-       MOUSE STAR REACTION
+       MOUSE REACTIVE STARS
     ========================================== */
 
     document.addEventListener(
@@ -242,33 +292,35 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     if (distance < 180) {
 
-                        const move =
-                            Math.max(
-                                0,
-                                (180 - distance) / 180
-                            );
+                        const strength =
+                            (180 - distance) /
+                            180;
 
-                        const directionX =
+                        const xDirection =
                             centerX < mouseX
                                 ? -1
                                 : 1;
 
-                        const directionY =
+                        const yDirection =
                             centerY < mouseY
                                 ? -1
                                 : 1;
 
                         star.style.transform =
                             "translate(" +
-                            directionX *
-                            move *
+                            xDirection *
+                            strength *
                             8 +
                             "px, " +
-                            directionY *
-                            move *
+                            yDirection *
+                            strength *
                             8 +
                             "px) scale(" +
-                            (1 + move * .15) +
+                            (
+                                1 +
+                                strength *
+                                0.12
+                            ) +
                             ")";
 
                     } else {
@@ -297,21 +349,269 @@ document.addEventListener("DOMContentLoaded", function () {
                 "active"
             );
 
-            setTimeout(
-                function () {
+            setTimeout(function () {
 
-                    universe.classList.add(
-                        "active"
-                    );
+                universe.classList.add(
+                    "active"
+                );
 
-                    createShootingStar();
+                createShootingStar();
 
-                },
-                700
-            );
+            }, 700);
 
         }
     );
+
+
+    /* =========================================
+       CREATE SVG CONSTELLATION
+    ========================================== */
+
+    function getConstellationSVG() {
+
+        let svg =
+            document.getElementById(
+                "constellation-svg"
+            );
+
+        if (svg) {
+            return svg;
+        }
+
+
+        svg =
+            document.createElementNS(
+                "http://www.w3.org/2000/svg",
+                "svg"
+            );
+
+        svg.id =
+            "constellation-svg";
+
+
+        svg.style.position =
+            "fixed";
+
+        svg.style.left =
+            "0";
+
+        svg.style.top =
+            "0";
+
+        svg.style.width =
+            "100vw";
+
+        svg.style.height =
+            "100vh";
+
+        svg.style.pointerEvents =
+            "none";
+
+        svg.style.zIndex =
+            "5";
+
+        svg.style.overflow =
+            "visible";
+
+
+        document.body.appendChild(
+            svg
+        );
+
+
+        return svg;
+
+    }
+
+
+    /* =========================================
+       DRAW CONSTELLATION
+    ========================================== */
+
+    function drawConstellation() {
+
+        const svg =
+            getConstellationSVG();
+
+
+        /*
+         * Remove existing lines.
+         */
+
+        while (svg.firstChild) {
+
+            svg.removeChild(
+                svg.firstChild
+            );
+
+        }
+
+
+        /*
+         * Need at least two
+         * discovered stars.
+         */
+
+        if (
+            discoveredStars.length < 2
+        ) {
+
+            return;
+
+        }
+
+
+        /*
+         * Connect every discovered
+         * star to the next one.
+         */
+
+        for (
+            let i = 0;
+            i <
+            discoveredStars.length - 1;
+            i++
+        ) {
+
+            const firstStar =
+                memoryStars[
+                    discoveredStars[i]
+                ];
+
+            const secondStar =
+                memoryStars[
+                    discoveredStars[i + 1]
+                ];
+
+
+            const firstRect =
+                firstStar.getBoundingClientRect();
+
+            const secondRect =
+                secondStar.getBoundingClientRect();
+
+
+            const x1 =
+                firstRect.left +
+                firstRect.width / 2;
+
+            const y1 =
+                firstRect.top +
+                firstRect.height / 2;
+
+
+            const x2 =
+                secondRect.left +
+                secondRect.width / 2;
+
+            const y2 =
+                secondRect.top +
+                secondRect.height / 2;
+
+
+            /*
+             * Create SVG line.
+             */
+
+            const line =
+                document.createElementNS(
+                    "http://www.w3.org/2000/svg",
+                    "line"
+                );
+
+
+            line.setAttribute(
+                "x1",
+                x1
+            );
+
+            line.setAttribute(
+                "y1",
+                y1
+            );
+
+            line.setAttribute(
+                "x2",
+                x2
+            );
+
+            line.setAttribute(
+                "y2",
+                y2
+            );
+
+
+            line.setAttribute(
+                "stroke",
+                "rgba(255,255,255,0.65)"
+            );
+
+            line.setAttribute(
+                "stroke-width",
+                "1.2"
+            );
+
+            line.setAttribute(
+                "stroke-linecap",
+                "round"
+            );
+
+
+            /*
+             * Calculate line length.
+             */
+
+            const length =
+                Math.sqrt(
+                    Math.pow(
+                        x2 - x1,
+                        2
+                    ) +
+                    Math.pow(
+                        y2 - y1,
+                        2
+                    )
+                );
+
+
+            /*
+             * Drawing animation.
+             */
+
+            line.style.strokeDasharray =
+                length;
+
+            line.style.strokeDashoffset =
+                length;
+
+            line.style.filter =
+                "drop-shadow(0 0 6px rgba(255,255,255,0.8))";
+
+
+            svg.appendChild(
+                line
+            );
+
+
+            /*
+             * Trigger animation.
+             */
+
+            requestAnimationFrame(
+                function () {
+
+                    line.style.transition =
+                        "stroke-dashoffset 1.2s ease";
+
+                    line.style.strokeDashoffset =
+                        "0";
+
+                }
+            );
+
+        }
+
+    }
 
 
     /* =========================================
@@ -330,29 +630,61 @@ document.addEventListener("DOMContentLoaded", function () {
                             star.dataset.memory
                         );
 
+
+                    if (
+                        !memories[index]
+                    ) {
+
+                        return;
+
+                    }
+
+
                     currentMemory =
                         index;
+
 
                     const memory =
                         memories[index];
 
-                    memoryTitle.textContent =
-                        memory.title;
 
-                    memoryIcon.textContent =
-                        memory.icon;
+                    if (memoryTitle) {
 
-                    memoryText.textContent =
-                        memory.text;
+                        memoryTitle.textContent =
+                            memory.title;
 
-                    memoryNumber.textContent =
-                        "MEMORY " +
-                        String(
-                            index + 1
-                        ).padStart(
-                            2,
-                            "0"
-                        );
+                    }
+
+
+                    if (memoryIcon) {
+
+                        memoryIcon.textContent =
+                            memory.icon;
+
+                    }
+
+
+                    if (memoryText) {
+
+                        memoryText.textContent =
+                            memory.text;
+
+                    }
+
+
+                    if (memoryNumber) {
+
+                        memoryNumber.textContent =
+                            "MEMORY " +
+                            String(
+                                index + 1
+                            ).padStart(
+                                2,
+                                "0"
+                            );
+
+                    }
+
 
                     memoryModal.classList.add(
                         "show"
@@ -366,74 +698,137 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =========================================
-       MARK AS DISCOVERED
+       DISCOVER MEMORY
     ========================================== */
 
-    memoryDone.addEventListener(
-        "click",
-        function () {
+    if (memoryDone) {
 
-            if (
-                currentMemory !== null &&
-                !memoryStars[currentMemory]
-                    .classList
-                    .contains("discovered")
-            ) {
-
-                memoryStars[currentMemory]
-                    .classList
-                    .add("discovered");
-
-                discoveredStars.push(
-                    currentMemory
-                );
-
-                discovered++;
-
-                updateProgress();
+        memoryDone.addEventListener(
+            "click",
+            function () {
 
                 if (
-                    discoveredStars.length > 1
+                    currentMemory === null
                 ) {
 
-                    drawConstellation();
+                    return;
 
                 }
 
+
+                const selectedStar =
+                    memoryStars[
+                        currentMemory
+                    ];
+
+
+                /*
+                 * Only count it once.
+                 */
+
+                if (
+                    !selectedStar.classList
+                        .contains(
+                            "discovered"
+                        )
+                ) {
+
+                    selectedStar.classList
+                        .add(
+                            "discovered"
+                        );
+
+
+                    discoveredStars.push(
+                        currentMemory
+                    );
+
+
+                    discovered++;
+
+
+                    updateProgress();
+
+
+                    /*
+                     * Draw constellation
+                     * after modal closes.
+                     */
+
+                    setTimeout(
+                        function () {
+
+                            drawConstellation();
+
+                        },
+                        300
+                    );
+
+                }
+
+
+                closeMemoryModal();
+
             }
+        );
 
-            closeModal();
-
-        }
-    );
+    }
 
 
     /* =========================================
-       PROGRESS
+       UPDATE PROGRESS
     ========================================== */
 
     function updateProgress() {
 
-        progressText.textContent =
-            discovered +
-            " / 6 discovered";
+        if (progressText) {
 
-        progressFill.style.width =
-            (discovered / 6 * 100) +
-            "%";
+            progressText.textContent =
+                discovered +
+                " / 6 discovered";
+
+        }
 
 
-        if (discovered === 6) {
+        if (progressFill) {
+
+            progressFill.style.width =
+                (
+                    discovered /
+                    memoryStars.length *
+                    100
+                ) +
+                "%";
+
+        }
+
+
+        /*
+         * All memories found.
+         */
+
+        if (
+            discovered ===
+            memoryStars.length
+        ) {
 
             setTimeout(
                 function () {
 
-                    universeComplete
-                        .classList
-                        .add("show");
+                    if (
+                        universeComplete
+                    ) {
+
+                        universeComplete
+                            .classList
+                            .add(
+                                "show"
+                            );
+
+                    }
 
                 },
-                1200
+                1400
             );
 
         }
@@ -442,128 +837,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =========================================
-       CONSTELLATION
+       CLOSE MEMORY
     ========================================== */
 
-    function drawConstellation() {
-
-        document
-            .querySelectorAll(
-                ".constellation-line"
-            )
-            .forEach(
-                function (line) {
-
-                    line.remove();
-
-                }
-            );
-
-
-        for (
-            let i = 0;
-            i < discoveredStars.length - 1;
-            i++
-        ) {
-
-            const first =
-                memoryStars[
-                    discoveredStars[i]
-                ];
-
-            const second =
-                memoryStars[
-                    discoveredStars[i + 1]
-                ];
-
-            const firstRect =
-                first.getBoundingClientRect();
-
-            const secondRect =
-                second.getBoundingClientRect();
-
-            const x1 =
-                firstRect.left +
-                firstRect.width / 2;
-
-            const y1 =
-                firstRect.top +
-                firstRect.height / 2;
-
-            const x2 =
-                secondRect.left +
-                secondRect.width / 2;
-
-            const y2 =
-                secondRect.top +
-                secondRect.height / 2;
-
-            const dx =
-                x2 - x1;
-
-            const dy =
-                y2 - y1;
-
-            const distance =
-                Math.sqrt(
-                    dx * dx +
-                    dy * dy
-                );
-
-            const angle =
-                Math.atan2(
-                    dy,
-                    dx
-                ) *
-                180 /
-                Math.PI;
-
-            const line =
-                document.createElement(
-                    "div"
-                );
-
-            line.className =
-                "constellation-line";
-
-            line.style.width =
-                distance + "px";
-
-            line.style.left =
-                x1 + "px";
-
-            line.style.top =
-                y1 + "px";
-
-            line.style.transform =
-                "rotate(" +
-                angle +
-                "deg)";
-
-            document.body.appendChild(
-                line
-            );
-
-            requestAnimationFrame(
-                function () {
-
-                    line.classList.add(
-                        "visible"
-                    );
-
-                }
-            );
-
-        }
-
-    }
-
-
-    /* =========================================
-       CLOSE MODAL
-    ========================================== */
-
-    function closeModal() {
+    function closeMemoryModal() {
 
         memoryModal.classList.remove(
             "show"
@@ -574,14 +851,18 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    closeMemory.addEventListener(
-        "click",
-        closeModal
-    );
+    if (closeMemory) {
+
+        closeMemory.addEventListener(
+            "click",
+            closeMemoryModal
+        );
+
+    }
 
 
     /* =========================================
-       CLICK OUTSIDE
+       CLICK OUTSIDE MODAL
     ========================================== */
 
     memoryModal.addEventListener(
@@ -595,7 +876,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     )
             ) {
 
-                closeModal();
+                closeMemoryModal();
 
             }
 
@@ -604,7 +885,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =========================================
-       ESCAPE
+       ESCAPE KEY
     ========================================== */
 
     document.addEventListener(
@@ -612,13 +893,19 @@ document.addEventListener("DOMContentLoaded", function () {
         function (event) {
 
             if (
-                event.key === "Escape" &&
-                memoryModal.classList.contains(
-                    "show"
-                )
+                event.key === "Escape"
             ) {
 
-                closeModal();
+                if (
+                    memoryModal.classList
+                        .contains(
+                            "show"
+                        )
+                ) {
+
+                    closeMemoryModal();
+
+                }
 
             }
 
@@ -627,32 +914,73 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =========================================
-       PAGE 4
+       KEEP CONSTELLATION ALIGNED
     ========================================== */
 
-    continueButton.addEventListener(
-        "click",
+    window.addEventListener(
+        "resize",
         function () {
 
-            universeComplete
-                .classList
-                .remove("show");
+            if (
+                discoveredStars.length >= 2
+            ) {
 
-            transition.classList.remove(
-                "fade-out"
-            );
+                drawConstellation();
 
-            setTimeout(
-                function () {
-
-                    window.location.href =
-                        "page4.html";
-
-                },
-                900
-            );
+            }
 
         }
     );
+
+
+    /* =========================================
+       CONTINUE TO PAGE 4
+    ========================================== */
+
+    if (continueButton) {
+
+        continueButton.addEventListener(
+            "click",
+            function () {
+
+                if (
+                    transition
+                ) {
+
+                    transition.classList
+                        .remove(
+                            "fade-out"
+                        );
+
+                }
+
+
+                if (
+                    universeComplete
+                ) {
+
+                    universeComplete
+                        .classList
+                        .remove(
+                            "show"
+                        );
+
+                }
+
+
+                setTimeout(
+                    function () {
+
+                        window.location.href =
+                            "page4.html";
+
+                    },
+                    900
+                );
+
+            }
+        );
+
+    }
 
 });
