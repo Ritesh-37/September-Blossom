@@ -11,99 +11,82 @@
 html,
 body {
     width: 100%;
-    height: 100%;
+    min-height: 100%;
 }
 
 body {
+    min-height: 100vh;
+
     overflow: hidden;
 
     font-family:
         "Trebuchet MS",
         Arial,
         sans-serif;
-}
 
-
-/* =========================================================
-   GENERAL PAGE SYSTEM
-========================================================= */
-
-.site-page {
-    position: fixed;
-
-    inset: 0;
-
-    width: 100vw;
-    height: 100vh;
-
-    overflow: hidden;
-
-    opacity: 0;
-    visibility: hidden;
-
-    transform: scale(1.03);
-
-    transition:
-        opacity 0.8s ease,
-        visibility 0.8s ease,
-        transform 0.8s ease;
-}
-
-
-.site-page.active {
-    opacity: 1;
-    visibility: visible;
-
-    transform: scale(1);
-}
-
-
-/* =========================================================
-   =========================================================
-   PAGE 1
-   =========================================================
-========================================================= */
-
-.page1 {
+    /* RED BACKGROUND */
     background:
         radial-gradient(
-            circle at 15% 15%,
-            rgba(255, 120, 140, 0.28),
-            transparent 30%
-        ),
-
-        radial-gradient(
-            circle at 85% 85%,
-            rgba(255, 80, 110, 0.20),
+            circle at 20% 20%,
+            #ef4167 0%,
             transparent 35%
         ),
-
+        radial-gradient(
+            circle at 80% 80%,
+            #a90032 0%,
+            transparent 40%
+        ),
         linear-gradient(
             135deg,
-            #ef183f 0%,
-            #df1239 45%,
-            #c90032 100%
+            #e6003d,
+            #c50035 48%,
+            #a5002c
         );
 
     color: white;
 }
 
 
-.page1::before {
+/* =========================================================
+   SOFT LIGHT
+========================================================= */
+
+body::before {
     content: "";
 
-    position: absolute;
+    position: fixed;
 
     width: 700px;
     height: 700px;
 
     top: -300px;
-    left: -220px;
+    left: -250px;
 
     border-radius: 50%;
 
     background:
-        rgba(255, 170, 185, 0.16);
+        rgba(255, 255, 255, 0.08);
+
+    filter: blur(45px);
+
+    pointer-events: none;
+}
+
+body::after {
+    content: "";
+
+    position: fixed;
+
+    width: 600px;
+    height: 600px;
+
+    right: -250px;
+    bottom: -250px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 120, 160, 0.12);
 
     filter: blur(50px);
 
@@ -111,34 +94,12 @@ body {
 }
 
 
-.page1::after {
-    content: "";
-
-    position: absolute;
-
-    width: 650px;
-    height: 650px;
-
-    right: -240px;
-    bottom: -300px;
-
-    border-radius: 50%;
-
-    background:
-        rgba(255, 100, 135, 0.16);
-
-    filter: blur(55px);
-
-    pointer-events: none;
-}
-
-
 /* =========================================================
-   PAGE 1 BACKGROUND FLOWERS
+   BACKGROUND DECOR
 ========================================================= */
 
 .background-decor {
-    position: absolute;
+    position: fixed;
 
     inset: 0;
 
@@ -150,20 +111,22 @@ body {
 }
 
 
+/* =========================================================
+   WHITE FLOWERS
+========================================================= */
+
 .flower {
     position: absolute;
 
     color: white;
 
-    font-family: Georgia, serif;
-
-    opacity: 0.72;
-
-    font-size: 22px;
-
     text-shadow:
         0 2px 8px
-        rgba(255,255,255,0.25);
+        rgba(255, 255, 255, 0.35);
+
+    opacity: 0.75;
+
+    font-family: Georgia, serif;
 
     animation:
         flowerFloat
@@ -172,160 +135,115 @@ body {
         infinite;
 }
 
-
-/* 22 flowers */
-
 .flower-1 {
     top: 5%;
     left: 5%;
-    font-size: 27px;
+    font-size: 24px;
 }
 
 .flower-2 {
     top: 10%;
-    left: 18%;
-    font-size: 18px;
-    animation-delay: .7s;
+    left: 20%;
+    font-size: 17px;
+    animation-delay: 1s;
 }
 
 .flower-3 {
     top: 18%;
-    left: 3%;
-    font-size: 16px;
-    animation-delay: 1.2s;
+    left: 38%;
+    font-size: 25px;
+    animation-delay: 2s;
 }
 
 .flower-4 {
-    top: 8%;
-    right: 7%;
-    font-size: 26px;
-    animation-delay: 1.8s;
-}
-
-.flower-5 {
-    top: 16%;
-    right: 20%;
-    font-size: 17px;
-    animation-delay: 2.3s;
-}
-
-.flower-6 {
-    top: 28%;
-    right: 3%;
-    font-size: 24px;
-    animation-delay: 1.1s;
-}
-
-.flower-7 {
-    top: 38%;
-    left: 4%;
-    font-size: 18px;
-    animation-delay: 2.7s;
-}
-
-.flower-8 {
-    top: 42%;
-    right: 5%;
-    font-size: 28px;
-    animation-delay: .5s;
-}
-
-.flower-9 {
-    top: 53%;
-    left: 2%;
-    font-size: 15px;
-    animation-delay: 1.9s;
-}
-
-.flower-10 {
-    top: 62%;
-    right: 3%;
-    font-size: 19px;
-    animation-delay: 3s;
-}
-
-.flower-11 {
-    top: 72%;
-    left: 5%;
-    font-size: 25px;
-    animation-delay: 1.4s;
-}
-
-.flower-12 {
-    bottom: 7%;
+    top: 7%;
     right: 8%;
     font-size: 22px;
-    animation-delay: 2.2s;
-}
-
-.flower-13 {
-    bottom: 15%;
-    left: 18%;
-    font-size: 16px;
-    animation-delay: 3.1s;
-}
-
-.flower-14 {
-    bottom: 5%;
-    left: 40%;
-    font-size: 24px;
     animation-delay: 1.5s;
 }
 
+.flower-5 {
+    top: 25%;
+    right: 20%;
+    font-size: 16px;
+    animation-delay: 3s;
+}
+
+.flower-6 {
+    top: 43%;
+    right: 4%;
+    font-size: 25px;
+    animation-delay: 2s;
+}
+
+.flower-7 {
+    top: 53%;
+    left: 3%;
+    font-size: 18px;
+    animation-delay: 1s;
+}
+
+.flower-8 {
+    top: 65%;
+    left: 12%;
+    font-size: 26px;
+    animation-delay: 3s;
+}
+
+.flower-9 {
+    top: 75%;
+    right: 8%;
+    font-size: 19px;
+    animation-delay: 2s;
+}
+
+.flower-10 {
+    bottom: 5%;
+    left: 30%;
+    font-size: 23px;
+    animation-delay: 1.5s;
+}
+
+.flower-11 {
+    bottom: 12%;
+    right: 30%;
+    font-size: 17px;
+    animation-delay: 3s;
+}
+
+.flower-12 {
+    bottom: 20%;
+    left: 4%;
+    font-size: 25px;
+    animation-delay: 2s;
+}
+
+.flower-13 {
+    top: 35%;
+    left: 22%;
+    font-size: 15px;
+    animation-delay: 4s;
+}
+
+.flower-14 {
+    top: 60%;
+    right: 23%;
+    font-size: 22px;
+    animation-delay: 1s;
+}
+
 .flower-15 {
-    top: 4%;
+    bottom: 30%;
     left: 42%;
-    font-size: 14px;
-    animation-delay: 2.8s;
+    font-size: 17px;
+    animation-delay: 3s;
 }
 
 .flower-16 {
-    top: 32%;
-    left: 22%;
-    font-size: 13px;
-    animation-delay: .9s;
-}
-
-.flower-17 {
-    top: 67%;
-    left: 27%;
-    font-size: 19px;
-    animation-delay: 2.6s;
-}
-
-.flower-18 {
-    bottom: 23%;
-    right: 27%;
-    font-size: 16px;
-    animation-delay: 1.7s;
-}
-
-.flower-19 {
-    top: 25%;
-    right: 32%;
-    font-size: 14px;
-    animation-delay: 3.3s;
-}
-
-.flower-20 {
-    bottom: 8%;
-    right: 39%;
-    font-size: 18px;
-    animation-delay: 2.1s;
-}
-
-.flower-21 {
-    top: 78%;
-    right: 17%;
-    font-size: 14px;
-    animation-delay: 3.6s;
-}
-
-.flower-22 {
-    top: 55%;
-    right: 25%;
-    font-size: 16px;
-    animation-delay: 1.3s;
+    bottom: 5%;
+    right: 5%;
+    font-size: 26px;
+    animation-delay: 2s;
 }
 
 
@@ -340,126 +258,97 @@ body {
 
     50% {
         transform:
-            translateY(-9px)
-            rotate(7deg);
+            translateY(-10px)
+            rotate(8deg);
     }
 }
 
 
 /* =========================================================
-   PAGE 1 GREEN LEAVES
+   GREEN LEAVES
 ========================================================= */
 
 .leaf {
     position: absolute;
 
-    color: #70d66f;
+    color: #75d681;
+
+    filter:
+        saturate(1.1)
+        brightness(1.05);
 
     opacity: 0.7;
 
     font-size: 28px;
 
-    filter:
-        saturate(1.5)
-        brightness(1.08);
-
-    text-shadow:
-        0 2px 8px
-        rgba(0,80,20,.25);
-
     animation:
-        leafMove
+        leafFloat
         7s
         ease-in-out
         infinite;
 }
 
-
 .leaf-1 {
-    top: 5%;
-    right: 30%;
+    top: 4%;
+    right: 32%;
 }
 
 .leaf-2 {
-    top: 14%;
-    left: 30%;
+    top: 15%;
+    left: 8%;
     animation-delay: 1s;
 }
 
 .leaf-3 {
-    top: 31%;
-    left: 1%;
+    top: 34%;
+    right: 8%;
     animation-delay: 2s;
 }
 
 .leaf-4 {
-    top: 46%;
-    right: 1%;
+    top: 50%;
+    left: 8%;
     animation-delay: 3s;
 }
 
 .leaf-5 {
-    top: 62%;
-    left: 3%;
+    top: 68%;
+    right: 18%;
     animation-delay: 1.5s;
 }
 
 .leaf-6 {
-    bottom: 5%;
-    right: 30%;
+    bottom: 8%;
+    left: 15%;
     animation-delay: 2.5s;
 }
 
 .leaf-7 {
     bottom: 15%;
-    left: 11%;
-    animation-delay: 3.5s;
+    right: 5%;
+    animation-delay: 3s;
 }
 
 .leaf-8 {
-    top: 74%;
-    right: 5%;
-    animation-delay: 4s;
+    top: 80%;
+    left: 40%;
+    animation-delay: 1s;
 }
 
 .leaf-9 {
-    top: 22%;
-    right: 12%;
-    animation-delay: 1.2s;
+    top: 45%;
+    left: 28%;
+    animation-delay: 4s;
 }
 
 .leaf-10 {
-    top: 84%;
-    left: 30%;
-    animation-delay: 2.2s;
-}
-
-.leaf-11 {
-    top: 38%;
-    left: 17%;
-    animation-delay: 3.2s;
-}
-
-.leaf-12 {
-    top: 56%;
-    right: 17%;
-    animation-delay: 4.2s;
-}
-
-.leaf-13 {
-    bottom: 26%;
-    left: 4%;
-    animation-delay: 1.8s;
-}
-
-.leaf-14 {
-    bottom: 7%;
-    right: 8%;
-    animation-delay: 2.8s;
+    bottom: 30%;
+    right: 35%;
+    animation-delay: 2s;
 }
 
 
-@keyframes leafMove {
+@keyframes leafFloat {
 
     0%,
     100% {
@@ -471,22 +360,23 @@ body {
     50% {
         transform:
             translateY(-10px)
-            rotate(12deg);
+            rotate(10deg);
     }
 }
 
 
 /* =========================================================
-   PAGE 1 CONTENT
+   MAIN PAGE
 ========================================================= */
 
-.page1-content {
+.page {
     position: relative;
 
     z-index: 5;
 
     width: 100%;
-    height: 100%;
+
+    min-height: 100vh;
 
     display: grid;
 
@@ -498,7 +388,7 @@ body {
     gap: 40px;
 
     padding:
-        35px 7%;
+        40px 7%;
 }
 
 
@@ -521,6 +411,10 @@ body {
 }
 
 
+/* =========================================================
+   DECORATIVE LAYERS
+========================================================= */
+
 .pink-layer {
     position: absolute;
 
@@ -528,14 +422,13 @@ body {
     height: 410px;
 
     background:
-        rgba(255, 180, 195, .22);
+        rgba(255, 170, 190, 0.18);
 
     transform:
         rotate(-8deg);
 
     border-radius: 28px;
 }
-
 
 .white-layer {
     position: absolute;
@@ -544,7 +437,7 @@ body {
     height: 390px;
 
     background:
-        rgba(255,255,255,.13);
+        rgba(255, 255, 255, 0.12);
 
     transform:
         rotate(6deg);
@@ -552,6 +445,10 @@ body {
     border-radius: 25px;
 }
 
+
+/* =========================================================
+   HEART
+========================================================= */
 
 .heart-frame {
     position: relative;
@@ -565,12 +462,11 @@ body {
     filter:
         drop-shadow(
             0 25px 35px
-            rgba(70,0,20,.3)
+            rgba(70, 0, 20, 0.3)
         );
 
     z-index: 3;
 }
-
 
 .heart-frame::before,
 .heart-frame::after {
@@ -589,7 +485,6 @@ body {
         195px 195px 0 0;
 }
 
-
 .heart-frame::before {
     left: 195px;
 
@@ -599,7 +494,6 @@ body {
     transform-origin:
         0 100%;
 }
-
 
 .heart-frame::after {
     left: 0;
@@ -611,6 +505,10 @@ body {
         100% 100%;
 }
 
+
+/* =========================================================
+   HEART PHOTO
+========================================================= */
 
 .heart-photo {
     position: absolute;
@@ -646,7 +544,6 @@ body {
     background: white;
 }
 
-
 .heart-photo img {
     width: 100%;
     height: 100%;
@@ -656,15 +553,18 @@ body {
     display: block;
 
     transition:
-        transform .6s ease;
+        transform 0.6s ease;
 }
-
 
 .heart-photo:hover img {
     transform:
         scale(1.06);
 }
 
+
+/* =========================================================
+   DECORATIVE FLOWERS
+========================================================= */
 
 .decor-flower {
     position: absolute;
@@ -673,11 +573,11 @@ body {
 
     color: white;
 
-    font-size: 34px;
+    font-size: 35px;
 
     text-shadow:
         0 4px 10px
-        rgba(80,0,30,.25);
+        rgba(60, 0, 20, 0.3);
 
     animation:
         flowerPulse
@@ -686,18 +586,17 @@ body {
         infinite;
 }
 
-
 .flower-left {
     left: 8%;
     top: 25%;
 }
 
-
 .flower-right {
     right: 7%;
     bottom: 24%;
-}
 
+    animation-delay: 1s;
+}
 
 @keyframes flowerPulse {
 
@@ -716,6 +615,10 @@ body {
 }
 
 
+/* =========================================================
+   CAPTION
+========================================================= */
+
 .photo-caption {
     position: relative;
 
@@ -729,17 +632,19 @@ body {
 
     font-style: italic;
 
+    font-size: 1rem;
+
     color:
-        rgba(255,255,255,.92);
+        rgba(255, 255, 255, 0.9);
 
     letter-spacing: 1px;
 }
 
-
 .photo-caption span {
-    color: #ffd6e2;
+    margin:
+        0 8px;
 
-    margin: 0 8px;
+    color: #ffd5e2;
 }
 
 
@@ -750,10 +655,6 @@ body {
 .password-section {
     position: relative;
 
-    min-height: 650px;
-
-    padding: 30px;
-
     display: flex;
 
     flex-direction: column;
@@ -763,8 +664,11 @@ body {
     justify-content: center;
 
     text-align: center;
-}
 
+    min-height: 650px;
+
+    padding: 30px;
+}
 
 .password-decoration {
     font-size: 2rem;
@@ -780,22 +684,22 @@ body {
         infinite;
 }
 
-
 @keyframes heartbeat {
 
     0%,
     100% {
-        transform: scale(1);
+        transform:
+            scale(1);
     }
 
     50% {
-        transform: scale(1.15);
+        transform:
+            scale(1.15);
     }
 }
 
-
 .small-heading {
-    font-size: .72rem;
+    font-size: 0.72rem;
 
     letter-spacing: 4px;
 
@@ -806,7 +710,6 @@ body {
     margin-bottom: 12px;
 }
 
-
 .password-section h1 {
     font-family:
         Georgia,
@@ -814,19 +717,20 @@ body {
         serif;
 
     font-size:
-        clamp(2rem,4vw,3.4rem);
+        clamp(2rem, 4vw, 3.4rem);
 
     font-weight: normal;
+
+    color: white;
 
     margin-bottom: 10px;
 }
 
-
 .subtitle {
     color:
-        rgba(255,240,245,.88);
+        rgba(255, 240, 245, 0.85);
 
-    font-size: .95rem;
+    font-size: 0.95rem;
 
     margin-bottom: 25px;
 
@@ -834,13 +738,20 @@ body {
 }
 
 
+/* =========================================================
+   PASSWORD DISPLAY
+========================================================= */
+
 .password-display {
     width: 280px;
+
     height: 65px;
 
     border:
-        2px solid
-        rgba(255,255,255,.95);
+        2px solid white;
+
+    background:
+        transparent;
 
     border-radius: 14px;
 
@@ -852,36 +763,39 @@ body {
 
     justify-content: center;
 
-    color: #a9234c;
+    gap: 12px;
 
     font-size: 1.5rem;
 
     letter-spacing: 8px;
 
-    transition:
-        background .3s ease,
-        box-shadow .3s ease;
-}
+    color: #a9234c;
 
+    transition:
+        background 0.3s ease;
+}
 
 .password-display.filled {
     background: white;
 
     box-shadow:
         0 10px 30px
-        rgba(255,255,255,.25);
+        rgba(255, 255, 255, 0.25);
 }
 
+
+/* =========================================================
+   KEYPAD
+========================================================= */
 
 .keypad {
     display: grid;
 
     grid-template-columns:
-        repeat(3,72px);
+        repeat(3, 72px);
 
     gap: 12px;
 }
-
 
 .key {
     width: 72px;
@@ -891,9 +805,11 @@ body {
 
     border-radius: 15px;
 
-    background: #ffc5d8;
+    background:
+        #ffc5d8;
 
-    color: #a9234c;
+    color:
+        #a9234c;
 
     font-family:
         Georgia,
@@ -908,22 +824,21 @@ body {
     box-shadow:
         0 7px 0 #e999b2,
         0 12px 20px
-        rgba(90,0,30,.18);
+        rgba(90, 0, 30, 0.18);
 
     transition:
-        transform .12s ease,
-        box-shadow .12s ease,
-        background .2s ease;
+        transform 0.12s ease,
+        box-shadow 0.12s ease,
+        background 0.2s ease;
 }
 
-
 .key:hover {
-    background: #ffd6e4;
+    background:
+        #ffd6e4;
 
     transform:
         translateY(-3px);
 }
-
 
 .key:active {
     transform:
@@ -933,29 +848,36 @@ body {
         0 2px 0 #e999b2;
 }
 
-
 .key.special {
-    background: #ffe2eb;
+    background:
+        #ffe2eb;
 
-    color: #9c3152;
+    color:
+        #9c3152;
 
     font-size: 1.6rem;
 }
 
+
+/* =========================================================
+   MESSAGE
+========================================================= */
 
 .password-message {
     min-height: 25px;
 
     margin-top: 20px;
 
-    font-size: .9rem;
+    font-size: 0.9rem;
 
     font-weight: bold;
+
+    color: #ffe3eb;
 }
 
 
 /* =========================================================
-   PASSWORD POPUP
+   POPUP OVERLAY
 ========================================================= */
 
 .popup-overlay {
@@ -963,1799 +885,225 @@ body {
 
     inset: 0;
 
-    z-index: 500;
+    z-index: 100;
 
-    display: flex;
+    display: none;
 
     align-items: center;
 
     justify-content: center;
 
-    padding: 20px;
-
     background:
-        rgba(80,5,30,.38);
+        rgba(80, 0, 25, 0.42);
 
     backdrop-filter:
         blur(5px);
-
-    opacity: 0;
-
-    visibility: hidden;
-
-    transition:
-        opacity .3s ease,
-        visibility .3s ease;
 }
-
 
 .popup-overlay.show {
-    opacity: 1;
+    display: flex;
 
-    visibility: visible;
+    animation:
+        fadeIn
+        0.25s ease;
 }
 
 
-.popup-box {
+/* =========================================================
+   CUTE WHITE POPUP
+========================================================= */
+
+.cute-popup {
     position: relative;
 
-    width:
-        min(390px,90vw);
-
-    min-height: 245px;
+    width: min(390px, 88vw);
 
     padding:
-        38px 30px 28px;
+        32px 28px 28px;
 
     background:
-        #fffafa;
+        #fffdfd;
 
-    border:
-        3px solid #ffd2df;
+    color:
+        #a9234c;
 
-    border-radius: 28px;
+    border-radius:
+        28px;
 
     text-align: center;
 
     box-shadow:
         0 25px 70px
-        rgba(70,0,25,.35);
+        rgba(70, 0, 25, 0.35);
 
-    transform:
-        scale(.75)
-        translateY(20px);
+    border:
+        3px solid
+        #ffd5e2;
 
-    transition:
-        transform .35s
-        cubic-bezier(.17,.67,.35,1.3);
+    animation:
+        popupIn
+        0.4s
+        cubic-bezier(.17,.67,.32,1.3);
 }
 
+.cute-popup::before {
+    content: "♡";
 
-.popup-overlay.show .popup-box {
-    transform:
-        scale(1)
-        translateY(0);
-}
-
-
-.popup-close {
     position: absolute;
 
     top: 10px;
-    right: 14px;
+    left: 16px;
 
-    width: 30px;
-    height: 30px;
+    font-size: 25px;
 
-    border: none;
+    color:
+        #ffb1c9;
+}
 
-    border-radius: 50%;
+.cute-popup::after {
+    content: "♡";
 
-    background: #ffe3ec;
+    position: absolute;
 
-    color: #b32651;
+    bottom: 10px;
+    right: 16px;
+
+    font-size: 25px;
+
+    color:
+        #ffb1c9;
+}
+
+.popup-flower {
+    font-size: 42px;
+
+    margin-bottom: 4px;
+}
+
+.popup-heart {
+    font-size: 28px;
+
+    margin-bottom: 5px;
+}
+
+.cute-popup h2 {
+    font-family:
+        Georgia,
+        serif;
+
+    font-size: 1.8rem;
+
+    margin-bottom: 12px;
+
+    color:
+        #c51e50;
+}
+
+.cute-popup p {
+    font-size: 1rem;
+
+    line-height: 1.6;
+
+    color:
+        #8d3150;
+}
+
+.popup-doodle {
+    margin:
+        16px 0;
 
     font-size: 1.25rem;
 
-    cursor: pointer;
+    color:
+        #d53668;
 }
 
-
-.popup-close:hover {
-    background: #ffcbdc;
-
-    transform: rotate(90deg);
-}
-
-
-.popup-doodle {
-    font-size: 3rem;
-
-    margin-bottom: 15px;
-
-    animation:
-        popupBounce
-        1.2s
-        ease-in-out
-        infinite;
-}
-
-
-@keyframes popupBounce {
-
-    0%,
-    100% {
-        transform:
-            scale(1)
-            rotate(-4deg);
-    }
-
-    50% {
-        transform:
-            scale(1.1)
-            rotate(4deg);
-    }
-}
-
-
-.popup-message {
-    color: #a9234c;
-
-    font-family:
-        Georgia,
-        serif;
-
-    font-size: 1.3rem;
-
-    line-height: 1.5;
-
-    font-weight: bold;
-}
-
-
-.popup-hearts {
-    margin-top: 18px;
-
-    color: #e34870;
-
-    font-size: 1.1rem;
-
-    letter-spacing: 7px;
-}
-
-
-/* =========================================================
-   =========================================================
-   PAGE 2
-   =========================================================
-========================================================= */
-
-.page2 {
-    background:
-        linear-gradient(
-            to bottom,
-            #9bdcff 0%,
-            #d5f4ff 52%,
-            #8fd66f 53%,
-            #4cae4e 100%
-        );
-
-    color: #3f5429;
-}
-
-
-/* =========================================================
-   SKY
-========================================================= */
-
-.sky {
-    position: absolute;
-
-    inset: 0;
-
-    pointer-events: none;
-}
-
-
-.sun {
-    position: absolute;
-
-    top: 65px;
-    right: 19%;
-
-    width: 85px;
-    height: 85px;
-
-    border-radius: 50%;
+.popup-button {
+    border: none;
 
     background:
-        #ffd83d;
-
-    box-shadow:
-        0 0 45px
-        rgba(255,216,61,.7);
-}
-
-
-.cloud {
-    position: absolute;
+        #e62c5c;
 
     color: white;
 
-    font-size: 60px;
+    padding:
+        12px 24px;
 
-    opacity: .7;
-
-    animation:
-        cloudMove
-        22s
-        linear
-        infinite;
-}
-
-
-.cloud-one {
-    top: 80px;
-    left: 8%;
-}
-
-
-.cloud-two {
-    top: 155px;
-    left: 43%;
-
-    font-size: 48px;
-
-    animation-duration: 28s;
-}
-
-
-.cloud-three {
-    top: 50px;
-    left: 72%;
-
-    font-size: 42px;
-
-    animation-duration: 25s;
-}
-
-
-@keyframes cloudMove {
-
-    0% {
-        transform:
-            translateX(-30px);
-    }
-
-    50% {
-        transform:
-            translateX(30px);
-    }
-
-    100% {
-        transform:
-            translateX(-30px);
-    }
-}
-
-
-/* =========================================================
-   BIRTHDAY TITLE
-========================================================= */
-
-.birthday-title {
-    position: absolute;
-
-    z-index: 20;
-
-    top: 22px;
-    left: 50%;
-
-    transform:
-        translateX(-50%);
-
-    width: 100%;
-
-    text-align: center;
+    border-radius:
+        30px;
 
     font-family:
         "Trebuchet MS",
-        Arial,
         sans-serif;
 
-    font-size:
-        clamp(2.2rem,5.5vw,5.3rem);
-
-    font-weight:
-        900;
-
-    letter-spacing:
-        4px;
-
-    text-shadow:
-        0 6px 0
-        rgba(255,255,255,.7),
-
-        0 9px 18px
-        rgba(50,90,20,.22);
-
-    white-space:
-        nowrap;
-}
-
-
-.birthday-title span {
-    display: inline-block;
-
-    animation:
-        titleBounce
-        2.5s
-        ease-in-out
-        infinite;
-}
-
-
-.birthday-title span:nth-child(1) {
-    color: #ef476f;
-}
-
-.birthday-title span:nth-child(2) {
-    color: #f78c00;
-    animation-delay: .1s;
-}
-
-.birthday-title span:nth-child(3) {
-    color: #06b6a4;
-    animation-delay: .2s;
-}
-
-.birthday-title span:nth-child(4) {
-    color: #7b61ff;
-    animation-delay: .3s;
-}
-
-.birthday-title span:nth-child(5) {
-    color: #ffca3a;
-    animation-delay: .4s;
-}
-
-.birthday-title span:nth-child(7) {
-    color: #ff595e;
-    animation-delay: .5s;
-}
-
-.birthday-title span:nth-child(8) {
-    color: #1982c4;
-    animation-delay: .6s;
-}
-
-.birthday-title span:nth-child(9) {
-    color: #6a4c93;
-    animation-delay: .7s;
-}
-
-.birthday-title span:nth-child(10) {
-    color: #ff924c;
-    animation-delay: .8s;
-}
-
-.birthday-title span:nth-child(11) {
-    color: #2a9d8f;
-    animation-delay: .9s;
-}
-
-.birthday-title span:nth-child(12) {
-    color: #e63946;
-    animation-delay: 1s;
-}
-
-.birthday-title span:nth-child(13) {
-    color: #ffca3a;
-    animation-delay: 1.1s;
-}
-
-.birthday-title span:nth-child(14) {
-    color: #8ac926;
-    animation-delay: 1.2s;
-}
-
-.birthday-title span:nth-child(15) {
-    color: #ef476f;
-    animation-delay: 1.3s;
-}
-
-
-.birthday-space {
-    width: 20px;
-}
-
-
-@keyframes titleBounce {
-
-    0%,
-    100% {
-        transform:
-            translateY(0);
-    }
-
-    50% {
-        transform:
-            translateY(-7px);
-    }
-}
-
-
-.birthday-subtitle {
-    position: absolute;
-
-    z-index: 20;
-
-    top: 112px;
-
-    width: 100%;
-
-    text-align: center;
-
-    color:
-        #5b6e35;
-
-    font-family:
-        Georgia,
-        serif;
-
-    font-style: italic;
-
-    font-size:
-        1.05rem;
-}
-
-
-/* =========================================================
-   PARTY DECORATIONS
-========================================================= */
-
-.party-decor {
-    position: absolute;
-
-    inset: 0;
-
-    pointer-events: none;
-
-    z-index: 15;
-}
-
-
-.balloon {
-    position: absolute;
-
-    font-size: 55px;
-
-    animation:
-        balloonFloat
-        4s
-        ease-in-out
-        infinite;
-}
-
-
-.balloon-red {
-    left: 4%;
-    top: 13%;
-}
-
-.balloon-pink {
-    left: 10%;
-    top: 26%;
-    animation-delay: .5s;
-}
-
-.balloon-yellow {
-    right: 5%;
-    top: 15%;
-    animation-delay: 1s;
-}
-
-.balloon-blue {
-    right: 12%;
-    top: 29%;
-    animation-delay: 1.5s;
-}
-
-.balloon-purple {
-    left: 46%;
-    top: 3%;
-    font-size: 42px;
-    animation-delay: 2s;
-}
-
-
-@keyframes balloonFloat {
-
-    0%,
-    100% {
-        transform:
-            translateY(0)
-            rotate(-4deg);
-    }
-
-    50% {
-        transform:
-            translateY(-12px)
-            rotate(4deg);
-    }
-}
-
-
-.confetti {
-    position: absolute;
-
-    color: #fff;
-
-    font-size: 24px;
-
-    animation:
-        confettiFloat
-        3s
-        ease-in-out
-        infinite;
-}
-
-
-.c1 { top: 20%; left: 25%; }
-.c2 { top: 17%; left: 35%; animation-delay:.3s; }
-.c3 { top: 35%; left: 39%; animation-delay:.8s; }
-.c4 { top: 23%; right: 29%; animation-delay:1.2s; }
-.c5 { top: 45%; right: 23%; animation-delay:.5s; }
-.c6 { top: 18%; right: 38%; animation-delay:1.7s; }
-.c7 { top: 52%; left: 48%; animation-delay:2s; }
-.c8 { top: 31%; left: 57%; animation-delay:1s; }
-.c9 { top: 40%; left: 71%; animation-delay:1.5s; }
-.c10 { top: 15%; left: 63%; animation-delay:.7s; }
-
-
-@keyframes confettiFloat {
-
-    0%,
-    100% {
-        transform:
-            translateY(0)
-            rotate(0deg);
-    }
-
-    50% {
-        transform:
-            translateY(-10px)
-            rotate(25deg);
-    }
-}
-
-
-/* =========================================================
-   PHOTO FRAME
-========================================================= */
-
-.birthday-photo-frame {
-    position: absolute;
-
-    z-index: 30;
-
-    left: 5%;
-
-    top: 35%;
-
-    width: 285px;
-
-    padding:
-        20px 20px 15px;
-
-    background:
-        #fff;
-
-    border:
-        8px solid
-        #fff;
-
-    border-radius:
-        8px;
-
-    box-shadow:
-        0 18px 40px
-        rgba(50,70,30,.28);
-
-    transform:
-        rotate(-3deg);
-
-    transition:
-        transform .3s ease;
-}
-
-
-.birthday-photo-frame:hover {
-    transform:
-        rotate(-1deg)
-        translateY(-5px);
-}
-
-
-.photo-frame-inner {
-    width: 100%;
-
-    height: 250px;
-
-    overflow: hidden;
-
-    background: #eee;
-}
-
-
-.photo-frame-inner img {
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-
-    display: block;
-
-    transition:
-        filter .5s ease,
-        transform .5s ease;
-}
-
-
-.photo-frame-inner:hover img {
-    filter:
-        brightness(1.25)
-        saturate(1.1);
-
-    transform:
-        scale(1.05);
-}
-
-
-.frame-caption {
-    text-align: center;
-
-    color:
-        #bd3154;
-
-    font-family:
-        Georgia,
-        serif;
-
-    font-style: italic;
-
-    margin-top: 10px;
-}
-
-
-/* =========================================================
-   RED RIBBON ON FRAME
-========================================================= */
-
-.ribbon-top {
-    position: absolute;
-
-    z-index: 10;
-
-    top: -30px;
-    left: 50%;
-
-    width: 80px;
-    height: 60px;
-
-    transform:
-        translateX(-50%);
-}
-
-
-.ribbon-loop {
-    position: absolute;
-
-    width: 45px;
-    height: 32px;
-
-    background:
-        #df183e;
-
-    border:
-        3px solid
-        #b80d2d;
-
-    border-radius:
-        50% 50% 45% 45%;
-}
-
-
-.ribbon-loop.left {
-    left: -6px;
-
-    transform:
-        rotate(25deg);
-}
-
-
-.ribbon-loop.right {
-    right: -6px;
-
-    transform:
-        rotate(-25deg);
-}
-
-
-.ribbon-knot {
-    position: absolute;
-
-    z-index: 5;
-
-    left: 27px;
-    top: 18px;
-
-    width: 28px;
-    height: 28px;
-
-    background:
-        #c90e32;
-
-    border-radius:
-        50%;
-
-    border:
-        3px solid
-        #a50a28;
-}
-
-
-.ribbon-tail {
-    position: absolute;
-
-    top: 36px;
-
-    width: 23px;
-    height: 45px;
-
-    background:
-        #e21a40;
-
-    border:
-        2px solid
-        #b90d2d;
-}
-
-
-.left-tail {
-    left: 20px;
-
-    transform:
-        rotate(15deg);
-
-    clip-path:
-        polygon(
-            0 0,
-            100% 0,
-            100% 100%,
-            50% 75%,
-            0 100%
-        );
-}
-
-
-.right-tail {
-    right: 20px;
-
-    transform:
-        rotate(-15deg);
-
-    clip-path:
-        polygon(
-            0 0,
-            100% 0,
-            100% 100%,
-            50% 75%,
-            0 100%
-        );
-}
-
-
-/* =========================================================
-   FARM SCENE
-========================================================= */
-
-.farm-scene {
-    position: absolute;
-
-    inset: 0;
-
-    z-index: 5;
-
-    pointer-events: none;
-}
-
-
-.far-ground {
-    position: absolute;
-
-    left: 0;
-    right: 0;
-
-    bottom: 0;
-
-    height: 48%;
-
-    background:
-        linear-gradient(
-            to bottom,
-            #82cf65,
-            #4ca748
-        );
-
-    clip-path:
-        polygon(
-            0 15%,
-            12% 8%,
-            24% 16%,
-            38% 7%,
-            51% 17%,
-            64% 9%,
-            78% 18%,
-            90% 8%,
-            100% 15%,
-            100% 100%,
-            0 100%
-        );
-}
-
-
-/* =========================================================
-   SUNFLOWER FIELD
-========================================================= */
-
-.sunflower-field {
-    position: absolute;
-
-    left: 25%;
-
-    right: 0;
-
-    bottom: 8%;
-
-    height: 42%;
-
-    z-index: 8;
-}
-
-
-.sunflower {
-    position: absolute;
-
-    bottom: 0;
-
-    width: 65px;
-
-    transform-origin:
-        bottom center;
-
-    animation:
-        sunflowerWind
-        2.8s
-        ease-in-out
-        infinite;
-}
-
-
-.sunflower .stem {
-    position: absolute;
-
-    left: 29px;
-
-    bottom: 0;
-
-    width: 8px;
-
-    height: 105px;
-
-    border-radius:
-        10px;
-
-    background:
-        #438c3e;
-}
-
-
-.flower-head {
-    position: absolute;
-
-    bottom: 82px;
-
-    left: 0;
-
-    font-size: 50px;
-
-    line-height: 1;
-}
-
-
-.sf1 {
-    left: 3%;
-    animation-delay: 0s;
-}
-
-.sf2 {
-    left: 10%;
-    bottom: 8%;
-    animation-delay: .3s;
-}
-
-.sf3 {
-    left: 17%;
-    bottom: -3%;
-    animation-delay: .6s;
-}
-
-.sf4 {
-    left: 24%;
-    bottom: 13%;
-    animation-delay: .9s;
-}
-
-.sf5 {
-    left: 31%;
-    bottom: -5%;
-    animation-delay: .2s;
-}
-
-.sf6 {
-    left: 38%;
-    bottom: 8%;
-    animation-delay: .5s;
-}
-
-.sf7 {
-    left: 45%;
-    bottom: -2%;
-    animation-delay: .8s;
-}
-
-.sf8 {
-    left: 52%;
-    bottom: 12%;
-    animation-delay: 1.1s;
-}
-
-.sf9 {
-    left: 59%;
-    bottom: -5%;
-    animation-delay: .4s;
-}
-
-.sf10 {
-    left: 66%;
-    bottom: 8%;
-    animation-delay: .7s;
-}
-
-.sf11 {
-    left: 73%;
-    bottom: 0;
-    animation-delay: 1s;
-}
-
-.sf12 {
-    left: 80%;
-    bottom: 12%;
-    animation-delay: 1.3s;
-}
-
-.sf13 {
-    left: 87%;
-    bottom: -3%;
-    animation-delay: .5s;
-}
-
-.sf14 {
-    left: 94%;
-    bottom: 7%;
-    animation-delay: .9s;
-}
-
-.sf15 {
-    left: 48%;
-    bottom: 28%;
-    transform: scale(.75);
-    animation-delay: 1.5s;
-}
-
-
-@keyframes sunflowerWind {
-
-    0%,
-    100% {
-        transform:
-            rotate(-2deg);
-    }
-
-    50% {
-        transform:
-            rotate(5deg);
-    }
-}
-
-
-/* =========================================================
-   FARM HOUSE
-========================================================= */
-
-.farm-house {
-    position: absolute;
-
-    z-index: 12;
-
-    right: 8%;
-
-    bottom: 28%;
-
-    width: 230px;
-
-    height: 210px;
-
-    pointer-events: auto;
-}
-
-
-.house-body {
-    position: absolute;
-
-    left: 25px;
-    bottom: 0;
-
-    width: 180px;
-    height: 150px;
-
-    background:
-        #f7d28b;
-
-    border:
-        5px solid
-        #9c6437;
-
-    border-radius:
-        5px;
-}
-
-
-.house-roof {
-    position: absolute;
-
-    z-index: 5;
-
-    top: 5px;
-
-    left: 3px;
-
-    width: 224px;
-    height: 105px;
-
-    background:
-        #c7523f;
-
-    border:
-        5px solid
-        #863a2f;
-
-    clip-path:
-        polygon(
-            0 100%,
-            50% 0,
-            100% 100%
-        );
-}
-
-
-.house-chimney {
-    position: absolute;
-
-    z-index: 3;
-
-    right: 35px;
-    top: 17px;
-
-    width: 27px;
-    height: 60px;
-
-    background:
-        #b85b42;
-
-    border:
-        4px solid
-        #80382d;
-}
-
-
-.house-window {
-    position: absolute;
-
-    width: 43px;
-    height: 43px;
-
-    top: 34px;
-
-    background:
-        #9bdcff;
-
-    border:
-        5px solid
-        #77482e;
-
-    z-index: 5;
-}
-
-
-.window-one {
-    left: 18px;
-}
-
-
-.window-two {
-    right: 18px;
-}
-
-
-.house-window::before {
-    content: "";
-
-    position: absolute;
-
-    left: 50%;
-    top: 0;
-    bottom: 0;
-
-    width: 3px;
-
-    background:
-        #77482e;
-
-    transform:
-        translateX(-50%);
-}
-
-
-.house-window::after {
-    content: "";
-
-    position: absolute;
-
-    top: 50%;
-    left: 0;
-    right: 0;
-
-    height: 3px;
-
-    background:
-        #77482e;
-
-    transform:
-        translateY(-50%);
-}
-
-
-/* =========================================================
-   FARM HOUSE DOOR
-========================================================= */
-
-.farm-door {
-    position: absolute;
-
-    z-index: 10;
-
-    bottom: 0;
-
-    left: 67px;
-
-    width: 55px;
-
-    height: 90px;
-
-    background:
-        #814b2c;
-
-    border:
-        5px solid
-        #63371f;
-
-    border-bottom: none;
-
-    border-radius:
-        5px 5px 0 0;
+    font-weight: bold;
 
     cursor: pointer;
 
-    transition:
-        filter .25s ease,
-        transform .25s ease;
-}
-
-
-.farm-door:hover {
-    filter:
-        brightness(1.25);
-
-    transform:
-        translateY(-3px);
-}
-
-
-.door-handle {
-    position: absolute;
-
-    right: 8px;
-
-    top: 48%;
-
-    width: 8px;
-    height: 8px;
-
-    border-radius: 50%;
-
-    background:
-        #ffd45c;
-}
-
-
-.door-tooltip {
-    position: absolute;
-
-    z-index: 50;
-
-    left: 126px;
-
-    bottom: 43px;
-
-    padding:
-        8px 14px;
-
-    background:
-        white;
-
-    color:
-        #bd3154;
-
-    border-radius:
-        12px;
-
-    font-weight:
-        bold;
-
-    font-size:
-        .9rem;
-
     box-shadow:
-        0 6px 18px
-        rgba(0,0,0,.18);
-
-    opacity: 0;
-
-    visibility: hidden;
-
-    transform:
-        translateX(-5px);
+        0 5px 0 #b71e48;
 
     transition:
-        opacity .2s ease,
-        transform .2s ease;
+        transform 0.15s ease;
 }
 
-
-.farm-door:hover + .door-tooltip {
-    opacity: 1;
-
-    visibility: visible;
-
+.popup-button:hover {
     transform:
-        translateX(0);
+        translateY(-2px);
 }
 
-
-/* =========================================================
-   WIND TOWER
-========================================================= */
-
-.wind-tower {
-    position: absolute;
-
-    z-index: 10;
-
-    right: 2%;
-
-    bottom: 28%;
-
-    width: 150px;
-
-    height: 300px;
-
-    pointer-events: none;
-}
-
-
-.tower-pole {
-    position: absolute;
-
-    bottom: 0;
-
-    left: 68px;
-
-    width: 14px;
-
-    height: 250px;
-
-    background:
-        linear-gradient(
-            to right,
-            #777,
-            #ddd,
-            #777
-        );
-
-    clip-path:
-        polygon(
-            35% 0,
-            65% 0,
-            100% 100%,
-            0 100%
-        );
-}
-
-
-.tower-blades {
-    position: absolute;
-
-    z-index: 10;
-
-    left: 43px;
-    top: 25px;
-
-    width: 80px;
-    height: 80px;
-
-    animation:
-        bladeSpin
-        4s
-        linear
-        infinite;
-}
-
-
-.blade {
-    position: absolute;
-
-    left: 35px;
-    top: 35px;
-
-    width: 8px;
-    height: 75px;
-
-    background:
-        #f4f4f4;
-
-    border-radius:
-        10px;
-
-    transform-origin:
-        50% 8px;
+.popup-button:active {
+    transform:
+        translateY(3px);
 
     box-shadow:
-        0 2px 5px
-        rgba(0,0,0,.2);
+        0 2px 0 #b71e48;
 }
 
 
-.blade-one {
-    transform:
-        rotate(0deg);
-}
-
-
-.blade-two {
-    transform:
-        rotate(90deg);
-}
-
-
-.blade-three {
-    transform:
-        rotate(180deg);
-}
-
-
-.blade-four {
-    transform:
-        rotate(270deg);
-}
-
-
-.blade-center {
-    position: absolute;
-
-    left: 27px;
-    top: 27px;
-
-    width: 25px;
-    height: 25px;
-
-    background:
-        #555;
-
-    border-radius: 50%;
-
-    z-index: 20;
-}
-
-
-@keyframes bladeSpin {
+@keyframes popupIn {
 
     from {
+        opacity: 0;
+
         transform:
-            rotate(0deg);
+            scale(0.75)
+            translateY(20px);
     }
 
     to {
-        transform:
-            rotate(360deg);
-    }
-}
-
-
-/* =========================================================
-   WIND LINES
-========================================================= */
-
-.wind-line {
-    position: absolute;
-
-    z-index: 4;
-
-    color:
-        rgba(255,255,255,.65);
-
-    font-size: 26px;
-
-    letter-spacing: 4px;
-
-    animation:
-        windMove
-        3s
-        ease-in-out
-        infinite;
-}
-
-
-.wind-one {
-    right: 28%;
-    top: 36%;
-}
-
-
-.wind-two {
-    right: 42%;
-    top: 46%;
-
-    animation-delay:
-        .8s;
-}
-
-
-.wind-three {
-    right: 20%;
-    top: 52%;
-
-    animation-delay:
-        1.4s;
-}
-
-
-@keyframes windMove {
-
-    0% {
-        opacity: 0;
-
-        transform:
-            translateX(30px);
-    }
-
-    50% {
         opacity: 1;
 
         transform:
-            translateX(0);
-    }
-
-    100% {
-        opacity: 0;
-
-        transform:
-            translateX(-35px);
-    }
-}
-
-
-/* =========================================================
-   DUCK FAMILY
-========================================================= */
-
-.duck-family {
-    position: absolute;
-
-    z-index: 100;
-
-    left: -170px;
-
-    bottom: 12px;
-
-    display: flex;
-
-    align-items: flex-end;
-
-    gap: 2px;
-
-    cursor: pointer;
-
-    animation:
-        duckWalk
-        24s
-        linear
-        infinite;
-}
-
-
-.duck {
-    font-size: 48px;
-
-    filter:
-        drop-shadow(
-            0 4px 3px
-            rgba(0,0,0,.15)
-        );
-}
-
-
-.mother-duck {
-    font-size: 58px;
-
-    margin-right: 3px;
-}
-
-
-.duckling {
-    font-size: 34px;
-
-    position: relative;
-
-    top: 3px;
-}
-
-
-.duckling-one {
-    animation:
-        ducklingBounce
-        .8s
-        ease-in-out
-        infinite;
-}
-
-
-.duckling-two {
-    animation:
-        ducklingBounce
-        .8s
-        ease-in-out
-        infinite;
-
-    animation-delay: .2s;
-}
-
-
-.duckling-three {
-    animation:
-        ducklingBounce
-        .8s
-        ease-in-out
-        infinite;
-
-    animation-delay: .4s;
-}
-
-
-@keyframes duckWalk {
-
-    0% {
-        left: -180px;
-    }
-
-    45% {
-        left: 45%;
-    }
-
-    50% {
-        left: 50%;
-    }
-
-    100% {
-        left: calc(100% + 180px);
-    }
-}
-
-
-@keyframes ducklingBounce {
-
-    0%,
-    100% {
-        transform:
+            scale(1)
             translateY(0);
     }
+}
 
-    50% {
-        transform:
-            translateY(-5px);
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
     }
 }
 
 
 /* =========================================================
-   MUSIC BUTTON
-========================================================= */
-
-.music-button {
-    position: absolute;
-
-    z-index: 200;
-
-    right: 22px;
-    bottom: 22px;
-
-    width: 48px;
-    height: 48px;
-
-    border: 2px solid white;
-
-    border-radius: 50%;
-
-    background:
-        rgba(255,255,255,.8);
-
-    cursor: pointer;
-
-    font-size: 1.2rem;
-
-    box-shadow:
-        0 8px 20px
-        rgba(0,0,0,.18);
-}
-
-
-.music-button:hover {
-    transform:
-        scale(1.08);
-}
-
-
-/* =========================================================
-   =========================================================
-   PAGE 3
-   =========================================================
-========================================================= */
-
-.page3 {
-    background:
-        radial-gradient(
-            circle at center,
-            #fff2f6,
-            #ffd0df 45%,
-            #f29ab5 100%
-        );
-
-    display:
-        flex;
-
-    flex-direction:
-        column;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    text-align:
-        center;
-
-    color:
-        #a9234c;
-}
-
-
-.page3 h1 {
-    font-family:
-        Georgia,
-        serif;
-
-    font-size:
-        clamp(3rem,7vw,6rem);
-
-    margin-bottom:
-        20px;
-}
-
-
-.page3 p {
-    font-size:
-        1.3rem;
-}
-
-
-.page3-heart {
-    font-size:
-        6rem;
-
-    margin-top:
-        30px;
-
-    animation:
-        heartbeat
-        1.5s
-        ease-in-out
-        infinite;
-}
-
-
-.page3-sparkles {
-    position:
-        absolute;
-
-    top:
-        15%;
-
-    font-size:
-        2rem;
-
-    letter-spacing:
-        20px;
-
-    animation:
-        sparkleMove
-        3s
-        ease-in-out
-        infinite;
-}
-
-
-@keyframes sparkleMove {
-
-    0%,
-    100% {
-        transform:
-            scale(1);
-    }
-
-    50% {
-        transform:
-            scale(1.2);
-    }
-}
-
-
-/* =========================================================
-   RESPONSIVE
+   MOBILE
 ========================================================= */
 
 @media (max-width: 900px) {
 
-    .page1 {
+    body {
         overflow-y: auto;
     }
 
-    .page1-content {
-        grid-template-columns:
-            1fr;
-
-        gap: 0;
+    .page {
+        grid-template-columns: 1fr;
 
         padding:
             25px 15px;
@@ -2763,193 +1111,47 @@ body {
 
     .photo-section,
     .password-section {
-        min-height:
-            auto;
+        min-height: auto;
     }
 
     .photo-section {
-        padding-top:
-            30px;
-
-        padding-bottom:
-            15px;
+        padding-top: 30px;
+        padding-bottom: 10px;
     }
 
     .password-section {
-        padding-top:
-            15px;
-
-        padding-bottom:
-            40px;
+        padding-top: 10px;
+        padding-bottom: 40px;
     }
 
     .heart-frame {
-        width: 300px;
-        height: 300px;
-    }
-
-    .pink-layer {
-        width: 320px;
-        height: 320px;
-    }
-
-    .white-layer {
-        width: 310px;
-        height: 310px;
-    }
-
-    .heart-frame::before,
-    .heart-frame::after {
-        width: 150px;
-        height: 230px;
-    }
-
-    .heart-frame::before {
-        left: 150px;
-    }
-
-    .heart-photo {
-        width: 255px;
-        height: 255px;
-
-        top: 22px;
-        left: 22px;
-    }
-
-    .birthday-photo-frame {
-        left: 3%;
-
-        width: 230px;
-    }
-
-    .photo-frame-inner {
-        height: 200px;
-    }
-
-    .farm-house {
-        right: 4%;
-
         transform:
-            scale(.85);
+            scale(0.75)
+            rotate(-2deg);
 
-        transform-origin:
-            bottom right;
-    }
-
-    .wind-tower {
-        right: -1%;
-
-        transform:
-            scale(.75);
-
-        transform-origin:
-            bottom right;
+        margin:
+            -45px 0;
     }
 }
 
 
-@media (max-width: 600px) {
+@media (max-width: 500px) {
 
-    body {
-        overflow: hidden;
+    .password-section h1 {
+        font-size: 2rem;
     }
 
-    .birthday-title {
-        top: 15px;
-
-        font-size:
-            clamp(1.7rem,8vw,3rem);
-
-        letter-spacing:
-            1px;
+    .password-display {
+        width: 250px;
     }
 
-    .birthday-space {
-        width:
-            7px;
+    .keypad {
+        grid-template-columns:
+            repeat(3, 65px);
     }
 
-    .birthday-subtitle {
-        top: 70px;
-
-        font-size:
-            .78rem;
-    }
-
-    .birthday-photo-frame {
-        left: 50%;
-
-        top: 18%;
-
-        transform:
-            translateX(-50%)
-            rotate(-2deg);
-
-        width: 190px;
-    }
-
-    .birthday-photo-frame:hover {
-        transform:
-            translateX(-50%)
-            rotate(0deg)
-            translateY(-4px);
-    }
-
-    .photo-frame-inner {
-        height:
-            155px;
-    }
-
-    .farm-house {
-        right:
-            -35px;
-
-        bottom:
-            25%;
-
-        transform:
-            scale(.65);
-
-        transform-origin:
-            bottom right;
-    }
-
-    .wind-tower {
-        right:
-            -30px;
-
-        bottom:
-            25%;
-
-        transform:
-            scale(.55);
-
-        transform-origin:
-            bottom right;
-    }
-
-    .balloon {
-        font-size:
-            35px;
-    }
-
-    .duck-family {
-        bottom:
-            8px;
-    }
-
-    .duck {
-        font-size:
-            40px;
-    }
-
-    .mother-duck {
-        font-size:
-            48px;
-    }
-
-    .duckling {
-        font-size:
-            28px;
+    .key {
+        width: 65px;
+        height: 54px;
     }
 }
