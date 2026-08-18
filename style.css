@@ -1,235 +1,861 @@
-<!DOCTYPE html>
-<html lang="en">
+/* =====================================================
+   🎂 BIRTHDAY SURPRISE - PAGE 1 ONLY
+===================================================== */
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-    <title>🎂 Birthday Surprise</title>
 
-    <link rel="stylesheet" href="style.css">
-</head>
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
 
-<body>
 
-    <!-- ================================
-         FIRST PAGE ONLY
-    ================================= -->
+body {
 
-    <main class="welcome-page">
+    min-height: 100vh;
 
-        <!-- LEFT SIDE : YOUR PHOTO -->
-        <section class="photo-section">
+    font-family:
+        "Trebuchet MS",
+        Arial,
+        sans-serif;
 
-            <div class="photo-frame">
+    overflow: hidden;
 
-                <!--
-                =========================================
-                YOUR PHOTO GOES HERE
+    color: #5d315d;
 
-                Later replace:
-                media/my-photo.jpg
+    /* BRIGHT BIRTHDAY BACKGROUND */
 
-                with your actual photo file.
-                =========================================
-                -->
+    background:
 
-                <img
-                    src="media/my-photo.jpg"
-                    alt="Birthday Boy"
-                    onerror="this.src='https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=600'"
-                >
+        radial-gradient(
+            circle at 10% 20%,
+            #ffd1e8 0%,
+            transparent 30%
+        ),
 
-            </div>
+        radial-gradient(
+            circle at 90% 15%,
+            #d9c7ff 0%,
+            transparent 30%
+        ),
 
-            <h1>Abey oh Chirkoot!!</h1>
+        radial-gradient(
+            circle at 50% 100%,
+            #ffe7a8 0%,
+            transparent 35%
+        ),
 
-            <p>Password Daal 😏</p>
+        linear-gradient(
+            135deg,
+            #fff5fb,
+            #f4edff,
+            #fff8e8
+        );
 
-        </section>
+    position: relative;
+}
 
 
-        <!-- RIGHT SIDE : PASSWORD -->
-        <section class="password-section">
+/* =====================================================
+   BACKGROUND GLOW
+===================================================== */
 
-            <div class="password-card">
+body::before {
 
-                <div class="cake">🎂</div>
+    content: "";
 
-                <div class="small-heading">
-                    A LITTLE BIRTHDAY SECRET
-                </div>
+    position: fixed;
 
-                <h2>
-                    Enter The Password
-                </h2>
+    inset: 0;
 
-                <p class="instruction">
-                    Only the chosen one can enter... 👀
-                </p>
+    pointer-events: none;
 
+    background:
 
-                <!-- PASSWORD DISPLAY -->
-                <div
-                    id="password-display"
-                    class="password-display"
-                >
-                    <span>_</span>
-                    <span>_</span>
-                    <span>_</span>
-                    <span>_</span>
-                    <span>_</span>
-                    <span>_</span>
-                    <span>_</span>
-                    <span>_</span>
-                </div>
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(255, 255, 255, 0.7),
+            transparent 55%
+        );
 
+    z-index: 0;
+}
 
-                <!-- NUMERIC KEYPAD -->
-                <div class="keypad">
 
-                    <button onclick="addNumber('1')">1</button>
-                    <button onclick="addNumber('2')">2</button>
-                    <button onclick="addNumber('3')">3</button>
+/* =====================================================
+   MAIN PAGE
+===================================================== */
 
-                    <button onclick="addNumber('4')">4</button>
-                    <button onclick="addNumber('5')">5</button>
-                    <button onclick="addNumber('6')">6</button>
+.welcome-page {
 
-                    <button onclick="addNumber('7')">7</button>
-                    <button onclick="addNumber('8')">8</button>
-                    <button onclick="addNumber('9')">9</button>
+    position: relative;
 
-                    <button
-                        class="clear-button"
-                        onclick="clearPassword()"
-                    >
-                        C
-                    </button>
+    z-index: 1;
 
-                    <button onclick="addNumber('0')">
-                        0
-                    </button>
+    width: 100%;
 
-                    <button
-                        class="enter-button"
-                        onclick="checkPassword()"
-                    >
-                        ✓
-                    </button>
+    height: 100vh;
 
-                </div>
+    display: grid;
 
+    grid-template-columns: 1fr 1fr;
 
-                <p
-                    id="password-message"
-                    class="password-message"
-                ></p>
+    align-items: center;
 
-            </div>
+    padding: 40px 7%;
 
-        </section>
+    gap: 70px;
+}
 
-    </main>
 
+/* =====================================================
+   LEFT SIDE
+===================================================== */
 
-    <!-- ================================
-         WRONG PASSWORD POPUP
-    ================================= -->
+.photo-section {
 
-    <div
-        id="wrong-popup"
-        class="popup"
-    >
+    display: flex;
 
-        <div class="wrong-card">
+    flex-direction: column;
 
-            <button
-                class="close-popup"
-                onclick="closeWrongPopup()"
-            >
-                ×
-            </button>
+    align-items: center;
 
-            <!--
-            Later you can replace this image with
-            your "Abey Saale" meme.
+    justify-content: center;
 
-            Example:
-            media/abey-saale.jpg
-            -->
+    text-align: center;
+}
 
-            <img
-                src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=500"
-                alt="Wrong password meme"
-            >
 
-            <h2>ABEY SAALE! 😂</h2>
+/* =====================================================
+   SQUARE PHOTO FRAME
+===================================================== */
 
-            <p>
-                Galat password daala hai!
-            </p>
+.photo-frame {
 
-        </div>
+    width: min(430px, 38vw);
 
-    </div>
+    aspect-ratio: 1 / 1;
 
+    padding: 9px;
 
-    <!-- ================================
-         WELCOME VIDEO POPUP
-    ================================= -->
+    border-radius: 28px;
 
-    <div
-        id="welcome-popup"
-        class="popup"
-    >
+    background:
 
-        <div class="video-card">
+        linear-gradient(
+            135deg,
+            #ff4fa3,
+            #9b5cff,
+            #43d9ff,
+            #ffcf4a
+        );
 
-            <h2>🎬 Welcome!</h2>
+    box-shadow:
 
-            <p>
-                Finally... you made it. 😏
-            </p>
+        0 0 15px rgba(255, 72, 165, 0.5),
 
-            <!--
-            =========================================
-            YOUR WELCOME VIDEO GOES HERE
+        0 0 40px rgba(155, 92, 255, 0.35),
 
-            Put your video inside:
+        0 25px 70px rgba(100, 50, 130, 0.25);
 
-            media/welcome.mp4
-            =========================================
-            -->
+    animation:
+        frameGlow 3s ease-in-out infinite;
 
-            <video
-                id="welcome-video"
-                controls
-                playsinline
-            >
+    position: relative;
+}
 
-                <source
-                    src="media/welcome.mp4"
-                    type="video/mp4"
-                >
 
-                Your browser does not support video.
+.photo-frame::before {
 
-            </video>
+    content: "";
 
-            <button
-                onclick="continueToNextPage()"
-            >
-                ENTER THE BIRTHDAY ADVENTURE 💗
-            </button>
+    position: absolute;
 
-        </div>
+    inset: -5px;
 
-    </div>
+    border-radius: 32px;
 
+    background:
+        linear-gradient(
+            135deg,
+            #ff4fa3,
+            #9b5cff,
+            #43d9ff
+        );
 
-    <script src="script.js"></script>
+    filter: blur(15px);
 
-</body>
+    opacity: 0.35;
 
-</html>
+    z-index: -1;
+}
+
+
+.photo-frame img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    border-radius: 20px;
+
+    background: #f5e7f5;
+}
+
+
+@keyframes frameGlow {
+
+    0%,
+    100% {
+
+        transform: translateY(0);
+
+        box-shadow:
+
+            0 0 15px rgba(255, 72, 165, 0.5),
+
+            0 0 40px rgba(155, 92, 255, 0.35),
+
+            0 25px 70px rgba(100, 50, 130, 0.25);
+    }
+
+    50% {
+
+        transform: translateY(-8px);
+
+        box-shadow:
+
+            0 0 25px rgba(255, 72, 165, 0.8),
+
+            0 0 60px rgba(155, 92, 255, 0.5),
+
+            0 30px 80px rgba(100, 50, 130, 0.3);
+    }
+}
+
+
+/* =====================================================
+   LEFT TEXT
+===================================================== */
+
+.photo-section h1 {
+
+    margin-top: 25px;
+
+    font-size:
+        clamp(1.8rem, 3vw, 3rem);
+
+    color: #e43e91;
+
+    text-shadow:
+
+        2px 2px 0 white,
+
+        0 0 15px rgba(255, 72, 165, 0.25);
+}
+
+
+.photo-section p {
+
+    margin-top: 6px;
+
+    font-size: 1.15rem;
+
+    font-weight: bold;
+
+    color: #80518a;
+}
+
+
+/* =====================================================
+   RIGHT SIDE
+===================================================== */
+
+.password-section {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+
+/* =====================================================
+   PASSWORD CARD
+===================================================== */
+
+.password-card {
+
+    width: min(460px, 100%);
+
+    padding: 40px 35px;
+
+    text-align: center;
+
+    border-radius: 32px;
+
+    background:
+        rgba(255, 255, 255, 0.75);
+
+    backdrop-filter: blur(20px);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.9);
+
+    box-shadow:
+
+        0 25px 70px
+        rgba(110, 50, 130, 0.18),
+
+        inset 0 1px 0
+        rgba(255,255,255,0.9);
+}
+
+
+/* =====================================================
+   CAKE
+===================================================== */
+
+.cake {
+
+    font-size: 4rem;
+
+    margin-bottom: 10px;
+
+    animation:
+
+        cakeBounce
+        2s
+        ease-in-out
+        infinite;
+}
+
+
+@keyframes cakeBounce {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(-3deg);
+    }
+
+    50% {
+        transform: translateY(-8px) rotate(3deg);
+    }
+}
+
+
+/* =====================================================
+   SMALL HEADING
+===================================================== */
+
+.small-heading {
+
+    font-size: 0.72rem;
+
+    letter-spacing: 4px;
+
+    font-weight: bold;
+
+    color: #a257b8;
+
+    margin-bottom: 12px;
+}
+
+
+/* =====================================================
+   PASSWORD TITLE
+===================================================== */
+
+.password-card h2 {
+
+    font-size:
+        clamp(1.8rem, 3vw, 2.5rem);
+
+    color: #d94693;
+
+    margin-bottom: 8px;
+}
+
+
+.instruction {
+
+    font-size: 0.95rem;
+
+    color: #806580;
+
+    margin-bottom: 20px;
+}
+
+
+/* =====================================================
+   PASSWORD DISPLAY
+===================================================== */
+
+.password-display {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    margin: 20px auto 25px;
+}
+
+
+.password-display span {
+
+    width: 30px;
+
+    height: 40px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-bottom: 3px solid #d76aa5;
+
+    color: #d94693;
+
+    font-size: 1.4rem;
+
+    font-weight: bold;
+}
+
+
+/* =====================================================
+   NUMBER KEYPAD
+===================================================== */
+
+.keypad {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 10px;
+
+    max-width: 300px;
+
+    margin: auto;
+}
+
+
+.keypad button {
+
+    border: none;
+
+    width: 100%;
+
+    height: 55px;
+
+    border-radius: 17px;
+
+    font-size: 1.2rem;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    color: #713b70;
+
+    background:
+        rgba(255, 255, 255, 0.9);
+
+    box-shadow:
+
+        0 7px 15px
+        rgba(100, 50, 120, 0.12);
+
+    transition:
+        0.2s ease;
+}
+
+
+.keypad button:hover {
+
+    transform:
+        translateY(-3px)
+        scale(1.04);
+
+    background: #ffe0f0;
+
+    box-shadow:
+
+        0 10px 20px
+        rgba(230, 70, 150, 0.2);
+}
+
+
+.keypad button:active {
+
+    transform: scale(0.92);
+}
+
+
+/* =====================================================
+   CLEAR BUTTON
+===================================================== */
+
+.keypad .clear-button {
+
+    color: #d94b78;
+
+    background: #ffe3ec;
+}
+
+
+/* =====================================================
+   ENTER BUTTON
+===================================================== */
+
+.keypad .enter-button {
+
+    color: white;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #ff55a5,
+            #925bea
+        );
+}
+
+
+/* =====================================================
+   PASSWORD MESSAGE
+===================================================== */
+
+.password-message {
+
+    min-height: 25px;
+
+    margin-top: 15px;
+
+    font-weight: bold;
+
+    color: #df4c7e;
+}
+
+
+/* =====================================================
+   POPUPS
+===================================================== */
+
+.popup {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 100;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    background:
+        rgba(80, 30, 80, 0.45);
+
+    backdrop-filter: blur(10px);
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.3s ease;
+}
+
+
+.popup.show {
+
+    opacity: 1;
+
+    pointer-events: auto;
+}
+
+
+/* =====================================================
+   WRONG PASSWORD CARD
+===================================================== */
+
+.wrong-card {
+
+    width: min(500px, 90%);
+
+    padding: 25px;
+
+    text-align: center;
+
+    border-radius: 30px;
+
+    background: white;
+
+    box-shadow:
+
+        0 30px 80px
+        rgba(0,0,0,0.3);
+
+    animation:
+        popupIn 0.4s ease;
+}
+
+
+.wrong-card img {
+
+    width: 100%;
+
+    max-height: 350px;
+
+    object-fit: cover;
+
+    border-radius: 20px;
+}
+
+
+.wrong-card h2 {
+
+    margin-top: 18px;
+
+    font-size: 2rem;
+
+    color: #e33f6f;
+}
+
+
+.wrong-card p {
+
+    margin-top: 8px;
+
+    color: #795b79;
+}
+
+
+/* =====================================================
+   CLOSE BUTTON
+===================================================== */
+
+.close-popup {
+
+    position: absolute;
+
+    top: 12px;
+
+    right: 15px;
+
+    width: 38px;
+
+    height: 38px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #f4d8eb;
+
+    color: #783f75;
+
+    font-size: 1.5rem;
+
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   VIDEO POPUP
+===================================================== */
+
+.video-card {
+
+    width: min(800px, 94%);
+
+    padding: 35px;
+
+    text-align: center;
+
+    border-radius: 30px;
+
+    background: white;
+
+    box-shadow:
+
+        0 30px 90px
+        rgba(0,0,0,0.3);
+
+    animation:
+        popupIn 0.5s ease;
+}
+
+
+.video-card h2 {
+
+    font-size: 2.3rem;
+
+    color: #d94693;
+
+    margin-bottom: 8px;
+}
+
+
+.video-card p {
+
+    color: #795b79;
+
+    margin-bottom: 20px;
+}
+
+
+.video-card video {
+
+    width: 100%;
+
+    max-height: 60vh;
+
+    border-radius: 18px;
+
+    background: black;
+}
+
+
+.video-card button {
+
+    border: none;
+
+    margin-top: 20px;
+
+    padding: 14px 25px;
+
+    border-radius: 999px;
+
+    color: white;
+
+    font-weight: bold;
+
+    font-size: 1rem;
+
+    cursor: pointer;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #ff55a5,
+            #925bea
+        );
+
+    box-shadow:
+
+        0 10px 25px
+        rgba(150, 80, 200, 0.3);
+
+    transition: 0.2s ease;
+}
+
+
+.video-card button:hover {
+
+    transform:
+        translateY(-3px)
+        scale(1.04);
+}
+
+
+/* =====================================================
+   POPUP ANIMATION
+===================================================== */
+
+@keyframes popupIn {
+
+    from {
+
+        transform:
+            scale(0.7)
+            translateY(30px);
+
+        opacity: 0;
+    }
+
+    to {
+
+        transform:
+            scale(1)
+            translateY(0);
+
+        opacity: 1;
+    }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 800px) {
+
+    body {
+        overflow-y: auto;
+    }
+
+
+    .welcome-page {
+
+        height: auto;
+
+        min-height: 100vh;
+
+        grid-template-columns: 1fr;
+
+        gap: 30px;
+
+        padding:
+            30px 20px 50px;
+    }
+
+
+    .photo-frame {
+
+        width:
+            min(320px, 75vw);
+    }
+
+
+    .photo-section h1 {
+
+        font-size: 2rem;
+    }
+
+
+    .password-card {
+
+        padding:
+            30px 20px;
+    }
+
+
+    .password-display span {
+
+        width: 25px;
+    }
+
+}
