@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Our Little Universe ❤️</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="page3.css">
+</head>
+
+<body>
+
+    <!-- PAGE TRANSITION -->
+
+    <div id="pageTransition"></div>
+
+
+    <!-- BACKGROUND -->
+
+    <div class="nebula nebula-one"></div>
+    <div class="nebula nebula-two"></div>
+    <div class="nebula nebula-three"></div>
+
+
+    <!-- STARS -->
+
+    <div class="stars" id="stars"></div>
+
+
+    <!-- INTRODUCTION -->
+
+    <section class="intro-screen active" id="introScreen">
+
+        <div class="intro-content">
+
+            <div class="tiny-star">✦</div>
+
+            <p class="eyebrow">
+                CHAPTER THREE
+            </p>
+
+            <h1>
+                Our Little
+                <br>
+                <span>Universe</span>
+            </h1>
+
+            <p class="intro-text">
+                Somewhere between all these stars...
+            </p>
+
+            <p class="intro-text">
+                there are little pieces of us.
+                ❤️
+            </p>
+
+            <button id="exploreButton" class="main-button">
+                EXPLORE THE STARS ✨
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- UNIVERSE -->
+
+    <main class="universe" id="universe">
+
+        <div class="universe-heading">
+
+            <p class="eyebrow">
+                TISHA'S LITTLE UNIVERSE
+            </p>
+
+            <h2>
+                Find the memories...
+            </h2>
+
+            <p>
+                There are little pieces of our story
+                hidden among the stars.
+            </p>
+
+            <div class="progress">
+
+                <span id="progressText">
+                    0 / 6 discovered
+                </span>
+
+                <div class="progress-bar">
+
+                    <div
+                        id="progressFill"
+                        class="progress-fill">
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- STAR 1 -->
+
+        <button
+            class="memory-star star-one"
+            data-memory="0"
+            aria-label="Our Beginning">
+
+            <span class="star-glow"></span>
+            <span class="star-symbol">✦</span>
+
+            <span class="star-label">
+                Our Beginning
+            </span>
+
+        </button>
+
+
+        <!-- STAR 2 -->
+
+        <button
+            class="memory-star star-two"
+            data-memory="1"
+            aria-label="12.03.26">
+
+            <span class="star-glow"></span>
+            <span class="star-symbol">✦</span>
+
+            <span class="star-label">
+                12.03.26
+            </span>
+
+        </button>
+
+
+        <!-- STAR 3 -->
+
+        <button
+            class="memory-star star-three"
+            data-memory="2"
+            aria-label="That First Day">
+
+            <span class="star-glow"></span>
+            <span class="star-symbol">✦</span>
+
+            <span class="star-label">
+                That First Day
+            </span>
+
+        </button>
+
+
+        <!-- STAR 4 -->
+
+        <button
+            class="memory-star star-four"
+            data-memory="3"
+            aria-label="A Little Confession">
+
+            <span class="star-glow"></span>
+            <span class="star-symbol">✦</span>
+
+            <span class="star-label">
+                A Little Confession
+            </span>
+
+        </button>
+
+
+        <!-- STAR 5 -->
+
+        <button
+            class="memory-star star-five"
+            data-memory="4"
+            aria-label="Something I Love">
+
+            <span class="star-glow"></span>
+            <span class="star-symbol">✦</span>
+
+            <span class="star-label">
+                Something I Love
+            </span>
+
+        </button>
+
+
+        <!-- STAR 6 -->
+
+        <button
+            class="memory-star star-six"
+            data-memory="5"
+            aria-label="A Secret">
+
+            <span class="star-glow"></span>
+            <span class="star-symbol">✦</span>
+
+            <span class="star-label">
+                A Secret
+            </span>
+
+        </button>
+
+
+        <!-- FINAL MESSAGE -->
+
+        <div
+            id="universeComplete"
+            class="universe-complete">
+
+            <div class="complete-stars">
+                ✦ ✧ ✦
+            </div>
+
+            <h2>
+                You found them all. ❤️
+            </h2>
+
+            <p>
+                But I think there are still
+                more memories to make.
+            </p>
+
+            <button
+                id="continueButton"
+                class="main-button">
+
+                CONTINUE MY ADVENTURE →
+
+            </button>
+
+        </div>
+
+    </main>
+
+
+    <!-- MEMORY MODAL -->
+
+    <div
+        id="memoryModal"
+        class="memory-modal">
+
+        <div class="modal-backdrop"></div>
+
+        <div class="memory-card">
+
+            <button
+                id="closeMemory"
+                class="close-button"
+                aria-label="Close">
+
+                ×
+
+            </button>
+
+
+            <div class="memory-icon" id="memoryIcon">
+                ✦
+            </div>
+
+            <p
+                class="memory-number"
+                id="memoryNumber">
+                MEMORY 01
+            </p>
+
+            <h2 id="memoryTitle">
+                Our Beginning
+            </h2>
+
+            <div class="memory-line"></div>
+
+            <p
+                id="memoryText"
+                class="memory-text">
+            </p>
+
+
+            <!-- PHOTO PLACEHOLDER -->
+
+            <div class="memory-photo">
+
+                <span>📷</span>
+
+                <small>
+                    YOUR PHOTO WILL GO HERE
+                </small>
+
+            </div>
+
+            <button
+                id="memoryDone"
+                class="memory-done">
+
+                I FOUND THIS ONE ❤️
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- MUSIC CONTROL -->
+
+    <button
+        id="musicButton"
+        class="music-button"
+        aria-label="Music">
+
+        ♫
+
+    </button>
+
+
+    <script src="page3.js"></script>
+
+</body>
+</html>
