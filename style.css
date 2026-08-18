@@ -1,5 +1,5 @@
 /* =========================================
-   BASIC RESET
+   RESET
 ========================================= */
 
 * {
@@ -16,7 +16,9 @@ body {
 
 body {
     overflow: hidden;
+
     font-family: "Poppins", sans-serif;
+
     background:
         radial-gradient(
             circle at center,
@@ -25,7 +27,114 @@ body {
             #bd2742 70%,
             #971d36 100%
         );
+
     color: #ffffff;
+}
+
+
+/* =========================================
+   LOADING SCREEN
+========================================= */
+
+#loading-screen {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #df465d,
+            #a91f3b
+        );
+
+    z-index: 1000;
+
+    transition:
+        opacity 0.8s ease,
+        visibility 0.8s ease;
+}
+
+#loading-screen.hide {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loading-content {
+    text-align: center;
+
+    animation: loadingAppear 1s ease;
+}
+
+.loading-bow {
+    font-size: 45px;
+
+    margin-bottom: 12px;
+
+    animation: bowBounce 1.8s ease-in-out infinite;
+}
+
+.loading-content p {
+    font-family: "Great Vibes", cursive;
+
+    font-size: 28px;
+
+    color: #fff8f4;
+}
+
+.loading-dots {
+    margin-top: 15px;
+}
+
+.loading-dots span {
+    display: inline-block;
+
+    width: 6px;
+    height: 6px;
+
+    margin: 0 4px;
+
+    background: #fff8f4;
+
+    border-radius: 50%;
+
+    animation: loadingDot 1.2s infinite ease-in-out;
+}
+
+.loading-dots span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.loading-dots span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes loadingAppear {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes loadingDot {
+    0%,
+    100% {
+        opacity: 0.25;
+        transform: translateY(0);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateY(-5px);
+    }
 }
 
 
@@ -35,6 +144,7 @@ body {
 
 .background-glow {
     position: fixed;
+
     width: 600px;
     height: 600px;
 
@@ -137,54 +247,46 @@ body::before {
 .sparkles span:nth-child(2) {
     top: 24%;
     left: 80%;
-
     animation-delay: 1s;
 }
 
 .sparkles span:nth-child(3) {
     top: 70%;
     left: 15%;
-
     animation-delay: 2s;
 }
 
 .sparkles span:nth-child(4) {
     top: 80%;
     left: 82%;
-
     animation-delay: 1.5s;
 }
 
 .sparkles span:nth-child(5) {
     top: 40%;
     left: 10%;
-
     animation-delay: 2.5s;
 }
 
 .sparkles span:nth-child(6) {
     top: 55%;
     left: 90%;
-
     animation-delay: 0.8s;
 }
 
 .sparkles span:nth-child(7) {
     top: 12%;
     left: 62%;
-
     animation-delay: 3s;
 }
 
 .sparkles span:nth-child(8) {
     top: 88%;
     left: 42%;
-
     animation-delay: 2s;
 }
 
 @keyframes sparkleFloat {
-
     0%,
     100% {
         opacity: 0.2;
@@ -199,7 +301,7 @@ body::before {
 
 
 /* =========================================
-   FLOATING HEARTS
+   SUBTLE HEARTS
 ========================================= */
 
 .hearts {
@@ -217,51 +319,45 @@ body::before {
     position: absolute;
     bottom: -30px;
 
-    color: rgba(255, 255, 255, 0.18);
+    color: rgba(255, 255, 255, 0.16);
 
-    font-size: 18px;
+    font-size: 16px;
 
-    animation: heartFloat 9s linear infinite;
+    animation: heartFloat 11s linear infinite;
 }
 
 .hearts span:nth-child(1) {
-    left: 12%;
+    left: 14%;
     animation-delay: 1s;
 }
 
 .hearts span:nth-child(2) {
-    left: 35%;
-    animation-delay: 4s;
+    left: 38%;
+    animation-delay: 5s;
 }
 
 .hearts span:nth-child(3) {
-    left: 58%;
-    animation-delay: 2s;
+    left: 69%;
+    animation-delay: 2.5s;
 }
 
 .hearts span:nth-child(4) {
-    left: 76%;
-    animation-delay: 6s;
-}
-
-.hearts span:nth-child(5) {
-    left: 90%;
-    animation-delay: 3s;
+    left: 88%;
+    animation-delay: 7s;
 }
 
 @keyframes heartFloat {
-
     0% {
-        transform: translateY(0) rotate(0deg);
+        transform: translateY(0) rotate(0);
         opacity: 0;
     }
 
     15% {
-        opacity: 0.8;
+        opacity: 0.7;
     }
 
     80% {
-        opacity: 0.4;
+        opacity: 0.3;
     }
 
     100% {
@@ -296,28 +392,25 @@ body::before {
 .top-right {
     top: 0;
     right: 0;
-
     transform: scaleX(-1);
 }
 
 .bottom-left {
     bottom: 0;
     left: 0;
-
     transform: scaleY(-1);
 }
 
 .bottom-right {
     bottom: 0;
     right: 0;
-
     transform: scale(-1);
 }
 
 .flower {
     position: absolute;
 
-    color: #fff;
+    color: #ffffff;
 
     font-size: 58px;
 
@@ -350,7 +443,6 @@ body::before {
 }
 
 @keyframes flowerSway {
-
     0%,
     100% {
         transform: rotate(-4deg);
@@ -362,7 +454,6 @@ body::before {
 }
 
 @keyframes decorationFloat {
-
     0%,
     100% {
         margin-top: 0;
@@ -375,7 +466,7 @@ body::before {
 
 
 /* =========================================
-   GIFT SCREEN
+   GIFT CONTAINER
 ========================================= */
 
 .gift-container {
@@ -387,11 +478,10 @@ body::before {
 
     z-index: 10;
 
-    animation: giftAppear 1.2s ease forwards;
+    animation: giftAppear 1s ease forwards;
 }
 
 @keyframes giftAppear {
-
     from {
         opacity: 0;
         transform: translateY(25px) scale(0.95);
@@ -406,13 +496,12 @@ body::before {
 .tiny-bow {
     font-size: 42px;
 
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 
     animation: bowBounce 3s ease-in-out infinite;
 }
 
 @keyframes bowBounce {
-
     0%,
     100% {
         transform: translateY(0) rotate(-2deg);
@@ -425,135 +514,255 @@ body::before {
 
 
 /* =========================================
-   ENVELOPE
+   REALISTIC ENVELOPE
 ========================================= */
 
 .envelope {
     position: relative;
 
-    width: 340px;
+    width: 350px;
     max-width: 90vw;
 
     height: 245px;
 
-    margin: 0 auto 28px;
+    margin: 0 auto 12px;
 
     cursor: pointer;
 
-    transition: transform 0.4s ease;
+    filter:
+        drop-shadow(
+            0 25px 30px rgba(70, 0, 20, 0.25)
+        );
+
+    transition:
+        transform 0.35s ease,
+        filter 0.35s ease;
 }
 
 .envelope:hover {
     transform: translateY(-8px) rotate(-1deg);
+
+    filter:
+        drop-shadow(
+            0 32px 38px rgba(70, 0, 20, 0.3)
+        );
 }
 
-.envelope-body {
+.envelope-back {
     position: absolute;
     inset: 0;
+
+    background: #fff0e8;
+
+    border-radius: 18px;
+
+    z-index: 1;
+}
+
+.envelope-paper {
+    position: absolute;
+
+    left: 25px;
+    right: 25px;
+
+    top: 22px;
+
+    height: 185px;
+
+    background: #fffaf5;
+
+    color: #9c2943;
+
+    border-radius: 12px;
 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
-    padding: 30px;
-
-    background: rgba(255, 250, 244, 0.96);
-
-    color: #9c2943;
-
-    border-radius: 18px;
-
-    border: 1px solid rgba(255, 255, 255, 0.7);
-
     box-shadow:
-        0 25px 60px rgba(80, 0, 20, 0.3),
-        0 0 35px rgba(255, 255, 255, 0.08);
+        inset 0 0 20px rgba(160, 60, 70, 0.05);
 
     z-index: 2;
+
+    padding: 20px;
 }
 
-.envelope-top {
+.envelope-flap {
     position: absolute;
 
     top: 0;
     left: 0;
 
     width: 100%;
-    height: 110px;
+    height: 125px;
 
-    background: #fff4ed;
+    background: #ffe4dc;
 
-    clip-path: polygon(
-        0 0,
-        100% 0,
-        50% 100%
-    );
+    clip-path:
+        polygon(
+            0 0,
+            100% 0,
+            50% 100%
+        );
 
     border-radius: 18px 18px 0 0;
 
-    z-index: 3;
-
-    pointer-events: none;
-}
-
-.seal {
-    width: 45px;
-    height: 45px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: #d93650;
-
-    color: #fff;
-
-    border-radius: 50%;
-
-    font-size: 18px;
-
-    box-shadow: 0 5px 15px rgba(160, 20, 50, 0.25);
-
-    margin-bottom: 10px;
-
     z-index: 4;
+
+    transition:
+        transform 0.8s ease,
+        opacity 0.5s ease;
 }
 
 .envelope-small {
-    font-size: 10px;
+    font-size: 9px;
 
     letter-spacing: 3px;
 
-    font-weight: 600;
+    font-weight: 700;
 
-    opacity: 0.7;
+    opacity: 0.65;
 
-    z-index: 4;
+    margin-bottom: 5px;
 }
 
 .envelope h1 {
     font-family: "Cormorant Garamond", serif;
 
-    font-size: 36px;
+    font-size: 38px;
 
-    letter-spacing: 4px;
+    letter-spacing: 5px;
 
-    margin: 3px 0 7px;
-
-    z-index: 4;
+    margin-bottom: 6px;
 }
 
 .envelope-message {
+    font-family: "Great Vibes", cursive;
+
+    font-size: 23px;
+
+    opacity: 0.8;
+}
+
+.wax-seal {
+    position: absolute;
+
+    left: 50%;
+    top: 88px;
+
+    transform: translateX(-50%);
+
+    width: 54px;
+    height: 54px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #ef5b73,
+            #b5223e
+        );
+
+    color: #fff;
+
+    font-size: 19px;
+
+    box-shadow:
+        0 5px 12px rgba(90, 0, 20, 0.25);
+
+    z-index: 5;
+
+    transition:
+        transform 0.6s ease,
+        opacity 0.4s ease;
+}
+
+.envelope-ribbon {
+    position: absolute;
+
+    bottom: 0;
+
+    width: 30px;
+    height: 90px;
+
+    background: rgba(217, 54, 80, 0.75);
+
+    z-index: 5;
+
+    opacity: 0.7;
+}
+
+.ribbon-left {
+    left: 35px;
+
+    transform: rotate(12deg);
+}
+
+.ribbon-right {
+    right: 35px;
+
+    transform: rotate(-12deg);
+}
+
+.envelope.opening .envelope-flap {
+    transform: rotateX(180deg);
+
+    transform-origin: top;
+
+    opacity: 0;
+}
+
+.envelope.opening .wax-seal {
+    transform:
+        translateX(-50%)
+        scale(0.2)
+        rotate(30deg);
+
+    opacity: 0;
+}
+
+.envelope.opening {
+    animation: envelopeOpen 0.9s ease forwards;
+}
+
+@keyframes envelopeOpen {
+    0% {
+        transform: translateY(0) scale(1);
+    }
+
+    45% {
+        transform: translateY(-10px) scale(1.04) rotate(-2deg);
+    }
+
+    100% {
+        transform: translateY(-15px) scale(0.95);
+        opacity: 0;
+    }
+}
+
+
+/* =========================================
+   HIDDEN PASSWORD CLUE
+========================================= */
+
+.hidden-code {
+    font-family: "Cormorant Garamond", serif;
+
     font-size: 12px;
 
-    line-height: 1.6;
+    letter-spacing: 3px;
 
-    max-width: 230px;
+    opacity: 0.35;
 
-    opacity: 0.75;
+    margin-bottom: 18px;
 
-    z-index: 4;
+    user-select: none;
 }
 
 
@@ -666,12 +875,13 @@ body::before {
     width: 60%;
     height: 100%;
 
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.8),
-        transparent
-    );
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.8),
+            transparent
+        );
 
     transform: skewX(-20deg);
 
@@ -694,9 +904,14 @@ body::before {
     transform: scale(0.96);
 }
 
+.luxury-button:disabled {
+    cursor: wait;
+    opacity: 0.85;
+}
+
 
 /* =========================================
-   PASSWORD SCREEN
+   PASSWORD CARD
 ========================================= */
 
 .password-card {
@@ -708,7 +923,7 @@ body::before {
 
     text-align: center;
 
-    background: rgba(255, 248, 243, 0.96);
+    background: rgba(255, 248, 243, 0.97);
 
     color: #9d2943;
 
@@ -721,7 +936,6 @@ body::before {
 }
 
 @keyframes cardAppear {
-
     from {
         opacity: 0;
         transform: translateY(30px) scale(0.94);
@@ -735,13 +949,11 @@ body::before {
 
 .card-bow {
     font-size: 35px;
-
     margin-bottom: 5px;
 }
 
 .lock-icon {
     font-size: 38px;
-
     margin-bottom: 8px;
 }
 
@@ -899,7 +1111,6 @@ body::before {
 
 .popup-icon {
     font-size: 45px;
-
     margin-bottom: 10px;
 }
 
@@ -937,6 +1148,65 @@ body::before {
 
 
 /* =========================================
+   MUSIC CONTROL
+========================================= */
+
+.music-control {
+    position: fixed;
+
+    right: 22px;
+    bottom: 22px;
+
+    width: 43px;
+    height: 43px;
+
+    border: 1px solid rgba(255, 255, 255, 0.4);
+
+    border-radius: 50%;
+
+    background: rgba(255, 248, 243, 0.16);
+
+    backdrop-filter: blur(10px);
+
+    color: #ffffff;
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+    z-index: 200;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transform: scale(0.8);
+
+    transition:
+        opacity 0.4s ease,
+        visibility 0.4s ease,
+        transform 0.3s ease,
+        background 0.3s ease;
+}
+
+.music-control.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+}
+
+.music-control:hover {
+    background: rgba(255, 248, 243, 0.3);
+
+    transform: scale(1.08);
+}
+
+.music-control.muted {
+    opacity: 0.55;
+}
+
+
+/* =========================================
    UNLOCK ANIMATION
 ========================================= */
 
@@ -945,14 +1215,15 @@ body::before {
 }
 
 @keyframes unlockPulse {
-
     0% {
         transform: scale(1);
     }
 
     35% {
         transform: scale(1.04);
-        box-shadow: 0 0 35px rgba(255, 255, 255, 0.7);
+
+        box-shadow:
+            0 0 35px rgba(255, 255, 255, 0.7);
     }
 
     100% {
@@ -962,7 +1233,7 @@ body::before {
 
 
 /* =========================================
-   RESPONSIVE MOBILE DESIGN
+   MOBILE
 ========================================= */
 
 @media (max-width: 600px) {
@@ -1003,13 +1274,11 @@ body::before {
 
     .eyebrow {
         font-size: 9px;
-
         letter-spacing: 2px;
     }
 
     .subtitle {
         font-size: 25px;
-
         margin-bottom: 28px;
     }
 
@@ -1018,11 +1287,22 @@ body::before {
     }
 
     .envelope {
-        height: 225px;
+        width: 320px;
+        height: 220px;
+    }
+
+    .envelope-paper {
+        left: 20px;
+        right: 20px;
+        height: 165px;
     }
 
     .envelope h1 {
-        font-size: 30px;
+        font-size: 31px;
+    }
+
+    .envelope-message {
+        font-size: 20px;
     }
 
     .password-card {
@@ -1037,6 +1317,11 @@ body::before {
         padding: 15px 25px;
         font-size: 13px;
     }
+
+    .music-control {
+        right: 15px;
+        bottom: 15px;
+    }
 }
 
 
@@ -1048,9 +1333,7 @@ body::before {
 
     .envelope {
         transform: scale(0.82);
-
         margin-top: -20px;
-        margin-bottom: 0;
     }
 
     .envelope:hover {
