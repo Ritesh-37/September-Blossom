@@ -1,67 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Our Little Universe ❤️</title>
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Chapter III — The Universe of Us ❤️</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
 
-    <link rel="stylesheet" href="page3.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="chapter3.css"
+    >
+
 </head>
+
 
 <body>
 
-    <!-- PAGE TRANSITION -->
+    <!-- =========================================
+         GLOBAL BACKGROUND
+    ========================================== -->
 
-    <div id="pageTransition"></div>
+    <div id="stars"></div>
 
+    <div class="aurora aurora-one"></div>
+    <div class="aurora aurora-two"></div>
 
-    <!-- BACKGROUND -->
-
-    <div class="nebula nebula-one"></div>
-    <div class="nebula nebula-two"></div>
-    <div class="nebula nebula-three"></div>
-
-
-    <!-- STARS -->
-
-    <div class="stars" id="stars"></div>
+    <div id="transition-layer"></div>
 
 
-    <!-- INTRODUCTION -->
+    <!-- =========================================
+         PART 3
+         QUIZ
+    ========================================== -->
 
-    <section class="intro-screen active" id="introScreen">
+    <section
+        id="quiz-intro"
+        class="chapter-section active"
+    >
 
-        <div class="intro-content">
+        <div class="center-content">
 
-            <div class="tiny-star">✦</div>
+            <div class="emoji-big">
+                💕
+            </div>
 
             <p class="eyebrow">
-                CHAPTER THREE
+                CHAPTER III • PART 3
             </p>
 
             <h1>
-                Our Little
-                <br>
-                <span>Universe</span>
+                How Well
+                <span>Do You Know Us?</span>
             </h1>
 
-            <p class="intro-text">
-                Somewhere between all these stars...
+            <p class="subtitle">
+                You've discovered our memories...
+                <br>
+                now let's see if you've been paying attention. 👀
             </p>
 
-            <p class="intro-text">
-                there are little pieces of us.
-                ❤️
-            </p>
-
-            <button id="exploreButton" class="main-button">
-                EXPLORE THE STARS ✨
+            <button
+                id="start-quiz"
+                class="primary-button"
+            >
+                LET'S FIND OUT ✨
             </button>
 
         </div>
@@ -69,259 +90,753 @@
     </section>
 
 
-    <!-- UNIVERSE -->
+    <!-- =========================================
+         QUIZ
+    ========================================== -->
 
-    <main class="universe" id="universe">
+    <section
+        id="quiz"
+        class="chapter-section"
+    >
 
-        <div class="universe-heading">
+        <div class="quiz-wrapper">
 
-            <p class="eyebrow">
-                TISHA'S LITTLE UNIVERSE
-            </p>
+            <div class="quiz-header">
 
-            <h2>
-                Find the memories...
-            </h2>
+                <p class="eyebrow">
+                    HOW WELL DO YOU KNOW US?
+                </p>
 
-            <p>
-                There are little pieces of our story
-                hidden among the stars.
-            </p>
+                <div id="question-count">
+                    01 / 10
+                </div>
 
-            <div class="progress">
-
-                <span id="progressText">
-                    0 / 6 discovered
-                </span>
-
-                <div class="progress-bar">
+                <div class="progress-track">
 
                     <div
-                        id="progressFill"
-                        class="progress-fill">
-                    </div>
+                        id="quiz-progress"
+                        class="progress-fill"
+                    ></div>
 
                 </div>
 
             </div>
 
+
+            <div
+                id="question-card"
+                class="glass-card question-card"
+            >
+
+                <div
+                    id="question-icon"
+                    class="question-icon"
+                >
+                    🌙
+                </div>
+
+                <h2 id="question-text">
+                    Question
+                </h2>
+
+                <p class="instruction">
+                    Choose one, cutuuuu 😌
+                </p>
+
+
+                <div class="answer-grid">
+
+                    <button
+                        class="answer-choice"
+                        data-answer="Ritesh"
+                    >
+
+                        <span>
+                            ❤️
+                        </span>
+
+                        Ritesh
+
+                    </button>
+
+
+                    <button
+                        class="answer-choice"
+                        data-answer="Tisha"
+                    >
+
+                        <span>
+                            💕
+                        </span>
+
+                        Tisha
+
+                    </button>
+
+                </div>
+
+                <p
+                    id="answer-feedback"
+                    class="answer-feedback"
+                ></p>
+
+            </div>
+
         </div>
 
-
-        <!-- STAR 1 -->
-
-        <button
-            class="memory-star star-one"
-            data-memory="0"
-            aria-label="Our Beginning">
-
-            <span class="star-glow"></span>
-            <span class="star-symbol">✦</span>
-
-            <span class="star-label">
-                Our Beginning
-            </span>
-
-        </button>
+    </section>
 
 
-        <!-- STAR 2 -->
+    <!-- =========================================
+         QUIZ RESULT
+    ========================================== -->
 
-        <button
-            class="memory-star star-two"
-            data-memory="1"
-            aria-label="12.03.26">
+    <section
+        id="quiz-result"
+        class="chapter-section"
+    >
 
-            <span class="star-glow"></span>
-            <span class="star-symbol">✦</span>
+        <div class="result-card">
 
-            <span class="star-label">
-                12.03.26
-            </span>
-
-        </button>
-
-
-        <!-- STAR 3 -->
-
-        <button
-            class="memory-star star-three"
-            data-memory="2"
-            aria-label="That First Day">
-
-            <span class="star-glow"></span>
-            <span class="star-symbol">✦</span>
-
-            <span class="star-label">
-                That First Day
-            </span>
-
-        </button>
-
-
-        <!-- STAR 4 -->
-
-        <button
-            class="memory-star star-four"
-            data-memory="3"
-            aria-label="A Little Confession">
-
-            <span class="star-glow"></span>
-            <span class="star-symbol">✦</span>
-
-            <span class="star-label">
-                A Little Confession
-            </span>
-
-        </button>
-
-
-        <!-- STAR 5 -->
-
-        <button
-            class="memory-star star-five"
-            data-memory="4"
-            aria-label="Something I Love">
-
-            <span class="star-glow"></span>
-            <span class="star-symbol">✦</span>
-
-            <span class="star-label">
-                Something I Love
-            </span>
-
-        </button>
-
-
-        <!-- STAR 6 -->
-
-        <button
-            class="memory-star star-six"
-            data-memory="5"
-            aria-label="A Secret">
-
-            <span class="star-glow"></span>
-            <span class="star-symbol">✦</span>
-
-            <span class="star-label">
-                A Secret
-            </span>
-
-        </button>
-
-
-        <!-- FINAL MESSAGE -->
-
-        <div
-            id="universeComplete"
-            class="universe-complete">
-
-            <div class="complete-stars">
-                ✦ ✧ ✦
+            <div class="trophy">
+                🏆
             </div>
+
+            <p class="eyebrow">
+                YOUR REPORT CARD
+            </p>
 
             <h2>
-                You found them all. ❤️
+                You scored
             </h2>
 
-            <p>
-                But I think there are still
-                more memories to make.
-            </p>
+            <div class="final-score">
 
-            <button
-                id="continueButton"
-                class="main-button">
-
-                CONTINUE MY ADVENTURE →
-
-            </button>
-
-        </div>
-
-    </main>
-
-
-    <!-- MEMORY MODAL -->
-
-    <div
-        id="memoryModal"
-        class="memory-modal">
-
-        <div class="modal-backdrop"></div>
-
-        <div class="memory-card">
-
-            <button
-                id="closeMemory"
-                class="close-button"
-                aria-label="Close">
-
-                ×
-
-            </button>
-
-
-            <div class="memory-icon" id="memoryIcon">
-                ✦
-            </div>
-
-            <p
-                class="memory-number"
-                id="memoryNumber">
-                MEMORY 01
-            </p>
-
-            <h2 id="memoryTitle">
-                Our Beginning
-            </h2>
-
-            <div class="memory-line"></div>
-
-            <p
-                id="memoryText"
-                class="memory-text">
-            </p>
-
-
-            <!-- PHOTO PLACEHOLDER -->
-
-            <div class="memory-photo">
-
-                <span>📷</span>
+                <span id="score-number">
+                    9
+                </span>
 
                 <small>
-                    YOUR PHOTO WILL GO HERE
+                    / 10
                 </small>
 
             </div>
 
-            <button
-                id="memoryDone"
-                class="memory-done">
+            <h3 id="score-message">
+                YOU GOT 1 WRONG SISTARRRRR 😭
+            </h3>
 
-                I FOUND THIS ONE ❤️
+            <p>
+                Ask Ritesh for the wrong answer.
+                <br>
+                He owns this website anyway. 😌
+            </p>
+
+
+            <div class="score-details">
+
+                <div>
+                    <strong id="correct-number">
+                        9
+                    </strong>
+
+                    <span>
+                        CORRECT
+                    </span>
+                </div>
+
+
+                <div>
+                    <strong id="wrong-number">
+                        1
+                    </strong>
+
+                    <span>
+                        WRONG
+                    </span>
+                </div>
+
+            </div>
+
+
+            <button
+                id="quiz-next"
+                class="primary-button"
+            >
+                OKAY, LET'S MOVE ON ❤️
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         PART 4 — BALLOONS
+    ========================================== -->
+
+    <section
+        id="balloon-section"
+        class="chapter-section"
+    >
+
+        <div class="balloon-heading">
+
+            <p class="eyebrow">
+                CHAPTER III • PART 4
+            </p>
+
+            <h2>
+                Unlock My
+                <span>Message</span>
+            </h2>
+
+            <p>
+                There's something hidden here...
+                <br>
+                but you'll have to work for it. 👀
+            </p>
+
+            <div
+                id="balloon-progress"
+                class="balloon-progress"
+            >
+                0 / 24
+            </div>
+
+        </div>
+
+
+        <div
+            id="balloon-field"
+            class="balloon-field"
+        ></div>
+
+
+        <div
+            id="balloon-hidden-message"
+            class="hidden-balloon-message"
+        >
+            <span>BURST</span>
+            <span>ALL</span>
+            <span>THE</span>
+            <span>BALLOONS</span>
+            <span>CUTUUUU ❤️</span>
+        </div>
+
+
+        <div
+            id="envelope-area"
+            class="envelope-area"
+        >
+
+            <p>
+                You found it... 💌
+            </p>
+
+            <button
+                id="open-envelope"
+                class="envelope-button"
+            >
+
+                <span class="envelope">
+                    💌
+                </span>
+
+                OPEN MY MESSAGE
 
             </button>
 
         </div>
 
-    </div>
+    </section>
 
 
-    <!-- MUSIC CONTROL -->
+    <!-- =========================================
+         LETTER INTRO / SUCK INTO ENVELOPE
+    ========================================== -->
 
-    <button
-        id="musicButton"
-        class="music-button"
-        aria-label="Music">
+    <section
+        id="letter-transition"
+        class="chapter-section dark-section"
+    >
 
-        ♫
+        <div
+            id="giant-envelope"
+            class="giant-envelope"
+        >
+            💌
+        </div>
 
-    </button>
+        <p id="falling-text">
+            Wait...
+        </p>
+
+    </section>
 
 
-    <script src="page3.js"></script>
+    <!-- =========================================
+         LOVE LETTER
+    ========================================== -->
+
+    <section
+        id="love-letter"
+        class="chapter-section letter-section"
+    >
+
+        <div class="letter-wrapper">
+
+            <p class="eyebrow">
+                A LITTLE SOMETHING FROM ME
+            </p>
+
+            <div class="paper">
+
+                <div class="paper-decoration">
+                    ❤️
+                </div>
+
+                <h2>
+                    For My Tisha
+                </h2>
+
+
+                <p>
+                    I don't know if I say this enough,
+                    but I genuinely feel very blessed
+                    to have you as someone so close to me.
+                    Somewhere along the way, you became
+                    someone around whom I can simply be
+                    myself. I feel incredibly comfortable
+                    and loved around you, and that is
+                    something I never want to take for
+                    granted.
+                </p>
+
+
+                <p>
+                    I love how charismatic you are,
+                    how interactive and full of life you
+                    are, and how effortlessly you bring
+                    your energy wherever you go. I still
+                    remember hearing your voice for the
+                    first time and telling you that you
+                    sounded very young. 😂 And somehow,
+                    that little moment became one of the
+                    many tiny memories that I now smile
+                    about.
+                </p>
+
+
+                <p>
+                    I'm really grateful that one day I sent
+                    you that follow request, that you
+                    accepted it, and that you decided to
+                    send me a simple "Hi" on 12.03.26.
+                    Because I had absolutely no idea that
+                    one little Hi could eventually become
+                    something this special to me. You have
+                    a very special place in my life, Tisha,
+                    and I'm genuinely happy that you're
+                    here. Happy Birthday, my favorite
+                    person. ❤️
+                </p>
+
+
+                <div class="signature">
+                    — Ritesh ❤️
+                </div>
+
+            </div>
+
+
+            <!-- VOICE -->
+
+            <div class="voice-box">
+
+                <div class="voice-icon">
+                    🎙️
+                </div>
+
+                <div>
+
+                    <strong>
+                        And now...
+                    </strong>
+
+                    <p>
+                        hear me say it to you.
+                    </p>
+
+                </div>
+
+
+                <audio
+                    id="love-letter-audio"
+                    controls
+                    preload="metadata"
+                >
+
+                    <source
+                        src="love-letter.mp3"
+                        type="audio/mpeg"
+                    >
+
+                    Your browser does not support
+                    audio playback.
+
+                </audio>
+
+            </div>
+
+
+            <!-- LETTER CHECK -->
+
+            <div
+                id="letter-check"
+                class="letter-check"
+            >
+
+                <h3>
+                    Be honest... 👀
+                </h3>
+
+                <p>
+                    Have you read your man's letter?
+                </p>
+
+
+                <div class="yes-no-buttons">
+
+                    <button
+                        id="letter-yes"
+                        class="primary-button"
+                    >
+                        YES ❤️
+                    </button>
+
+                    <button
+                        id="letter-no"
+                        class="secondary-button"
+                    >
+                        NO 👀
+                    </button>
+
+                </div>
+
+
+                <p
+                    id="letter-warning"
+                    class="letter-warning"
+                ></p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         PART 5 — GARDEN
+    ========================================== -->
+
+    <section
+        id="garden"
+        class="chapter-section garden-section"
+    >
+
+        <div class="garden-header">
+
+            <p class="eyebrow">
+                CHAPTER III • PART 5
+            </p>
+
+            <h2>
+                A Garden
+                <span>Made For You</span>
+            </h2>
+
+            <p>
+                Every little flower has something
+                to tell you. 🌷
+            </p>
+
+        </div>
+
+
+        <div
+            id="garden-world"
+            class="garden-world"
+        >
+
+            <div class="moon">
+                🌙
+            </div>
+
+            <div class="firefly f1">✦</div>
+            <div class="firefly f2">✦</div>
+            <div class="firefly f3">✦</div>
+            <div class="firefly f4">✦</div>
+            <div class="firefly f5">✦</div>
+
+            <button
+                class="flower flower-one"
+                data-message="You have a way of making ordinary moments feel special. 🌸"
+            >
+                🌹
+            </button>
+
+            <button
+                class="flower flower-two"
+                data-message="Your energy is one of the things I love most about you. ✨"
+            >
+                🌻
+            </button>
+
+            <button
+                class="flower flower-three"
+                data-message="You are much more lovable than you probably realize. 🥹"
+            >
+                🌷
+            </button>
+
+            <button
+                class="flower flower-four"
+                data-message="Your smile has probably fixed more of my moods than you know. ❤️"
+            >
+                🌸
+            </button>
+
+            <button
+                class="flower flower-five"
+                data-message="That sleepy little you is dangerously cute. 😴💕"
+            >
+                🌼
+            </button>
+
+            <button
+                class="flower flower-six"
+                data-message="I'm really, really glad that I get to know you. ❤️"
+            >
+                🪻
+            </button>
+
+        </div>
+
+
+        <div
+            id="garden-message"
+            class="garden-message"
+        ></div>
+
+
+        <button
+            id="garden-next"
+            class="primary-button garden-next"
+            disabled
+        >
+            I'VE EXPLORED THE GARDEN 🌷
+        </button>
+
+    </section>
+
+
+    <!-- =========================================
+         PART 6 — 9 FACT CARDS
+    ========================================== -->
+
+    <section
+        id="facts"
+        class="chapter-section"
+    >
+
+        <div class="facts-wrapper">
+
+            <p class="eyebrow">
+                CHAPTER III • PART 6
+            </p>
+
+            <h2>
+                Things You
+                <span>Probably Don't Know About Yourself</span>
+            </h2>
+
+            <p class="facts-subtitle">
+                Nine little observations about one
+                very interesting girl. 👀
+            </p>
+
+
+            <div
+                id="fact-grid"
+                class="fact-grid"
+            ></div>
+
+
+            <div
+                id="facts-progress"
+                class="facts-progress"
+            >
+                0 / 9 discovered
+            </div>
+
+
+            <button
+                id="facts-next"
+                class="primary-button"
+                disabled
+            >
+                ONE LAST THING... 🎁
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         PART 7 — MYSTERY BOX
+    ========================================== -->
+
+    <section
+        id="mystery"
+        class="chapter-section mystery-section"
+    >
+
+        <div class="mystery-wrapper">
+
+            <p class="eyebrow">
+                CHAPTER III • PART 7
+            </p>
+
+            <h2>
+                Okay...
+                <span>Last Thing.</span>
+            </h2>
+
+            <p id="mystery-text">
+                I promise. 😌
+            </p>
+
+
+            <button
+                id="mystery-box"
+                class="mystery-box"
+                aria-label="Mystery box"
+            >
+                🎁
+            </button>
+
+
+            <div
+                id="click-counter"
+                class="click-counter"
+            >
+                0 / 7
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         BLACK HOLE
+    ========================================== -->
+
+    <section
+        id="black-hole"
+        class="chapter-section black-hole-section"
+    >
+
+        <div class="black-hole">
+
+            <div class="black-hole-ring"></div>
+
+        </div>
+
+        <p>
+            Something is pulling you in...
+        </p>
+
+    </section>
+
+
+    <!-- =========================================
+         CHAPTER 4
+    ========================================== -->
+
+    <section
+        id="chapter-four"
+        class="chapter-section chapter-four"
+    >
+
+        <div class="chapter-four-content">
+
+            <div class="completion">
+                ✓
+            </div>
+
+            <p class="eyebrow">
+                CHAPTER III
+            </p>
+
+            <h1>
+                COMPLETE
+            </h1>
+
+            <p>
+                You found the memories.
+                <br>
+                You played the game.
+                <br>
+                You found the letter.
+                <br>
+                You explored the garden.
+                <br>
+                You uncovered the secrets.
+                <br>
+                And then you survived the mystery box. 😂
+            </p>
+
+
+            <div class="chapter-divider">
+                ✦ ❤️ ✦
+            </div>
+
+
+            <p class="chapter-four-intro">
+                But the story isn't over.
+            </p>
+
+
+            <button
+                id="chapter-four-button"
+                class="primary-button"
+            >
+                ENTER CHAPTER IV →
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         EFFECTS
+    ========================================== -->
+
+    <div
+        id="confetti"
+        class="confetti-container"
+    ></div>
+
+
+    <script
+        src="chapter3.js"
+    ></script>
 
 </body>
+
 </html>
