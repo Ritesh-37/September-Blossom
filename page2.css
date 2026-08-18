@@ -22,9 +22,9 @@ body {
     background:
         radial-gradient(
             circle at center,
-            #b92d47 0%,
+            #bd304b 0%,
             #8f1d37 45%,
-            #5d1028 100%
+            #5b1027 100%
         );
 
     overflow-x: hidden;
@@ -32,7 +32,78 @@ body {
 
 
 /* =========================================
-   BACKGROUND
+   CINEMATIC TRANSITION
+========================================= */
+
+#pageTransition {
+    position: fixed;
+
+    inset: 0;
+
+    background: #4a0b20;
+
+    opacity: 1;
+
+    pointer-events: none;
+
+    z-index: 999;
+
+    transition:
+        opacity 1.4s ease;
+}
+
+#pageTransition.fade-out {
+    opacity: 0;
+}
+
+
+/* =========================================
+   FILM GRAIN
+========================================= */
+
+.film-grain {
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 90;
+
+    opacity: 0.05;
+
+    background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+
+    animation: grainMove 0.2s steps(2) infinite;
+}
+
+@keyframes grainMove {
+
+    0% {
+        transform: translate(0, 0);
+    }
+
+    25% {
+        transform: translate(1%, -1%);
+    }
+
+    50% {
+        transform: translate(-1%, 1%);
+    }
+
+    75% {
+        transform: translate(1%, 1%);
+    }
+
+    100% {
+        transform: translate(-1%, -1%);
+    }
+}
+
+
+/* =========================================
+   BACKGROUND GLOW
 ========================================= */
 
 .background-glow {
@@ -46,21 +117,85 @@ body {
 
     transform: translate(-50%, -50%);
 
-    background: rgba(255, 150, 170, 0.08);
+    background: rgba(255, 160, 180, 0.09);
 
     border-radius: 50%;
 
-    filter: blur(100px);
+    filter: blur(110px);
 
     pointer-events: none;
 
     z-index: 0;
 }
 
+
+/* =========================================
+   MOVING LIGHT ORBS
+========================================= */
+
+.light-orb {
+    position: fixed;
+
+    width: 180px;
+    height: 180px;
+
+    border-radius: 50%;
+
+    filter: blur(70px);
+
+    opacity: 0.18;
+
+    pointer-events: none;
+
+    z-index: 0;
+
+    animation: orbMove 12s ease-in-out infinite alternate;
+}
+
+.orb-one {
+    left: 5%;
+    top: 20%;
+}
+
+.orb-two {
+    right: 5%;
+    bottom: 15%;
+
+    animation-delay: 3s;
+}
+
+.orb-three {
+    left: 45%;
+    top: 70%;
+
+    animation-delay: 6s;
+}
+
+@keyframes orbMove {
+
+    0% {
+        transform: translate(0, 0) scale(0.8);
+    }
+
+    50% {
+        transform: translate(40px, -30px) scale(1.1);
+    }
+
+    100% {
+        transform: translate(-30px, 40px) scale(0.9);
+    }
+}
+
+
+/* =========================================
+   DOT PATTERN
+========================================= */
+
 body::before {
     content: "";
 
     position: fixed;
+
     inset: 0;
 
     background-image:
@@ -71,7 +206,7 @@ body::before {
 
     background-size: 32px 32px;
 
-    opacity: 0.3;
+    opacity: 0.25;
 
     pointer-events: none;
 
@@ -85,6 +220,7 @@ body::before {
 
 .stars {
     position: fixed;
+
     inset: 0;
 
     pointer-events: none;
@@ -95,7 +231,7 @@ body::before {
 .stars span {
     position: absolute;
 
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.65);
 
     animation: twinkle 4s infinite ease-in-out;
 }
@@ -166,18 +302,19 @@ body::before {
    FLOATING HEARTS
 ========================================= */
 
-.petals {
+.floating-hearts {
     position: fixed;
+
     inset: 0;
 
-    pointer-events: none;
-
     overflow: hidden;
+
+    pointer-events: none;
 
     z-index: 1;
 }
 
-.petals span {
+.floating-hearts span {
     position: absolute;
 
     bottom: -30px;
@@ -186,37 +323,45 @@ body::before {
 
     font-size: 18px;
 
-    animation: floatHeart 12s linear infinite;
+    animation: floatHeart 13s linear infinite;
 }
 
-.petals span:nth-child(1) {
-    left: 10%;
+.floating-hearts span:nth-child(1) {
+    left: 8%;
 }
 
-.petals span:nth-child(2) {
-    left: 32%;
+.floating-hearts span:nth-child(2) {
+    left: 27%;
     animation-delay: 3s;
 }
 
-.petals span:nth-child(3) {
-    left: 57%;
+.floating-hearts span:nth-child(3) {
+    left: 47%;
     animation-delay: 6s;
 }
 
-.petals span:nth-child(4) {
-    left: 78%;
-    animation-delay: 1.5s;
+.floating-hearts span:nth-child(4) {
+    left: 68%;
+    animation-delay: 2s;
 }
 
-.petals span:nth-child(5) {
-    left: 92%;
+.floating-hearts span:nth-child(5) {
+    left: 82%;
     animation-delay: 8s;
+}
+
+.floating-hearts span:nth-child(6) {
+    left: 94%;
+    animation-delay: 10s;
 }
 
 @keyframes floatHeart {
 
     0% {
-        transform: translateY(0) rotate(0);
+        transform:
+            translateY(0)
+            rotate(0deg);
+
         opacity: 0;
     }
 
@@ -225,14 +370,17 @@ body::before {
     }
 
     100% {
-        transform: translateY(-110vh) rotate(30deg);
+        transform:
+            translateY(-110vh)
+            rotate(30deg);
+
         opacity: 0;
     }
 }
 
 
 /* =========================================
-   PAGE
+   MAIN PAGE
 ========================================= */
 
 #page2 {
@@ -250,34 +398,43 @@ body::before {
 
 .scene {
     position: fixed;
+
     inset: 0;
 
     min-height: 100vh;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     padding: 50px 25px;
 
     opacity: 0;
+
     visibility: hidden;
 
-    transform: translateY(25px) scale(0.98);
+    transform:
+        translateY(25px)
+        scale(0.98);
 
     transition:
-        opacity 0.8s ease,
-        transform 0.8s ease,
-        visibility 0.8s ease;
+        opacity 0.9s ease,
+        transform 0.9s ease,
+        visibility 0.9s ease;
 
     overflow-y: auto;
 }
 
 .scene.active {
     opacity: 1;
+
     visibility: visible;
 
-    transform: translateY(0) scale(1);
+    transform:
+        translateY(0)
+        scale(1);
 }
 
 .scene-content,
@@ -295,7 +452,7 @@ body::before {
 
 
 /* =========================================
-   TYPOGRAPHY
+   SCENE 1
 ========================================= */
 
 .scene-bow {
@@ -303,7 +460,8 @@ body::before {
 
     margin-bottom: 18px;
 
-    animation: gentleBow 3s ease-in-out infinite;
+    animation:
+        gentleBow 3s ease-in-out infinite;
 }
 
 @keyframes gentleBow {
@@ -387,8 +545,6 @@ body::before {
 ========================================= */
 
 .story-button {
-    position: relative;
-
     border: 1px solid rgba(255, 255, 255, 0.5);
 
     padding: 15px 28px;
@@ -434,11 +590,11 @@ body::before {
 ========================================= */
 
 .message-container {
-    max-width: 720px;
+    max-width: 760px;
 }
 
-.typing-message {
-    min-height: 280px;
+.handwritten-message {
+    min-height: 330px;
 
     display: flex;
 
@@ -446,31 +602,35 @@ body::before {
 
     justify-content: center;
 
-    gap: 22px;
+    gap: 25px;
 
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
-.typing-message p {
-    font-family: "Cormorant Garamond", serif;
+.handwritten-message p {
+    font-family: "Great Vibes", cursive;
 
-    font-size: clamp(26px, 4vw, 38px);
+    font-size: clamp(31px, 4vw, 48px);
 
     line-height: 1.25;
 
     opacity: 0;
 
-    transform: translateY(12px);
+    transform:
+        translateY(15px)
+        rotate(-1deg);
 
     transition:
-        opacity 1s ease,
-        transform 1s ease;
+        opacity 1.2s ease,
+        transform 1.2s ease;
 }
 
-.typing-message p.visible {
+.handwritten-message p.visible {
     opacity: 1;
 
-    transform: translateY(0);
+    transform:
+        translateY(0)
+        rotate(0);
 }
 
 .hidden-button {
@@ -557,7 +717,7 @@ body::before {
         linear-gradient(
             to bottom,
             transparent,
-            rgba(255, 255, 255, 0.45),
+            rgba(255, 255, 255, 0.55),
             transparent
         );
 
@@ -573,11 +733,11 @@ body::before {
 
     opacity: 0;
 
-    transform: translateY(30px);
+    transform: translateY(40px);
 
     transition:
-        opacity 0.8s ease,
-        transform 0.8s ease;
+        opacity 0.9s ease,
+        transform 0.9s ease;
 }
 
 .memory.visible {
@@ -598,6 +758,11 @@ body::before {
     text-align: left;
 }
 
+
+/* =========================================
+   TIMELINE HEART
+========================================= */
+
 .timeline-dot {
     position: absolute;
 
@@ -607,6 +772,7 @@ body::before {
     height: 32px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
@@ -623,6 +789,24 @@ body::before {
         0 8px 18px rgba(50, 0, 15, 0.25);
 
     z-index: 3;
+
+    animation: heartGlow 2.5s ease-in-out infinite;
+}
+
+@keyframes heartGlow {
+
+    0%,
+    100% {
+        box-shadow:
+            0 0 0 7px rgba(255, 255, 255, 0.08),
+            0 8px 18px rgba(50, 0, 15, 0.25);
+    }
+
+    50% {
+        box-shadow:
+            0 0 0 10px rgba(255, 255, 255, 0.12),
+            0 0 25px rgba(255, 220, 230, 0.35);
+    }
 }
 
 .memory-left .timeline-dot {
@@ -633,8 +817,13 @@ body::before {
     left: -16px;
 }
 
+
+/* =========================================
+   MEMORY CARD
+========================================= */
+
 .memory-card {
-    background: rgba(255, 248, 245, 0.96);
+    background: rgba(255, 248, 245, 0.97);
 
     color: #7d1c35;
 
@@ -646,44 +835,74 @@ body::before {
         0 20px 45px rgba(45, 0, 15, 0.22);
 
     transition:
-        transform 0.3s ease;
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
 }
 
 .memory-card:hover {
-    transform: translateY(-7px) rotate(-0.5deg);
+    transform:
+        translateY(-8px)
+        rotate(-0.5deg);
+
+    box-shadow:
+        0 30px 55px rgba(45, 0, 15, 0.28);
 }
+
+
+/* =========================================
+   PHOTO
+========================================= */
 
 .photo-placeholder {
     height: 220px;
 
     border-radius: 14px;
 
+    padding: 8px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f3c6cf,
+            #fae7e2
+        );
+
+    margin-bottom: 17px;
+
+    overflow: hidden;
+}
+
+.photo-inner {
+    width: 100%;
+    height: 100%;
+
+    border: 1px dashed rgba(125, 28, 53, 0.3);
+
+    border-radius: 10px;
+
     display: flex;
 
     flex-direction: column;
 
     align-items: center;
+
     justify-content: center;
 
-    background:
-        linear-gradient(
-            135deg,
-            #f4cbd1,
-            #f9e5df
-        );
-
-    color: #9a3a51;
-
-    margin-bottom: 17px;
+    transition:
+        transform 0.4s ease;
 }
 
-.photo-placeholder span {
+.memory-card:hover .photo-inner {
+    transform: scale(1.03);
+}
+
+.photo-inner span {
     font-size: 48px;
 
     margin-bottom: 8px;
 }
 
-.photo-placeholder small {
+.photo-inner small {
     font-size: 9px;
 
     letter-spacing: 3px;
@@ -692,6 +911,11 @@ body::before {
 
     opacity: 0.6;
 }
+
+
+/* =========================================
+   MEMORY TEXT
+========================================= */
 
 .memory-text {
     padding: 0 8px 8px;
@@ -756,6 +980,20 @@ body::before {
     font-size: 34px;
 
     margin-bottom: 20px;
+
+    opacity: 0;
+
+    transform: translateY(15px);
+
+    transition:
+        opacity 1s ease,
+        transform 1s ease;
+}
+
+.pause-text.show {
+    opacity: 1;
+
+    transform: translateY(0);
 }
 
 .big-final-text {
@@ -766,6 +1004,20 @@ body::before {
     line-height: 1.25;
 
     margin-bottom: 35px;
+
+    opacity: 0;
+
+    transform: translateY(15px);
+
+    transition:
+        opacity 1s ease,
+        transform 1s ease;
+}
+
+.big-final-text.show {
+    opacity: 1;
+
+    transform: translateY(0);
 }
 
 
@@ -809,6 +1061,36 @@ body::before {
     background: rgba(255, 255, 255, 0.22);
 }
 
+.music-status {
+    position: fixed;
+
+    right: 75px;
+    bottom: 27px;
+
+    padding: 7px 12px;
+
+    border-radius: 20px;
+
+    background: rgba(255, 255, 255, 0.1);
+
+    backdrop-filter: blur(10px);
+
+    font-size: 9px;
+
+    letter-spacing: 1px;
+
+    opacity: 0;
+
+    z-index: 100;
+
+    transition:
+        opacity 0.5s ease;
+}
+
+.music-status.show {
+    opacity: 0.8;
+}
+
 
 /* =========================================
    MOBILE
@@ -820,6 +1102,7 @@ body::before {
         align-items: flex-start;
 
         padding-top: 70px;
+
         padding-bottom: 60px;
     }
 
@@ -837,6 +1120,14 @@ body::before {
 
     .dramatic-line {
         font-size: 26px;
+    }
+
+    .handwritten-message {
+        min-height: 280px;
+    }
+
+    .handwritten-message p {
+        font-size: 32px;
     }
 
     .timeline::before {
@@ -859,6 +1150,7 @@ body::before {
     .memory-left .timeline-dot,
     .memory-right .timeline-dot {
         left: -1px;
+
         right: auto;
     }
 
@@ -880,6 +1172,10 @@ body::before {
 
     .pause-text {
         font-size: 29px;
+    }
+
+    .music-status {
+        display: none;
     }
 }
 
@@ -904,9 +1200,5 @@ body::before {
         font-size: 58px;
 
         margin-bottom: 20px;
-    }
-
-    .typing-message {
-        min-height: 220px;
     }
 }
