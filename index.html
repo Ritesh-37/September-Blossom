@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -9,84 +10,90 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>🎂 Birthday Adventure 💗</title>
+    <title>🎂 The Birthday Adventure</title>
 
-    <!-- Our CSS file -->
     <link rel="stylesheet" href="style.css">
+
 </head>
 
 
 <body>
 
-    <!-- Floating hearts/stars -->
-    <div id="floating-items"></div>
+<!-- =====================================================
+     FLOATING DECORATIONS
+===================================================== -->
+
+<div id="floating-items"></div>
+
+<canvas id="fireworks"></canvas>
 
 
-    <!-- ==================================================
-         START SCREEN
-    ================================================== -->
+<!-- =====================================================
+     START SCREEN
+===================================================== -->
 
-    <section id="start-screen" class="screen active">
+<section id="start-screen" class="screen active">
 
-        <div class="main-card">
+    <div class="main-card">
 
-            <div class="big-emoji">🎂</div>
+        <div class="big-emoji">🎂</div>
 
-            <div class="tiny-title">
-                A SECRET BIRTHDAY ADVENTURE
-            </div>
-
-            <h1>
-                Happy Birthday! 💗
-            </h1>
-
-            <p class="intro">
-
-                Someone has hidden
-                <strong>10 surprises</strong>
-                around this website...
-
-                <br><br>
-
-                But every surprise is locked! 🔐
-
-                <br><br>
-
-                Solve the questions,
-                unlock the surprises,
-                and discover everything.
-
-            </p>
-
-            <button onclick="startGame()">
-                🎀 Start Adventure
-            </button>
-
+        <div class="tiny-title">
+            A SECRET BIRTHDAY ADVENTURE
         </div>
 
-    </section>
+        <h1>
+            Happy Birthday! 💗
+        </h1>
+
+        <p class="intro">
+
+            Someone has hidden a whole
+            birthday adventure inside this website.
+
+            <br><br>
+
+            There are secrets,
+            riddles,
+            memories,
+            surprises and one
+            <strong>VERY BIG FINAL SURPRISE.</strong>
+
+            <br><br>
+
+            Are you ready?
+
+        </p>
+
+        <button onclick="startGame()">
+            🎀 START ADVENTURE
+        </button>
+
+    </div>
+
+</section>
 
 
 
-    <!-- ==================================================
-         GAME SCREEN
-    ================================================== -->
+<!-- =====================================================
+     MAIN GAME
+===================================================== -->
 
-    <section id="game-screen" class="screen">
+<section id="game-screen" class="screen">
 
-        <!-- Top bar -->
+    <div class="game-header">
 
-        <div class="game-header">
+        <div class="progress">
+            💗
+            <span id="progress-count">0</span>
+            / 10
+        </div>
 
-            <div class="progress">
-                💗
-                <span id="progress-count">0</span>
-                / 10
-            </div>
+        <div class="game-title">
+            🎀 Birthday Adventure
+        </div>
 
-            <div class="game-title">
-                Birthday Adventure ✨
-            </div>
+        <div class="header-buttons">
 
             <button
                 class="small-button"
@@ -95,352 +102,708 @@
                 ?
             </button>
 
+            <button
+                class="small-button"
+                onclick="toggleNightMode()"
+                id="theme-button"
+            >
+                🌙
+            </button>
+
+            <button
+                class="small-button"
+                onclick="toggleMusic()"
+                id="music-button"
+            >
+                🎵
+            </button>
+
         </div>
 
+    </div>
 
-        <!-- ==================================================
-             10 SURPRISE BUTTONS
-        ================================================== -->
+
+
+    <!-- =================================================
+         TREASURE MAP
+    ================================================= -->
+
+    <div class="map-title">
+        🗺️ THE SECRET BIRTHDAY MAP
+    </div>
+
+
+    <div class="treasure-map">
+
+        <div class="map-line line-a"></div>
+        <div class="map-line line-b"></div>
+        <div class="map-line line-c"></div>
 
         <button
-            class="surprise-button button-1"
+            class="map-node node-1"
             onclick="openChallenge(0)"
         >
-            🎀
-            <span>1</span>
+            🎀<small>1</small>
         </button>
 
-
         <button
-            class="surprise-button button-2"
+            class="map-node node-2"
             onclick="openChallenge(1)"
         >
-            💌
-            <span>2</span>
+            💌<small>2</small>
         </button>
 
-
         <button
-            class="surprise-button button-3"
+            class="map-node node-3"
             onclick="openChallenge(2)"
         >
-            🌸
-            <span>3</span>
+            📸<small>3</small>
         </button>
 
-
         <button
-            class="surprise-button button-4"
+            class="map-node node-4"
             onclick="openChallenge(3)"
         >
-            🎁
-            <span>4</span>
+            🎥<small>4</small>
         </button>
 
-
         <button
-            class="surprise-button button-5"
+            class="map-node node-5"
             onclick="openChallenge(4)"
         >
-            ⭐
-            <span>5</span>
+            ⭐<small>5</small>
         </button>
 
-
         <button
-            class="surprise-button button-6"
+            class="map-node node-6"
             onclick="openChallenge(5)"
         >
-            🦋
-            <span>6</span>
+            🦋<small>6</small>
         </button>
 
-
         <button
-            class="surprise-button button-7"
+            class="map-node node-7"
             onclick="openChallenge(6)"
         >
-            🎂
-            <span>7</span>
+            🎂<small>7</small>
         </button>
 
-
         <button
-            class="surprise-button button-8"
+            class="map-node node-8"
             onclick="openChallenge(7)"
         >
-            💖
-            <span>8</span>
+            💖<small>8</small>
         </button>
 
-
         <button
-            class="surprise-button button-9"
+            class="map-node node-9"
             onclick="openChallenge(8)"
         >
-            🌈
-            <span>9</span>
+            🌈<small>9</small>
         </button>
-
 
         <button
-            class="surprise-button button-10"
+            class="map-node node-10"
             onclick="openChallenge(9)"
         >
-            🔮
-            <span>10</span>
+            🔮<small>10</small>
         </button>
 
+    </div>
 
 
-        <!-- Center -->
 
-        <div class="center-message">
+    <!-- =================================================
+         CENTER CONTROLS
+    ================================================= -->
 
-            <div class="center-emoji">
-                🎀
+    <div class="center-message">
+
+        <div class="center-emoji">
+            🗺️
+        </div>
+
+        <h2>
+            Explore Everything
+        </h2>
+
+        <p>
+            Solve the ten mysteries,
+            but don't assume this map
+            contains everything...
+        </p>
+
+        <div id="game-hint">
+            🔐 Everything is locked...
+        </div>
+
+        <div class="center-tools">
+
+            <button onclick="openEnvelope()">
+                💌 Secret Letter
+            </button>
+
+            <button onclick="openGallery()">
+                📸 Memories
+            </button>
+
+            <button onclick="openVideoRoom()">
+                🎥 Video Room
+            </button>
+
+            <button onclick="openRandomSurprise()">
+                🎁 Random Surprise
+            </button>
+
+            <button onclick="openCountdown()">
+                ⏰ Countdown
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         SECRET BUTTON
+    ================================================= -->
+
+    <button
+        id="secret-button"
+        onclick="activateEasterEgg()"
+        aria-label="secret"
+    >
+        ✨
+    </button>
+
+</section>
+
+
+
+<!-- =====================================================
+     QUESTION POPUP
+===================================================== -->
+
+<div id="challenge-popup" class="overlay">
+
+    <div class="challenge-card">
+
+        <button
+            class="close-button"
+            onclick="closeChallenge()"
+        >
+            ×
+        </button>
+
+        <div
+            id="challenge-emoji"
+            class="challenge-emoji"
+        >
+            🔐
+        </div>
+
+        <div class="tiny-title">
+            UNLOCK THE SURPRISE
+        </div>
+
+        <h2 id="challenge-title">
+            Question
+        </h2>
+
+        <p id="challenge-question">
+            Question
+        </p>
+
+        <input
+            id="answer-input"
+            type="text"
+            placeholder="Type your answer..."
+            autocomplete="off"
+        >
+
+        <button onclick="checkAnswer()">
+            🔓 UNLOCK
+        </button>
+
+        <p
+            id="wrong-answer"
+            class="wrong-answer"
+        ></p>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     SURPRISE POPUP
+===================================================== -->
+
+<div id="surprise-popup" class="overlay">
+
+    <div class="surprise-card">
+
+        <button
+            class="close-button"
+            onclick="closeSurprise()"
+        >
+            ×
+        </button>
+
+        <div
+            id="surprise-emoji"
+            class="surprise-emoji"
+        >
+            💗
+        </div>
+
+        <div class="tiny-title">
+            SURPRISE UNLOCKED!
+        </div>
+
+        <h2 id="surprise-title">
+            Surprise!
+        </h2>
+
+        <div
+            id="surprise-content"
+            class="surprise-content"
+        ></div>
+
+        <button onclick="closeSurprise()">
+            💕 CONTINUE
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     SECRET LETTER
+===================================================== -->
+
+<div id="letter-popup" class="overlay">
+
+    <div class="letter-envelope">
+
+        <button
+            class="close-button"
+            onclick="closeOverlay('letter-popup')"
+        >
+            ×
+        </button>
+
+        <div class="envelope" onclick="openLetter()">
+
+            <div class="envelope-flap">
+                💌
             </div>
 
+            <div class="envelope-body">
+                Click me 💗
+            </div>
+
+        </div>
+
+        <div id="letter-content" class="letter-content">
+
             <h2>
-                Find the surprises!
+                💌 A Letter For You
             </h2>
 
             <p>
-                Click one of the buttons around
-                the screen.
+                Dear Birthday Star,
             </p>
-
-            <div id="game-hint">
-                🔐 Everything is locked...
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- ==================================================
-         QUESTION POPUP
-    ================================================== -->
-
-    <div
-        id="challenge-popup"
-        class="overlay"
-    >
-
-        <div class="challenge-card">
-
-            <button
-                class="close-button"
-                onclick="closeChallenge()"
-            >
-                ×
-            </button>
-
-            <div
-                id="challenge-emoji"
-                class="challenge-emoji"
-            >
-                🔐
-            </div>
-
-            <div class="tiny-title">
-                UNLOCK THE SURPRISE
-            </div>
-
-            <h2 id="challenge-title">
-                Question
-            </h2>
-
-            <p id="challenge-question">
-                Question goes here.
-            </p>
-
-            <input
-                id="answer-input"
-                type="text"
-                placeholder="Type your answer..."
-                autocomplete="off"
-            >
-
-            <button onclick="checkAnswer()">
-                🔓 Unlock
-            </button>
-
-            <p
-                id="wrong-answer"
-                class="wrong-answer"
-            ></p>
-
-        </div>
-
-    </div>
-
-
-
-    <!-- ==================================================
-         SURPRISE POPUP
-    ================================================== -->
-
-    <div
-        id="surprise-popup"
-        class="overlay"
-    >
-
-        <div class="surprise-card">
-
-            <button
-                class="close-button"
-                onclick="closeSurprise()"
-            >
-                ×
-            </button>
-
-            <div
-                id="surprise-emoji"
-                class="surprise-emoji"
-            >
-                💗
-            </div>
-
-            <div class="tiny-title">
-                YOU UNLOCKED IT!
-            </div>
-
-            <h2 id="surprise-title">
-                Surprise!
-            </h2>
-
-            <div
-                id="surprise-content"
-                class="surprise-content"
-            ></div>
-
-            <button onclick="closeSurprise()">
-                💕 Continue
-            </button>
-
-        </div>
-
-    </div>
-
-
-
-    <!-- ==================================================
-         INSTRUCTIONS
-    ================================================== -->
-
-    <div
-        id="instructions-popup"
-        class="overlay"
-    >
-
-        <div class="instruction-card">
-
-            <button
-                class="close-button"
-                onclick="closeInstructions()"
-            >
-                ×
-            </button>
-
-            <h2>
-                🎮 How to Play
-            </h2>
 
             <p>
+                Today is your day.
+                So I wanted to make something
+                a little different for you.
+            </p>
 
-                There are 10 hidden surprises.
+            <p>
+                I hope this little website makes
+                you smile, laugh and remember
+                how loved you are.
+            </p>
 
-                <br><br>
+            <p>
+                Keep being yourself.
+                You're pretty amazing. 💗
+            </p>
 
-                🔐 Click a numbered button.
-
-                <br>
-
-                🧩 Solve the question.
-
-                <br>
-
-                🔓 Enter the answer.
-
-                <br>
-
-                🎁 Discover the surprise!
-
-                <br><br>
-
-                You can try again if you get
-                an answer wrong. 💗
-
+            <p>
+                — Someone who cares about you 🎀
             </p>
 
         </div>
 
     </div>
 
+</div>
 
 
-    <!-- ==================================================
-         FINAL CELEBRATION
-    ================================================== -->
 
-    <div
-        id="final-popup"
-        class="overlay"
-    >
+<!-- =====================================================
+     PHOTO GALLERY
+===================================================== -->
 
-        <div class="final-card">
+<div id="gallery-popup" class="overlay">
+
+    <div class="gallery-card">
+
+        <button
+            class="close-button"
+            onclick="closeOverlay('gallery-popup')"
+        >
+            ×
+        </button>
+
+        <h2>
+            📸 Memory Gallery
+        </h2>
+
+        <p>
+            A tiny museum of memories 💗
+        </p>
+
+        <div class="gallery">
+
+            <img
+                src="media/photo1.jpg"
+                alt="Memory 1"
+            >
+
+            <img
+                src="media/photo2.jpg"
+                alt="Memory 2"
+            >
+
+            <img
+                src="media/photo3.jpg"
+                alt="Memory 3"
+            >
+
+        </div>
+
+        <p class="gallery-note">
+            Add your own pictures to the
+            <strong>media</strong> folder!
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     VIDEO ROOM
+===================================================== -->
+
+<div id="video-popup" class="overlay">
+
+    <div class="video-card">
+
+        <button
+            class="close-button"
+            onclick="closeOverlay('video-popup')"
+        >
+            ×
+        </button>
+
+        <h2>
+            🎥 Secret Cinema
+        </h2>
+
+        <p>
+            Grab some popcorn 🍿
+        </p>
+
+        <video
+            controls
+            playsinline
+        >
+            <source
+                src="media/video1.mp4"
+                type="video/mp4"
+            >
+        </video>
+
+        <video
+            controls
+            playsinline
+        >
+            <source
+                src="media/video2.mp4"
+                type="video/mp4"
+            >
+        </video>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     COUNTDOWN
+===================================================== -->
+
+<div id="countdown-popup" class="overlay">
+
+    <div class="countdown-card">
+
+        <button
+            class="close-button"
+            onclick="closeOverlay('countdown-popup')"
+        >
+            ×
+        </button>
+
+        <div class="big-emoji">
+            🎂
+        </div>
+
+        <h2>
+            Birthday Countdown
+        </h2>
+
+        <p>
+            Until the big day...
+        </p>
+
+        <div class="countdown">
+
+            <div>
+                <strong id="days">0</strong>
+                <span>Days</span>
+            </div>
+
+            <div>
+                <strong id="hours">0</strong>
+                <span>Hours</span>
+            </div>
+
+            <div>
+                <strong id="minutes">0</strong>
+                <span>Minutes</span>
+            </div>
+
+            <div>
+                <strong id="seconds">0</strong>
+                <span>Seconds</span>
+            </div>
+
+        </div>
+
+        <p id="birthday-message">
+            🎉 Almost there!
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     INSTRUCTIONS
+===================================================== -->
+
+<div id="instructions-popup" class="overlay">
+
+    <div class="instruction-card">
+
+        <button
+            class="close-button"
+            onclick="closeInstructions()"
+        >
+            ×
+        </button>
+
+        <h2>
+            🎮 How To Play
+        </h2>
+
+        <p>
+
+            🗺️ Explore the map.
+
+            <br><br>
+
+            🔐 Solve riddles.
+
+            <br><br>
+
+            🎁 Unlock surprises.
+
+            <br><br>
+
+            🕵️ Look carefully for secrets.
+
+            <br><br>
+
+            💌 Open the letter.
+
+            <br><br>
+
+            📸 Explore the memories.
+
+            <br><br>
+
+            🎥 Visit the cinema.
+
+            <br><br>
+
+            🌙 Try night mode.
+
+            <br><br>
+
+            ✨ And don't forget:
+            <strong>not everything is visible.</strong>
+
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     EASTER EGG
+===================================================== -->
+
+<div id="easter-popup" class="overlay">
+
+    <div class="easter-card">
+
+        <div class="big-emoji">
+            🥚
+        </div>
+
+        <h2>
+            YOU FOUND THE SECRET!
+        </h2>
+
+        <p>
+            Okay... you're either very clever
+            or extremely good at clicking random
+            things. 😂
+        </p>
+
+        <p>
+            Either way, you deserve this:
+        </p>
+
+        <h1>
+            💎✨ SECRET LEVEL ✨💎
+        </h1>
+
+        <button onclick="secretFireworks()">
+            🎆 ACTIVATE FIREWORKS
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     FINAL CINEMATIC
+===================================================== -->
+
+<div id="final-popup" class="overlay cinematic">
+
+    <div class="final-cinematic">
+
+        <div class="cinematic-stars"></div>
+
+        <div class="final-content">
 
             <div class="final-emoji">
-                🥳
+                🎂
             </div>
 
             <div class="tiny-title">
-                YOU DID IT!
+                THE FINAL SURPRISE
             </div>
 
             <h1>
-                All Surprises Unlocked!
+                Happy Birthday,
+                <span id="final-name">
+                    Birthday Star
+                </span>!
             </h1>
 
-            <p>
+            <p id="cinematic-message">
 
-                You found every hidden surprise!
-
-                <br><br>
-
-                🎂 Happy Birthday,
-                <strong id="final-name">
-                    Birthday Star
-                </strong>!
+                You found every secret.
 
                 <br><br>
 
-                May your entire year be filled
-                with happiness, laughter,
-                amazing memories and dreams
-                coming true. ✨
+                But the real surprise was never
+                the website.
+
+                <br><br>
+
+                It was the reminder that someone
+                thinks you're worth celebrating.
+
+                <br><br>
+
+                💗 Stay amazing.
+                Keep smiling.
+                Keep dreaming.
+
+                <br><br>
+
+                🎂 HAPPY BIRTHDAY! 🎂
 
             </p>
 
             <button onclick="massiveParty()">
-                🎊 MASSIVE PARTY
+                🎊 START THE FINAL PARTY
             </button>
 
         </div>
 
     </div>
 
+</div>
 
 
-    <!-- Confetti container -->
-    <div id="confetti-container"></div>
+
+<!-- =====================================================
+     CONFETTI
+===================================================== -->
+
+<div id="confetti-container"></div>
 
 
-    <!-- Our JavaScript file -->
-    <script src="script.js"></script>
+
+<!-- =====================================================
+     MUSIC
+===================================================== -->
+
+<audio
+    id="birthday-music"
+    loop
+>
+    <source
+        src="media/birthday.mp3"
+        type="audio/mpeg"
+    >
+</audio>
+
+
+<script src="script.js"></script>
 
 </body>
 
