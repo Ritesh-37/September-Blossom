@@ -1,4 +1,3 @@
-```javascript
 /* =========================================================
    PASSWORD
 ========================================================= */
@@ -7,62 +6,106 @@ const CORRECT_PASSWORD = "0309";
 
 let enteredPassword = "";
 
-let passwordCorrect = false;
+let popupType = "";
+
+let musicPlaying = false;
 
 
 /* =========================================================
-   ELEMENTS
+   AUDIO SYSTEM
+   We create sounds directly with Web Audio.
+   This means you do NOT need an audio folder.
 ========================================================= */
 
-const passwordDisplay =
-    document.getElementById(
-        "password-display"
+let audioContext = null;
+
+let musicTimer = null;
+
+let musicNoteIndex = 0;
+
+
+/* =========================================================
+   CREATE AUDIO CONTEXT
+========================================================= */
+
+function getAudioContext() {
+
+    if (!audioContext) {
+
+        audioContext =
+            new (
+                window.AudioContext ||
+                window.webkitAudioContext
+            )();
+
+    }
+
+    if (
+        audioContext.state ===
+        "suspended"
+    ) {
+
+        audioContext.resume();
+
+    }
+
+    return audioContext;
+}
+
+
+/* =========================================================
+   PLAY SIMPLE TONE
+========================================================= */
+
+function playTone(
+    frequency,
+    duration = 0.15,
+    type = "sine",
+    volume = 0.08
+) {
+
+    const ctx =
+        getAudioContext();
+
+    const oscillator =
+        ctx.createOscillator();
+
+    const gain =
+        ctx.createGain();
+
+
+    oscillator.type =
+        type;
+
+    oscillator.frequency.value =
+        frequency;
+
+
+    gain.gain.setValueAtTime(
+        volume,
+        ctx.currentTime
     );
 
-const popupOverlay =
-    document.getElementById(
-        "popup-overlay"
+
+    gain.gain.exponentialRampToValueAtTime(
+        0.001,
+        ctx.currentTime + duration
     );
 
-const popupDoodle =
-    document.getElementById(
-        "popup-doodle"
+
+    oscillator.connect(gain);
+
+    gain.connect(
+        ctx.destination
     );
 
-const popupMessage =
-    document.getElementById(
-        "popup-message"
-    );
 
-const popupHearts =
-    document.getElementById(
-        "popup-hearts"
-    );
+    oscillator.start();
 
-const pageOne =
-    document.getElementById(
-        "page-one"
+    oscillator.stop(
+        ctx.currentTime + duration
     );
-
-const pageTwo =
-    document.getElementById(
-        "page-two"
-    );
-
-const birthdayMusic =
-    document.getElementById(
-        "birthday-music"
-    );
-
-const farmDoor =
-    document.getElementById(
-        "farm-door"
-    );
-
-const doorTooltip =
-    document.getElementById(
-        "door-tooltip"
-    );
+}
 
 
 /* =========================================================
@@ -71,7 +114,13 @@ const doorTooltip =
 
 function updateDisplay() {
 
-    passwordDisplay.textContent =
+    const display =
+        document.getElementById(
+            "password-display"
+        );
+
+
+    display.textContent =
         "•".repeat(
             enteredPassword.length
         );
@@ -81,15 +130,16 @@ function updateDisplay() {
         enteredPassword.length > 0
     ) {
 
-        passwordDisplay.classList.add(
+        display.classList.add(
             "filled"
         );
 
     } else {
 
-        passwordDisplay.classList.remove(
+        display.classList.remove(
             "filled"
         );
+
     }
 }
 
@@ -103,7 +153,9 @@ function pressKey(number) {
     if (
         enteredPassword.length >= 8
     ) {
+
         return;
+
     }
 
 
@@ -112,6 +164,13 @@ function pressKey(number) {
     updateDisplay();
 
     clearMessage();
+
+    playTone(
+        440,
+        0.08,
+        "sine",
+        0.035
+    );
 }
 
 
@@ -130,64 +189,120 @@ function deleteKey() {
     updateDisplay();
 
     clearMessage();
-}
 
-
-/* =========================================================
-   PASSWORD MESSAGE
-========================================================= */
-
-function clearMessage() {
-
-    const message =
-        document.getElementById(
-            "password-message"
-        );
-
-    message.textContent = "";
-}
-
-
-/* =========================================================
-   SHOW WRONG PASSWORD POPUP
-========================================================= */
-
-function showWrongPopup() {
-
-    popupDoodle.textContent =
-        "🥺💗";
-
-    popupMessage.innerHTML =
-        "Baby!!!! You've entered the wrong password.";
-
-    popupHearts.textContent =
-        "♡ ✿ ♡";
-
-
-    popupOverlay.classList.add(
-        "show"
+    playTone(
+        250,
+        0.08,
+        "sine",
+        0.03
     );
 }
 
 
 /* =========================================================
-   SHOW CORRECT PASSWORD POPUP
+   SHOW POPUP
 ========================================================= */
 
-function showCorrectPopup() {
+function showPopup(type) {
 
-    popupDoodle.textContent =
-        "🎀💗✨";
+    const overlay =
+        document.getElementById(
+            "popup-overlay"
+        );
 
-    popupMessage.innerHTML =
-        "Welcome, Baby! 💕<br>" +
-        "I've been waiting for you! 🌸";
+    const doodle =
+        document.getElementById(
+            "popup-doodle"
+        );
 
-    popupHearts.textContent =
-        "♡ ✿ ♡ ✿ ♡";
+    const message =
+        document.getElementById(
+            "popup-message"
+        );
+
+    const hearts =
+        document.getElementById(
+            "popup-hearts"
+        );
 
 
-    popupOverlay.classList.add(
+    popupType = type;
+
+
+    if (
+        type === "wrong"
+    ) {
+
+        doodle.textContent =
+            "🥺💗";
+
+        message.innerHTML =
+            "Baby!!!! You've entered the wrong password.";
+
+        hearts.textContent =
+            "♡ ✿ ♡";
+
+
+        playTone(
+            220,
+            0.2,
+            "sine",
+            0.06
+        );
+
+    }
+
+
+    if (
+        type === "correct"
+    ) {
+
+        doodle.textContent =
+            "🎀💗✨";
+
+        message.innerHTML =
+            "Welcome, Baby! 💕<br>" +
+            "I've been waiting for you! 🌸";
+
+        hearts.textContent =
+            "♡ ✿ ♡ ✿ ♡";
+
+
+        playTone(
+            523,
+            0.12,
+            "sine",
+            0.05
+        );
+
+        setTimeout(
+            () => {
+                playTone(
+                    659,
+                    0.12,
+                    "sine",
+                    0.05
+                );
+            },
+            120
+        );
+
+        setTimeout(
+            () => {
+                playTone(
+                    784,
+                    0.2,
+                    "sine",
+                    0.05
+                );
+            },
+            240
+        );
+
+    }
+
+
+    overlay.classList.add(
         "show"
     );
 }
@@ -199,24 +314,41 @@ function showCorrectPopup() {
 
 function closePopup() {
 
-    popupOverlay.classList.remove(
+    const overlay =
+        document.getElementById(
+            "popup-overlay"
+        );
+
+
+    overlay.classList.remove(
         "show"
     );
 
 
     /*
        IMPORTANT:
-       Page 2 opens ONLY if the
-       password was correct.
+       Page 2 opens ONLY after
+       the correct welcome popup
+       has been closed.
     */
 
-    if (passwordCorrect) {
+    if (
+        popupType === "correct"
+    ) {
 
         setTimeout(
-            openBirthdayPage,
+            () => {
+
+                openPage2();
+
+            },
             300
         );
+
     }
+
+
+    popupType = "";
 }
 
 
@@ -225,6 +357,12 @@ function closePopup() {
 ========================================================= */
 
 function checkPassword() {
+
+    const display =
+        document.getElementById(
+            "password-display"
+        );
+
 
     /*
        CORRECT
@@ -235,14 +373,7 @@ function checkPassword() {
         CORRECT_PASSWORD
     ) {
 
-        passwordCorrect = true;
-
-
-        /*
-           Success animation
-        */
-
-        passwordDisplay.animate(
+        display.animate(
 
             [
                 {
@@ -265,13 +396,21 @@ function checkPassword() {
                 duration:
                     450
             }
+
         );
 
 
         setTimeout(
-            showCorrectPopup,
+            () => {
+
+                showPopup(
+                    "correct"
+                );
+
+            },
             300
         );
+
 
         return;
     }
@@ -281,10 +420,7 @@ function checkPassword() {
        WRONG
     */
 
-    passwordCorrect = false;
-
-
-    passwordDisplay.animate(
+    display.animate(
 
         [
             {
@@ -294,22 +430,22 @@ function checkPassword() {
 
             {
                 transform:
-                    "translateX(-9px)"
+                    "translateX(-8px)"
             },
 
             {
                 transform:
-                    "translateX(9px)"
+                    "translateX(8px)"
             },
 
             {
                 transform:
-                    "translateX(-7px)"
+                    "translateX(-6px)"
             },
 
             {
                 transform:
-                    "translateX(7px)"
+                    "translateX(6px)"
             },
 
             {
@@ -320,19 +456,25 @@ function checkPassword() {
 
         {
             duration:
-                400
+                350
         }
     );
 
 
     setTimeout(
-        showWrongPopup,
+        () => {
+
+            showPopup(
+                "wrong"
+            );
+
+        },
         300
     );
 
 
     setTimeout(
-        function () {
+        () => {
 
             enteredPassword = "";
 
@@ -345,230 +487,220 @@ function checkPassword() {
 
 
 /* =========================================================
+   CLEAR PASSWORD MESSAGE
+========================================================= */
+
+function clearMessage() {
+
+    const message =
+        document.getElementById(
+            "password-message"
+        );
+
+    message.textContent = "";
+}
+
+
+/* =========================================================
    OPEN PAGE 2
 ========================================================= */
 
-function openBirthdayPage() {
+function openPage2() {
 
-    /*
-       Hide Page 1
-    */
+    const page1 =
+        document.getElementById(
+            "page1"
+        );
 
-    pageOne.style.display =
+    const page2 =
+        document.getElementById(
+            "page2"
+        );
+
+
+    page1.style.display =
         "none";
 
-
-    /*
-       Show Page 2
-    */
-
-    pageTwo.classList.add(
-        "active"
-    );
+    page2.style.display =
+        "block";
 
 
     /*
-       Start birthday music.
-       Browser policy may prevent
-       audio in some situations.
+       Start birthday music
+       after entering Page 2.
     */
 
-    if (birthdayMusic) {
-
-        birthdayMusic.volume =
-            0.35;
-
-        const playPromise =
-            birthdayMusic.play();
-
-
-        if (
-            playPromise !== undefined
-        ) {
-
-            playPromise.catch(
-                function () {
-
-                    console.log(
-                        "Music autoplay was blocked by the browser."
-                    );
-
-                }
-            );
-        }
-    }
+    startBirthdayMusic();
 }
 
 
 /* =========================================================
-   DOOR HOVER
+   BIRTHDAY MUSIC
 ========================================================= */
 
-farmDoor.addEventListener(
-    "mouseenter",
-    function () {
+/*
+   Simple generated birthday-style melody.
 
-        doorTooltip.classList.add(
-            "show"
-        );
-    }
-);
+   This avoids requiring an external
+   MP3 file in GitHub.
+*/
+
+const birthdayNotes = [
+
+    262,
+    262,
+    294,
+    262,
+    349,
+    330,
+
+    262,
+    262,
+    294,
+    262,
+    392,
+    349,
+
+    262,
+    262,
+    523,
+    440,
+    349,
+    330,
+    294,
+
+    466,
+    466,
+    440,
+    349,
+    392,
+    349
+
+];
 
 
-farmDoor.addEventListener(
-    "mouseleave",
-    function () {
+function playBirthdayNote() {
 
-        doorTooltip.classList.remove(
-            "show"
-        );
-    }
-);
+    if (
+        !musicPlaying
+    ) {
 
-
-/* =========================================================
-   DOOR CLICK SOUND
-========================================================= */
-
-function playDoorSound() {
-
-    /*
-       Web Audio API creates a
-       small wooden click sound.
-
-       This means you don't need
-       another audio file for the door.
-    */
-
-    const AudioContext =
-        window.AudioContext ||
-        window.webkitAudioContext;
-
-
-    if (!AudioContext) {
         return;
+
     }
 
 
-    const context =
-        new AudioContext();
+    const note =
+        birthdayNotes[
+            musicNoteIndex %
+            birthdayNotes.length
+        ];
 
 
-    const oscillator =
-        context.createOscillator();
-
-    const gain =
-        context.createGain();
-
-
-    oscillator.type =
-        "triangle";
-
-
-    oscillator.frequency.setValueAtTime(
-        180,
-        context.currentTime
+    playTone(
+        note,
+        0.28,
+        "triangle",
+        0.035
     );
 
 
-    oscillator.frequency.exponentialRampToValueAtTime(
-        80,
-        context.currentTime + 0.12
-    );
+    musicNoteIndex++;
 
 
-    gain.gain.setValueAtTime(
-        0.18,
-        context.currentTime
-    );
-
-
-    gain.gain.exponentialRampToValueAtTime(
-        0.001,
-        context.currentTime + 0.18
-    );
-
-
-    oscillator.connect(
-        gain
-    );
-
-    gain.connect(
-        context.destination
-    );
-
-
-    oscillator.start();
-
-    oscillator.stop(
-        context.currentTime + 0.18
-    );
+    musicTimer =
+        setTimeout(
+            playBirthdayNote,
+            360
+        );
 }
 
 
 /* =========================================================
-   OPEN FARM HOUSE
+   START MUSIC
 ========================================================= */
 
-function openFarmDoor() {
+function startBirthdayMusic() {
 
-    playDoorSound();
+    getAudioContext();
 
+    musicPlaying = true;
 
-    /*
-       Small door-opening animation
-    */
+    musicNoteIndex = 0;
 
-    farmDoor.animate(
-
-        [
-            {
-                transform:
-                    "perspective(300px) rotateY(0deg)"
-            },
-
-            {
-                transform:
-                    "perspective(300px) rotateY(-35deg)"
-            },
-
-            {
-                transform:
-                    "perspective(300px) rotateY(-70deg)"
-            }
-        ],
-
-        {
-            duration:
-                650,
-
-            fill:
-                "forwards"
-        }
+    clearTimeout(
+        musicTimer
     );
 
+    playBirthdayNote();
 
-    doorTooltip.textContent =
-        "Opening...";
+    updateMusicButton();
+}
 
 
-    /*
-       Page 3 placeholder.
+/* =========================================================
+   STOP MUSIC
+========================================================= */
 
-       When we're ready to build Page 3,
-       this function will navigate to it.
-    */
+function stopBirthdayMusic() {
 
-    setTimeout(
-        function () {
+    musicPlaying = false;
 
-            alert(
-                "🏡 The door opened! Page 3 will go here next. 💗"
-            );
-
-        },
-        750
+    clearTimeout(
+        musicTimer
     );
+
+    musicTimer = null;
+
+    updateMusicButton();
+}
+
+
+/* =========================================================
+   TOGGLE MUSIC
+========================================================= */
+
+function toggleMusic() {
+
+    if (
+        musicPlaying
+    ) {
+
+        stopBirthdayMusic();
+
+    } else {
+
+        startBirthdayMusic();
+
+    }
+}
+
+
+/* =========================================================
+   MUSIC BUTTON TEXT
+========================================================= */
+
+function updateMusicButton() {
+
+    const button =
+        document.getElementById(
+            "music-button"
+        );
+
+
+    if (
+        musicPlaying
+    ) {
+
+        button.textContent =
+            "🔊 Music On";
+
+    } else {
+
+        button.textContent =
+            "🔇 Music Off";
+
+    }
 }
 
 
@@ -576,137 +708,160 @@ function openFarmDoor() {
    DUCK SOUND
 ========================================================= */
 
-function duckQuack() {
+function duckSound() {
 
-    /*
-       Web Audio API makes a cute
-       duck-like quack without
-       requiring another sound file.
-    */
-
-    const AudioContext =
-        window.AudioContext ||
-        window.webkitAudioContext;
-
-
-    if (!AudioContext) {
-        return;
-    }
-
-
-    const context =
-        new AudioContext();
-
-
-    const oscillator =
-        context.createOscillator();
-
-    const gain =
-        context.createGain();
-
-
-    oscillator.type =
-        "square";
-
-
-    oscillator.frequency.setValueAtTime(
-        420,
-        context.currentTime
-    );
-
-
-    oscillator.frequency.exponentialRampToValueAtTime(
-        250,
-        context.currentTime + 0.12
-    );
-
-
-    oscillator.frequency.exponentialRampToValueAtTime(
-        380,
-        context.currentTime + 0.22
-    );
-
-
-    gain.gain.setValueAtTime(
-        0.14,
-        context.currentTime
-    );
-
-
-    gain.gain.exponentialRampToValueAtTime(
-        0.001,
-        context.currentTime + 0.25
-    );
-
-
-    oscillator.connect(
-        gain
-    );
-
-    gain.connect(
-        context.destination
-    );
-
-
-    oscillator.start();
-
-    oscillator.stop(
-        context.currentTime + 0.25
-    );
+    getAudioContext();
 
 
     /*
-       Little duck bounce
+       Two tones make the
+       sound more duck-like.
     */
 
-    const ducks =
-        document.getElementById(
-            "duck-family"
-        );
+    playTone(
+        330,
+        0.18,
+        "sawtooth",
+        0.06
+    );
 
 
-    ducks.animate(
+    setTimeout(
+        () => {
 
-        [
-            {
-                transform:
-                    "translateY(0)"
-            },
+            playTone(
+                220,
+                0.2,
+                "sawtooth",
+                0.05
+            );
 
-            {
-                transform:
-                    "translateY(-12px)"
-            },
-
-            {
-                transform:
-                    "translateY(0)"
-            }
-        ],
-
-        {
-            duration:
-                350
-        }
+        },
+        100
     );
 }
 
 
 /* =========================================================
-   ESCAPE CLOSES POPUP
+   FARMHOUSE DOOR
+========================================================= */
+
+function openFarmDoor() {
+
+    /*
+       Door click sound.
+    */
+
+    playTone(
+        180,
+        0.12,
+        "square",
+        0.05
+    );
+
+
+    setTimeout(
+        () => {
+
+            playTone(
+                100,
+                0.18,
+                "square",
+                0.035
+            );
+
+        },
+        100
+    );
+
+
+    /*
+       Small door animation.
+    */
+
+    const door =
+        document.getElementById(
+            "farm-door"
+        );
+
+
+    door.animate(
+
+        [
+            {
+                transform:
+                    "scaleX(1)"
+            },
+
+            {
+                transform:
+                    "scaleX(0.92)"
+            },
+
+            {
+                transform:
+                    "scaleX(1)"
+            }
+        ],
+
+        {
+            duration:
+                400
+        }
+    );
+
+
+    /*
+       Give the sound a moment,
+       then go to Page 3.
+    */
+
+    setTimeout(
+        () => {
+
+            openPage3();
+
+        },
+        650
+    );
+}
+
+
+/* =========================================================
+   OPEN PAGE 3
+========================================================= */
+
+function openPage3() {
+
+    const page2 =
+        document.getElementById(
+            "page2"
+        );
+
+    const page3 =
+        document.getElementById(
+            "page3"
+        );
+
+
+    stopBirthdayMusic();
+
+
+    page2.style.display =
+        "none";
+
+    page3.style.display =
+        "flex";
+}
+
+
+/* =========================================================
+   KEYBOARD SUPPORT
 ========================================================= */
 
 document.addEventListener(
     "keydown",
-    function (event) {
-
-        if (
-            event.key === "Escape"
-        ) {
-
-            closePopup();
-        }
-
+    function(event) {
 
         if (
             event.key >= "0" &&
@@ -716,42 +871,39 @@ document.addEventListener(
             pressKey(
                 event.key
             );
+
         }
 
 
-        if (
-            event.key === "Backspace"
+        else if (
+            event.key ===
+            "Backspace"
         ) {
 
             deleteKey();
+
         }
 
 
-        if (
-            event.key === "Enter"
+        else if (
+            event.key ===
+            "Enter"
         ) {
 
             checkPassword();
+
         }
-    }
-);
 
 
-/* =========================================================
-   CLICK OUTSIDE POPUP
-========================================================= */
-
-popupOverlay.addEventListener(
-    "click",
-    function (event) {
-
-        if (
-            event.target ===
-            popupOverlay
+        else if (
+            event.key ===
+            "Escape"
         ) {
 
             closePopup();
+
         }
+
     }
 );
 
@@ -760,5 +912,41 @@ popupOverlay.addEventListener(
    INITIALIZE
 ========================================================= */
 
-updateDisplay();
-```
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        updateDisplay();
+
+        updateMusicButton();
+
+
+        /*
+           Clicking outside popup
+           closes it.
+        */
+
+        const overlay =
+            document.getElementById(
+                "popup-overlay"
+            );
+
+
+        overlay.addEventListener(
+            "click",
+            function(event) {
+
+                if (
+                    event.target ===
+                    overlay
+                ) {
+
+                    closePopup();
+
+                }
+
+            }
+        );
+
+    }
+);
