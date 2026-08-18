@@ -276,9 +276,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         setTimeout(function () {
 
-            alert(
-                "Page 2 will be connected here next! ❤️"
-            );
+            window.location.href = "page2.html";
 
             passwordScreen.classList.add("active");
 
