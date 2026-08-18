@@ -3,253 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Little Birthday Secret 💗</title>
+    <title>A Little Surprise ❤️</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- INTRO -->
-    <div id="intro" class="intro">
-        <div class="intro-heart">♡</div>
-        <p>A little birthday secret...</p>
+    <div class="background">
+        <div class="flower flower-one">✿</div>
+        <div class="flower flower-two">✿</div>
+        <div class="flower flower-three">✿</div>
+        <div class="flower flower-four">✿</div>
+
+        <div class="leaf leaf-one">🍃</div>
+        <div class="leaf leaf-two">🍃</div>
+        <div class="leaf leaf-three">🍃</div>
+        <div class="leaf leaf-four">🍃</div>
     </div>
 
+    <main class="container">
 
-    <!-- BACKGROUND DECORATIONS -->
-    <div class="decorations">
-        <span class="flower f1">✿</span>
-        <span class="flower f2">✿</span>
-        <span class="flower f3">✿</span>
-        <span class="flower f4">✿</span>
-        <span class="flower f5">✿</span>
+        <div class="card">
 
-        <span class="leaf l1">🌿</span>
-        <span class="leaf l2">🍃</span>
-        <span class="leaf l3">🌿</span>
-        <span class="leaf l4">🍃</span>
+            <div class="heart">♥</div>
 
-        <span class="petal p1">♡</span>
-        <span class="petal p2">♡</span>
-        <span class="petal p3">♡</span>
-        <span class="petal p4">♡</span>
-        <span class="petal p5">♡</span>
-        <span class="petal p6">♡</span>
-    </div>
+            <p class="small-text">A little surprise for you...</p>
 
+            <h1>Hello, Beautiful ❤️</h1>
 
-    <!-- MAIN PAGE -->
-    <main class="page">
+            <p class="message">
+                Someone has prepared something very special for you.
+            </p>
 
-        <!-- LEFT SIDE -->
-        <section class="photo-section">
+            <p class="question">
+                But first... can you unlock it? 🔐
+            </p>
 
-            <div class="glow"></div>
+            <div class="password-box">
 
-            <div class="pink-card"></div>
-            <div class="white-card"></div>
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter the secret password"
+                    autocomplete="off"
+                >
 
-            <div class="heart-decoration left-flower">✿</div>
-            <div class="heart-decoration right-flower">✿</div>
-
-            <div class="heart-frame">
-
-                <div class="heart-photo">
-
-                    <!--
-                    =================================================
-                    YOUR PHOTO
-
-                    Later replace the URL below with your own photo.
-
-                    Example:
-                    src="media/myphoto.jpg"
-                    =================================================
-                    -->
-
-                    <img
-                        src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=800&q=80"
-                        alt="Birthday photo"
-                    >
-
-                </div>
+                <button id="unlockButton" type="button">
+                    Unlock My Surprise ✨
+                </button>
 
             </div>
 
-            <p class="photo-caption">
-                ♡ A little piece of happiness ♡
+            <p class="hint">
+                Hint: It's something only you would know 💕
             </p>
 
-            <p class="photo-small-text">
-                made with a little bit of love ✨
-            </p>
-
-        </section>
-
-
-        <!-- RIGHT SIDE -->
-        <section class="password-section">
-
-            <div class="glass-box">
-
-                <div class="top-heart">♡</div>
-
-                <p class="small-title">
-                    A LITTLE SECRET AWAITS
-                </p>
-
-                <h1>
-                    Enter The Password
-                </h1>
-
-                <p class="subtitle">
-                    Only someone special knows
-                    the way in... 🌸
-                </p>
-
-                <div class="little-line">
-                    <span></span>
-                    <b>♡</b>
-                    <span></span>
-                </div>
-
-
-                <!-- PASSWORD DISPLAY -->
-                <div
-                    id="passwordDisplay"
-                    class="password-display"
-                ></div>
-
-
-                <!-- KEYPAD -->
-                <div class="keypad">
-
-                    <button class="key" onclick="pressKey('1')">1</button>
-                    <button class="key" onclick="pressKey('2')">2</button>
-                    <button class="key" onclick="pressKey('3')">3</button>
-
-                    <button class="key" onclick="pressKey('4')">4</button>
-                    <button class="key" onclick="pressKey('5')">5</button>
-                    <button class="key" onclick="pressKey('6')">6</button>
-
-                    <button class="key" onclick="pressKey('7')">7</button>
-                    <button class="key" onclick="pressKey('8')">8</button>
-                    <button class="key" onclick="pressKey('9')">9</button>
-
-                    <button class="key special" onclick="deleteKey()">×</button>
-                    <button class="key" onclick="pressKey('0')">0</button>
-                    <button class="key special" onclick="checkPassword()">↵</button>
-
-                </div>
-
-
-                <p
-                    id="passwordMessage"
-                    class="password-message"
-                ></p>
-
-                <p class="hint">
-                    enter the secret code ♡
-                </p>
-
-            </div>
-
-        </section>
+        </div>
 
     </main>
 
+    <div class="popup-overlay" id="wrongPopup">
 
-    <!-- WRONG PASSWORD POPUP -->
-    <div
-        id="wrongPopup"
-        class="popup"
-    >
+        <div class="popup">
 
-        <div class="popup-box">
+            <div class="popup-icon">🤍</div>
 
-            <button
-                class="close-button"
-                onclick="closeWrongPopup()"
-            >
-                ×
-            </button>
-
-            <div class="popup-doodle">
-                ♡
-            </div>
-
-            <div class="popup-flower">
-                ✿
-            </div>
-
-            <h2>
-                Baby!!!! 😭💗
-            </h2>
+            <h2>Baby!!!!</h2>
 
             <p>
-                You've entered the
-                <strong>wrong password!</strong>
+                You've entered the wrong password. 🥺
             </p>
 
-            <p class="popup-small">
-                Try again, silly ♡
-            </p>
-
-            <button
-                class="popup-action"
-                onclick="closeWrongPopup()"
-            >
-                I'll try again 💕
+            <button type="button" id="wrongClose">
+                Try Again 💕
             </button>
 
         </div>
 
     </div>
 
+    <div class="popup-overlay" id="welcomePopup">
 
-    <!-- CORRECT PASSWORD POPUP -->
-    <div
-        id="successPopup"
-        class="popup"
-    >
+        <div class="popup">
 
-        <div class="popup-box success-box">
+            <div class="popup-icon">💗</div>
 
-            <div class="sparkles">
-                ✨ ♡ ✨
-            </div>
-
-            <div class="success-heart">
-                💗
-            </div>
-
-            <h2>
-                Yayyyy! 🥹💗
-            </h2>
+            <h2>Welcome, Baby! ✨</h2>
 
             <p>
-                You remembered the secret!
+                You got it right! Your little surprise is waiting for you. 🥰
             </p>
 
-            <p class="popup-small">
-                Welcome, birthday girl ✨
-            </p>
-
-            <div class="popup-divider">
-                ♡
-            </div>
-
-            <button
-                class="popup-action"
-                onclick="closeSuccessPopup()"
-            >
-                Continue ♡
+            <button type="button" id="welcomeClose">
+                Let's Go! 💕
             </button>
 
         </div>
 
     </div>
-
 
     <script src="script.js"></script>
 
