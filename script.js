@@ -1,5 +1,5 @@
 /* =====================================================
-   🎂 BIRTHDAY SURPRISE - PAGE 1 ONLY
+   🎂 BIRTHDAY SECRET — PAGE 1
 ===================================================== */
 
 
@@ -12,13 +12,13 @@ const correctPassword = "03092005";
 let enteredPassword = "";
 
 
+
 /* =====================================================
-   ADD NUMBER
+   NUMERIC KEYPAD
 ===================================================== */
 
-function addNumber(number) {
+function pressKey(number) {
 
-    // Don't allow more than 8 digits
     if (enteredPassword.length >= 8) {
         return;
     }
@@ -26,7 +26,9 @@ function addNumber(number) {
     enteredPassword += number;
 
     updatePasswordDisplay();
+
 }
+
 
 
 /* =====================================================
@@ -35,26 +37,59 @@ function addNumber(number) {
 
 function updatePasswordDisplay() {
 
-    const boxes =
-        document.querySelectorAll(
-            "#password-display span"
+    const display =
+        document.getElementById(
+            "password-text"
+        );
+
+    const box =
+        document.getElementById(
+            "password-display"
         );
 
 
-    boxes.forEach((box, index) => {
+    if (enteredPassword.length === 0) {
 
-        if (index < enteredPassword.length) {
+        display.textContent =
+            "ENTER PASSWORD";
 
-            box.textContent = "●";
+        box.classList.remove(
+            "has-password"
+        );
 
-        } else {
+        return;
+    }
 
-            box.textContent = "_";
 
-        }
+    display.textContent =
+        "•".repeat(
+            enteredPassword.length
+        );
 
-    });
+    box.classList.add(
+        "has-password"
+    );
+
 }
+
+
+
+/* =====================================================
+   DELETE LAST NUMBER
+===================================================== */
+
+function deleteLast() {
+
+    enteredPassword =
+        enteredPassword.slice(
+            0,
+            -1
+        );
+
+    updatePasswordDisplay();
+
+}
+
 
 
 /* =====================================================
@@ -68,9 +103,11 @@ function clearPassword() {
     updatePasswordDisplay();
 
     document.getElementById(
-        "password-message"
+        "password-status"
     ).textContent = "";
+
 }
+
 
 
 /* =====================================================
@@ -79,50 +116,96 @@ function clearPassword() {
 
 function checkPassword() {
 
+    const card =
+        document.querySelector(
+            ".password-card"
+        );
+
+    const status =
+        document.getElementById(
+            "password-status"
+        );
+
+
     if (
-        enteredPassword === correctPassword
+        enteredPassword ===
+        correctPassword
     ) {
 
-        // Correct password
+        /* =============================================
+           CORRECT PASSWORD
+        ============================================== */
 
-        document.getElementById(
-            "password-message"
-        ).textContent =
-            "🎉 Correct! Welcome...";
+        status.textContent =
+            "✓ ACCESS GRANTED";
+
+        status.style.color =
+            "#3b9b72";
+
+
+        card.style.boxShadow =
+            "0 0 50px rgba(80,210,150,0.25), 0 25px 80px rgba(110,65,130,0.18)";
 
 
         setTimeout(() => {
 
-            openWelcomeVideo();
+            openWelcomePopup();
 
         }, 500);
 
-    } else {
+    }
 
-        // Wrong password
+    else {
 
-        document.getElementById(
-            "password-message"
-        ).textContent =
-            "❌ Wrong password!";
+        /* =============================================
+           WRONG PASSWORD
+        ============================================== */
+
+        status.textContent =
+            "✕ WRONG PASSWORD";
+
+        status.style.color =
+            "#d3477f";
 
 
-        showWrongPopup();
+        card.classList.remove(
+            "shake"
+        );
+
+
+        void card.offsetWidth;
+
+
+        card.classList.add(
+            "shake"
+        );
+
+
+        setTimeout(() => {
+
+            openWrongPopup();
+
+        }, 350);
 
     }
 
 }
 
 
+
 /* =====================================================
-   WRONG PASSWORD
+   WRONG PASSWORD POPUP
 ===================================================== */
 
-function showWrongPopup() {
+function openWrongPopup() {
 
     document
-        .getElementById("wrong-popup")
-        .classList.add("show");
+        .getElementById(
+            "wrong-popup"
+        )
+        .classList.add(
+            "show"
+        );
 
 }
 
@@ -130,17 +213,22 @@ function showWrongPopup() {
 function closeWrongPopup() {
 
     document
-        .getElementById("wrong-popup")
-        .classList.remove("show");
+        .getElementById(
+            "wrong-popup"
+        )
+        .classList.remove(
+            "show"
+        );
 
 }
 
 
+
 /* =====================================================
-   WELCOME VIDEO
+   WELCOME VIDEO POPUP
 ===================================================== */
 
-function openWelcomeVideo() {
+function openWelcomePopup() {
 
     const popup =
         document.getElementById(
@@ -153,27 +241,29 @@ function openWelcomeVideo() {
         );
 
 
-    popup.classList.add("show");
+    popup.classList.add(
+        "show"
+    );
 
 
     /*
-    Try to automatically play
-    the welcome video with sound.
-
-    Some browsers may block
-    automatic audio.
-
-    If that happens, simply
-    press the video play button.
+       Because the password button was clicked,
+       the browser normally allows video playback
+       with sound.
     */
 
-    video.muted = false;
+    video.currentTime = 0;
 
     video.play()
         .catch(() => {
 
+            /*
+               If the browser blocks autoplay,
+               the video controls are still available.
+            */
+
             console.log(
-                "Browser blocked automatic video playback."
+                "Video autoplay was blocked by the browser."
             );
 
         });
@@ -181,55 +271,60 @@ function openWelcomeVideo() {
 }
 
 
-/* =====================================================
-   NEXT PAGE
-===================================================== */
+function closeWelcomePopup() {
 
-function continueToNextPage() {
-
-    /*
-    =====================================================
-    FOR NOW:
-
-    We are NOT creating Page 2 yet.
-
-    This button simply closes
-    the welcome video.
-
-    Later we'll connect this to
-    your Birthday Adventure page.
-    =====================================================
-    */
-
-    document
-        .getElementById(
+    const popup =
+        document.getElementById(
             "welcome-popup"
-        )
-        .classList.remove("show");
+        );
+
+    const video =
+        document.getElementById(
+            "welcome-video"
+        );
+
+
+    video.pause();
+
+    popup.classList.remove(
+        "show"
+    );
 
 }
 
 
+
 /* =====================================================
-   KEYBOARD SUPPORT
+   ESC KEY CLOSES POPUPS
 ===================================================== */
 
 document.addEventListener(
     "keydown",
     function(event) {
 
-        // Number keys
         if (
-            event.key >= "0" &&
-            event.key <= "9"
+            event.key === "Escape"
         ) {
 
-            addNumber(event.key);
+            closeWrongPopup();
+
+            closeWelcomePopup();
 
         }
 
+    }
+);
 
-        // Enter
+
+
+/* =====================================================
+   ENTER KEY
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
         if (
             event.key === "Enter"
         ) {
@@ -238,45 +333,21 @@ document.addEventListener(
 
         }
 
-
-        // Backspace
-        if (
-            event.key === "Backspace"
-        ) {
-
-            enteredPassword =
-                enteredPassword.slice(
-                    0,
-                    -1
-                );
-
-            updatePasswordDisplay();
-
-        }
-
-
-        // Escape
-        if (
-            event.key === "Escape"
-        ) {
-
-            closeWrongPopup();
-
-        }
-
     }
 );
 
 
+
 /* =====================================================
-   INITIALIZE
+   PREVENT RIGHT CLICK
+   Optional little extra
 ===================================================== */
 
 document.addEventListener(
-    "DOMContentLoaded",
-    function() {
+    "contextmenu",
+    function(event) {
 
-        updatePasswordDisplay();
+        event.preventDefault();
 
     }
 );
