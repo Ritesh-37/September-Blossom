@@ -1,55 +1,30 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    /* =========================================
-       ELEMENTS
-    ========================================== */
+    const transition =
+        document.getElementById("pageTransition");
 
-    const transition = document.getElementById("pageTransition");
-
-    const scene1 = document.getElementById("scene1");
-    const scene2 = document.getElementById("scene2");
-    const scene3 = document.getElementById("scene3");
-    const scene4 = document.getElementById("scene4");
-
-    const scene1Button = document.getElementById("scene1Button");
-    const scene2Button = document.getElementById("scene2Button");
-    const scene3Button = document.getElementById("scene3Button");
-    const nextPageButton = document.getElementById("nextPageButton");
-
-    const messageLine1 = document.getElementById("messageLine1");
-    const messageLine2 = document.getElementById("messageLine2");
-    const messageLine3 = document.getElementById("messageLine3");
-    const messageLine4 = document.getElementById("messageLine4");
-
-    const memories = document.querySelectorAll(".memory");
-
-    const pauseText = document.getElementById("pauseText");
-    const finalText = document.getElementById("finalText");
-
-    const music = document.getElementById("page2Music");
-    const musicButton = document.getElementById("musicButton");
-    const musicStatus = document.getElementById("musicStatus");
-
-
-    /* =========================================
-       PERSONAL MESSAGE
-       EDIT THESE LATER
-    ========================================== */
-
-    const messages = [
-        "There are some people who enter your life...",
-
-        "and somehow make ordinary days feel a little more special.",
-
-        "You're one of those people for me. ❤️",
-
-        "And this little story is my way of showing you why."
+    const scenes = [
+        document.getElementById("scene1"),
+        document.getElementById("scene2"),
+        document.getElementById("scene3"),
+        document.getElementById("scene4"),
+        document.getElementById("scene5"),
+        document.getElementById("scene6")
     ];
 
+    const music =
+        document.getElementById("page2Music");
 
-    /* =========================================
-       PAGE LOAD TRANSITION
-    ========================================== */
+    const musicButton =
+        document.getElementById("musicButton");
+
+    const musicStatus =
+        document.getElementById("musicStatus");
+
+
+    /* ==============================
+       PAGE LOAD
+    =============================== */
 
     setTimeout(function () {
 
@@ -58,236 +33,191 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 300);
 
 
-    /* =========================================
-       SHOW SCENE
-    ========================================== */
+    /* ==============================
+       SCENE SWITCHER
+    =============================== */
 
-    function showScene(scene) {
+    function showScene(number) {
 
-        const scenes = [
-            scene1,
-            scene2,
-            scene3,
-            scene4
-        ];
+        scenes.forEach(function (scene) {
 
-        scenes.forEach(function (item) {
-
-            item.classList.remove("active");
+            scene.classList.remove("active");
 
         });
 
         setTimeout(function () {
 
-            scene.classList.add("active");
+            scenes[number].classList.add("active");
 
         }, 100);
     }
 
 
-    /* =========================================
+    /* ==============================
        MUSIC
-    ========================================== */
+    =============================== */
 
     function startMusic() {
 
         music.volume = 0;
 
-        const playPromise = music.play();
+        const promise = music.play();
 
-        if (playPromise !== undefined) {
+        if (promise !== undefined) {
 
-            playPromise
-                .then(function () {
+            promise.then(function () {
 
-                    let volume = 0;
+                let volume = 0;
 
-                    const fadeIn = setInterval(function () {
+                const fade = setInterval(function () {
 
-                        volume += 0.03;
+                    volume += 0.03;
 
-                        music.volume = Math.min(volume, 0.35);
+                    music.volume =
+                        Math.min(volume, 0.35);
 
-                        if (volume >= 0.35) {
+                    if (volume >= 0.35) {
 
-                            clearInterval(fadeIn);
+                        clearInterval(fade);
 
-                        }
+                    }
 
-                    }, 100);
+                }, 100);
 
-                })
-                .catch(function () {
+            }).catch(function () {
 
-                    /*
-                     * Some browsers block autoplay.
-                     * Music can still be started with
-                     * the music button.
-                     */
+                // Browser blocked autoplay.
+                // User can use the music button.
 
-                });
+            });
+
         }
     }
 
 
-    /* =========================================
+    /* ==============================
        MUSIC BUTTON
-    ========================================== */
+    =============================== */
 
-    musicButton.addEventListener("click", function () {
+    musicButton.addEventListener(
+        "click",
+        function () {
 
-        if (music.paused) {
+            if (music.paused) {
 
-            music.play();
+                music.play();
 
-            musicButton.textContent = "♫";
+                musicButton.textContent = "♫";
 
-            musicStatus.textContent = "♫ Music on";
+                musicStatus.textContent =
+                    "♫ Music on";
 
-        } else {
+            } else {
 
-            music.pause();
+                music.pause();
 
-            musicButton.textContent = "🔇";
+                musicButton.textContent = "🔇";
 
-            musicStatus.textContent = "Music off";
+                musicStatus.textContent =
+                    "Music off";
+
+            }
+
+            musicStatus.classList.add("show");
+
+            setTimeout(function () {
+
+                musicStatus.classList.remove("show");
+
+            }, 1800);
 
         }
+    );
 
-        musicStatus.classList.add("show");
 
-        setTimeout(function () {
+    /* ==============================
+       CHAPTER 1 → 2
+    =============================== */
 
-            musicStatus.classList.remove("show");
+    document
+        .getElementById("chapter1Button")
+        .addEventListener("click", function () {
 
-        }, 1800);
+            startMusic();
 
-    });
+            showScene(1);
 
+        });
 
-    /* =========================================
-       SCENE 1 → SCENE 2
-    ========================================== */
 
-    scene1Button.addEventListener("click", function () {
+    /* ==============================
+       CHAPTER 2 → 3
+    =============================== */
 
-        startMusic();
+    document
+        .getElementById("chapter2Button")
+        .addEventListener("click", function () {
 
-        showScene(scene2);
+            showScene(2);
 
+        });
 
-        setTimeout(function () {
 
-            messageLine1.textContent = messages[0];
+    /* ==============================
+       CHAPTER 3 → 4
+    =============================== */
 
-            messageLine1.classList.add("visible");
+    document
+        .getElementById("chapter3Button")
+        .addEventListener("click", function () {
 
-        }, 700);
+            showScene(3);
 
+        });
 
-        setTimeout(function () {
 
-            messageLine2.textContent = messages[1];
+    /* ==============================
+       CHAPTER 4 → 5
+    =============================== */
 
-            messageLine2.classList.add("visible");
+    document
+        .getElementById("chapter4Button")
+        .addEventListener("click", function () {
 
-        }, 2000);
+            showScene(4);
 
+        });
 
-        setTimeout(function () {
 
-            messageLine3.textContent = messages[2];
+    /* ==============================
+       CHAPTER 5 → 6
+    =============================== */
 
-            messageLine3.classList.add("visible");
+    document
+        .getElementById("chapter5Button")
+        .addEventListener("click", function () {
 
-        }, 3300);
+            showScene(5);
 
+        });
 
-        setTimeout(function () {
 
-            messageLine4.textContent = messages[3];
+    /* ==============================
+       PAGE 3 CONNECTION
+    =============================== */
 
-            messageLine4.classList.add("visible");
+    document
+        .getElementById("nextPageButton")
+        .addEventListener("click", function () {
 
-        }, 4600);
+            /*
+             * We will connect Page 3 here.
+             *
+             * DO NOT CHANGE THIS YET.
+             */
 
+            window.location.href = "page3.html";
 
-        setTimeout(function () {
-
-            scene2Button.classList.add("show");
-
-        }, 5900);
-
-    });
-
-
-    /* =========================================
-       SCENE 2 → SCENE 3
-    ========================================== */
-
-    scene2Button.addEventListener("click", function () {
-
-        showScene(scene3);
-
-
-        setTimeout(function () {
-
-            memories.forEach(function (memory, index) {
-
-                setTimeout(function () {
-
-                    memory.classList.add("visible");
-
-                }, index * 550);
-
-            });
-
-        }, 600);
-
-    });
-
-
-    /* =========================================
-       SCENE 3 → SCENE 4
-    ========================================== */
-
-    scene3Button.addEventListener("click", function () {
-
-        showScene(scene4);
-
-
-        setTimeout(function () {
-
-            pauseText.classList.add("show");
-
-        }, 900);
-
-
-        setTimeout(function () {
-
-            finalText.classList.add("show");
-
-        }, 2200);
-
-    });
-
-
-    /* =========================================
-       SCENE 4 → PAGE 3
-    ========================================== */
-
-    nextPageButton.addEventListener("click", function () {
-
-        /*
-         * PAGE 3 WILL BE CONNECTED HERE LATER.
-         *
-         * Do not change this yet.
-         */
-
-        alert(
-            "Page 3 will be connected here next. ❤️"
-        );
-
-    });
+        });
 
 });
