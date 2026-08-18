@@ -1,1269 +1,235 @@
-/* =====================================================
-   🎂 BIRTHDAY SECRET PAGE
-===================================================== */
+<!DOCTYPE html>
+<html lang="en">
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>🎂 Birthday Surprise</title>
 
-html,
-body {
-    width: 100%;
-    min-height: 100%;
-}
+    <link rel="stylesheet" href="style.css">
+</head>
 
+<body>
 
-body {
+    <!-- ================================
+         FIRST PAGE ONLY
+    ================================= -->
 
-    min-height: 100vh;
+    <main class="welcome-page">
 
-    overflow: hidden;
+        <!-- LEFT SIDE : YOUR PHOTO -->
+        <section class="photo-section">
 
-    font-family:
-        "Trebuchet MS",
-        Arial,
-        sans-serif;
+            <div class="photo-frame">
 
-    background:
-        radial-gradient(
-            circle at 10% 10%,
-            #fff4a8,
-            transparent 25%
-        ),
+                <!--
+                =========================================
+                YOUR PHOTO GOES HERE
 
-        radial-gradient(
-            circle at 90% 20%,
-            #ffc5e5,
-            transparent 28%
-        ),
+                Later replace:
+                media/my-photo.jpg
 
-        radial-gradient(
-            circle at 80% 90%,
-            #c9c2ff,
-            transparent 30%
-        ),
+                with your actual photo file.
+                =========================================
+                -->
 
-        linear-gradient(
-            135deg,
-            #fffdf2,
-            #fff0f8,
-            #f1edff
-        );
+                <img
+                    src="media/my-photo.jpg"
+                    alt="Birthday Boy"
+                    onerror="this.src='https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=600'"
+                >
 
-    color: #5c315e;
+            </div>
 
-}
+            <h1>Abey oh Chirkoot!!</h1>
 
+            <p>Password Daal 😏</p>
 
-/* =====================================================
-   🌟 MAIN PAGE
-===================================================== */
+        </section>
 
-#password-page {
 
-    min-height: 100vh;
+        <!-- RIGHT SIDE : PASSWORD -->
+        <section class="password-section">
 
-    width: 100%;
+            <div class="password-card">
 
-    display: grid;
+                <div class="cake">🎂</div>
 
-    grid-template-columns:
-        1fr 1fr;
+                <div class="small-heading">
+                    A LITTLE BIRTHDAY SECRET
+                </div>
 
-    align-items: center;
+                <h2>
+                    Enter The Password
+                </h2>
 
-    position: relative;
+                <p class="instruction">
+                    Only the chosen one can enter... 👀
+                </p>
 
-    z-index: 5;
 
-}
+                <!-- PASSWORD DISPLAY -->
+                <div
+                    id="password-display"
+                    class="password-display"
+                >
+                    <span>_</span>
+                    <span>_</span>
+                    <span>_</span>
+                    <span>_</span>
+                    <span>_</span>
+                    <span>_</span>
+                    <span>_</span>
+                    <span>_</span>
+                </div>
 
 
-/* =====================================================
-   🖼️ PHOTO SIDE
-===================================================== */
+                <!-- NUMERIC KEYPAD -->
+                <div class="keypad">
 
-.photo-side {
+                    <button onclick="addNumber('1')">1</button>
+                    <button onclick="addNumber('2')">2</button>
+                    <button onclick="addNumber('3')">3</button>
 
-    height: 100vh;
+                    <button onclick="addNumber('4')">4</button>
+                    <button onclick="addNumber('5')">5</button>
+                    <button onclick="addNumber('6')">6</button>
 
-    display: flex;
+                    <button onclick="addNumber('7')">7</button>
+                    <button onclick="addNumber('8')">8</button>
+                    <button onclick="addNumber('9')">9</button>
 
-    align-items: center;
+                    <button
+                        class="clear-button"
+                        onclick="clearPassword()"
+                    >
+                        C
+                    </button>
 
-    justify-content: center;
+                    <button onclick="addNumber('0')">
+                        0
+                    </button>
 
-    position: relative;
+                    <button
+                        class="enter-button"
+                        onclick="checkPassword()"
+                    >
+                        ✓
+                    </button>
 
-}
+                </div>
 
 
-.photo-container {
+                <p
+                    id="password-message"
+                    class="password-message"
+                ></p>
 
-    position: relative;
+            </div>
 
-    text-align: center;
+        </section>
 
-    animation:
-        photoFloat
-        4s
-        ease-in-out
-        infinite;
+    </main>
 
-}
 
+    <!-- ================================
+         WRONG PASSWORD POPUP
+    ================================= -->
 
-@keyframes photoFloat {
+    <div
+        id="wrong-popup"
+        class="popup"
+    >
 
-    0%,
-    100% {
+        <div class="wrong-card">
 
-        transform:
-            translateY(0);
+            <button
+                class="close-popup"
+                onclick="closeWrongPopup()"
+            >
+                ×
+            </button>
 
-    }
+            <!--
+            Later you can replace this image with
+            your "Abey Saale" meme.
 
-    50% {
+            Example:
+            media/abey-saale.jpg
+            -->
 
-        transform:
-            translateY(-12px);
+            <img
+                src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=500"
+                alt="Wrong password meme"
+            >
 
-    }
+            <h2>ABEY SAALE! 😂</h2>
 
-}
+            <p>
+                Galat password daala hai!
+            </p>
 
+        </div>
 
-/* =====================================================
-   🟪 SQUARE PHOTO FRAME
-===================================================== */
+    </div>
 
-.photo-frame {
 
-    width:
-        clamp(
-            280px,
-            30vw,
-            430px
-        );
+    <!-- ================================
+         WELCOME VIDEO POPUP
+    ================================= -->
 
-    height:
-        clamp(
-            280px,
-            30vw,
-            430px
-        );
+    <div
+        id="welcome-popup"
+        class="popup"
+    >
 
-    position: relative;
+        <div class="video-card">
 
-    overflow: hidden;
+            <h2>🎬 Welcome!</h2>
 
-    border-radius: 25px;
+            <p>
+                Finally... you made it. 😏
+            </p>
 
-    padding: 7px;
+            <!--
+            =========================================
+            YOUR WELCOME VIDEO GOES HERE
 
-    background:
-        linear-gradient(
-            135deg,
-            #ff4fa3,
-            #9c5cff,
-            #ffcf4a,
-            #ff4fa3
-        );
+            Put your video inside:
 
-    background-size: 300% 300%;
+            media/welcome.mp4
+            =========================================
+            -->
 
-    animation:
-        neonBorder
-        5s
-        ease
-        infinite;
+            <video
+                id="welcome-video"
+                controls
+                playsinline
+            >
 
-    box-shadow:
+                <source
+                    src="media/welcome.mp4"
+                    type="video/mp4"
+                >
 
-        0 0 10px
-        rgba(255, 70, 170, 0.7),
+                Your browser does not support video.
 
-        0 0 30px
-        rgba(170, 70, 255, 0.5),
+            </video>
 
-        0 0 70px
-        rgba(255, 100, 190, 0.35);
+            <button
+                onclick="continueToNextPage()"
+            >
+                ENTER THE BIRTHDAY ADVENTURE 💗
+            </button>
 
-}
+        </div>
 
+    </div>
 
-@keyframes neonBorder {
 
-    0% {
-        background-position: 0% 50%;
-    }
+    <script src="script.js"></script>
 
-    50% {
-        background-position: 100% 50%;
-    }
+</body>
 
-    100% {
-        background-position: 0% 50%;
-    }
-
-}
-
-
-.photo-frame img {
-
-    width: 100%;
-
-    height: 100%;
-
-    display: block;
-
-    object-fit: cover;
-
-    border-radius: 18px;
-
-    background: #ffdbef;
-
-}
-
-
-/* =====================================================
-   ✨ PHOTO GLOW
-===================================================== */
-
-.photo-glow {
-
-    position: absolute;
-
-    width: 100%;
-
-    height: 100%;
-
-    left: 0;
-
-    top: 0;
-
-    border-radius: 30px;
-
-    pointer-events: none;
-
-    box-shadow:
-
-        0 0 80px
-        rgba(255, 70, 170, 0.35);
-
-    animation:
-        glowPulse
-        2.5s
-        ease-in-out
-        infinite;
-
-}
-
-
-@keyframes glowPulse {
-
-    0%,
-    100% {
-
-        opacity: 0.5;
-
-        transform:
-            scale(1);
-
-    }
-
-    50% {
-
-        opacity: 1;
-
-        transform:
-            scale(1.04);
-
-    }
-
-}
-
-
-/* =====================================================
-   😎 PHOTO TEXT
-===================================================== */
-
-.photo-text {
-
-    margin-top: 25px;
-
-}
-
-
-.photo-text h2 {
-
-    font-size:
-        clamp(
-            1.5rem,
-            3vw,
-            2.4rem
-        );
-
-    color: #ec438f;
-
-    text-shadow:
-        2px 2px 0 white;
-
-}
-
-
-.photo-text p {
-
-    margin-top: 5px;
-
-    font-size: 1.2rem;
-
-    font-weight: bold;
-
-    color: #8546a8;
-
-}
-
-
-/* =====================================================
-   🔐 PASSWORD SIDE
-===================================================== */
-
-.password-side {
-
-    height: 100vh;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    padding: 30px;
-
-}
-
-
-/* =====================================================
-   💎 PASSWORD CARD
-===================================================== */
-
-.password-card {
-
-    width:
-        min(
-            480px,
-            90%
-        );
-
-    padding: 38px 35px;
-
-    text-align: center;
-
-    border-radius: 35px;
-
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.72
-        );
-
-    backdrop-filter:
-        blur(25px);
-
-    border:
-        1px solid
-        rgba(
-            255,
-            255,
-            255,
-            0.9
-        );
-
-    box-shadow:
-
-        0 30px 80px
-        rgba(
-            120,
-            60,
-            150,
-            0.2
-        );
-
-}
-
-
-.birthday-icon {
-
-    font-size: 4rem;
-
-    animation:
-        bounce
-        1.5s
-        infinite
-        alternate;
-
-}
-
-
-@keyframes bounce {
-
-    from {
-        transform:
-            scale(1)
-            rotate(-5deg);
-    }
-
-    to {
-        transform:
-            scale(1.12)
-            rotate(5deg);
-    }
-
-}
-
-
-.small-heading {
-
-    margin-top: 10px;
-
-    font-size: 0.72rem;
-
-    font-weight: bold;
-
-    letter-spacing: 3px;
-
-    color: #b24ba9;
-
-}
-
-
-.password-card h1 {
-
-    margin-top: 10px;
-
-    font-size:
-        clamp(
-            2.2rem,
-            5vw,
-            3.5rem
-        );
-
-    color: #ed4b99;
-
-    text-shadow:
-        3px 3px 0 #ffd5ea;
-
-}
-
-
-.subtitle {
-
-    margin-top: 10px;
-
-    line-height: 1.6;
-
-    color: #765070;
-
-}
-
-
-/* =====================================================
-   🔢 PASSWORD DISPLAY
-===================================================== */
-
-.password-display {
-
-    display: flex;
-
-    justify-content: center;
-
-    gap: 7px;
-
-    margin:
-        25px auto
-        18px;
-
-}
-
-
-.password-display span {
-
-    width: 28px;
-
-    height: 38px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    border-bottom:
-        3px solid
-        #d65bad;
-
-    color: #8b439d;
-
-    font-size: 1.3rem;
-
-    font-weight: bold;
-
-}
-
-
-/* =====================================================
-   🔢 NUMERIC KEYPAD
-===================================================== */
-
-.keypad {
-
-    width: 280px;
-
-    margin:
-        0 auto;
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 9px;
-
-}
-
-
-.keypad button {
-
-    margin: 0;
-
-    width: 100%;
-
-    height: 55px;
-
-    padding: 0;
-
-    border: none;
-
-    border-radius: 17px;
-
-    font-size: 1.25rem;
-
-    font-weight: bold;
-
-    color: #673b68;
-
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.9
-        );
-
-    box-shadow:
-        0 7px 15px
-        rgba(
-            150,
-            80,
-            170,
-            0.15
-        );
-
-    transition:
-        0.2s;
-
-}
-
-
-.keypad button:hover {
-
-    transform:
-        translateY(-3px)
-        scale(1.04);
-
-    background:
-        #fff;
-
-}
-
-
-.keypad button:active {
-
-    transform:
-        scale(0.92);
-
-}
-
-
-.clear-button {
-
-    color: #e24d83 !important;
-
-}
-
-
-.backspace-button {
-
-    color: #8d4bc0 !important;
-
-}
-
-
-/* =====================================================
-   🔓 UNLOCK BUTTON
-===================================================== */
-
-.unlock-button {
-
-    width: 280px;
-
-    margin-top: 18px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #f04c9a,
-            #9b5de5
-        );
-
-    box-shadow:
-
-        0 10px 30px
-        rgba(
-            180,
-            70,
-            180,
-            0.3
-        );
-
-}
-
-
-.unlock-button:hover {
-
-    box-shadow:
-
-        0 15px 40px
-        rgba(
-            180,
-            70,
-            180,
-            0.45
-        );
-
-}
-
-
-.password-message {
-
-    min-height: 25px;
-
-    margin-top: 12px;
-
-    color: #e94b83;
-
-    font-weight: bold;
-
-}
-
-
-/* =====================================================
-   🎀 POPUP
-===================================================== */
-
-.popup-overlay {
-
-    position: fixed;
-
-    inset: 0;
-
-    z-index: 1000;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    padding: 20px;
-
-    background:
-        rgba(
-            65,
-            20,
-            80,
-            0.45
-        );
-
-    backdrop-filter:
-        blur(12px);
-
-    opacity: 0;
-
-    pointer-events: none;
-
-    transition:
-        opacity 0.35s;
-
-}
-
-
-.popup-overlay.show {
-
-    opacity: 1;
-
-    pointer-events: auto;
-
-}
-
-
-/* =====================================================
-   ❌ WRONG PASSWORD CARD
-===================================================== */
-
-.wrong-card {
-
-    width:
-        min(
-            600px,
-            94%
-        );
-
-    padding:
-        35px 25px;
-
-    text-align: center;
-
-    position: relative;
-
-    border-radius: 30px;
-
-    background:
-        #fff7fb;
-
-    box-shadow:
-        0 30px 90px
-        rgba(
-            0,
-            0,
-            0,
-            0.3
-        );
-
-    animation:
-        popupIn
-        0.45s
-        ease;
-
-}
-
-
-@keyframes popupIn {
-
-    0% {
-
-        transform:
-            scale(0.6)
-            rotate(-4deg);
-
-        opacity: 0;
-
-    }
-
-    70% {
-
-        transform:
-            scale(1.05)
-            rotate(1deg);
-
-    }
-
-    100% {
-
-        transform:
-            scale(1)
-            rotate(0);
-
-        opacity: 1;
-
-    }
-
-}
-
-
-.popup-close {
-
-    position: absolute;
-
-    top: 12px;
-
-    right: 15px;
-
-    width: 40px;
-
-    height: 40px;
-
-    margin: 0;
-
-    padding: 0;
-
-    background:
-        #f5d7e9;
-
-    color: #753f70;
-
-    font-size: 1.4rem;
-
-}
-
-
-.wrong-title {
-
-    font-size:
-        clamp(
-            2rem,
-            6vw,
-            4rem
-        );
-
-    font-weight: bold;
-
-    color: #ed3e78;
-
-    margin-bottom: 20px;
-
-}
-
-
-.meme-image {
-
-    display: block;
-
-    width: min(
-        500px,
-        100%
-    );
-
-    max-height: 400px;
-
-    object-fit: cover;
-
-    margin: 0 auto;
-
-    border-radius: 20px;
-
-    box-shadow:
-        0 15px 35px
-        rgba(
-            100,
-            30,
-            80,
-            0.2
-        );
-
-}
-
-
-.wrong-card p {
-
-    margin-top: 15px;
-
-    font-weight: bold;
-
-}
-
-
-.try-again-button {
-
-    background:
-        linear-gradient(
-            135deg,
-            #ff4f8b,
-            #a35be7
-        );
-
-}
-
-
-/* =====================================================
-   🎥 WELCOME VIDEO
-===================================================== */
-
-.welcome-card {
-
-    width:
-        min(
-            800px,
-            95%
-        );
-
-    max-height: 92vh;
-
-    overflow-y: auto;
-
-    padding:
-        40px 30px;
-
-    text-align: center;
-
-    border-radius: 35px;
-
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.95
-        );
-
-    box-shadow:
-        0 30px 100px
-        rgba(
-            60,
-            20,
-            90,
-            0.35
-        );
-
-    animation:
-        popupIn
-        0.6s
-        ease;
-
-}
-
-
-.welcome-heading {
-
-    font-size: 0.85rem;
-
-    letter-spacing: 3px;
-
-    font-weight: bold;
-
-    color: #b64eb0;
-
-}
-
-
-.welcome-card h2 {
-
-    margin-top: 10px;
-
-    font-size:
-        clamp(
-            1.8rem,
-            5vw,
-            3rem
-        );
-
-    color: #e74791;
-
-}
-
-
-.welcome-card p {
-
-    margin-top: 8px;
-
-    line-height: 1.6;
-
-}
-
-
-#welcome-video {
-
-    display: block;
-
-    width: 100%;
-
-    max-height: 55vh;
-
-    margin:
-        22px auto;
-
-    border-radius: 20px;
-
-    background: #1d1230;
-
-}
-
-
-.continue-button {
-
-    background:
-        linear-gradient(
-            135deg,
-            #f34c9c,
-            #9457e3
-        );
-
-}
-
-
-/* =====================================================
-   ✨ FLOATING DECORATIONS
-===================================================== */
-
-.floating-decoration {
-
-    position: fixed;
-
-    z-index: 1;
-
-    pointer-events: none;
-
-    font-size: 25px;
-
-    opacity: 0.65;
-
-    animation:
-        floatAround
-        linear
-        infinite;
-
-}
-
-
-.decoration-1 {
-
-    left: 5%;
-
-    animation-duration: 8s;
-
-}
-
-
-.decoration-2 {
-
-    left: 20%;
-
-    animation-duration: 11s;
-
-}
-
-
-.decoration-3 {
-
-    left: 45%;
-
-    animation-duration: 9s;
-
-}
-
-
-.decoration-4 {
-
-    left: 65%;
-
-    animation-duration: 13s;
-
-}
-
-
-.decoration-5 {
-
-    left: 82%;
-
-    animation-duration: 10s;
-
-}
-
-
-.decoration-6 {
-
-    left: 93%;
-
-    animation-duration: 12s;
-
-}
-
-
-@keyframes floatAround {
-
-    0% {
-
-        top: 110vh;
-
-        transform:
-            rotate(0deg)
-            translateX(0);
-
-    }
-
-    50% {
-
-        transform:
-            rotate(180deg)
-            translateX(30px);
-
-    }
-
-    100% {
-
-        top: -10vh;
-
-        transform:
-            rotate(360deg)
-            translateX(-30px);
-
-    }
-
-}
-
-
-/* =====================================================
-   📱 MOBILE
-===================================================== */
-
-@media (max-width: 800px) {
-
-    body {
-
-        overflow-y: auto;
-
-    }
-
-
-    #password-page {
-
-        grid-template-columns:
-            1fr;
-
-        min-height: 100vh;
-
-        padding:
-            30px 15px;
-
-    }
-
-
-    .photo-side {
-
-        height: auto;
-
-        padding-top: 20px;
-
-    }
-
-
-    .photo-frame {
-
-        width: 230px;
-
-        height: 230px;
-
-    }
-
-
-    .photo-text {
-
-        margin-top: 15px;
-
-    }
-
-
-    .photo-text h2 {
-
-        font-size: 1.5rem;
-
-    }
-
-
-    .photo-text p {
-
-        font-size: 1rem;
-
-    }
-
-
-    .password-side {
-
-        height: auto;
-
-        padding:
-            25px 10px 40px;
-
-    }
-
-
-    .password-card {
-
-        padding:
-            25px 18px;
-
-    }
-
-
-    .birthday-icon {
-
-        font-size: 3rem;
-
-    }
-
-
-    .password-card h1 {
-
-        font-size: 2rem;
-
-    }
-
-
-    .keypad {
-
-        width: 250px;
-
-    }
-
-
-    .unlock-button {
-
-        width: 250px;
-
-    }
-
-}
-
-
-/* =====================================================
-   📱 VERY SMALL PHONES
-===================================================== */
-
-@media (max-width: 400px) {
-
-    .photo-frame {
-
-        width: 190px;
-
-        height: 190px;
-
-    }
-
-
-    .keypad {
-
-        width: 220px;
-
-    }
-
-
-    .keypad button {
-
-        height: 48px;
-
-    }
-
-
-    .unlock-button {
-
-        width: 220px;
-
-    }
-
-}
+</html>
