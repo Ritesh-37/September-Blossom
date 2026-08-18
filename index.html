@@ -1,135 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Private Birthday Portal</title>
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>🎂 Birthday Secret</title>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
+
 
 <body>
 
-    <!-- ================================
-         PASSWORD PAGE
-    ================================= -->
 
-    <section id="password-page">
+<!-- =====================================================
+     ✨ FLOATING BIRTHDAY DECORATIONS
+===================================================== -->
 
-        <!-- LEFT SIDE -->
-        <div class="left-side">
+<div class="floating-decoration decoration-1">💗</div>
+<div class="floating-decoration decoration-2">✨</div>
+<div class="floating-decoration decoration-3">🎀</div>
+<div class="floating-decoration decoration-4">⭐</div>
+<div class="floating-decoration decoration-5">💕</div>
+<div class="floating-decoration decoration-6">🌸</div>
 
-            <div class="photo-box">
 
-                <!--
-                ==========================================
-                YOUR PHOTO GOES HERE
 
-                Later, replace:
+<!-- =====================================================
+     🔐 PASSWORD PAGE
+===================================================== -->
 
-                media/my-photo.jpg
+<main id="password-page">
 
-                with your actual image filename.
 
-                Example:
-                media/ritesh.jpg
-                ==========================================
-                -->
+    <!-- =================================================
+         LEFT SIDE — PHOTO
+    ================================================= -->
+
+    <section class="photo-side">
+
+        <div class="photo-container">
+
+
+            <!-- =================================================
+                 YOUR PHOTO GOES HERE
+                 
+                 IMPORTANT:
+                 Later replace:
+                 media/my-photo.jpg
+
+                 with your own aggressive photo.
+            ================================================= -->
+
+            <div class="photo-frame">
 
                 <img
-                    src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e"
+                    src="media/my-photo.jpg"
                     alt="My Photo"
+                    id="my-photo"
                 >
 
             </div>
 
-            <h1>
-                Abey oh Chirkoot!!
-            </h1>
 
-            <p>
-                Password Daal 😎
-            </p>
-
-        </div>
+            <div class="photo-glow"></div>
 
 
-        <!-- RIGHT SIDE -->
-        <div class="right-side">
-
-            <div class="password-card">
-
-                <div class="lock">
-                    🔐
-                </div>
-
-                <div class="small-heading">
-                    PRIVATE ACCESS
-                </div>
+            <div class="photo-text">
 
                 <h2>
-                    Enter Password
+                    Abey oh Chirkoot!! 😎
                 </h2>
 
-                <p class="subtitle">
-                    Only the chosen one may enter...
+                <p>
+                    Password Daal 🔐
                 </p>
-
-
-                <!-- PASSWORD DISPLAY -->
-
-                <div id="password-display">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-
-
-                <!-- NUMERIC KEYPAD -->
-
-                <div class="keypad">
-
-                    <button onclick="pressNumber('1')">1</button>
-                    <button onclick="pressNumber('2')">2</button>
-                    <button onclick="pressNumber('3')">3</button>
-
-                    <button onclick="pressNumber('4')">4</button>
-                    <button onclick="pressNumber('5')">5</button>
-                    <button onclick="pressNumber('6')">6</button>
-
-                    <button onclick="pressNumber('7')">7</button>
-                    <button onclick="pressNumber('8')">8</button>
-                    <button onclick="pressNumber('9')">9</button>
-
-                    <button class="empty-key"></button>
-
-                    <button onclick="pressNumber('0')">0</button>
-
-                    <button
-                        class="delete-key"
-                        onclick="deleteNumber()"
-                    >
-                        ⌫
-                    </button>
-
-                </div>
-
-
-                <button
-                    class="enter-button"
-                    onclick="checkPassword()"
-                >
-                    ENTER ✦
-                </button>
-
-
-                <p id="password-message"></p>
 
             </div>
 
@@ -139,126 +91,302 @@
 
 
 
-    <!-- ================================
-         WRONG PASSWORD POPUP
-    ================================= -->
+    <!-- =================================================
+         RIGHT SIDE — PASSWORD
+    ================================================= -->
 
-    <div id="wrong-popup">
-
-        <div class="wrong-card">
-
-            <!--
-            ==========================================
-            TEMPORARY MEME IMAGE
-
-            Later replace this with your meme:
-
-            media/abey-saale.jpg
-            ==========================================
-            -->
-
-            <img
-                src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde"
-                alt="Wrong password meme"
-            >
-
-            <h2>
-                ABEY SAALE 😂
-            </h2>
-
-            <button onclick="closeWrongPopup()">
-                Okay Okay 😭
-            </button>
-
-        </div>
-
-    </div>
+    <section class="password-side">
 
 
-
-    <!-- ================================
-         WELCOME VIDEO
-    ================================= -->
-
-    <div id="welcome-popup">
-
-        <div class="welcome-card">
-
-            <video
-                id="welcome-video"
-                controls
-                playsinline
-            >
-
-                <!--
-                ==========================================
-                WELCOME VIDEO
-
-                Later put your video here:
-
-                media/welcome.mp4
-                ==========================================
-                -->
-
-                <source
-                    src="media/welcome.mp4"
-                    type="video/mp4"
-                >
-
-            </video>
-
-            <h2>
-                Welcome... 👀
-            </h2>
-
-            <p>
-                You actually knew the password.
-            </p>
-
-            <button onclick="continueToAdventure()">
-                ENTER THE ADVENTURE 🎂
-            </button>
-
-        </div>
-
-    </div>
+        <div class="password-card">
 
 
+            <div class="birthday-icon">
+                🎂
+            </div>
 
-    <!-- ================================
-         ORIGINAL BIRTHDAY GAME
-    ================================= -->
 
-    <section
-        id="game-screen"
-        class="hidden"
-    >
+            <div class="small-heading">
+                A VERY SECRET BIRTHDAY WEBSITE
+            </div>
 
-        <!--
-        YOUR ORIGINAL BIRTHDAY ADVENTURE
-        WILL GO HERE.
-
-        For now this is just a placeholder.
-        We will connect your existing
-        birthday adventure in the next step.
-        -->
-
-        <div class="game-placeholder">
 
             <h1>
-                🎂 Birthday Adventure
+                Oyeee! 👀
             </h1>
 
-            <p>
-                Welcome to the secret birthday world! 💗
+
+            <p class="subtitle">
+                Enter the secret password
+                to continue your birthday adventure.
             </p>
+
+
+            <!-- PASSWORD DISPLAY -->
+
+            <div
+                id="password-display"
+                class="password-display"
+            >
+                <span>_</span>
+                <span>_</span>
+                <span>_</span>
+                <span>_</span>
+                <span>_</span>
+                <span>_</span>
+                <span>_</span>
+                <span>_</span>
+            </div>
+
+
+            <!-- NUMERIC KEYPAD -->
+
+            <div class="keypad">
+
+                <button onclick="pressNumber('1')">
+                    1
+                </button>
+
+                <button onclick="pressNumber('2')">
+                    2
+                </button>
+
+                <button onclick="pressNumber('3')">
+                    3
+                </button>
+
+                <button onclick="pressNumber('4')">
+                    4
+                </button>
+
+                <button onclick="pressNumber('5')">
+                    5
+                </button>
+
+                <button onclick="pressNumber('6')">
+                    6
+                </button>
+
+                <button onclick="pressNumber('7')">
+                    7
+                </button>
+
+                <button onclick="pressNumber('8')">
+                    8
+                </button>
+
+                <button onclick="pressNumber('9')">
+                    9
+                </button>
+
+                <button
+                    class="clear-button"
+                    onclick="clearPassword()"
+                >
+                    C
+                </button>
+
+                <button onclick="pressNumber('0')">
+                    0
+                </button>
+
+                <button
+                    class="backspace-button"
+                    onclick="deleteNumber()"
+                >
+                    ⌫
+                </button>
+
+            </div>
+
+
+            <button
+                class="unlock-button"
+                onclick="checkPassword()"
+            >
+                🔓 UNLOCK
+            </button>
+
+
+            <p
+                id="password-message"
+                class="password-message"
+            ></p>
+
 
         </div>
 
     </section>
 
+</main>
 
-    <script src="script.js"></script>
+
+
+<!-- =====================================================
+     ❌ WRONG PASSWORD POPUP
+===================================================== -->
+
+<div
+    id="wrong-popup"
+    class="popup-overlay"
+>
+
+
+    <div class="wrong-card">
+
+
+        <button
+            class="popup-close"
+            onclick="closeWrongPopup()"
+        >
+            ×
+        </button>
+
+
+        <div class="wrong-title">
+            ABEY SAALE! 😂
+        </div>
+
+
+        <!--
+            TEMPORARY MEME IMAGE
+
+            Later replace this with your actual meme:
+
+            media/abey-saale.jpg
+        -->
+
+        <img
+            src="https://placehold.co/500x400/ff4f81/ffffff?text=ABEY+SAALE!+%F0%9F%98%82"
+            alt="Wrong password meme"
+            class="meme-image"
+        >
+
+
+        <p>
+            Password galat hai bhai! 😭
+        </p>
+
+
+        <button
+            class="try-again-button"
+            onclick="closeWrongPopup()"
+        >
+            😂 Try Again
+        </button>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     🎥 WELCOME VIDEO
+===================================================== -->
+
+<div
+    id="welcome-popup"
+    class="popup-overlay"
+>
+
+
+    <div class="welcome-card">
+
+
+        <div class="welcome-heading">
+            🎉 PASSWORD ACCEPTED!
+        </div>
+
+
+        <h2>
+            Welcome, Chirkoot! 😂
+        </h2>
+
+
+        <p>
+            Okay okay... you got it right.
+            <br>
+            Now watch this. 👀
+        </p>
+
+
+        <!--
+            =================================================
+            YOUR WELCOME VIDEO GOES HERE
+
+            Put your video inside:
+
+            media/welcome.mp4
+
+            IMPORTANT:
+            Name it EXACTLY:
+
+            welcome.mp4
+            =================================================
+        -->
+
+        <video
+            id="welcome-video"
+            controls
+            playsinline
+        >
+
+            <source
+                src="media/welcome.mp4"
+                type="video/mp4"
+            >
+
+            Your browser does not support video.
+
+        </video>
+
+
+        <button
+            id="continue-button"
+            class="continue-button"
+            onclick="goToNextPage()"
+        >
+            💗 CONTINUE
+        </button>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     🎵 OPTIONAL BACKGROUND MUSIC
+===================================================== -->
+
+<!--
+    You can add music later if you want.
+
+    Put:
+
+    media/birthday.mp3
+
+    and uncomment this section.
+
+<audio
+    id="birthday-music"
+    loop
+>
+    <source
+        src="media/birthday.mp3"
+        type="audio/mpeg"
+    >
+</audio>
+
+-->
+
+
+
+<script src="script.js"></script>
 
 </body>
+
 </html>
