@@ -36,12 +36,15 @@ function updateDisplay() {
 
     if (enteredPassword.length > 0) {
 
-        display.classList.add("filled");
+        display.classList.add(
+            "filled"
+        );
 
     } else {
 
-        display.classList.remove("filled");
-
+        display.classList.remove(
+            "filled"
+        );
     }
 }
 
@@ -54,8 +57,6 @@ function pressKey(number) {
 
     /*
        Maximum 8 digits.
-       This also prevents accidental
-       unlimited input.
     */
 
     if (enteredPassword.length >= 8) {
@@ -90,136 +91,245 @@ function deleteKey() {
 
 
 /* =========================================================
+   SHOW POPUP
+========================================================= */
+
+function showPopup(type) {
+
+    const overlay =
+        document.getElementById(
+            "popup-overlay"
+        );
+
+    const doodle =
+        document.getElementById(
+            "popup-doodle"
+        );
+
+    const popupMessage =
+        document.getElementById(
+            "popup-message"
+        );
+
+    const popupHearts =
+        document.getElementById(
+            "popup-hearts"
+        );
+
+
+    /*
+       WRONG PASSWORD POPUP
+    */
+
+    if (type === "wrong") {
+
+        doodle.textContent =
+            "🥺💗";
+
+        popupMessage.innerHTML =
+            "Baby!!!! You've entered the wrong password.";
+
+        popupHearts.textContent =
+            "♡ ✿ ♡";
+
+
+        /*
+           Little sad/cute animation.
+        */
+
+        doodle.style.color =
+            "#e22d5a";
+
+    }
+
+
+    /*
+       CORRECT PASSWORD POPUP
+    */
+
+    else if (type === "correct") {
+
+        doodle.textContent =
+            "🎀💗✨";
+
+        popupMessage.innerHTML =
+            "Welcome, Baby! 💕<br>I've been waiting for you! 🌸";
+
+        popupHearts.textContent =
+            "♡ ✿ ♡ ✿ ♡";
+
+        doodle.style.color =
+            "#e22d5a";
+    }
+
+
+    /*
+       Make popup visible.
+    */
+
+    overlay.classList.add(
+        "show"
+    );
+}
+
+
+/* =========================================================
+   CLOSE POPUP
+========================================================= */
+
+function closePopup() {
+
+    const overlay =
+        document.getElementById(
+            "popup-overlay"
+        );
+
+    overlay.classList.remove(
+        "show"
+    );
+}
+
+
+/* =========================================================
    CHECK PASSWORD
 ========================================================= */
 
 function checkPassword() {
 
-    const message =
+    const display =
         document.getElementById(
-            "password-message"
+            "password-display"
         );
 
+
+    /*
+       CORRECT PASSWORD
+    */
 
     if (
         enteredPassword ===
         CORRECT_PASSWORD
     ) {
 
-        message.textContent =
-            "♡ Password accepted ♡";
-
-
-        message.style.color =
-            "#fff";
-
-
         /*
            Small success animation.
         */
 
-        const display =
-            document.getElementById(
-                "password-display"
-            );
-
-
         display.animate(
 
             [
                 {
-                    transform: "scale(1)"
+                    transform:
+                        "scale(1)"
                 },
 
                 {
-                    transform: "scale(1.08)"
+                    transform:
+                        "scale(1.08)"
                 },
 
                 {
-                    transform: "scale(1)"
+                    transform:
+                        "scale(1)"
                 }
             ],
 
             {
-                duration: 450
+                duration:
+                    450
             }
-
         );
 
 
         /*
-           For now we stop here.
-
-           Later, when Page 2 is ready,
-           this is where we'll transition
-           to the next page.
+           Show cute welcome popup.
         */
 
         setTimeout(() => {
 
-            message.textContent =
-                "✨ Welcome... ✨";
+            showPopup(
+                "correct"
+            );
 
-        }, 600);
-
-
-    } else {
-
-        message.textContent =
-            "Not quite... try again ♡";
-
-
-        message.style.color =
-            "#ffe1ea";
+        }, 350);
 
 
         /*
-           Shake the password box.
+           Keep password accepted.
+           Page 2 will be connected here later.
         */
 
-        const display =
-            document.getElementById(
-                "password-display"
-            );
+        return;
+    }
 
+
+    /*
+       WRONG PASSWORD
+    */
+
+    else {
+
+        /*
+           Shake password display.
+        */
 
         display.animate(
 
             [
                 {
-                    transform: "translateX(0)"
+                    transform:
+                        "translateX(0)"
                 },
 
                 {
-                    transform: "translateX(-8px)"
+                    transform:
+                        "translateX(-8px)"
                 },
 
                 {
-                    transform: "translateX(8px)"
+                    transform:
+                        "translateX(8px)"
                 },
 
                 {
-                    transform: "translateX(-6px)"
+                    transform:
+                        "translateX(-6px)"
                 },
 
                 {
-                    transform: "translateX(6px)"
+                    transform:
+                        "translateX(6px)"
                 },
 
                 {
-                    transform: "translateX(0)"
+                    transform:
+                        "translateX(0)"
                 }
             ],
 
             {
-                duration: 350
+                duration:
+                    350
             }
-
         );
 
 
         /*
-           Clear wrong password.
+           Show wrong-password popup.
+        */
+
+        setTimeout(() => {
+
+            showPopup(
+                "wrong"
+            );
+
+        }, 300);
+
+
+        /*
+           Clear wrong password
+           after a short delay.
         */
 
         setTimeout(() => {
@@ -228,7 +338,7 @@ function checkPassword() {
 
             updateDisplay();
 
-        }, 500);
+        }, 700);
     }
 }
 
@@ -265,8 +375,9 @@ document.addEventListener(
             event.key <= "9"
         ) {
 
-            pressKey(event.key);
-
+            pressKey(
+                event.key
+            );
         }
 
 
@@ -275,11 +386,11 @@ document.addEventListener(
         */
 
         else if (
-            event.key === "Backspace"
+            event.key ===
+            "Backspace"
         ) {
 
             deleteKey();
-
         }
 
 
@@ -288,11 +399,24 @@ document.addEventListener(
         */
 
         else if (
-            event.key === "Enter"
+            event.key ===
+            "Enter"
         ) {
 
             checkPassword();
+        }
 
+
+        /*
+           Escape closes popup.
+        */
+
+        else if (
+            event.key ===
+            "Escape"
+        ) {
+
+            closePopup();
         }
 
     }
@@ -300,7 +424,7 @@ document.addEventListener(
 
 
 /* =========================================================
-   INITIALIZE
+   CLOSE POPUP WHEN CLICKING OUTSIDE
 ========================================================= */
 
 document.addEventListener(
@@ -308,6 +432,34 @@ document.addEventListener(
     function () {
 
         updateDisplay();
+
+
+        const overlay =
+            document.getElementById(
+                "popup-overlay"
+            );
+
+
+        overlay.addEventListener(
+            "click",
+            function (event) {
+
+                /*
+                   Only close when the
+                   dark background itself
+                   is clicked.
+                */
+
+                if (
+                    event.target ===
+                    overlay
+                ) {
+
+                    closePopup();
+                }
+
+            }
+        );
 
     }
 );
