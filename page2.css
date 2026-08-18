@@ -1,7 +1,3 @@
-/* =========================================
-   RESET
-========================================= */
-
 * {
     margin: 0;
     padding: 0;
@@ -16,7 +12,6 @@ body {
 
 body {
     font-family: "Poppins", sans-serif;
-
     color: #fff8f5;
 
     background:
@@ -31,25 +26,15 @@ body {
 }
 
 
-/* =========================================
-   CINEMATIC TRANSITION
-========================================= */
+/* PAGE TRANSITION */
 
 #pageTransition {
     position: fixed;
-
     inset: 0;
-
-    background: #4a0b20;
-
-    opacity: 1;
-
-    pointer-events: none;
-
+    background: #430b1f;
     z-index: 999;
-
-    transition:
-        opacity 1.4s ease;
+    pointer-events: none;
+    transition: opacity 1.4s ease;
 }
 
 #pageTransition.fade-out {
@@ -57,99 +42,44 @@ body {
 }
 
 
-/* =========================================
-   FILM GRAIN
-========================================= */
-
-.film-grain {
-    position: fixed;
-
-    inset: 0;
-
-    pointer-events: none;
-
-    z-index: 90;
-
-    opacity: 0.05;
-
-    background-image:
-        url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
-
-    animation: grainMove 0.2s steps(2) infinite;
-}
-
-@keyframes grainMove {
-
-    0% {
-        transform: translate(0, 0);
-    }
-
-    25% {
-        transform: translate(1%, -1%);
-    }
-
-    50% {
-        transform: translate(-1%, 1%);
-    }
-
-    75% {
-        transform: translate(1%, 1%);
-    }
-
-    100% {
-        transform: translate(-1%, -1%);
-    }
-}
-
-
-/* =========================================
-   BACKGROUND GLOW
-========================================= */
+/* BACKGROUND */
 
 .background-glow {
     position: fixed;
 
-    width: 700px;
-    height: 700px;
+    width: 650px;
+    height: 650px;
 
     left: 50%;
     top: 50%;
 
     transform: translate(-50%, -50%);
 
-    background: rgba(255, 160, 180, 0.09);
+    background: rgba(255, 170, 190, 0.1);
 
     border-radius: 50%;
 
-    filter: blur(110px);
+    filter: blur(100px);
 
     pointer-events: none;
-
-    z-index: 0;
 }
 
-
-/* =========================================
-   MOVING LIGHT ORBS
-========================================= */
 
 .light-orb {
     position: fixed;
 
-    width: 180px;
-    height: 180px;
+    width: 170px;
+    height: 170px;
 
     border-radius: 50%;
 
     filter: blur(70px);
 
-    opacity: 0.18;
+    opacity: 0.15;
 
     pointer-events: none;
 
-    z-index: 0;
-
-    animation: orbMove 12s ease-in-out infinite alternate;
+    animation: moveOrb 12s ease-in-out infinite alternate;
 }
 
 .orb-one {
@@ -171,10 +101,10 @@ body {
     animation-delay: 6s;
 }
 
-@keyframes orbMove {
+@keyframes moveOrb {
 
     0% {
-        transform: translate(0, 0) scale(0.8);
+        transform: translate(0, 0) scale(.8);
     }
 
     50% {
@@ -182,58 +112,49 @@ body {
     }
 
     100% {
-        transform: translate(-30px, 40px) scale(0.9);
+        transform: translate(-30px, 40px) scale(.9);
     }
 }
 
 
-/* =========================================
-   DOT PATTERN
-========================================= */
+/* DOTS */
 
 body::before {
     content: "";
 
     position: fixed;
-
     inset: 0;
 
     background-image:
         radial-gradient(
-            rgba(255, 255, 255, 0.08) 1px,
+            rgba(255,255,255,.08) 1px,
             transparent 1px
         );
 
     background-size: 32px 32px;
 
-    opacity: 0.25;
+    opacity: .25;
 
     pointer-events: none;
-
-    z-index: 0;
 }
 
 
-/* =========================================
-   STARS
-========================================= */
+/* STARS */
 
 .stars {
     position: fixed;
-
     inset: 0;
 
     pointer-events: none;
-
     z-index: 1;
 }
 
 .stars span {
     position: absolute;
 
-    color: rgba(255, 255, 255, 0.65);
+    color: rgba(255,255,255,.7);
 
-    animation: twinkle 4s infinite ease-in-out;
+    animation: twinkle 4s ease-in-out infinite;
 }
 
 .stars span:nth-child(1) {
@@ -256,7 +177,7 @@ body::before {
 .stars span:nth-child(4) {
     top: 80%;
     left: 88%;
-    animation-delay: 0.5s;
+    animation-delay: .5s;
 }
 
 .stars span:nth-child(5) {
@@ -287,8 +208,8 @@ body::before {
 
     0%,
     100% {
-        opacity: 0.2;
-        transform: scale(0.8);
+        opacity: .2;
+        transform: scale(.8);
     }
 
     50% {
@@ -298,20 +219,15 @@ body::before {
 }
 
 
-/* =========================================
-   FLOATING HEARTS
-========================================= */
+/* HEARTS */
 
 .floating-hearts {
     position: fixed;
-
     inset: 0;
 
     overflow: hidden;
 
     pointer-events: none;
-
-    z-index: 1;
 }
 
 .floating-hearts span {
@@ -319,11 +235,11 @@ body::before {
 
     bottom: -30px;
 
-    color: rgba(255, 220, 225, 0.25);
+    color: rgba(255,220,225,.25);
 
     font-size: 18px;
 
-    animation: floatHeart 13s linear infinite;
+    animation: floatingHeart 13s linear infinite;
 }
 
 .floating-hearts span:nth-child(1) {
@@ -355,18 +271,15 @@ body::before {
     animation-delay: 10s;
 }
 
-@keyframes floatHeart {
+@keyframes floatingHeart {
 
     0% {
-        transform:
-            translateY(0)
-            rotate(0deg);
-
+        transform: translateY(0);
         opacity: 0;
     }
 
     15% {
-        opacity: 0.7;
+        opacity: .7;
     }
 
     100% {
@@ -379,57 +292,56 @@ body::before {
 }
 
 
-/* =========================================
-   MAIN PAGE
-========================================= */
+/* GRAIN */
 
-#page2 {
-    position: relative;
+.film-grain {
+    position: fixed;
+    inset: 0;
 
-    min-height: 100vh;
+    pointer-events: none;
 
-    z-index: 5;
+    opacity: .035;
+
+    z-index: 50;
+
+    background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
 }
 
 
-/* =========================================
-   SCENES
-========================================= */
+/* SCENES */
 
 .scene {
     position: fixed;
-
     inset: 0;
 
     min-height: 100vh;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
-    padding: 50px 25px;
+    padding: 40px 25px;
+
+    overflow-y: auto;
 
     opacity: 0;
-
     visibility: hidden;
 
     transform:
         translateY(25px)
-        scale(0.98);
+        scale(.98);
 
     transition:
-        opacity 0.9s ease,
-        transform 0.9s ease,
-        visibility 0.9s ease;
+        opacity .9s ease,
+        transform .9s ease,
+        visibility .9s ease;
 
-    overflow-y: auto;
+    z-index: 10;
 }
 
 .scene.active {
     opacity: 1;
-
     visibility: visible;
 
     transform:
@@ -437,34 +349,36 @@ body::before {
         scale(1);
 }
 
-.scene-content,
-.message-container,
-.story-container,
-.final-message {
-    width: min(92%, 900px);
+.content {
+    width: min(92%, 850px);
 
     text-align: center;
-
-    position: relative;
-
-    z-index: 10;
 }
 
 
-/* =========================================
-   SCENE 1
-========================================= */
+/* TYPOGRAPHY */
 
-.scene-bow {
-    font-size: 50px;
+.eyebrow {
+    font-size: 10px;
 
-    margin-bottom: 18px;
+    letter-spacing: 4px;
 
-    animation:
-        gentleBow 3s ease-in-out infinite;
+    font-weight: 600;
+
+    opacity: .7;
+
+    margin-bottom: 22px;
 }
 
-@keyframes gentleBow {
+.bow {
+    font-size: 48px;
+
+    margin-bottom: 15px;
+
+    animation: bowMove 3s ease-in-out infinite;
+}
+
+@keyframes bowMove {
 
     0%,
     100% {
@@ -476,88 +390,129 @@ body::before {
     }
 }
 
-.small-heading {
-    font-size: 10px;
+h1 {
+    font-family: "Cormorant Garamond", serif;
 
-    letter-spacing: 4px;
+    font-size: clamp(43px, 7vw, 75px);
 
-    font-weight: 600;
+    font-weight: 500;
 
-    opacity: 0.75;
+    line-height: 1.05;
 
-    margin-bottom: 18px;
+    margin-bottom: 35px;
 }
 
-.scene-content h1 {
+h2 {
     font-family: "Great Vibes", cursive;
 
-    font-size: clamp(70px, 10vw, 120px);
+    font-size: clamp(55px, 9vw, 90px);
 
     font-weight: 400;
 
     line-height: 1;
 
-    text-shadow:
-        0 10px 30px rgba(50, 0, 15, 0.3);
-
     margin-bottom: 30px;
 }
 
-.scene-content h1 span {
-    font-family: "Poppins", sans-serif;
 
-    font-size: 40px;
-}
+/* CHAPTER 1 */
 
-.main-line {
+.story-reveal {
     font-family: "Cormorant Garamond", serif;
 
-    font-size: clamp(27px, 4vw, 40px);
+    font-size: 27px;
 
-    line-height: 1.2;
-
-    margin-bottom: 10px;
+    line-height: 1.35;
 }
 
-.funny-line {
-    font-family: "Great Vibes", cursive;
+.story-reveal p {
+    margin-bottom: 15px;
+}
+
+.highlight {
+    font-weight: 600;
 
     font-size: 32px;
-
-    opacity: 0.9;
-
-    margin-bottom: 8px;
 }
 
-.dramatic-line {
+.hi-text {
+    font-family: "Great Vibes", cursive;
+
+    font-size: clamp(65px, 10vw, 105px);
+
+    margin: 25px 0 30px;
+
+    text-shadow:
+        0 10px 30px rgba(50,0,15,.3);
+}
+
+
+/* DATE */
+
+.date {
     font-family: "Cormorant Garamond", serif;
 
-    font-size: 30px;
+    font-size: clamp(65px, 11vw, 120px);
 
     font-weight: 600;
 
-    margin-bottom: 35px;
+    letter-spacing: 5px;
+}
+
+.date-line {
+    width: 100px;
+    height: 1px;
+
+    background: rgba(255,255,255,.6);
+
+    margin: 20px auto;
+}
+
+.date-content h2 {
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: clamp(32px, 5vw, 48px);
+
+    margin-bottom: 25px;
+}
+
+.date-message {
+    max-width: 600px;
+
+    margin: auto;
+
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 27px;
+
+    line-height: 1.35;
+}
+
+.script-text {
+    font-family: "Great Vibes", cursive;
+
+    font-size: 36px;
+
+    margin: 25px 0 35px;
 }
 
 
-/* =========================================
-   BUTTON
-========================================= */
+/* BUTTON */
 
-.story-button {
-    border: 1px solid rgba(255, 255, 255, 0.5);
+.next-button {
+    border: 1px solid rgba(255,255,255,.5);
 
-    padding: 15px 28px;
+    padding: 14px 26px;
 
     border-radius: 999px;
 
-    background: rgba(255, 248, 245, 0.96);
+    background: rgba(255,248,245,.96);
 
     color: #8d1e38;
 
     font-family: "Poppins", sans-serif;
 
-    font-size: 12px;
+    font-size: 11px;
 
     font-weight: 700;
 
@@ -566,297 +521,50 @@ body::before {
     cursor: pointer;
 
     box-shadow:
-        0 12px 30px rgba(50, 0, 15, 0.25);
+        0 12px 30px rgba(50,0,15,.25);
 
     transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease;
+        transform .25s ease,
+        box-shadow .25s ease;
 }
 
-.story-button:hover {
+.next-button:hover {
     transform: translateY(-4px);
 
     box-shadow:
-        0 18px 35px rgba(50, 0, 15, 0.3);
+        0 18px 35px rgba(50,0,15,.3);
 }
 
-.story-button:active {
-    transform: scale(0.96);
-}
-
-
-/* =========================================
-   SCENE 2
-========================================= */
-
-.message-container {
-    max-width: 760px;
-}
-
-.handwritten-message {
-    min-height: 330px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: center;
-
-    gap: 25px;
-
-    margin-bottom: 20px;
-}
-
-.handwritten-message p {
-    font-family: "Great Vibes", cursive;
-
-    font-size: clamp(31px, 4vw, 48px);
-
-    line-height: 1.25;
-
-    opacity: 0;
-
-    transform:
-        translateY(15px)
-        rotate(-1deg);
-
-    transition:
-        opacity 1.2s ease,
-        transform 1.2s ease;
-}
-
-.handwritten-message p.visible {
-    opacity: 1;
-
-    transform:
-        translateY(0)
-        rotate(0);
-}
-
-.hidden-button {
-    opacity: 0;
-
-    pointer-events: none;
-
-    transform: translateY(10px);
-
-    transition:
-        opacity 0.8s ease,
-        transform 0.8s ease;
-}
-
-.hidden-button.show {
-    opacity: 1;
-
-    pointer-events: auto;
-
-    transform: translateY(0);
+.next-button:active {
+    transform: scale(.96);
 }
 
 
-/* =========================================
-   SCENE 3
-========================================= */
-
-.story-container {
-    max-width: 950px;
-
-    padding: 30px 0 80px;
-}
-
-.story-container h2 {
-    font-family: "Great Vibes", cursive;
-
-    font-size: clamp(55px, 8vw, 90px);
-
-    font-weight: 400;
-
-    line-height: 1;
-
-    margin-bottom: 12px;
-}
-
-.story-intro {
-    font-family: "Cormorant Garamond", serif;
-
-    font-size: 25px;
-
-    opacity: 0.85;
-
-    margin-bottom: 60px;
-}
-
-
-/* =========================================
-   TIMELINE
-========================================= */
-
-.timeline {
-    position: relative;
-
-    width: 100%;
-
-    max-width: 850px;
-
-    margin: auto;
-}
-
-.timeline::before {
-    content: "";
-
-    position: absolute;
-
-    left: 50%;
-
-    top: 0;
-    bottom: 0;
-
-    width: 2px;
-
-    background:
-        linear-gradient(
-            to bottom,
-            transparent,
-            rgba(255, 255, 255, 0.55),
-            transparent
-        );
-
-    transform: translateX(-50%);
-}
-
-.memory {
-    position: relative;
-
-    width: 50%;
-
-    padding: 20px 35px;
-
-    opacity: 0;
-
-    transform: translateY(40px);
-
-    transition:
-        opacity 0.9s ease,
-        transform 0.9s ease;
-}
-
-.memory.visible {
-    opacity: 1;
-
-    transform: translateY(0);
-}
-
-.memory-left {
-    left: 0;
-
-    text-align: right;
-}
-
-.memory-right {
-    left: 50%;
-
-    text-align: left;
-}
-
-
-/* =========================================
-   TIMELINE HEART
-========================================= */
-
-.timeline-dot {
-    position: absolute;
-
-    top: 30px;
-
-    width: 32px;
-    height: 32px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
-
-    background: #fff8f5;
-
-    color: #a22240;
-
-    font-size: 13px;
-
-    box-shadow:
-        0 0 0 7px rgba(255, 255, 255, 0.08),
-        0 8px 18px rgba(50, 0, 15, 0.25);
-
-    z-index: 3;
-
-    animation: heartGlow 2.5s ease-in-out infinite;
-}
-
-@keyframes heartGlow {
-
-    0%,
-    100% {
-        box-shadow:
-            0 0 0 7px rgba(255, 255, 255, 0.08),
-            0 8px 18px rgba(50, 0, 15, 0.25);
-    }
-
-    50% {
-        box-shadow:
-            0 0 0 10px rgba(255, 255, 255, 0.12),
-            0 0 25px rgba(255, 220, 230, 0.35);
-    }
-}
-
-.memory-left .timeline-dot {
-    right: -16px;
-}
-
-.memory-right .timeline-dot {
-    left: -16px;
-}
-
-
-/* =========================================
-   MEMORY CARD
-========================================= */
+/* MEMORY */
 
 .memory-card {
-    background: rgba(255, 248, 245, 0.97);
+    width: min(100%, 650px);
+
+    margin: 0 auto 35px;
+
+    padding: 16px;
+
+    background: rgba(255,248,245,.97);
 
     color: #7d1c35;
 
-    border-radius: 20px;
-
-    padding: 15px;
+    border-radius: 22px;
 
     box-shadow:
-        0 20px 45px rgba(45, 0, 15, 0.22);
-
-    transition:
-        transform 0.35s ease,
-        box-shadow 0.35s ease;
+        0 25px 55px rgba(45,0,15,.25);
 }
 
-.memory-card:hover {
-    transform:
-        translateY(-8px)
-        rotate(-0.5deg);
+.memory-photo {
+    height: 270px;
 
-    box-shadow:
-        0 30px 55px rgba(45, 0, 15, 0.28);
-}
+    margin-bottom: 25px;
 
-
-/* =========================================
-   PHOTO
-========================================= */
-
-.photo-placeholder {
-    height: 220px;
-
-    border-radius: 14px;
+    border-radius: 15px;
 
     padding: 8px;
 
@@ -866,164 +574,236 @@ body::before {
             #f3c6cf,
             #fae7e2
         );
-
-    margin-bottom: 17px;
-
-    overflow: hidden;
 }
 
-.photo-inner {
+.photo-placeholder {
     width: 100%;
     height: 100%;
 
-    border: 1px dashed rgba(125, 28, 53, 0.3);
+    border: 1px dashed rgba(125,28,53,.3);
 
     border-radius: 10px;
 
     display: flex;
-
-    flex-direction: column;
-
     align-items: center;
-
     justify-content: center;
 
-    transition:
-        transform 0.4s ease;
+    flex-direction: column;
 }
 
-.memory-card:hover .photo-inner {
-    transform: scale(1.03);
-}
-
-.photo-inner span {
+.photo-placeholder span {
     font-size: 48px;
-
-    margin-bottom: 8px;
 }
 
-.photo-inner small {
+.photo-placeholder small {
+    margin-top: 8px;
+
     font-size: 9px;
 
     letter-spacing: 3px;
 
-    font-weight: 700;
+    opacity: .6;
+}
 
-    opacity: 0.6;
+.memory-content {
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 25px;
+
+    line-height: 1.35;
+}
+
+.memory-content p {
+    margin-bottom: 12px;
+}
+
+.memory-divider {
+    display: block;
+
+    font-size: 18px;
+
+    margin: 12px 0;
+}
+
+.memory-special {
+    font-size: 34px;
+
+    font-weight: 600;
+}
+
+.memory-end {
+    font-size: 21px;
+
+    opacity: .8;
 }
 
 
-/* =========================================
-   MEMORY TEXT
-========================================= */
+/* CHAPTER 4 */
 
-.memory-text {
-    padding: 0 8px 8px;
+.question {
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 34px;
+
+    margin-bottom: 40px;
 }
 
-.memory-date {
-    font-size: 9px;
+.qualities {
+    display: grid;
 
-    letter-spacing: 3px;
+    grid-template-columns:
+        repeat(3, 1fr);
 
-    font-weight: 700;
+    gap: 20px;
 
-    opacity: 0.6;
-
-    margin-bottom: 8px;
+    margin-bottom: 40px;
 }
 
-.memory-text h3 {
+.quality {
+    padding: 25px 15px;
+
+    background: rgba(255,255,255,.08);
+
+    border:
+        1px solid rgba(255,255,255,.14);
+
+    border-radius: 18px;
+
+    backdrop-filter: blur(8px);
+
+    transition:
+        transform .3s ease;
+}
+
+.quality:hover {
+    transform: translateY(-8px);
+}
+
+.quality span {
+    display: block;
+
+    font-size: 30px;
+
+    margin-bottom: 12px;
+}
+
+.quality p {
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 25px;
+}
+
+.quality-ending {
+    font-family: "Great Vibes", cursive;
+
+    font-size: 37px;
+
+    margin-bottom: 35px;
+}
+
+
+/* CHAPTER 5 */
+
+.confession-line {
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 29px;
+
+    margin-bottom: 10px;
+}
+
+.funny-quote {
+    font-family: "Great Vibes", cursive;
+
+    font-size: clamp(50px, 8vw, 80px);
+
+    margin: 30px 0;
+
+    transform: rotate(-2deg);
+
+    text-shadow:
+        0 8px 25px rgba(50,0,15,.25);
+}
+
+.confession-ending {
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 26px;
+
+    margin-bottom: 25px;
+}
+
+.laughing-hearts {
+    font-size: 25px;
+
+    margin-bottom: 35px;
+}
+
+
+/* FINAL */
+
+.final-content {
+    max-width: 700px;
+}
+
+.final-bow {
+    font-size: 40px;
+
+    margin-bottom: 15px;
+}
+
+.final-content h2 {
+    font-size: clamp(65px, 10vw, 100px);
+
+    margin-bottom: 30px;
+}
+
+.letter {
     font-family: "Cormorant Garamond", serif;
 
     font-size: 27px;
 
-    line-height: 1.05;
-
-    margin-bottom: 8px;
+    line-height: 1.35;
 }
 
-.memory-text > p:last-child {
-    font-size: 12px;
-
-    line-height: 1.6;
-
-    opacity: 0.8;
+.letter p {
+    margin-bottom: 18px;
 }
 
-.final-story-button {
-    margin-top: 55px;
-}
-
-
-/* =========================================
-   SCENE 4
-========================================= */
-
-.final-message {
-    max-width: 700px;
-}
-
-.final-message h2 {
-    font-family: "Cormorant Garamond", serif;
-
-    font-size: clamp(45px, 7vw, 75px);
-
-    line-height: 1;
-
-    margin-bottom: 28px;
-}
-
-.pause-text {
-    font-family: "Great Vibes", cursive;
-
+.letter-special {
     font-size: 34px;
 
-    margin-bottom: 20px;
+    font-weight: 600;
 
-    opacity: 0;
-
-    transform: translateY(15px);
-
-    transition:
-        opacity 1s ease,
-        transform 1s ease;
+    margin-top: 25px;
 }
 
-.pause-text.show {
-    opacity: 1;
-
-    transform: translateY(0);
+.birthday-message {
+    margin: 40px 0 35px;
 }
 
-.big-final-text {
+.birthday-message p {
+    font-family: "Great Vibes", cursive;
+
+    font-size: 48px;
+
+    margin-bottom: 10px;
+}
+
+.birthday-message span {
     font-family: "Cormorant Garamond", serif;
 
-    font-size: clamp(27px, 4vw, 40px);
+    font-size: 24px;
 
-    line-height: 1.25;
-
-    margin-bottom: 35px;
-
-    opacity: 0;
-
-    transform: translateY(15px);
-
-    transition:
-        opacity 1s ease,
-        transform 1s ease;
+    opacity: .85;
 }
 
-.big-final-text.show {
-    opacity: 1;
-
-    transform: translateY(0);
+.final-button {
+    margin-top: 5px;
 }
 
 
-/* =========================================
-   MUSIC
-========================================= */
+/* MUSIC */
 
 .music-button {
     position: fixed;
@@ -1031,47 +811,44 @@ body::before {
     right: 22px;
     bottom: 22px;
 
-    width: 43px;
-    height: 43px;
+    width: 44px;
+    height: 44px;
 
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    border:
+        1px solid rgba(255,255,255,.4);
 
     border-radius: 50%;
 
-    background: rgba(255, 255, 255, 0.12);
+    background: rgba(255,255,255,.12);
 
     backdrop-filter: blur(10px);
 
     color: white;
 
-    cursor: pointer;
-
     font-size: 18px;
+
+    cursor: pointer;
 
     z-index: 100;
 
-    transition:
-        transform 0.25s ease,
-        background 0.25s ease;
+    transition: transform .25s ease;
 }
 
 .music-button:hover {
     transform: scale(1.08);
-
-    background: rgba(255, 255, 255, 0.22);
 }
 
 .music-status {
     position: fixed;
 
     right: 75px;
-    bottom: 27px;
+    bottom: 28px;
 
     padding: 7px 12px;
 
     border-radius: 20px;
 
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255,255,255,.1);
 
     backdrop-filter: blur(10px);
 
@@ -1083,122 +860,110 @@ body::before {
 
     z-index: 100;
 
-    transition:
-        opacity 0.5s ease;
+    transition: opacity .5s ease;
 }
 
 .music-status.show {
-    opacity: 0.8;
+    opacity: .8;
 }
 
 
-/* =========================================
-   MOBILE
-========================================= */
+/* MOBILE */
 
 @media (max-width: 700px) {
 
     .scene {
         align-items: flex-start;
 
-        padding-top: 70px;
-
+        padding-top: 65px;
         padding-bottom: 60px;
     }
 
-    .scene-content h1 {
-        font-size: 68px;
+    .content {
+        width: 94%;
     }
 
-    .scene-content h1 span {
+    h1 {
+        font-size: 43px;
+    }
+
+    .story-reveal {
+        font-size: 23px;
+    }
+
+    .highlight {
         font-size: 28px;
     }
 
-    .main-line {
-        font-size: 27px;
+    .hi-text {
+        font-size: 70px;
     }
 
-    .dramatic-line {
-        font-size: 26px;
+    .date {
+        font-size: 65px;
     }
 
-    .handwritten-message {
-        min-height: 280px;
+    .date-message {
+        font-size: 23px;
     }
 
-    .handwritten-message p {
-        font-size: 32px;
+    .script-text {
+        font-size: 31px;
     }
 
-    .timeline::before {
-        left: 15px;
+    .memory-photo {
+        height: 210px;
     }
 
-    .memory,
-    .memory-left,
-    .memory-right {
-        width: 100%;
-
-        left: 0;
-
-        padding-left: 45px;
-        padding-right: 0;
-
-        text-align: left;
-    }
-
-    .memory-left .timeline-dot,
-    .memory-right .timeline-dot {
-        left: -1px;
-
-        right: auto;
-    }
-
-    .story-container h2 {
-        font-size: 60px;
-    }
-
-    .story-intro {
+    .memory-content {
         font-size: 22px;
     }
 
-    .photo-placeholder {
-        height: 200px;
+    .memory-special {
+        font-size: 30px;
     }
 
-    .final-message h2 {
-        font-size: 48px;
+    .qualities {
+        grid-template-columns: 1fr;
     }
 
-    .pause-text {
+    .quality {
+        padding: 18px;
+    }
+
+    .question {
+        font-size: 28px;
+    }
+
+    .quality-ending {
+        font-size: 32px;
+    }
+
+    .confession-line {
+        font-size: 24px;
+    }
+
+    .confession-ending {
+        font-size: 23px;
+    }
+
+    .letter {
+        font-size: 23px;
+    }
+
+    .letter-special {
         font-size: 29px;
+    }
+
+    .birthday-message p {
+        font-size: 42px;
+    }
+
+    .birthday-message span {
+        font-size: 20px;
     }
 
     .music-status {
         display: none;
-    }
-}
-
-
-/* =========================================
-   SMALL PHONES
-========================================= */
-
-@media (max-height: 700px) {
-
-    .scene {
-        padding-top: 40px;
-    }
-
-    .scene-bow {
-        font-size: 38px;
-
-        margin-bottom: 10px;
-    }
-
-    .scene-content h1 {
-        font-size: 58px;
-
-        margin-bottom: 20px;
     }
 }
