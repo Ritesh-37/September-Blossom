@@ -1,10 +1,68 @@
+```javascript
 /* =========================================================
-   PASSWORD SETTINGS
+   PASSWORD
 ========================================================= */
 
 const CORRECT_PASSWORD = "0309";
 
 let enteredPassword = "";
+
+let passwordCorrect = false;
+
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const passwordDisplay =
+    document.getElementById(
+        "password-display"
+    );
+
+const popupOverlay =
+    document.getElementById(
+        "popup-overlay"
+    );
+
+const popupDoodle =
+    document.getElementById(
+        "popup-doodle"
+    );
+
+const popupMessage =
+    document.getElementById(
+        "popup-message"
+    );
+
+const popupHearts =
+    document.getElementById(
+        "popup-hearts"
+    );
+
+const pageOne =
+    document.getElementById(
+        "page-one"
+    );
+
+const pageTwo =
+    document.getElementById(
+        "page-two"
+    );
+
+const birthdayMusic =
+    document.getElementById(
+        "birthday-music"
+    );
+
+const farmDoor =
+    document.getElementById(
+        "farm-door"
+    );
+
+const doorTooltip =
+    document.getElementById(
+        "door-tooltip"
+    );
 
 
 /* =========================================================
@@ -13,36 +71,23 @@ let enteredPassword = "";
 
 function updateDisplay() {
 
-    const display =
-        document.getElementById(
-            "password-display"
-        );
-
-
-    /*
-       Show a dot for every number entered.
-    */
-
-    display.textContent =
+    passwordDisplay.textContent =
         "•".repeat(
             enteredPassword.length
         );
 
 
-    /*
-       Empty = hollow box
-       Numbers entered = white box
-    */
+    if (
+        enteredPassword.length > 0
+    ) {
 
-    if (enteredPassword.length > 0) {
-
-        display.classList.add(
+        passwordDisplay.classList.add(
             "filled"
         );
 
     } else {
 
-        display.classList.remove(
+        passwordDisplay.classList.remove(
             "filled"
         );
     }
@@ -50,16 +95,14 @@ function updateDisplay() {
 
 
 /* =========================================================
-   NUMBER BUTTON
+   PRESS NUMBER
 ========================================================= */
 
 function pressKey(number) {
 
-    /*
-       Maximum 8 digits.
-    */
-
-    if (enteredPassword.length >= 8) {
+    if (
+        enteredPassword.length >= 8
+    ) {
         return;
     }
 
@@ -73,7 +116,7 @@ function pressKey(number) {
 
 
 /* =========================================================
-   DELETE BUTTON
+   DELETE
 ========================================================= */
 
 function deleteKey() {
@@ -91,83 +134,60 @@ function deleteKey() {
 
 
 /* =========================================================
-   SHOW POPUP
+   PASSWORD MESSAGE
 ========================================================= */
 
-function showPopup(type) {
+function clearMessage() {
 
-    const overlay =
+    const message =
         document.getElementById(
-            "popup-overlay"
+            "password-message"
         );
 
-    const doodle =
-        document.getElementById(
-            "popup-doodle"
-        );
-
-    const popupMessage =
-        document.getElementById(
-            "popup-message"
-        );
-
-    const popupHearts =
-        document.getElementById(
-            "popup-hearts"
-        );
+    message.textContent = "";
+}
 
 
-    /*
-       WRONG PASSWORD POPUP
-    */
+/* =========================================================
+   SHOW WRONG PASSWORD POPUP
+========================================================= */
 
-    if (type === "wrong") {
+function showWrongPopup() {
 
-        doodle.textContent =
-            "🥺💗";
+    popupDoodle.textContent =
+        "🥺💗";
 
-        popupMessage.innerHTML =
-            "Baby!!!! You've entered the wrong password.";
+    popupMessage.innerHTML =
+        "Baby!!!! You've entered the wrong password.";
 
-        popupHearts.textContent =
-            "♡ ✿ ♡";
-
-
-        /*
-           Little sad/cute animation.
-        */
-
-        doodle.style.color =
-            "#e22d5a";
-
-    }
+    popupHearts.textContent =
+        "♡ ✿ ♡";
 
 
-    /*
-       CORRECT PASSWORD POPUP
-    */
-
-    else if (type === "correct") {
-
-        doodle.textContent =
-            "🎀💗✨";
-
-        popupMessage.innerHTML =
-            "Welcome, Baby! 💕<br>I've been waiting for you! 🌸";
-
-        popupHearts.textContent =
-            "♡ ✿ ♡ ✿ ♡";
-
-        doodle.style.color =
-            "#e22d5a";
-    }
+    popupOverlay.classList.add(
+        "show"
+    );
+}
 
 
-    /*
-       Make popup visible.
-    */
+/* =========================================================
+   SHOW CORRECT PASSWORD POPUP
+========================================================= */
 
-    overlay.classList.add(
+function showCorrectPopup() {
+
+    popupDoodle.textContent =
+        "🎀💗✨";
+
+    popupMessage.innerHTML =
+        "Welcome, Baby! 💕<br>" +
+        "I've been waiting for you! 🌸";
+
+    popupHearts.textContent =
+        "♡ ✿ ♡ ✿ ♡";
+
+
+    popupOverlay.classList.add(
         "show"
     );
 }
@@ -179,14 +199,24 @@ function showPopup(type) {
 
 function closePopup() {
 
-    const overlay =
-        document.getElementById(
-            "popup-overlay"
-        );
-
-    overlay.classList.remove(
+    popupOverlay.classList.remove(
         "show"
     );
+
+
+    /*
+       IMPORTANT:
+       Page 2 opens ONLY if the
+       password was correct.
+    */
+
+    if (passwordCorrect) {
+
+        setTimeout(
+            openBirthdayPage,
+            300
+        );
+    }
 }
 
 
@@ -196,14 +226,8 @@ function closePopup() {
 
 function checkPassword() {
 
-    const display =
-        document.getElementById(
-            "password-display"
-        );
-
-
     /*
-       CORRECT PASSWORD
+       CORRECT
     */
 
     if (
@@ -211,11 +235,14 @@ function checkPassword() {
         CORRECT_PASSWORD
     ) {
 
+        passwordCorrect = true;
+
+
         /*
-           Small success animation.
+           Success animation
         */
 
-        display.animate(
+        passwordDisplay.animate(
 
             [
                 {
@@ -225,7 +252,7 @@ function checkPassword() {
 
                 {
                     transform:
-                        "scale(1.08)"
+                        "scale(1.1)"
                 },
 
                 {
@@ -241,134 +268,445 @@ function checkPassword() {
         );
 
 
-        /*
-           Show cute welcome popup.
-        */
-
-        setTimeout(() => {
-
-            showPopup(
-                "correct"
-            );
-
-        }, 350);
-
-
-        /*
-           Keep password accepted.
-           Page 2 will be connected here later.
-        */
+        setTimeout(
+            showCorrectPopup,
+            300
+        );
 
         return;
     }
 
 
     /*
-       WRONG PASSWORD
+       WRONG
     */
 
-    else {
+    passwordCorrect = false;
 
-        /*
-           Shake password display.
-        */
 
-        display.animate(
+    passwordDisplay.animate(
 
-            [
-                {
-                    transform:
-                        "translateX(0)"
-                },
-
-                {
-                    transform:
-                        "translateX(-8px)"
-                },
-
-                {
-                    transform:
-                        "translateX(8px)"
-                },
-
-                {
-                    transform:
-                        "translateX(-6px)"
-                },
-
-                {
-                    transform:
-                        "translateX(6px)"
-                },
-
-                {
-                    transform:
-                        "translateX(0)"
-                }
-            ],
+        [
+            {
+                transform:
+                    "translateX(0)"
+            },
 
             {
-                duration:
-                    350
+                transform:
+                    "translateX(-9px)"
+            },
+
+            {
+                transform:
+                    "translateX(9px)"
+            },
+
+            {
+                transform:
+                    "translateX(-7px)"
+            },
+
+            {
+                transform:
+                    "translateX(7px)"
+            },
+
+            {
+                transform:
+                    "translateX(0)"
             }
-        );
+        ],
+
+        {
+            duration:
+                400
+        }
+    );
 
 
-        /*
-           Show wrong-password popup.
-        */
-
-        setTimeout(() => {
-
-            showPopup(
-                "wrong"
-            );
-
-        }, 300);
+    setTimeout(
+        showWrongPopup,
+        300
+    );
 
 
-        /*
-           Clear wrong password
-           after a short delay.
-        */
-
-        setTimeout(() => {
+    setTimeout(
+        function () {
 
             enteredPassword = "";
 
             updateDisplay();
 
-        }, 700);
+        },
+        700
+    );
+}
+
+
+/* =========================================================
+   OPEN PAGE 2
+========================================================= */
+
+function openBirthdayPage() {
+
+    /*
+       Hide Page 1
+    */
+
+    pageOne.style.display =
+        "none";
+
+
+    /*
+       Show Page 2
+    */
+
+    pageTwo.classList.add(
+        "active"
+    );
+
+
+    /*
+       Start birthday music.
+       Browser policy may prevent
+       audio in some situations.
+    */
+
+    if (birthdayMusic) {
+
+        birthdayMusic.volume =
+            0.35;
+
+        const playPromise =
+            birthdayMusic.play();
+
+
+        if (
+            playPromise !== undefined
+        ) {
+
+            playPromise.catch(
+                function () {
+
+                    console.log(
+                        "Music autoplay was blocked by the browser."
+                    );
+
+                }
+            );
+        }
     }
 }
 
 
 /* =========================================================
-   CLEAR MESSAGE
+   DOOR HOVER
 ========================================================= */
 
-function clearMessage() {
+farmDoor.addEventListener(
+    "mouseenter",
+    function () {
 
-    const message =
-        document.getElementById(
-            "password-message"
+        doorTooltip.classList.add(
+            "show"
         );
+    }
+);
 
-    message.textContent = "";
+
+farmDoor.addEventListener(
+    "mouseleave",
+    function () {
+
+        doorTooltip.classList.remove(
+            "show"
+        );
+    }
+);
+
+
+/* =========================================================
+   DOOR CLICK SOUND
+========================================================= */
+
+function playDoorSound() {
+
+    /*
+       Web Audio API creates a
+       small wooden click sound.
+
+       This means you don't need
+       another audio file for the door.
+    */
+
+    const AudioContext =
+        window.AudioContext ||
+        window.webkitAudioContext;
+
+
+    if (!AudioContext) {
+        return;
+    }
+
+
+    const context =
+        new AudioContext();
+
+
+    const oscillator =
+        context.createOscillator();
+
+    const gain =
+        context.createGain();
+
+
+    oscillator.type =
+        "triangle";
+
+
+    oscillator.frequency.setValueAtTime(
+        180,
+        context.currentTime
+    );
+
+
+    oscillator.frequency.exponentialRampToValueAtTime(
+        80,
+        context.currentTime + 0.12
+    );
+
+
+    gain.gain.setValueAtTime(
+        0.18,
+        context.currentTime
+    );
+
+
+    gain.gain.exponentialRampToValueAtTime(
+        0.001,
+        context.currentTime + 0.18
+    );
+
+
+    oscillator.connect(
+        gain
+    );
+
+    gain.connect(
+        context.destination
+    );
+
+
+    oscillator.start();
+
+    oscillator.stop(
+        context.currentTime + 0.18
+    );
 }
 
 
 /* =========================================================
-   KEYBOARD SUPPORT
+   OPEN FARM HOUSE
+========================================================= */
+
+function openFarmDoor() {
+
+    playDoorSound();
+
+
+    /*
+       Small door-opening animation
+    */
+
+    farmDoor.animate(
+
+        [
+            {
+                transform:
+                    "perspective(300px) rotateY(0deg)"
+            },
+
+            {
+                transform:
+                    "perspective(300px) rotateY(-35deg)"
+            },
+
+            {
+                transform:
+                    "perspective(300px) rotateY(-70deg)"
+            }
+        ],
+
+        {
+            duration:
+                650,
+
+            fill:
+                "forwards"
+        }
+    );
+
+
+    doorTooltip.textContent =
+        "Opening...";
+
+
+    /*
+       Page 3 placeholder.
+
+       When we're ready to build Page 3,
+       this function will navigate to it.
+    */
+
+    setTimeout(
+        function () {
+
+            alert(
+                "🏡 The door opened! Page 3 will go here next. 💗"
+            );
+
+        },
+        750
+    );
+}
+
+
+/* =========================================================
+   DUCK SOUND
+========================================================= */
+
+function duckQuack() {
+
+    /*
+       Web Audio API makes a cute
+       duck-like quack without
+       requiring another sound file.
+    */
+
+    const AudioContext =
+        window.AudioContext ||
+        window.webkitAudioContext;
+
+
+    if (!AudioContext) {
+        return;
+    }
+
+
+    const context =
+        new AudioContext();
+
+
+    const oscillator =
+        context.createOscillator();
+
+    const gain =
+        context.createGain();
+
+
+    oscillator.type =
+        "square";
+
+
+    oscillator.frequency.setValueAtTime(
+        420,
+        context.currentTime
+    );
+
+
+    oscillator.frequency.exponentialRampToValueAtTime(
+        250,
+        context.currentTime + 0.12
+    );
+
+
+    oscillator.frequency.exponentialRampToValueAtTime(
+        380,
+        context.currentTime + 0.22
+    );
+
+
+    gain.gain.setValueAtTime(
+        0.14,
+        context.currentTime
+    );
+
+
+    gain.gain.exponentialRampToValueAtTime(
+        0.001,
+        context.currentTime + 0.25
+    );
+
+
+    oscillator.connect(
+        gain
+    );
+
+    gain.connect(
+        context.destination
+    );
+
+
+    oscillator.start();
+
+    oscillator.stop(
+        context.currentTime + 0.25
+    );
+
+
+    /*
+       Little duck bounce
+    */
+
+    const ducks =
+        document.getElementById(
+            "duck-family"
+        );
+
+
+    ducks.animate(
+
+        [
+            {
+                transform:
+                    "translateY(0)"
+            },
+
+            {
+                transform:
+                    "translateY(-12px)"
+            },
+
+            {
+                transform:
+                    "translateY(0)"
+            }
+        ],
+
+        {
+            duration:
+                350
+        }
+    );
+}
+
+
+/* =========================================================
+   ESCAPE CLOSES POPUP
 ========================================================= */
 
 document.addEventListener(
     "keydown",
     function (event) {
 
-        /*
-           Number keys
-        */
+        if (
+            event.key === "Escape"
+        ) {
+
+            closePopup();
+        }
+
 
         if (
             event.key >= "0" &&
@@ -381,85 +719,46 @@ document.addEventListener(
         }
 
 
-        /*
-           Backspace
-        */
-
-        else if (
-            event.key ===
-            "Backspace"
+        if (
+            event.key === "Backspace"
         ) {
 
             deleteKey();
         }
 
 
-        /*
-           Enter
-        */
-
-        else if (
-            event.key ===
-            "Enter"
+        if (
+            event.key === "Enter"
         ) {
 
             checkPassword();
         }
-
-
-        /*
-           Escape closes popup.
-        */
-
-        else if (
-            event.key ===
-            "Escape"
-        ) {
-
-            closePopup();
-        }
-
     }
 );
 
 
 /* =========================================================
-   CLOSE POPUP WHEN CLICKING OUTSIDE
+   CLICK OUTSIDE POPUP
 ========================================================= */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
+popupOverlay.addEventListener(
+    "click",
+    function (event) {
 
-        updateDisplay();
+        if (
+            event.target ===
+            popupOverlay
+        ) {
 
-
-        const overlay =
-            document.getElementById(
-                "popup-overlay"
-            );
-
-
-        overlay.addEventListener(
-            "click",
-            function (event) {
-
-                /*
-                   Only close when the
-                   dark background itself
-                   is clicked.
-                */
-
-                if (
-                    event.target ===
-                    overlay
-                ) {
-
-                    closePopup();
-                }
-
-            }
-        );
-
+            closePopup();
+        }
     }
 );
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+updateDisplay();
+```
