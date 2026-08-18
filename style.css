@@ -1,5 +1,5 @@
 /* =====================================================
-   🎂 BIRTHDAY SURPRISE - PAGE 1 ONLY
+   RESET
 ===================================================== */
 
 * {
@@ -22,100 +22,276 @@ body {
 
     font-family:
         "Trebuchet MS",
+        "Segoe UI",
         Arial,
         sans-serif;
 
+    color: #30233b;
+
     overflow: hidden;
-
-    color: #5d315d;
-
-    /* BRIGHT BIRTHDAY BACKGROUND */
 
     background:
 
         radial-gradient(
-            circle at 10% 20%,
-            #ffd1e8 0%,
+            circle at 10% 15%,
+            rgba(255, 105, 180, 0.35),
             transparent 30%
         ),
 
         radial-gradient(
-            circle at 90% 15%,
-            #d9c7ff 0%,
+            circle at 90% 20%,
+            rgba(155, 120, 255, 0.35),
             transparent 30%
         ),
 
         radial-gradient(
             circle at 50% 100%,
-            #ffe7a8 0%,
+            rgba(255, 190, 100, 0.25),
             transparent 35%
         ),
 
         linear-gradient(
             135deg,
-            #fff5fb,
-            #f4edff,
-            #fff8e8
+            #fff7fc 0%,
+            #f8edff 45%,
+            #fff4e8 100%
         );
 
     position: relative;
 }
 
 
+
 /* =====================================================
-   BACKGROUND GLOW
+   BACKGROUND GLOWS
 ===================================================== */
 
-body::before {
-
-    content: "";
+.glow {
 
     position: fixed;
 
-    inset: 0;
+    border-radius: 50%;
+
+    filter: blur(80px);
 
     pointer-events: none;
 
-    background:
-
-        radial-gradient(
-            circle at 50% 50%,
-            rgba(255, 255, 255, 0.7),
-            transparent 55%
-        );
-
     z-index: 0;
+
 }
 
 
+.glow-one {
+
+    width: 280px;
+    height: 280px;
+
+    background: rgba(255, 70, 160, 0.22);
+
+    top: -80px;
+    left: -60px;
+
+    animation:
+        glowMoveOne
+        8s
+        ease-in-out
+        infinite
+        alternate;
+}
+
+
+.glow-two {
+
+    width: 350px;
+    height: 350px;
+
+    background: rgba(100, 100, 255, 0.20);
+
+    right: -100px;
+    top: 20%;
+
+    animation:
+        glowMoveTwo
+        10s
+        ease-in-out
+        infinite
+        alternate;
+}
+
+
+.glow-three {
+
+    width: 250px;
+    height: 250px;
+
+    background: rgba(255, 170, 80, 0.18);
+
+    bottom: -100px;
+    left: 40%;
+
+    animation:
+        glowMoveThree
+        9s
+        ease-in-out
+        infinite
+        alternate;
+}
+
+
+@keyframes glowMoveOne {
+
+    to {
+        transform:
+            translate(100px, 80px);
+    }
+
+}
+
+
+@keyframes glowMoveTwo {
+
+    to {
+        transform:
+            translate(-100px, 80px);
+    }
+
+}
+
+
+@keyframes glowMoveThree {
+
+    to {
+        transform:
+            translate(50px, -70px);
+    }
+
+}
+
+
+
 /* =====================================================
-   MAIN PAGE
+   FLOATING HEARTS
 ===================================================== */
 
-.welcome-page {
+.floating-heart {
 
-    position: relative;
+    position: fixed;
 
     z-index: 1;
 
-    width: 100%;
+    color: rgba(255, 80, 160, 0.28);
 
-    height: 100vh;
+    font-size: 50px;
 
-    display: grid;
+    pointer-events: none;
 
-    grid-template-columns: 1fr 1fr;
+    animation:
+        heartFloat
+        7s
+        ease-in-out
+        infinite;
 
-    align-items: center;
-
-    padding: 40px 7%;
-
-    gap: 70px;
 }
 
 
+.heart-one {
+
+    top: 10%;
+    left: 5%;
+
+}
+
+
+.heart-two {
+
+    top: 65%;
+    left: 46%;
+
+    animation-delay: 2s;
+
+}
+
+
+.heart-three {
+
+    top: 18%;
+    right: 5%;
+
+    animation-delay: 4s;
+
+}
+
+
+.heart-four {
+
+    bottom: 7%;
+    right: 15%;
+
+    animation-delay: 1s;
+
+}
+
+
+@keyframes heartFloat {
+
+    0%,
+    100% {
+
+        transform:
+            translateY(0)
+            rotate(-8deg);
+
+        opacity: 0.3;
+
+    }
+
+    50% {
+
+        transform:
+            translateY(-25px)
+            rotate(8deg);
+
+        opacity: 0.7;
+
+    }
+
+}
+
+
+
 /* =====================================================
-   LEFT SIDE
+   MAIN LAYOUT
+===================================================== */
+
+.entry-page {
+
+    position: relative;
+
+    z-index: 5;
+
+    min-height: 100vh;
+
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    align-items: center;
+
+    padding:
+        40px
+        7vw;
+
+    gap: 8vw;
+
+}
+
+
+
+/* =====================================================
+   LEFT PHOTO SECTION
 ===================================================== */
 
 .photo-section {
@@ -129,45 +305,66 @@ body::before {
     justify-content: center;
 
     text-align: center;
+
 }
 
 
+.photo-label {
+
+    font-size: 0.68rem;
+
+    letter-spacing: 5px;
+
+    font-weight: bold;
+
+    color: #a14d91;
+
+    margin-bottom: 20px;
+
+    opacity: 0.8;
+
+}
+
+
+
 /* =====================================================
-   SQUARE PHOTO FRAME
+   PREMIUM PHOTO FRAME
 ===================================================== */
 
 .photo-frame {
 
-    width: min(430px, 38vw);
+    width: min(420px, 34vw);
 
     aspect-ratio: 1 / 1;
 
-    padding: 9px;
+    padding: 10px;
 
-    border-radius: 28px;
+    position: relative;
 
     background:
-
         linear-gradient(
             135deg,
-            #ff4fa3,
-            #9b5cff,
-            #43d9ff,
-            #ffcf4a
+            #19141e,
+            #403347
         );
+
+    border-radius: 18px;
 
     box-shadow:
 
-        0 0 15px rgba(255, 72, 165, 0.5),
+        0 0 0 1px
+        rgba(255,255,255,0.75),
 
-        0 0 40px rgba(155, 92, 255, 0.35),
+        0 0 0 5px
+        rgba(255, 100, 190, 0.18),
 
-        0 25px 70px rgba(100, 50, 130, 0.25);
+        0 20px 70px
+        rgba(155, 50, 140, 0.30);
 
-    animation:
-        frameGlow 3s ease-in-out infinite;
+    transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease;
 
-    position: relative;
 }
 
 
@@ -177,138 +374,184 @@ body::before {
 
     position: absolute;
 
-    inset: -5px;
+    inset: -3px;
 
-    border-radius: 32px;
+    border-radius: 21px;
 
     background:
         linear-gradient(
             135deg,
-            #ff4fa3,
-            #9b5cff,
-            #43d9ff
+            #ff63ae,
+            #9b7cff,
+            #ffd36e
         );
 
-    filter: blur(15px);
-
-    opacity: 0.35;
-
     z-index: -1;
+
+    opacity: 0.9;
+
+    filter: blur(1px);
+
 }
 
 
-.photo-frame img {
+.photo-frame:hover {
+
+    transform:
+        translateY(-8px)
+        scale(1.015);
+
+    box-shadow:
+
+        0 0 0 1px
+        white,
+
+        0 0 35px
+        rgba(255, 80, 180, 0.35),
+
+        0 30px 90px
+        rgba(120, 50, 150, 0.35);
+
+}
+
+
+.photo-inner {
 
     width: 100%;
-
     height: 100%;
 
-    object-fit: cover;
+    overflow: hidden;
+
+    border-radius: 10px;
+
+    background: #151118;
+
+}
+
+
+.photo-inner img {
+
+    width: 100%;
+    height: 100%;
 
     display: block;
 
-    border-radius: 20px;
+    object-fit: cover;
 
-    background: #f5e7f5;
+    object-position: center;
+
+    filter:
+        contrast(1.05)
+        saturate(1.05);
+
 }
 
-
-@keyframes frameGlow {
-
-    0%,
-    100% {
-
-        transform: translateY(0);
-
-        box-shadow:
-
-            0 0 15px rgba(255, 72, 165, 0.5),
-
-            0 0 40px rgba(155, 92, 255, 0.35),
-
-            0 25px 70px rgba(100, 50, 130, 0.25);
-    }
-
-    50% {
-
-        transform: translateY(-8px);
-
-        box-shadow:
-
-            0 0 25px rgba(255, 72, 165, 0.8),
-
-            0 0 60px rgba(155, 92, 255, 0.5),
-
-            0 30px 80px rgba(100, 50, 130, 0.3);
-    }
-}
 
 
 /* =====================================================
-   LEFT TEXT
+   PHOTO CAPTION
 ===================================================== */
 
-.photo-section h1 {
+.photo-caption {
 
     margin-top: 25px;
 
-    font-size:
-        clamp(1.8rem, 3vw, 3rem);
-
-    color: #e43e91;
-
-    text-shadow:
-
-        2px 2px 0 white,
-
-        0 0 15px rgba(255, 72, 165, 0.25);
 }
 
 
-.photo-section p {
+.photo-caption h1 {
 
-    margin-top: 6px;
+    font-size:
+        clamp(2rem, 3.2vw, 3.3rem);
 
-    font-size: 1.15rem;
+    color: #d93682;
+
+    letter-spacing: -1px;
+
+    text-shadow:
+        0 3px 15px
+        rgba(210, 50, 130, 0.18);
+
+}
+
+
+.photo-caption p {
+
+    margin-top: 5px;
+
+    font-size: 1rem;
+
+    color: #8b6791;
+
+    letter-spacing: 2px;
 
     font-weight: bold;
 
-    color: #80518a;
 }
 
 
+.photo-line {
+
+    width: 90px;
+
+    height: 2px;
+
+    margin-top: 18px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #e15a9d,
+            transparent
+        );
+
+}
+
+
+.photo-small-text {
+
+    margin-top: 10px;
+
+    font-size: 0.58rem;
+
+    letter-spacing: 3px;
+
+    color: #a98aa5;
+
+}
+
+
+
 /* =====================================================
-   RIGHT SIDE
+   RIGHT PASSWORD SECTION
 ===================================================== */
 
 .password-section {
 
     display: flex;
 
+    align-items: center;
+
     justify-content: center;
 
-    align-items: center;
 }
 
 
-/* =====================================================
-   PASSWORD CARD
-===================================================== */
-
 .password-card {
 
-    width: min(460px, 100%);
+    width: min(470px, 100%);
 
-    padding: 40px 35px;
+    padding:
+        40px
+        42px;
 
     text-align: center;
 
-    border-radius: 32px;
+    border-radius: 28px;
 
     background:
-        rgba(255, 255, 255, 0.75);
-
-    backdrop-filter: blur(20px);
+        rgba(255, 255, 255, 0.76);
 
     border:
         1px solid
@@ -316,87 +559,100 @@ body::before {
 
     box-shadow:
 
-        0 25px 70px
-        rgba(110, 50, 130, 0.18),
+        0 25px 80px
+        rgba(110, 65, 130, 0.18),
 
-        inset 0 1px 0
-        rgba(255,255,255,0.9);
-}
+        inset
+        0 1px 0
+        rgba(255,255,255,0.95);
 
-
-/* =====================================================
-   CAKE
-===================================================== */
-
-.cake {
-
-    font-size: 4rem;
-
-    margin-bottom: 10px;
+    backdrop-filter:
+        blur(20px);
 
     animation:
+        cardAppear
+        1s
+        ease;
 
-        cakeBounce
-        2s
-        ease-in-out
-        infinite;
 }
 
 
-@keyframes cakeBounce {
+@keyframes cardAppear {
 
-    0%,
-    100% {
-        transform: translateY(0) rotate(-3deg);
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateX(40px);
+
     }
 
-    50% {
-        transform: translateY(-8px) rotate(3deg);
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateX(0);
+
     }
+
 }
+
 
 
 /* =====================================================
-   SMALL HEADING
+   CARD HEADER
 ===================================================== */
 
-.small-heading {
+.lock-icon {
 
-    font-size: 0.72rem;
+    font-size: 2rem;
+
+    margin-bottom: 8px;
+
+}
+
+
+.card-label {
+
+    font-size: 0.65rem;
 
     letter-spacing: 4px;
 
+    color: #ad55a2;
+
     font-weight: bold;
 
-    color: #a257b8;
-
-    margin-bottom: 12px;
 }
 
-
-/* =====================================================
-   PASSWORD TITLE
-===================================================== */
 
 .password-card h2 {
 
+    margin-top: 12px;
+
     font-size:
-        clamp(1.8rem, 3vw, 2.5rem);
+        clamp(2rem, 3vw, 2.8rem);
 
-    color: #d94693;
+    color: #bd3c83;
 
-    margin-bottom: 8px;
+    line-height: 1.1;
+
 }
 
 
-.instruction {
+.card-subtitle {
 
-    font-size: 0.95rem;
+    margin-top: 10px;
 
-    color: #806580;
+    margin-bottom: 22px;
 
-    margin-bottom: 20px;
+    color: #806a81;
+
+    font-size: 0.9rem;
+
 }
+
 
 
 /* =====================================================
@@ -405,21 +661,9 @@ body::before {
 
 .password-display {
 
-    display: flex;
+    width: 100%;
 
-    justify-content: center;
-
-    gap: 8px;
-
-    margin: 20px auto 25px;
-}
-
-
-.password-display span {
-
-    width: 30px;
-
-    height: 40px;
+    height: 58px;
 
     display: flex;
 
@@ -427,18 +671,47 @@ body::before {
 
     justify-content: center;
 
-    border-bottom: 3px solid #d76aa5;
+    border-radius: 15px;
 
-    color: #d94693;
+    background:
+        rgba(250, 244, 251, 0.95);
 
-    font-size: 1.4rem;
+    border:
+        1px solid
+        #ead8e9;
+
+    margin-bottom: 18px;
+
+    color: #9c7a99;
+
+    font-size: 0.8rem;
+
+    letter-spacing: 4px;
 
     font-weight: bold;
+
+    box-shadow:
+        inset
+        0 2px 8px
+        rgba(100, 60, 100, 0.06);
+
 }
 
 
+.password-display.has-password {
+
+    color: #b8337a;
+
+    font-size: 1.3rem;
+
+    letter-spacing: 8px;
+
+}
+
+
+
 /* =====================================================
-   NUMBER KEYPAD
+   KEYPAD
 ===================================================== */
 
 .keypad {
@@ -448,123 +721,120 @@ body::before {
     grid-template-columns:
         repeat(3, 1fr);
 
-    gap: 10px;
+    gap: 9px;
 
-    max-width: 300px;
-
-    margin: auto;
 }
 
 
-.keypad button {
+.number-key {
+
+    height: 54px;
 
     border: none;
 
-    width: 100%;
+    border-radius: 14px;
 
-    height: 55px;
+    margin: 0;
 
-    border-radius: 17px;
+    padding: 0;
 
-    font-size: 1.2rem;
+    background:
+        rgba(255, 255, 255, 0.95);
+
+    color: #633d62;
+
+    border:
+        1px solid
+        rgba(200, 160, 200, 0.25);
+
+    box-shadow:
+        0 5px 15px
+        rgba(100, 60, 110, 0.08);
+
+    font-size: 1.15rem;
 
     font-weight: bold;
 
-    cursor: pointer;
+    transition:
+        transform 0.15s ease,
+        background 0.15s ease,
+        box-shadow 0.15s ease;
 
-    color: #713b70;
+}
+
+
+.number-key:hover {
 
     background:
-        rgba(255, 255, 255, 0.9);
-
-    box-shadow:
-
-        0 7px 15px
-        rgba(100, 50, 120, 0.12);
-
-    transition:
-        0.2s ease;
-}
-
-
-.keypad button:hover {
+        linear-gradient(
+            135deg,
+            #fff,
+            #fff0f8
+        );
 
     transform:
-        translateY(-3px)
-        scale(1.04);
-
-    background: #ffe0f0;
+        translateY(-2px);
 
     box-shadow:
+        0 8px 20px
+        rgba(190, 60, 130, 0.16);
 
-        0 10px 20px
-        rgba(230, 70, 150, 0.2);
 }
 
 
-.keypad button:active {
+.number-key:active {
 
-    transform: scale(0.92);
+    transform:
+        scale(0.92);
+
 }
+
+
+.special-key {
+
+    color: #bd4c90;
+
+}
+
 
 
 /* =====================================================
-   CLEAR BUTTON
+   UNLOCK BUTTON
 ===================================================== */
 
-.keypad .clear-button {
+.unlock-button {
 
-    color: #d94b78;
+    width: 100%;
 
-    background: #ffe3ec;
-}
+    height: 58px;
 
+    margin-top: 18px;
 
-/* =====================================================
-   ENTER BUTTON
-===================================================== */
+    border: none;
 
-.keypad .enter-button {
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            110deg,
+            #d93682,
+            #a758d4,
+            #e25b9c
+        );
+
+    background-size: 200% 100%;
 
     color: white;
 
-    background:
+    font-size: 0.9rem;
 
-        linear-gradient(
-            135deg,
-            #ff55a5,
-            #925bea
-        );
-}
-
-
-/* =====================================================
-   PASSWORD MESSAGE
-===================================================== */
-
-.password-message {
-
-    min-height: 25px;
-
-    margin-top: 15px;
+    letter-spacing: 3px;
 
     font-weight: bold;
 
-    color: #df4c7e;
-}
-
-
-/* =====================================================
-   POPUPS
-===================================================== */
-
-.popup {
-
-    position: fixed;
-
-    inset: 0;
-
-    z-index: 100;
+    box-shadow:
+        0 12px 30px
+        rgba(190, 50, 130, 0.25);
 
     display: flex;
 
@@ -572,213 +842,402 @@ body::before {
 
     justify-content: center;
 
-    padding: 20px;
+    gap: 18px;
+
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
+
+    animation:
+        gradientMove
+        5s
+        ease
+        infinite;
+
+}
+
+
+@keyframes gradientMove {
+
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+
+}
+
+
+.unlock-button:hover {
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 18px 35px
+        rgba(190, 50, 130, 0.35);
+
+}
+
+
+.unlock-button:active {
+
+    transform:
+        scale(0.97);
+
+}
+
+
+.unlock-arrow {
+
+    font-size: 1.4rem;
+
+}
+
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.password-status {
+
+    min-height: 22px;
+
+    margin-top: 10px;
+
+    font-size: 0.8rem;
+
+    font-weight: bold;
+
+    color: #d3477f;
+
+}
+
+
+.card-footer {
+
+    margin-top: 15px;
+
+    font-size: 0.58rem;
+
+    color: #ad95ab;
+
+    letter-spacing: 2px;
+
+}
+
+
+
+/* =====================================================
+   POPUP OVERLAY
+===================================================== */
+
+.popup-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1000;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 25px;
 
     background:
-        rgba(80, 30, 80, 0.45);
+        rgba(38, 20, 42, 0.62);
 
-    backdrop-filter: blur(10px);
+    backdrop-filter:
+        blur(12px);
 
     opacity: 0;
+
+    visibility: hidden;
 
     pointer-events: none;
 
     transition:
-        opacity 0.3s ease;
+        opacity 0.3s ease,
+        visibility 0.3s ease;
+
 }
 
 
-.popup.show {
+.popup-overlay.show {
 
     opacity: 1;
 
+    visibility: visible;
+
     pointer-events: auto;
+
 }
+
 
 
 /* =====================================================
-   WRONG PASSWORD CARD
+   POPUP CLOSE BUTTON
 ===================================================== */
 
-.wrong-card {
-
-    width: min(500px, 90%);
-
-    padding: 25px;
-
-    text-align: center;
-
-    border-radius: 30px;
-
-    background: white;
-
-    box-shadow:
-
-        0 30px 80px
-        rgba(0,0,0,0.3);
-
-    animation:
-        popupIn 0.4s ease;
-}
-
-
-.wrong-card img {
-
-    width: 100%;
-
-    max-height: 350px;
-
-    object-fit: cover;
-
-    border-radius: 20px;
-}
-
-
-.wrong-card h2 {
-
-    margin-top: 18px;
-
-    font-size: 2rem;
-
-    color: #e33f6f;
-}
-
-
-.wrong-card p {
-
-    margin-top: 8px;
-
-    color: #795b79;
-}
-
-
-/* =====================================================
-   CLOSE BUTTON
-===================================================== */
-
-.close-popup {
+.popup-close {
 
     position: absolute;
 
-    top: 12px;
+    top: 14px;
+    left: 14px;
 
-    right: 15px;
+    width: 44px;
+    height: 44px;
 
-    width: 38px;
+    padding: 0;
 
-    height: 38px;
+    margin: 0;
 
     border: none;
 
     border-radius: 50%;
 
-    background: #f4d8eb;
+    background:
+        rgba(255,255,255,0.92);
 
-    color: #783f75;
+    color: #54294f;
 
-    font-size: 1.5rem;
+    font-size: 1.7rem;
 
-    cursor: pointer;
+    line-height: 1;
+
+    z-index: 20;
+
+    box-shadow:
+        0 6px 20px
+        rgba(0,0,0,0.18);
+
 }
+
+
+.popup-close:hover {
+
+    background: white;
+
+    transform:
+        scale(1.08);
+
+}
+
+
+
+/* =====================================================
+   MEME POPUP
+===================================================== */
+
+.meme-popup {
+
+    position: relative;
+
+    width: min(650px, 90vw);
+
+    max-height: 90vh;
+
+    padding:
+        45px
+        30px
+        30px;
+
+    text-align: center;
+
+    border-radius: 24px;
+
+    background:
+        #fff;
+
+    box-shadow:
+        0 30px 100px
+        rgba(0,0,0,0.35);
+
+    animation:
+        popupIn
+        0.45s
+        ease;
+
+}
+
+
+.popup-title {
+
+    font-size: 0.7rem;
+
+    letter-spacing: 5px;
+
+    color: #cf3f80;
+
+    font-weight: bold;
+
+    margin-bottom: 20px;
+
+}
+
+
+.meme-image {
+
+    display: block;
+
+    width: 100%;
+
+    max-height: 65vh;
+
+    object-fit: contain;
+
+    border-radius: 12px;
+
+}
+
+
+.popup-bottom-text {
+
+    margin-top: 18px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+}
+
+
+.popup-bottom-text strong {
+
+    color: #d6327b;
+
+    font-size: 1.3rem;
+
+}
+
+
+.popup-bottom-text span {
+
+    color: #806a81;
+
+}
+
 
 
 /* =====================================================
    VIDEO POPUP
 ===================================================== */
 
-.video-card {
+.video-popup {
 
-    width: min(800px, 94%);
+    position: relative;
 
-    padding: 35px;
+    width: min(850px, 92vw);
+
+    padding:
+        45px
+        35px
+        30px;
 
     text-align: center;
 
-    border-radius: 30px;
-
-    background: white;
-
-    box-shadow:
-
-        0 30px 90px
-        rgba(0,0,0,0.3);
-
-    animation:
-        popupIn 0.5s ease;
-}
-
-
-.video-card h2 {
-
-    font-size: 2.3rem;
-
-    color: #d94693;
-
-    margin-bottom: 8px;
-}
-
-
-.video-card p {
-
-    color: #795b79;
-
-    margin-bottom: 20px;
-}
-
-
-.video-card video {
-
-    width: 100%;
-
-    max-height: 60vh;
-
-    border-radius: 18px;
-
-    background: black;
-}
-
-
-.video-card button {
-
-    border: none;
-
-    margin-top: 20px;
-
-    padding: 14px 25px;
-
-    border-radius: 999px;
-
-    color: white;
-
-    font-weight: bold;
-
-    font-size: 1rem;
-
-    cursor: pointer;
+    border-radius: 26px;
 
     background:
-
         linear-gradient(
-            135deg,
-            #ff55a5,
-            #925bea
+            145deg,
+            #fffaff,
+            #f7efff
         );
 
     box-shadow:
+        0 30px 100px
+        rgba(0,0,0,0.4);
 
-        0 10px 25px
-        rgba(150, 80, 200, 0.3);
+    animation:
+        popupIn
+        0.5s
+        ease;
 
-    transition: 0.2s ease;
 }
 
 
-.video-card button:hover {
+.video-heading {
 
-    transform:
-        translateY(-3px)
-        scale(1.04);
+    font-size: 0.7rem;
+
+    letter-spacing: 4px;
+
+    color: #b14394;
+
+    font-weight: bold;
+
 }
+
+
+.video-popup h2 {
+
+    margin-top: 12px;
+
+    font-size:
+        clamp(1.8rem, 4vw, 3rem);
+
+    color: #c33c82;
+
+}
+
+
+.video-popup p {
+
+    margin-top: 7px;
+
+    margin-bottom: 20px;
+
+    color: #806a81;
+
+}
+
+
+.welcome-video {
+
+    width: 100%;
+
+    max-height: 65vh;
+
+    display: block;
+
+    border-radius: 16px;
+
+    background: #17121b;
+
+    box-shadow:
+        0 15px 40px
+        rgba(70, 30, 80, 0.2);
+
+}
+
+
+.video-footer {
+
+    margin-top: 18px;
+
+    font-size: 0.75rem;
+
+    letter-spacing: 2px;
+
+    color: #a27b9e;
+
+}
+
 
 
 /* =====================================================
@@ -789,73 +1248,194 @@ body::before {
 
     from {
 
+        opacity: 0;
+
         transform:
-            scale(0.7)
+            scale(0.85)
             translateY(30px);
 
-        opacity: 0;
     }
 
     to {
+
+        opacity: 1;
 
         transform:
             scale(1)
             translateY(0);
 
-        opacity: 1;
     }
+
 }
+
+
+
+/* =====================================================
+   WRONG PASSWORD SHAKE
+===================================================== */
+
+.password-card.shake {
+
+    animation:
+        passwordShake
+        0.45s
+        ease;
+
+}
+
+
+@keyframes passwordShake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    20% {
+        transform: translateX(-10px);
+    }
+
+    40% {
+        transform: translateX(10px);
+    }
+
+    60% {
+        transform: translateX(-8px);
+    }
+
+    80% {
+        transform: translateX(8px);
+    }
+
+}
+
 
 
 /* =====================================================
    MOBILE
 ===================================================== */
 
-@media (max-width: 800px) {
+@media (max-width: 850px) {
 
     body {
         overflow-y: auto;
+        overflow-x: hidden;
     }
 
 
-    .welcome-page {
-
-        height: auto;
+    .entry-page {
 
         min-height: 100vh;
 
-        grid-template-columns: 1fr;
+        grid-template-columns:
+            1fr;
 
-        gap: 30px;
+        gap: 40px;
 
         padding:
-            30px 20px 50px;
+            45px
+            20px;
+
     }
 
 
     .photo-frame {
 
         width:
-            min(320px, 75vw);
+            min(360px, 75vw);
+
     }
 
 
-    .photo-section h1 {
+    .password-card {
+
+        width:
+            min(460px, 92vw);
+
+    }
+
+
+    .photo-caption h1 {
 
         font-size: 2rem;
+
+    }
+
+
+    .floating-heart {
+
+        display: none;
+
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .entry-page {
+
+        padding:
+            30px
+            15px;
+
+        gap: 30px;
+
+    }
+
+
+    .photo-frame {
+
+        width:
+            min(300px, 80vw);
+
+    }
+
+
+    .photo-label {
+
+        font-size: 0.55rem;
+
+        letter-spacing: 3px;
+
     }
 
 
     .password-card {
 
         padding:
-            30px 20px;
+            30px
+            22px;
+
+        border-radius: 22px;
+
     }
 
 
-    .password-display span {
+    .password-card h2 {
 
-        width: 25px;
+        font-size: 2rem;
+
+    }
+
+
+    .number-key {
+
+        height: 50px;
+
+    }
+
+
+    .meme-popup,
+    .video-popup {
+
+        padding:
+            45px
+            18px
+            20px;
+
+        border-radius: 20px;
+
     }
 
 }
