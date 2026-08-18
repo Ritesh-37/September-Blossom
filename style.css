@@ -20,247 +20,118 @@ body {
 
     min-height: 100vh;
 
+    overflow: hidden;
+
     font-family:
         "Trebuchet MS",
-        "Segoe UI",
         Arial,
         sans-serif;
 
-    color: #30233b;
-
-    overflow: hidden;
+    color: white;
 
     background:
-
         radial-gradient(
-            circle at 10% 15%,
-            rgba(255, 105, 180, 0.35),
-            transparent 30%
+            circle at 20% 50%,
+            #25113b 0%,
+            transparent 35%
         ),
 
         radial-gradient(
-            circle at 90% 20%,
-            rgba(155, 120, 255, 0.35),
-            transparent 30%
-        ),
-
-        radial-gradient(
-            circle at 50% 100%,
-            rgba(255, 190, 100, 0.25),
+            circle at 85% 30%,
+            #171f3d 0%,
             transparent 35%
         ),
 
         linear-gradient(
             135deg,
-            #fff7fc 0%,
-            #f8edff 45%,
-            #fff4e8 100%
+            #020204,
+            #08090e 50%,
+            #020204
         );
-
-    position: relative;
 }
 
 
-
 /* =====================================================
-   BACKGROUND GLOWS
+   BATMAN-STYLE BACKGROUND SYMBOL
 ===================================================== */
 
-.glow {
+.bat-symbol {
 
     position: fixed;
 
-    border-radius: 50%;
+    left: 50%;
+    top: 50%;
 
-    filter: blur(80px);
+    transform:
+        translate(-50%, -50%);
+
+    font-size:
+        clamp(
+            18rem,
+            45vw,
+            40rem
+        );
+
+    opacity: 0.035;
+
+    filter:
+        blur(1px);
 
     pointer-events: none;
 
     z-index: 0;
+
+    user-select: none;
+
+}
+
+
+/* =====================================================
+   BACKGROUND NEON GLOWS
+===================================================== */
+
+.background-glow {
+
+    position: fixed;
+
+    width: 500px;
+    height: 500px;
+
+    border-radius: 50%;
+
+    filter: blur(130px);
+
+    pointer-events: none;
+
+    opacity: 0.25;
 
 }
 
 
 .glow-one {
 
-    width: 280px;
-    height: 280px;
+    left: -180px;
+    top: 20%;
 
-    background: rgba(255, 70, 160, 0.22);
+    background:
+        #8c25ff;
 
-    top: -80px;
-    left: -60px;
-
-    animation:
-        glowMoveOne
-        8s
-        ease-in-out
-        infinite
-        alternate;
 }
 
 
 .glow-two {
 
-    width: 350px;
-    height: 350px;
+    right: -180px;
+    bottom: 10%;
 
-    background: rgba(100, 100, 255, 0.20);
-
-    right: -100px;
-    top: 20%;
-
-    animation:
-        glowMoveTwo
-        10s
-        ease-in-out
-        infinite
-        alternate;
-}
-
-
-.glow-three {
-
-    width: 250px;
-    height: 250px;
-
-    background: rgba(255, 170, 80, 0.18);
-
-    bottom: -100px;
-    left: 40%;
-
-    animation:
-        glowMoveThree
-        9s
-        ease-in-out
-        infinite
-        alternate;
-}
-
-
-@keyframes glowMoveOne {
-
-    to {
-        transform:
-            translate(100px, 80px);
-    }
+    background:
+        #ff247f;
 
 }
-
-
-@keyframes glowMoveTwo {
-
-    to {
-        transform:
-            translate(-100px, 80px);
-    }
-
-}
-
-
-@keyframes glowMoveThree {
-
-    to {
-        transform:
-            translate(50px, -70px);
-    }
-
-}
-
 
 
 /* =====================================================
-   FLOATING HEARTS
-===================================================== */
-
-.floating-heart {
-
-    position: fixed;
-
-    z-index: 1;
-
-    color: rgba(255, 80, 160, 0.28);
-
-    font-size: 50px;
-
-    pointer-events: none;
-
-    animation:
-        heartFloat
-        7s
-        ease-in-out
-        infinite;
-
-}
-
-
-.heart-one {
-
-    top: 10%;
-    left: 5%;
-
-}
-
-
-.heart-two {
-
-    top: 65%;
-    left: 46%;
-
-    animation-delay: 2s;
-
-}
-
-
-.heart-three {
-
-    top: 18%;
-    right: 5%;
-
-    animation-delay: 4s;
-
-}
-
-
-.heart-four {
-
-    bottom: 7%;
-    right: 15%;
-
-    animation-delay: 1s;
-
-}
-
-
-@keyframes heartFloat {
-
-    0%,
-    100% {
-
-        transform:
-            translateY(0)
-            rotate(-8deg);
-
-        opacity: 0.3;
-
-    }
-
-    50% {
-
-        transform:
-            translateY(-25px)
-            rotate(8deg);
-
-        opacity: 0.7;
-
-    }
-
-}
-
-
-
-/* =====================================================
-   MAIN LAYOUT
+   MAIN ENTRY PAGE
 ===================================================== */
 
 .entry-page {
@@ -269,9 +140,8 @@ body {
 
     z-index: 5;
 
-    min-height: 100vh;
-
     width: 100%;
+    min-height: 100vh;
 
     display: grid;
 
@@ -280,14 +150,12 @@ body {
 
     align-items: center;
 
-    padding:
-        40px
-        7vw;
+    gap: 50px;
 
-    gap: 8vw;
+    padding:
+        50px 7%;
 
 }
-
 
 
 /* =====================================================
@@ -309,127 +177,79 @@ body {
 }
 
 
-.photo-label {
-
-    font-size: 0.68rem;
-
-    letter-spacing: 5px;
-
-    font-weight: bold;
-
-    color: #a14d91;
-
-    margin-bottom: 20px;
-
-    opacity: 0.8;
-
-}
-
-
-
 /* =====================================================
-   PREMIUM PHOTO FRAME
+   PHOTO FRAME
 ===================================================== */
 
 .photo-frame {
 
-    width: min(420px, 34vw);
+    position: relative;
+
+    width:
+        min(550px, 90%);
 
     aspect-ratio: 1 / 1;
 
-    padding: 10px;
-
-    position: relative;
+    padding: 12px;
 
     background:
+
         linear-gradient(
-            135deg,
-            #19141e,
-            #403347
+            145deg,
+            #16161b,
+            #050507
         );
 
-    border-radius: 18px;
+    border:
+
+        2px solid
+        rgba(255,255,255,0.18);
+
+    border-radius: 22px;
 
     box-shadow:
 
         0 0 0 1px
-        rgba(255,255,255,0.75),
-
-        0 0 0 5px
-        rgba(255, 100, 190, 0.18),
-
-        0 20px 70px
-        rgba(155, 50, 140, 0.30);
-
-    transition:
-        transform 0.4s ease,
-        box-shadow 0.4s ease;
-
-}
-
-
-.photo-frame::before {
-
-    content: "";
-
-    position: absolute;
-
-    inset: -3px;
-
-    border-radius: 21px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ff63ae,
-            #9b7cff,
-            #ffd36e
-        );
-
-    z-index: -1;
-
-    opacity: 0.9;
-
-    filter: blur(1px);
-
-}
-
-
-.photo-frame:hover {
-
-    transform:
-        translateY(-8px)
-        scale(1.015);
-
-    box-shadow:
-
-        0 0 0 1px
-        white,
+        rgba(255, 50, 150, 0.25),
 
         0 0 35px
-        rgba(255, 80, 180, 0.35),
+        rgba(255, 50, 180, 0.35),
 
-        0 30px 90px
-        rgba(120, 50, 150, 0.35);
+        0 0 80px
+        rgba(110, 50, 255, 0.25),
 
-}
-
-
-.photo-inner {
-
-    width: 100%;
-    height: 100%;
+        0 30px 80px
+        rgba(0,0,0,0.8);
 
     overflow: hidden;
 
-    border-radius: 10px;
-
-    background: #151118;
+    animation:
+        frameFloat 5s ease-in-out infinite;
 
 }
 
 
-.photo-inner img {
+@keyframes frameFloat {
+
+    0%,
+    100% {
+        transform:
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            translateY(-10px);
+    }
+
+}
+
+
+/* =====================================================
+   YOUR PHOTO
+===================================================== */
+
+.entry-photo {
 
     width: 100%;
     height: 100%;
@@ -438,14 +258,59 @@ body {
 
     object-fit: cover;
 
-    object-position: center;
+    border-radius: 12px;
 
     filter:
-        contrast(1.05)
-        saturate(1.05);
+        contrast(1.08)
+        saturate(1.08);
 
 }
 
+
+/* =====================================================
+   FRAME SHINE
+===================================================== */
+
+.frame-shine {
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+
+        linear-gradient(
+            120deg,
+            transparent 25%,
+            rgba(255,255,255,0.12),
+            transparent 45%
+        );
+
+    transform:
+        translateX(-100%);
+
+    animation:
+        frameShine 5s infinite;
+
+}
+
+
+@keyframes frameShine {
+
+    0% {
+        transform:
+            translateX(-100%);
+    }
+
+    30%,
+    100% {
+        transform:
+            translateX(100%);
+    }
+
+}
 
 
 /* =====================================================
@@ -454,7 +319,7 @@ body {
 
 .photo-caption {
 
-    margin-top: 25px;
+    margin-top: 30px;
 
 }
 
@@ -462,165 +327,137 @@ body {
 .photo-caption h1 {
 
     font-size:
-        clamp(2rem, 3.2vw, 3.3rem);
+        clamp(
+            2rem,
+            4vw,
+            3.5rem
+        );
 
-    color: #d93682;
+    color: #ff4fa3;
 
-    letter-spacing: -1px;
+    letter-spacing: 1px;
 
     text-shadow:
-        0 3px 15px
-        rgba(210, 50, 130, 0.18);
+
+        0 0 10px
+        rgba(255,60,160,0.5),
+
+        0 0 30px
+        rgba(255,60,160,0.25);
 
 }
 
 
 .photo-caption p {
 
-    margin-top: 5px;
+    margin-top: 8px;
 
-    font-size: 1rem;
+    font-size: 1.2rem;
 
-    color: #8b6791;
+    color:
+        #d9c9e7;
 
-    letter-spacing: 2px;
-
-    font-weight: bold;
+    letter-spacing: 3px;
 
 }
 
 
-.photo-line {
+.caption-line {
 
-    width: 90px;
+    width: 80px;
 
     height: 2px;
 
-    margin-top: 18px;
+    margin: 10px auto;
 
     background:
         linear-gradient(
             90deg,
             transparent,
-            #e15a9d,
+            #ff4fa3,
             transparent
         );
 
 }
 
 
-.photo-small-text {
-
-    margin-top: 10px;
-
-    font-size: 0.58rem;
-
-    letter-spacing: 3px;
-
-    color: #a98aa5;
-
-}
-
-
-
 /* =====================================================
-   RIGHT PASSWORD SECTION
+   PASSWORD SECTION
 ===================================================== */
 
 .password-section {
 
     display: flex;
 
-    align-items: center;
-
     justify-content: center;
+
+    align-items: center;
 
 }
 
 
+/* =====================================================
+   PASSWORD CARD
+===================================================== */
+
 .password-card {
 
-    width: min(470px, 100%);
+    width:
+        min(470px, 95%);
 
-    padding:
-        40px
-        42px;
+    padding: 40px;
 
     text-align: center;
 
     border-radius: 28px;
 
     background:
-        rgba(255, 255, 255, 0.76);
+
+        linear-gradient(
+            145deg,
+            rgba(25,25,32,0.94),
+            rgba(8,8,12,0.96)
+        );
 
     border:
+
         1px solid
-        rgba(255, 255, 255, 0.9);
+        rgba(255,255,255,0.12);
 
     box-shadow:
 
-        0 25px 80px
-        rgba(110, 65, 130, 0.18),
+        0 30px 80px
+        rgba(0,0,0,0.65),
 
-        inset
-        0 1px 0
-        rgba(255,255,255,0.95);
+        0 0 45px
+        rgba(190,50,255,0.12);
 
     backdrop-filter:
         blur(20px);
 
-    animation:
-        cardAppear
-        1s
-        ease;
-
 }
-
-
-@keyframes cardAppear {
-
-    from {
-
-        opacity: 0;
-
-        transform:
-            translateX(40px);
-
-    }
-
-    to {
-
-        opacity: 1;
-
-        transform:
-            translateX(0);
-
-    }
-
-}
-
 
 
 /* =====================================================
-   CARD HEADER
+   SECURITY ICON
 ===================================================== */
 
-.lock-icon {
+.security-icon {
 
     font-size: 2rem;
 
-    margin-bottom: 8px;
+    margin-bottom: 12px;
 
 }
 
 
-.card-label {
+.classified {
 
-    font-size: 0.65rem;
+    color: #ff4fa3;
 
-    letter-spacing: 4px;
+    font-size: 0.7rem;
 
-    color: #ad55a2;
+    letter-spacing: 5px;
 
     font-weight: bold;
 
@@ -629,30 +466,29 @@ body {
 
 .password-card h2 {
 
-    margin-top: 12px;
+    margin-top: 18px;
 
     font-size:
-        clamp(2rem, 3vw, 2.8rem);
+        clamp(
+            1.8rem,
+            4vw,
+            2.7rem
+        );
 
-    color: #bd3c83;
+    line-height: 1.15;
 
-    line-height: 1.1;
-
-}
-
-
-.card-subtitle {
-
-    margin-top: 10px;
-
-    margin-bottom: 22px;
-
-    color: #806a81;
-
-    font-size: 0.9rem;
+    color: white;
 
 }
 
+
+.subtitle {
+
+    margin-top: 12px;
+
+    color: #a9a2b5;
+
+}
 
 
 /* =====================================================
@@ -663,7 +499,9 @@ body {
 
     width: 100%;
 
-    height: 58px;
+    height: 60px;
+
+    margin-top: 25px;
 
     display: flex;
 
@@ -671,131 +509,129 @@ body {
 
     justify-content: center;
 
-    border-radius: 15px;
+    border-radius: 14px;
 
     background:
-        rgba(250, 244, 251, 0.95);
+        #050507;
 
     border:
         1px solid
-        #ead8e9;
+        rgba(255,255,255,0.15);
 
-    margin-bottom: 18px;
-
-    color: #9c7a99;
-
-    font-size: 0.8rem;
-
-    letter-spacing: 4px;
-
-    font-weight: bold;
-
-    box-shadow:
-        inset
-        0 2px 8px
-        rgba(100, 60, 100, 0.06);
-
-}
-
-
-.password-display.has-password {
-
-    color: #b8337a;
+    color: #77717e;
 
     font-size: 1.3rem;
 
     letter-spacing: 8px;
 
+    box-shadow:
+        inset 0 0 20px
+        rgba(0,0,0,0.6);
+
 }
 
 
+#password-dots {
+
+    transition:
+        0.2s;
+
+}
+
 
 /* =====================================================
-   KEYPAD
+   NUMERIC KEYPAD
 ===================================================== */
 
 .keypad {
+
+    margin-top: 20px;
 
     display: grid;
 
     grid-template-columns:
         repeat(3, 1fr);
 
-    gap: 9px;
+    gap: 10px;
 
 }
 
 
-.number-key {
+.keypad button {
 
-    height: 54px;
-
-    border: none;
-
-    border-radius: 14px;
+    height: 55px;
 
     margin: 0;
 
-    padding: 0;
-
-    background:
-        rgba(255, 255, 255, 0.95);
-
-    color: #633d62;
+    border-radius: 13px;
 
     border:
         1px solid
-        rgba(200, 160, 200, 0.25);
+        rgba(255,255,255,0.1);
 
-    box-shadow:
-        0 5px 15px
-        rgba(100, 60, 110, 0.08);
+    background:
+        linear-gradient(
+            145deg,
+            #1d1d25,
+            #101015
+        );
 
-    font-size: 1.15rem;
+    color: white;
+
+    font-size: 1.1rem;
 
     font-weight: bold;
 
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 15px
+        rgba(0,0,0,0.3);
+
     transition:
-        transform 0.15s ease,
-        background 0.15s ease,
-        box-shadow 0.15s ease;
+        0.2s;
 
 }
 
 
-.number-key:hover {
-
-    background:
-        linear-gradient(
-            135deg,
-            #fff,
-            #fff0f8
-        );
+.keypad button:hover {
 
     transform:
         translateY(-2px);
 
-    box-shadow:
-        0 8px 20px
-        rgba(190, 60, 130, 0.16);
+    background:
+        linear-gradient(
+            145deg,
+            #302033,
+            #17151d
+        );
+
+    border-color:
+        rgba(255,80,170,0.5);
 
 }
 
 
-.number-key:active {
+.keypad button:active {
 
     transform:
-        scale(0.92);
+        scale(0.94);
 
 }
 
 
-.special-key {
+.keypad .clear-key {
 
-    color: #bd4c90;
+    color: #ff668f;
 
 }
 
+
+.keypad .back-key {
+
+    color: #ff75c0;
+
+}
 
 
 /* =====================================================
@@ -806,70 +642,39 @@ body {
 
     width: 100%;
 
-    height: 58px;
+    margin-top: 20px;
 
-    margin-top: 18px;
+    padding: 16px;
 
     border: none;
 
-    border-radius: 15px;
+    border-radius: 14px;
 
     background:
-        linear-gradient(
-            110deg,
-            #d93682,
-            #a758d4,
-            #e25b9c
-        );
 
-    background-size: 200% 100%;
+        linear-gradient(
+            135deg,
+            #ff3f98,
+            #8c42ff
+        );
 
     color: white;
 
-    font-size: 0.9rem;
-
-    letter-spacing: 3px;
+    font-size: 1rem;
 
     font-weight: bold;
 
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
     box-shadow:
-        0 12px 30px
-        rgba(190, 50, 130, 0.25);
 
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 18px;
+        0 10px 30px
+        rgba(210,50,160,0.3);
 
     transition:
-        transform 0.2s,
-        box-shadow 0.2s;
-
-    animation:
-        gradientMove
-        5s
-        ease
-        infinite;
-
-}
-
-
-@keyframes gradientMove {
-
-    0% {
-        background-position: 0% 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
-    }
-
-    100% {
-        background-position: 0% 50%;
-    }
+        0.25s;
 
 }
 
@@ -880,66 +685,48 @@ body {
         translateY(-3px);
 
     box-shadow:
-        0 18px 35px
-        rgba(190, 50, 130, 0.35);
+
+        0 15px 40px
+        rgba(210,50,160,0.5);
 
 }
-
-
-.unlock-button:active {
-
-    transform:
-        scale(0.97);
-
-}
-
-
-.unlock-arrow {
-
-    font-size: 1.4rem;
-
-}
-
 
 
 /* =====================================================
-   STATUS
+   PASSWORD MESSAGE
 ===================================================== */
 
-.password-status {
+.password-message {
 
-    min-height: 22px;
+    min-height: 25px;
 
-    margin-top: 10px;
+    margin-top: 12px;
 
-    font-size: 0.8rem;
+    font-size: 0.9rem;
 
-    font-weight: bold;
-
-    color: #d3477f;
+    color: #ff6a9e;
 
 }
 
 
-.card-footer {
+.vault-footer {
 
-    margin-top: 15px;
+    margin-top: 20px;
 
-    font-size: 0.58rem;
+    font-size: 0.55rem;
 
-    color: #ad95ab;
+    letter-spacing: 3px;
 
-    letter-spacing: 2px;
+    color: #5d5863;
 
 }
-
 
 
 /* =====================================================
-   POPUP OVERLAY
+   POPUPS
 ===================================================== */
 
-.popup-overlay {
+.popup {
 
     position: fixed;
 
@@ -956,293 +743,71 @@ body {
     padding: 25px;
 
     background:
-        rgba(38, 20, 42, 0.62);
+        rgba(0,0,0,0.82);
 
     backdrop-filter:
         blur(12px);
 
     opacity: 0;
 
-    visibility: hidden;
-
     pointer-events: none;
 
     transition:
-        opacity 0.3s ease,
-        visibility 0.3s ease;
+        opacity 0.35s;
 
 }
 
 
-.popup-overlay.show {
+.popup.show {
 
     opacity: 1;
-
-    visibility: visible;
 
     pointer-events: auto;
 
 }
 
 
-
 /* =====================================================
-   POPUP CLOSE BUTTON
+   POPUP CARD
 ===================================================== */
 
-.popup-close {
-
-    position: absolute;
-
-    top: 14px;
-    left: 14px;
-
-    width: 44px;
-    height: 44px;
-
-    padding: 0;
-
-    margin: 0;
-
-    border: none;
-
-    border-radius: 50%;
-
-    background:
-        rgba(255,255,255,0.92);
-
-    color: #54294f;
-
-    font-size: 1.7rem;
-
-    line-height: 1;
-
-    z-index: 20;
-
-    box-shadow:
-        0 6px 20px
-        rgba(0,0,0,0.18);
-
-}
-
-
-.popup-close:hover {
-
-    background: white;
-
-    transform:
-        scale(1.08);
-
-}
-
-
-
-/* =====================================================
-   MEME POPUP
-===================================================== */
-
-.meme-popup {
+.popup-card {
 
     position: relative;
 
-    width: min(650px, 90vw);
+    width:
+        min(700px, 95%);
 
     max-height: 90vh;
 
-    padding:
-        45px
-        30px
-        30px;
+    overflow-y: auto;
+
+    padding: 45px;
 
     text-align: center;
 
-    border-radius: 24px;
+    border-radius: 25px;
 
     background:
-        #fff;
+        #101016;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.15);
 
     box-shadow:
+
         0 30px 100px
-        rgba(0,0,0,0.35);
+        rgba(0,0,0,0.8),
+
+        0 0 50px
+        rgba(255,50,170,0.15);
 
     animation:
-        popupIn
-        0.45s
-        ease;
+        popupIn 0.4s ease;
 
 }
 
-
-.popup-title {
-
-    font-size: 0.7rem;
-
-    letter-spacing: 5px;
-
-    color: #cf3f80;
-
-    font-weight: bold;
-
-    margin-bottom: 20px;
-
-}
-
-
-.meme-image {
-
-    display: block;
-
-    width: 100%;
-
-    max-height: 65vh;
-
-    object-fit: contain;
-
-    border-radius: 12px;
-
-}
-
-
-.popup-bottom-text {
-
-    margin-top: 18px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 5px;
-
-}
-
-
-.popup-bottom-text strong {
-
-    color: #d6327b;
-
-    font-size: 1.3rem;
-
-}
-
-
-.popup-bottom-text span {
-
-    color: #806a81;
-
-}
-
-
-
-/* =====================================================
-   VIDEO POPUP
-===================================================== */
-
-.video-popup {
-
-    position: relative;
-
-    width: min(850px, 92vw);
-
-    padding:
-        45px
-        35px
-        30px;
-
-    text-align: center;
-
-    border-radius: 26px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #fffaff,
-            #f7efff
-        );
-
-    box-shadow:
-        0 30px 100px
-        rgba(0,0,0,0.4);
-
-    animation:
-        popupIn
-        0.5s
-        ease;
-
-}
-
-
-.video-heading {
-
-    font-size: 0.7rem;
-
-    letter-spacing: 4px;
-
-    color: #b14394;
-
-    font-weight: bold;
-
-}
-
-
-.video-popup h2 {
-
-    margin-top: 12px;
-
-    font-size:
-        clamp(1.8rem, 4vw, 3rem);
-
-    color: #c33c82;
-
-}
-
-
-.video-popup p {
-
-    margin-top: 7px;
-
-    margin-bottom: 20px;
-
-    color: #806a81;
-
-}
-
-
-.welcome-video {
-
-    width: 100%;
-
-    max-height: 65vh;
-
-    display: block;
-
-    border-radius: 16px;
-
-    background: #17121b;
-
-    box-shadow:
-        0 15px 40px
-        rgba(70, 30, 80, 0.2);
-
-}
-
-
-.video-footer {
-
-    margin-top: 18px;
-
-    font-size: 0.75rem;
-
-    letter-spacing: 2px;
-
-    color: #a27b9e;
-
-}
-
-
-
-/* =====================================================
-   POPUP ANIMATION
-===================================================== */
 
 @keyframes popupIn {
 
@@ -1269,72 +834,196 @@ body {
 }
 
 
-
 /* =====================================================
-   WRONG PASSWORD SHAKE
+   CLOSE BUTTON
 ===================================================== */
 
-.password-card.shake {
+.popup-close {
 
-    animation:
-        passwordShake
-        0.45s
-        ease;
+    position: absolute;
+
+    top: 15px;
+    left: 15px;
+
+    width: 42px;
+    height: 42px;
+
+    padding: 0;
+
+    margin: 0;
+
+    border-radius: 50%;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.15);
+
+    background:
+        rgba(255,255,255,0.08);
+
+    color: white;
+
+    font-size: 1.7rem;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    z-index: 20;
 
 }
 
 
-@keyframes passwordShake {
+.popup-close:hover {
 
-    0%,
-    100% {
-        transform: translateX(0);
-    }
+    background:
+        #ff3f8f;
 
-    20% {
-        transform: translateX(-10px);
-    }
-
-    40% {
-        transform: translateX(10px);
-    }
-
-    60% {
-        transform: translateX(-8px);
-    }
-
-    80% {
-        transform: translateX(8px);
-    }
+    transform:
+        scale(1.08);
 
 }
 
+
+/* =====================================================
+   POPUP TEXT
+===================================================== */
+
+.popup-label {
+
+    color:
+        #ff4fa3;
+
+    font-size:
+        0.7rem;
+
+    letter-spacing:
+        4px;
+
+    font-weight: bold;
+
+    margin-bottom: 12px;
+
+}
+
+
+.popup-card h2 {
+
+    color: white;
+
+    font-size:
+        clamp(
+            1.7rem,
+            4vw,
+            2.8rem
+        );
+
+    margin-bottom: 12px;
+
+}
+
+
+.popup-card p {
+
+    color:
+        #aaa2b3;
+
+}
+
+
+/* =====================================================
+   MEME
+===================================================== */
+
+.meme-image {
+
+    display: block;
+
+    width:
+        min(500px, 100%);
+
+    max-height: 55vh;
+
+    object-fit: contain;
+
+    margin: 25px auto 0;
+
+    border-radius: 15px;
+
+    box-shadow:
+
+        0 15px 50px
+        rgba(0,0,0,0.7);
+
+}
+
+
+/* =====================================================
+   WELCOME VIDEO
+===================================================== */
+
+.welcome-video {
+
+    display: block;
+
+    width: 100%;
+
+    max-height: 55vh;
+
+    margin-top: 25px;
+
+    border-radius: 15px;
+
+    background: black;
+
+}
+
+
+.continue-button {
+
+    margin-top: 20px;
+
+    padding: 13px 25px;
+
+    border: none;
+
+    border-radius: 999px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff3f98,
+            #8c42ff
+        );
+
+    color: white;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+}
 
 
 /* =====================================================
    MOBILE
 ===================================================== */
 
-@media (max-width: 850px) {
+@media (max-width: 900px) {
 
     body {
         overflow-y: auto;
-        overflow-x: hidden;
     }
 
 
     .entry-page {
 
-        min-height: 100vh;
+        grid-template-columns: 1fr;
 
-        grid-template-columns:
-            1fr;
-
-        gap: 40px;
+        gap: 30px;
 
         padding:
-            45px
-            20px;
+            35px 20px;
 
     }
 
@@ -1342,7 +1031,7 @@ body {
     .photo-frame {
 
         width:
-            min(360px, 75vw);
+            min(480px, 90vw);
 
     }
 
@@ -1350,21 +1039,7 @@ body {
     .password-card {
 
         width:
-            min(460px, 92vw);
-
-    }
-
-
-    .photo-caption h1 {
-
-        font-size: 2rem;
-
-    }
-
-
-    .floating-heart {
-
-        display: none;
+            min(480px, 95vw);
 
     }
 
@@ -1373,68 +1048,31 @@ body {
 
 @media (max-width: 500px) {
 
-    .entry-page {
-
-        padding:
-            30px
-            15px;
-
-        gap: 30px;
-
-    }
-
-
-    .photo-frame {
-
-        width:
-            min(300px, 80vw);
-
-    }
-
-
-    .photo-label {
-
-        font-size: 0.55rem;
-
-        letter-spacing: 3px;
-
-    }
-
-
-    .password-card {
-
-        padding:
-            30px
-            22px;
-
-        border-radius: 22px;
-
-    }
-
-
-    .password-card h2 {
+    .photo-caption h1 {
 
         font-size: 2rem;
 
     }
 
 
-    .number-key {
+    .password-card {
+
+        padding: 30px 20px;
+
+    }
+
+
+    .keypad button {
 
         height: 50px;
 
     }
 
 
-    .meme-popup,
-    .video-popup {
+    .popup-card {
 
         padding:
-            45px
-            18px
-            20px;
-
-        border-radius: 20px;
+            45px 18px 25px;
 
     }
 
