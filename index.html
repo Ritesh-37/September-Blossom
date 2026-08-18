@@ -1,403 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>Birthday Secret</title>
+    <title>A Little Birthday Secret 💗</title>
 
     <link rel="stylesheet" href="style.css">
-
 </head>
-
 
 <body>
 
-
-    <!-- =====================================================
-         MAIN ENTRY PAGE
-    ====================================================== -->
-
-    <main class="entry-page">
-
-
-        <!-- =================================================
-             LEFT PANEL - YOUR PHOTO
-        ================================================== -->
-
-        <section class="entry-panel photo-panel">
-
-
-            <div class="photo-frame">
-
-                <!--
-                    YOUR PHOTO
-
-                    Keep your image in the same folder
-                    as index.html.
-
-                    Current filename:
-                    EntryImg.jpg
-
-                    If your actual file is PNG,
-                    change .jpg to .png.
-                -->
-
-                <img
-                    src="EntryImg.jpg"
-                    alt="Entry Image"
-                    class="entry-photo"
-                >
-
-            </div>
-
-
-            <!-- SAME FONT + SAME SIZE -->
-
-            <div class="intimidating-dialogue">
-
-                <div>
-                    ABEY OH CHIRKOOT!!
-                </div>
-
-                <div>
-                    PASSWORD DAAL
-                </div>
-
-            </div>
-
-
-        </section>
-
-
-
-        <!-- =================================================
-             RIGHT PANEL - PASSWORD
-        ================================================== -->
-
-        <section class="entry-panel password-panel">
-
-
-            <div class="password-content">
-
-
-                <div class="lock-icon">
-                    🔐
-                </div>
-
-
-                <div class="classified">
-                    CLASSIFIED ACCESS
-                </div>
-
-
-                <h2>
-                    BIRTHDAY<br>
-                    VAULT
-                </h2>
-
-
-                <p class="instruction">
-                    Enter the secret password
-                </p>
-
-
-
-                <!-- =================================================
-                     PASSWORD DISPLAY
-                ================================================== -->
-
-                <div
-                    id="password-display"
-                    class="password-display"
-                >
-
-                    <span id="password-dots">
-                        ENTER PASSWORD
-                    </span>
-
-                </div>
-
-
-
-                <!-- =================================================
-                     NUMERIC KEYPAD
-                ================================================== -->
-
-                <div class="keypad">
-
-
-                    <button
-                        type="button"
-                        onclick="addDigit('1')"
-                    >
-                        1
-                    </button>
-
-
-                    <button
-                        type="button"
-                        onclick="addDigit('2')"
-                    >
-                        2
-                    </button>
-
-
-                    <button
-                        type="button"
-                        onclick="addDigit('3')"
-                    >
-                        3
-                    </button>
-
-
-                    <button
-                        type="button"
-                        onclick="addDigit('4')"
-                    >
-                        4
-                    </button>
-
-
-                    <button
-                        type="button"
-                        onclick="addDigit('5')"
-                    >
-                        5
-                    </button>
-
-
-                    <button
-                        type="button"
-                        onclick="addDigit('6')"
-                    >
-                        6
-                    </button>
-
-
-                    <button
-                        type="button"
-                        onclick="addDigit('7')"
-                    >
-                        7
-                    </button>
-
-
-                    <button
-                        type="button"
-                        onclick="addDigit('8')"
-                    >
-                        8
-                    </button>
-
-
-                    <button
-                        type="button"
-                        onclick="addDigit('9')"
-                    >
-                        9
-                    </button>
-
-
-                    <button
-                        type="button"
-                        class="control-button"
-                        onclick="clearPassword()"
-                    >
-                        CLEAR
-                    </button>
-
-
-                    <button
-                        type="button"
-                        onclick="addDigit('0')"
-                    >
-                        0
-                    </button>
-
-
-                    <button
-                        type="button"
-                        class="control-button"
-                        onclick="removeDigit()"
-                    >
-                        ←
-                    </button>
-
-
-                </div>
-
-
-
-                <!-- =================================================
-                     ENTER BUTTON
-                ================================================== -->
-
-                <button
-                    type="button"
-                    class="unlock-button"
-                    onclick="checkPassword()"
-                >
-                    ENTER
-                </button>
-
-
-                <div
-                    id="password-message"
-                    class="password-message"
-                ></div>
-
-
-            </div>
-
-
-        </section>
-
-
-    </main>
-
-
-
-    <!-- =====================================================
-         WRONG PASSWORD POPUP
-    ====================================================== -->
-
-    <div
-        id="meme-popup"
-        class="popup"
-    >
-
-        <div class="popup-card">
-
-
-            <!-- TOP LEFT CLOSE BUTTON -->
-
-            <button
-                type="button"
-                class="popup-close"
-                onclick="closeMeme()"
-            >
-                ×
-            </button>
-
-
-            <div class="popup-label">
-                ACCESS DENIED
-            </div>
-
-
-            <h2>
-                ABEY SAALE!
-            </h2>
-
-
-            <!--
-                YOUR MEME
-
-                File:
-                AbeySaale.jpg
-
-                Keep it beside index.html.
-            -->
-
-            <img
-                src="AbeySaale.jpg"
-                alt="Wrong password meme"
-                class="meme-image"
-            >
-
-
-        </div>
+    <!-- ==================================================
+         BACKGROUND DECORATIONS
+    =================================================== -->
+
+    <div class="background-decor">
+
+        <span class="flower flower-1">✿</span>
+        <span class="flower flower-2">✿</span>
+        <span class="flower flower-3">✿</span>
+        <span class="flower flower-4">✿</span>
+        <span class="flower flower-5">✿</span>
+        <span class="flower flower-6">✿</span>
+
+        <span class="leaf leaf-1">🌿</span>
+        <span class="leaf leaf-2">🍃</span>
+        <span class="leaf leaf-3">🌿</span>
+        <span class="leaf leaf-4">🍃</span>
 
     </div>
 
 
+    <!-- ==================================================
+         MAIN PAGE
+    =================================================== -->
 
-    <!-- =====================================================
-         WELCOME VIDEO POPUP
-    ====================================================== -->
+    <main class="page">
 
-    <div
-        id="welcome-popup"
-        class="popup"
-    >
+        <!-- ==================================================
+             LEFT SIDE
+        =================================================== -->
 
-        <div class="popup-card">
+        <section class="photo-section">
 
+            <!-- Decorative layers -->
+            <div class="pink-layer"></div>
+            <div class="white-layer"></div>
 
-            <!-- TOP LEFT CLOSE BUTTON -->
+            <!-- Small decorative flowers -->
+            <div class="decor-flower flower-left">✿</div>
+            <div class="decor-flower flower-right">✿</div>
 
-            <button
-                type="button"
-                class="popup-close"
-                onclick="closeWelcomeVideo()"
-            >
-                ×
-            </button>
+            <!-- Heart frame -->
+            <div class="heart-frame">
 
+                <div class="heart-photo">
 
-            <div class="popup-label">
-                ACCESS GRANTED
+                    <!--
+                    ==================================================
+                    YOUR PHOTO GOES HERE
+
+                    For now this uses a random placeholder image.
+
+                    LATER:
+                    Replace the URL below with your own image.
+
+                    Example:
+                    src="media/myphoto.jpg"
+                    ==================================================
+                    -->
+
+                    <img
+                        src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=800&q=80"
+                        alt="Birthday photo"
+                    >
+
+                </div>
+
             </div>
 
+            <div class="photo-caption">
+                <span>♡</span>
+                A little piece of happiness
+                <span>♡</span>
+            </div>
 
-            <h2>
-                WELCOME.
-            </h2>
+        </section>
 
 
-            <p>
-                You know the password.
+        <!-- ==================================================
+             RIGHT SIDE
+        =================================================== -->
+
+        <section class="password-section">
+
+            <div class="password-decoration">
+                ♡
+            </div>
+
+            <p class="small-heading">
+                A LITTLE SECRET AWAITS
+            </p>
+
+            <h1>
+                Enter The Password
+            </h1>
+
+            <p class="subtitle">
+                Only someone special knows the way in... 🌸
             </p>
 
 
-            <!--
-                YOUR WELCOME VIDEO
+            <!-- PASSWORD DISPLAY -->
 
-                File:
-                welcome.mp4
-
-                Keep it beside index.html.
-            -->
-
-            <video
-                id="welcome-video"
-                class="welcome-video"
-                controls
-                playsinline
-            >
-
-                <source
-                    src="welcome.mp4"
-                    type="video/mp4"
-                >
-
-            </video>
+            <div
+                id="password-display"
+                class="password-display"
+            ></div>
 
 
-            <button
-                type="button"
-                class="continue-button"
-                onclick="closeWelcomeVideo()"
-            >
-                CONTINUE
-            </button>
+            <!-- NUMERIC KEYPAD -->
+
+            <div class="keypad">
+
+                <button class="key" onclick="pressKey('1')">1</button>
+                <button class="key" onclick="pressKey('2')">2</button>
+                <button class="key" onclick="pressKey('3')">3</button>
+
+                <button class="key" onclick="pressKey('4')">4</button>
+                <button class="key" onclick="pressKey('5')">5</button>
+                <button class="key" onclick="pressKey('6')">6</button>
+
+                <button class="key" onclick="pressKey('7')">7</button>
+                <button class="key" onclick="pressKey('8')">8</button>
+                <button class="key" onclick="pressKey('9')">9</button>
+
+                <button class="key special" onclick="deleteKey()">×</button>
+                <button class="key" onclick="pressKey('0')">0</button>
+                <button class="key special" onclick="checkPassword()">↵</button>
+
+            </div>
 
 
-        </div>
+            <p id="password-message" class="password-message"></p>
 
-    </div>
+        </section>
 
+    </main>
 
 
     <script src="script.js"></script>
 
 </body>
-
 </html>
