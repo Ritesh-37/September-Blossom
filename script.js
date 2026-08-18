@@ -4,265 +4,385 @@
 
 
 /* =====================================================
-   🔐 FIRST PAGE PASSWORD
-=====================================================
-
-   CHANGE THE PASSWORD HERE.
-
-   For now the password is:
-
-   chirkoot
-
+   PASSWORD
 ===================================================== */
 
-const secretPassword = "chirkoot";
+const PASSWORD = "03092005";
+
+let enteredPassword = "";
 
 
 /* =====================================================
-   👤 BIRTHDAY PERSON
+   NUMERIC KEYPAD
 ===================================================== */
 
-const birthdayPerson = "Tisha";
+function pressNumber(number) {
 
-
-/* =====================================================
-   🎂 BIRTHDAY DATE
-===================================================== */
-
-const birthdayDate =
-    "2026-09-15T00:00:00";
-
-
-/* =====================================================
-   🔐 PASSWORD SCREEN
-===================================================== */
-
-function checkPassword() {
-
-    const input =
-        document.getElementById(
-            "password-input"
-        );
-
-    const error =
-        document.getElementById(
-            "password-error"
-        );
-
-    const enteredPassword =
-        input.value
-            .trim()
-            .toLowerCase();
-
-
-    if (
-        enteredPassword ===
-        secretPassword.toLowerCase()
-    ) {
-
-        error.textContent = "";
-
-        openWelcomePopup();
-
+    if (enteredPassword.length >= 8) {
+        return;
     }
 
-    else {
 
-        error.textContent =
-            "Wrong password... 😭";
+    enteredPassword += number;
 
-        input.classList.remove(
-            "password-shake"
-        );
 
-        void input.offsetWidth;
+    updatePasswordDisplay();
 
-        input.classList.add(
-            "password-shake"
-        );
 
+    document.getElementById(
+        "password-message"
+    ).textContent = "";
+
+
+    /*
+       Automatically check when
+       all 8 digits are entered.
+    */
+
+    if (enteredPassword.length === 8) {
 
         setTimeout(() => {
 
-            document
-                .getElementById(
-                    "wrong-password-popup"
-                )
-                .classList.add("show");
+            checkPassword();
 
         }, 250);
 
     }
+
 }
 
 
 /* =====================================================
-   ENTER KEY FOR PASSWORD
+   UPDATE PASSWORD DISPLAY
 ===================================================== */
 
-document.addEventListener(
-    "keydown",
-    event => {
+function updatePasswordDisplay() {
 
-        const passwordScreen =
-            document.getElementById(
-                "password-screen"
-            );
-
-
-        if (
-            event.key === "Enter" &&
-            passwordScreen &&
-            passwordScreen.classList.contains("active")
-        ) {
-
-            checkPassword();
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   PASSWORD VISIBILITY
-===================================================== */
-
-function togglePassword() {
-
-    const input =
-        document.getElementById(
-            "password-input"
+    const slots =
+        document.querySelectorAll(
+            "#password-display span"
         );
 
 
+    slots.forEach(
+        (slot, index) => {
+
+            if (
+                index <
+                enteredPassword.length
+            ) {
+
+                slot.textContent = "●";
+
+                slot.classList.add(
+                    "filled"
+                );
+
+            }
+
+            else {
+
+                slot.textContent = "_";
+
+                slot.classList.remove(
+                    "filled"
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   CLEAR PASSWORD
+===================================================== */
+
+function clearPassword() {
+
+    enteredPassword = "";
+
+    updatePasswordDisplay();
+
+    document.getElementById(
+        "password-message"
+    ).textContent = "";
+
+}
+
+
+/* =====================================================
+   CHECK PASSWORD
+===================================================== */
+
+function checkPassword() {
+
     if (
-        input.type === "password"
+        enteredPassword === PASSWORD
     ) {
 
-        input.type = "text";
+        correctPassword();
 
     }
 
     else {
 
-        input.type = "password";
+        wrongPassword();
 
     }
+
 }
 
 
 /* =====================================================
-   WRONG PASSWORD POPUP
+   WRONG PASSWORD
 ===================================================== */
 
-function closeWrongPassword() {
+function wrongPassword() {
 
-    document
-        .getElementById(
-            "wrong-password-popup"
-        )
-        .classList.remove("show");
-
-
-    document
-        .getElementById(
-            "password-input"
-        )
-        .focus();
-}
-
-
-/* =====================================================
-   🎬 WELCOME POPUP
-===================================================== */
-
-function openWelcomePopup() {
-
-    const popup =
+    const message =
         document.getElementById(
-            "welcome-popup"
+            "password-message"
         );
 
 
-    popup.classList.add("show");
-
-
-    const video =
-        document.getElementById(
-            "welcome-video"
-        );
+    message.textContent =
+        "❌ WRONG PASSWORD";
 
 
     /*
-       Try to play the welcome video.
-
-       Browsers may block autoplay if
-       the video contains sound.
-
-       The user can press play manually.
+       Small shake animation
     */
 
-    video.play()
-        .catch(() => {});
-
-
-    const music =
-        document.getElementById(
-            "welcome-music"
+    const keypad =
+        document.querySelector(
+            ".keypad"
         );
 
 
-    music.volume = 0.35;
+    keypad.animate(
 
-    music.play()
-        .catch(() => {});
+        [
+            {
+                transform:
+                    "translateX(0)"
+            },
+
+            {
+                transform:
+                    "translateX(-10px)"
+            },
+
+            {
+                transform:
+                    "translateX(10px)"
+            },
+
+            {
+                transform:
+                    "translateX(-7px)"
+            },
+
+            {
+                transform:
+                    "translateX(0)"
+            }
+
+        ],
+
+        {
+            duration: 400
+        }
+
+    );
+
+
+    /*
+       Show meme after
+       short delay.
+    */
+
+    setTimeout(() => {
+
+        document
+            .getElementById(
+                "wrong-popup"
+            )
+            .classList.add("show");
+
+    }, 350);
+
+
+    clearPassword();
 
 }
 
 
 /* =====================================================
-   ENTER THE MAIN ADVENTURE
+   CLOSE WRONG PASSWORD
 ===================================================== */
 
-function enterAdventure() {
-
-    const welcomeMusic =
-        document.getElementById(
-            "welcome-music"
-        );
-
-
-    const welcomeVideo =
-        document.getElementById(
-            "welcome-video"
-        );
-
-
-    welcomeMusic.pause();
-
-    welcomeVideo.pause();
-
+function closeWrongPopup() {
 
     document
         .getElementById(
-            "welcome-popup"
+            "wrong-popup"
         )
         .classList.remove("show");
+
+}
+
+
+/* =====================================================
+   CORRECT PASSWORD
+===================================================== */
+
+function correctPassword() {
+
+    document.getElementById(
+        "password-message"
+    ).textContent =
+        "✅ ACCESS GRANTED";
+
+
+    /*
+       Open welcome video.
+    */
+
+    setTimeout(() => {
+
+        const popup =
+            document.getElementById(
+                "welcome-popup"
+            );
+
+
+        const video =
+            document.getElementById(
+                "welcome-video"
+            );
+
+
+        popup.classList.add("show");
+
+
+        /*
+           IMPORTANT:
+
+           Because the user just clicked
+           the keypad, browsers normally
+           allow video with sound.
+        */
+
+        video.currentTime = 0;
+
+
+        video.play()
+            .catch(error => {
+
+                console.log(
+                    "Video autoplay issue:",
+                    error
+                );
+
+            });
+
+    }, 500);
+
+}
+
+
+/* =====================================================
+   WELCOME VIDEO FINISHED
+===================================================== */
+
+document
+    .getElementById("welcome-video")
+    .addEventListener(
+        "ended",
+        () => {
+
+            const popup =
+                document.getElementById(
+                    "welcome-popup"
+                );
+
+
+            popup.classList.remove(
+                "show"
+            );
+
+
+            /*
+               Open the original
+               Birthday Adventure.
+            */
+
+            showBirthdayAdventure();
+
+        }
+    );
+
+
+/* =====================================================
+   SHOW BIRTHDAY ADVENTURE
+===================================================== */
+
+function showBirthdayAdventure() {
+
+    const passwordScreen =
+        document.getElementById(
+            "password-screen"
+        );
+
+
+    passwordScreen.style.opacity = "0";
+
+    passwordScreen.style.pointerEvents =
+        "none";
 
 
     setTimeout(() => {
 
-        showScreen("start-screen");
+        passwordScreen.style.display =
+            "none";
 
-    }, 400);
+
+        const game =
+            document.getElementById(
+                "game-screen"
+            );
+
+
+        game.classList.add(
+            "active"
+        );
+
+
+        createConfetti(100);
+
+        startMusic();
+
+        updateProgress();
+
+    }, 500);
 
 }
 
 
 /* =====================================================
-   🎁 10 MAIN SURPRISES
+   ORIGINAL GAME
 ===================================================== */
+
+const birthdayPerson =
+    "Birthday Star";
+
+
+const birthdayDate =
+    "2026-09-15T00:00:00";
+
 
 const surprises = [
 
@@ -274,8 +394,7 @@ const surprises = [
         question:
             "What is 2 + 2?",
 
-        answer:
-            "4",
+        answer: "4",
 
         message: `
             <h3>🎀 You found the first surprise!</h3>
@@ -300,8 +419,7 @@ const surprises = [
         question:
             "What do you get when you mix cake, candles and presents?",
 
-        answer:
-            "birthday",
+        answer: "birthday",
 
         message: `
             <h3>💌 A Secret Message</h3>
@@ -326,15 +444,10 @@ const surprises = [
         question:
             "What has a face and two hands but cannot smile?",
 
-        answer:
-            "clock",
+        answer: "clock",
 
         message: `
             <h3>📸 A Special Memory</h3>
-
-            <p>
-                Look what I found! 🌸
-            </p>
 
             <img
                 src="media/photo1.jpg"
@@ -356,16 +469,12 @@ const surprises = [
         question:
             "What goes up but never comes down?",
 
-        answer:
-            "age",
+        answer: "age",
 
         message: `
             <h3>🎥 SECRET VIDEO!</h3>
 
-            <video
-                controls
-                playsinline
-            >
+            <video controls playsinline>
 
                 <source
                     src="media/video1.mp4"
@@ -389,8 +498,7 @@ const surprises = [
         question:
             "I shine at night and disappear in the morning. What am I?",
 
-        answer:
-            "star",
+        answer: "star",
 
         message: `
             <h3>🌟 My Birthday Wish</h3>
@@ -402,7 +510,6 @@ const surprises = [
             </p>
 
             <p>
-                And obviously...
                 LOTS OF CAKE. 🎂
             </p>
         `
@@ -417,8 +524,7 @@ const surprises = [
         question:
             "What has many keys but cannot open a door?",
 
-        answer:
-            "piano",
+        answer: "piano",
 
         message: `
             <h3>🦋 You Found It!</h3>
@@ -426,10 +532,6 @@ const surprises = [
             <p>
                 Never stop being curious,
                 funny and completely yourself.
-            </p>
-
-            <p>
-                That's what makes you awesome. 💗
             </p>
         `
     },
@@ -443,19 +545,14 @@ const surprises = [
         question:
             "What food is usually the most important part of a birthday?",
 
-        answer:
-            "cake",
+        answer: "cake",
 
         message: `
             <h3>🎂 IMPORTANT ANNOUNCEMENT</h3>
 
             <p>
                 Birthday cake has officially
-                been declared calorie-free.
-            </p>
-
-            <p>
-                Yes, I made the rules. 😂
+                been declared calorie-free. 😂
             </p>
         `
     },
@@ -469,19 +566,13 @@ const surprises = [
         question:
             "What is the opposite of sad?",
 
-        answer:
-            "happy",
+        answer: "happy",
 
         message: `
             <h3>💖 You Are Awesome</h3>
 
             <p>
                 You are genuinely amazing.
-            </p>
-
-            <p>
-                Never forget that someone
-                thinks you're special.
             </p>
         `
     },
@@ -495,8 +586,7 @@ const surprises = [
         question:
             "What comes after the letter A?",
 
-        answer:
-            "b",
+        answer: "b",
 
         message: `
             <h3>🌈 You Made It!</h3>
@@ -505,10 +595,6 @@ const surprises = [
                 Every little surprise was just
                 an excuse to remind you that
                 you're pretty amazing.
-            </p>
-
-            <p>
-                💗 Happy Birthday!
             </p>
         `
     },
@@ -522,8 +608,7 @@ const surprises = [
         question:
             "What do you say when someone has a birthday?",
 
-        answer:
-            "happy birthday",
+        answer: "happy birthday",
 
         message: `
             <h3>🔮 THE FINAL SECRET!</h3>
@@ -531,20 +616,11 @@ const surprises = [
             <p>
                 You unlocked the final surprise!
             </p>
-
-            <p>
-                But there is still one giant
-                celebration waiting...
-            </p>
         `
     }
 
 ];
 
-
-/* =====================================================
-   VARIABLES
-===================================================== */
 
 let currentChallenge = 0;
 
@@ -553,43 +629,6 @@ let unlocked = [];
 let musicPlaying = false;
 
 let easterClicks = 0;
-
-
-/* =====================================================
-   START GAME
-===================================================== */
-
-function startGame() {
-
-    showScreen("game-screen");
-
-    createConfetti(80);
-
-    startMusic();
-
-    updateProgress();
-}
-
-
-/* =====================================================
-   SCREEN
-===================================================== */
-
-function showScreen(id) {
-
-    document
-        .querySelectorAll(".screen")
-        .forEach(screen => {
-
-            screen.classList.remove("active");
-
-        });
-
-
-    document
-        .getElementById(id)
-        .classList.add("active");
-}
 
 
 /* =====================================================
@@ -609,6 +648,7 @@ function openChallenge(index) {
         showSurprise(index);
 
         return;
+
     }
 
 
@@ -657,11 +697,12 @@ function openChallenge(index) {
         input.focus();
 
     }, 200);
+
 }
 
 
 /* =====================================================
-   CHECK ANSWER
+   CHECK GAME ANSWER
 ===================================================== */
 
 function checkAnswer() {
@@ -726,44 +767,9 @@ function checkAnswer() {
         error.textContent =
             "❌ Nope! Try again! 💗";
 
-
-        input.classList.remove(
-            "shake"
-        );
-
-
-        void input.offsetWidth;
-
-
-        input.classList.add(
-            "shake"
-        );
     }
+
 }
-
-
-/* =====================================================
-   ENTER KEY
-===================================================== */
-
-document.addEventListener(
-    "keydown",
-    event => {
-
-        if (
-            event.key === "Enter" &&
-            document
-                .getElementById(
-                    "challenge-popup"
-                )
-                .classList.contains("show")
-        ) {
-
-            checkAnswer();
-        }
-
-    }
-);
 
 
 /* =====================================================
@@ -777,6 +783,7 @@ function closeChallenge() {
             "challenge-popup"
         )
         .classList.remove("show");
+
 }
 
 
@@ -832,6 +839,7 @@ function showSurprise(index) {
         }, 1800);
 
     }
+
 }
 
 
@@ -846,6 +854,7 @@ function closeSurprise() {
             "surprise-popup"
         )
         .classList.remove("show");
+
 }
 
 
@@ -865,36 +874,38 @@ function updateProgress() {
         amount;
 
 
-    if (amount === 0) {
-
+    const hint =
         document.getElementById(
             "game-hint"
-        ).textContent =
+        );
+
+
+    if (amount === 0) {
+
+        hint.textContent =
             "🔐 Everything is locked...";
 
     }
 
     else if (amount < 10) {
 
-        document.getElementById(
-            "game-hint"
-        ).textContent =
+        hint.textContent =
             `✨ ${amount} surprise${amount === 1 ? "" : "s"} unlocked!`;
 
     }
 
     else {
 
-        document.getElementById(
-            "game-hint"
-        ).textContent =
+        hint.textContent =
             "🎉 EVERYTHING UNLOCKED!";
+
     }
+
 }
 
 
 /* =====================================================
-   FINAL CINEMATIC
+   FINAL
 ===================================================== */
 
 function showFinal() {
@@ -914,29 +925,17 @@ function showFinal() {
 
     createConfetti(200);
 
-    fireworksShow();
 }
 
 
 /* =====================================================
-   MASSIVE PARTY
+   PARTY
 ===================================================== */
 
 function massiveParty() {
 
     createConfetti(350);
 
-    fireworksShow();
-
-    setTimeout(
-        fireworksShow,
-        800
-    );
-
-    setTimeout(
-        fireworksShow,
-        1600
-    );
 }
 
 
@@ -951,6 +950,7 @@ function showInstructions() {
             "instructions-popup"
         )
         .classList.add("show");
+
 }
 
 
@@ -961,6 +961,7 @@ function closeInstructions() {
             "instructions-popup"
         )
         .classList.remove("show");
+
 }
 
 
@@ -973,6 +974,7 @@ function closeOverlay(id) {
     document
         .getElementById(id)
         .classList.remove("show");
+
 }
 
 
@@ -987,6 +989,7 @@ function openEnvelope() {
             "letter-popup"
         )
         .classList.add("show");
+
 }
 
 
@@ -996,6 +999,7 @@ function openLetter() {
         document.querySelector(
             ".envelope"
         );
+
 
     const letter =
         document.getElementById(
@@ -1011,6 +1015,7 @@ function openLetter() {
         letter.classList.add("open");
 
     }, 700);
+
 }
 
 
@@ -1025,6 +1030,7 @@ function openGallery() {
             "gallery-popup"
         )
         .classList.add("show");
+
 }
 
 
@@ -1039,6 +1045,7 @@ function openVideoRoom() {
             "video-popup"
         )
         .classList.add("show");
+
 }
 
 
@@ -1055,9 +1062,8 @@ function openRandomSurprise() {
         );
 
 
-    openChallenge(
-        randomIndex
-    );
+    openChallenge(randomIndex);
+
 }
 
 
@@ -1073,7 +1079,9 @@ function openCountdown() {
         )
         .classList.add("show");
 
+
     updateCountdown();
+
 }
 
 
@@ -1085,7 +1093,7 @@ function updateCountdown() {
 
 
     const now =
-        new Date().getTime();
+        Date.now();
 
 
     let difference =
@@ -1094,77 +1102,59 @@ function updateCountdown() {
 
     if (difference < 0) {
 
-        const oldDate =
-            new Date(birthdayDate);
-
-
-        const nextDate =
-            new Date(
-                oldDate.getFullYear() + 1,
-                oldDate.getMonth(),
-                oldDate.getDate(),
-                oldDate.getHours(),
-                oldDate.getMinutes()
-            );
-
-
         difference =
-            nextDate.getTime() - now;
+            new Date(
+                new Date(
+                    birthdayDate
+                ).getFullYear() + 1,
+
+                new Date(
+                    birthdayDate
+                ).getMonth(),
+
+                new Date(
+                    birthdayDate
+                ).getDate()
+            ).getTime() - now;
+
     }
-
-
-    const days =
-        Math.floor(
-            difference /
-            (1000 * 60 * 60 * 24)
-        );
-
-
-    const hours =
-        Math.floor(
-            (difference /
-            (1000 * 60 * 60)) %
-            24
-        );
-
-
-    const minutes =
-        Math.floor(
-            (difference /
-            (1000 * 60)) %
-            60
-        );
-
-
-    const seconds =
-        Math.floor(
-            (difference / 1000) %
-            60
-        );
 
 
     document.getElementById(
         "days"
     ).textContent =
-        days;
+        Math.floor(
+            difference /
+            86400000
+        );
 
 
     document.getElementById(
         "hours"
     ).textContent =
-        hours;
+        Math.floor(
+            difference /
+            3600000
+        ) % 24;
 
 
     document.getElementById(
         "minutes"
     ).textContent =
-        minutes;
+        Math.floor(
+            difference /
+            60000
+        ) % 60;
 
 
     document.getElementById(
         "seconds"
     ).textContent =
-        seconds;
+        Math.floor(
+            difference /
+            1000
+        ) % 60;
+
 }
 
 
@@ -1202,6 +1192,7 @@ function startMusic() {
             musicPlaying = false;
 
         });
+
 }
 
 
@@ -1213,9 +1204,7 @@ function toggleMusic() {
         );
 
 
-    if (
-        music.paused
-    ) {
+    if (music.paused) {
 
         music.play();
 
@@ -1233,6 +1222,7 @@ function toggleMusic() {
 
 
     updateMusicButton();
+
 }
 
 
@@ -1244,6 +1234,7 @@ function updateMusicButton() {
         musicPlaying
             ? "🔊"
             : "🎵";
+
 }
 
 
@@ -1264,22 +1255,13 @@ function toggleNightMode() {
         );
 
 
-    if (
+    button.textContent =
         document.body.classList.contains(
             "night"
         )
-    ) {
+            ? "☀️"
+            : "🌙";
 
-        button.textContent =
-            "☀️";
-
-    }
-
-    else {
-
-        button.textContent =
-            "🌙";
-    }
 }
 
 
@@ -1301,9 +1283,7 @@ function createConfetti(amount) {
         "#a66ee8",
         "#ffd45c",
         "#65d9ff",
-        "#72df9a",
-        "#ff8d8d",
-        "#ffffff"
+        "#72df9a"
 
     ];
 
@@ -1338,28 +1318,22 @@ function createConfetti(amount) {
             ];
 
 
-        piece.style.animationDuration =
-            (
-                2 +
-                Math.random() * 4
-            ) +
-            "s";
-
-
         piece.style.width =
-            (
-                6 +
-                Math.random() * 8
-            ) +
+            6 +
+            Math.random() * 8 +
             "px";
 
 
         piece.style.height =
-            (
-                10 +
-                Math.random() * 15
-            ) +
+            10 +
+            Math.random() * 15 +
             "px";
+
+
+        piece.style.animationDuration =
+            2 +
+            Math.random() * 4 +
+            "s";
 
 
         container.appendChild(
@@ -1372,90 +1346,10 @@ function createConfetti(amount) {
             piece.remove();
 
         }, 7000);
+
     }
+
 }
-
-
-/* =====================================================
-   FLOATING HEARTS
-===================================================== */
-
-const floatingItems = [
-
-    "💗",
-    "💕",
-    "💖",
-    "💜",
-    "✨",
-    "⭐",
-    "🌸",
-    "🎀",
-    "🦋"
-
-];
-
-
-function createFloatingItem() {
-
-    const item =
-        document.createElement(
-            "div"
-        );
-
-
-    item.className =
-        "floating";
-
-
-    item.textContent =
-        floatingItems[
-            Math.floor(
-                Math.random() *
-                floatingItems.length
-            )
-        ];
-
-
-    item.style.left =
-        Math.random() * 100 +
-        "vw";
-
-
-    item.style.fontSize =
-        (
-            15 +
-            Math.random() * 25
-        ) +
-        "px";
-
-
-    item.style.animationDuration =
-        (
-            7 +
-            Math.random() * 8
-        ) +
-        "s";
-
-
-    document
-        .getElementById(
-            "floating-items"
-        )
-        .appendChild(item);
-
-
-    setTimeout(() => {
-
-        item.remove();
-
-    }, 16000);
-}
-
-
-setInterval(
-    createFloatingItem,
-    500
-);
 
 
 /* =====================================================
@@ -1481,7 +1375,9 @@ function activateEasterEgg() {
         createConfetti(100);
 
         easterClicks = 0;
+
     }
+
 }
 
 
@@ -1495,199 +1391,8 @@ function secretFireworks() {
         "easter-popup"
     );
 
-    fireworksShow();
-
     createConfetti(250);
-}
 
-
-/* =====================================================
-   FIREWORKS ENGINE
-===================================================== */
-
-const canvas =
-    document.getElementById(
-        "fireworks"
-    );
-
-const ctx =
-    canvas.getContext(
-        "2d"
-    );
-
-
-let fireworks = [];
-
-
-function resizeCanvas() {
-
-    canvas.width =
-        window.innerWidth;
-
-    canvas.height =
-        window.innerHeight;
-}
-
-
-resizeCanvas();
-
-
-window.addEventListener(
-    "resize",
-    resizeCanvas
-);
-
-
-function fireworksShow() {
-
-    for (
-        let i = 0;
-        i < 5;
-        i++
-    ) {
-
-        setTimeout(() => {
-
-            createFirework(
-                Math.random() *
-                canvas.width,
-
-                Math.random() *
-                canvas.height *
-                0.6
-            );
-
-        }, i * 250);
-    }
-
-
-    animateFireworks();
-}
-
-
-function createFirework(x, y) {
-
-    const colors = [
-
-        "#ff5ca8",
-        "#ffd45c",
-        "#7de2ff",
-        "#c982ff",
-        "#ffffff"
-
-    ];
-
-
-    const color =
-        colors[
-            Math.floor(
-                Math.random() *
-                colors.length
-            )
-        ];
-
-
-    for (
-        let i = 0;
-        i < 60;
-        i++
-    ) {
-
-        const angle =
-            Math.random() *
-            Math.PI *
-            2;
-
-
-        const speed =
-            2 +
-            Math.random() * 5;
-
-
-        fireworks.push({
-
-            x: x,
-
-            y: y,
-
-            vx:
-                Math.cos(angle) *
-                speed,
-
-            vy:
-                Math.sin(angle) *
-                speed,
-
-            life: 80,
-
-            color: color
-        });
-    }
-}
-
-
-function animateFireworks() {
-
-    ctx.clearRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
-
-
-    fireworks =
-        fireworks.filter(
-            particle => {
-
-                particle.x +=
-                    particle.vx;
-
-                particle.y +=
-                    particle.vy;
-
-                particle.vy +=
-                    0.04;
-
-                particle.life--;
-
-
-                ctx.globalAlpha =
-                    particle.life / 80;
-
-                ctx.fillStyle =
-                    particle.color;
-
-
-                ctx.beginPath();
-
-                ctx.arc(
-                    particle.x,
-                    particle.y,
-                    3,
-                    0,
-                    Math.PI * 2
-                );
-
-                ctx.fill();
-
-
-                return particle.life > 0;
-            }
-        );
-
-
-    ctx.globalAlpha = 1;
-
-
-    if (
-        fireworks.length > 0
-    ) {
-
-        requestAnimationFrame(
-            animateFireworks
-        );
-    }
 }
 
 
@@ -1699,14 +1404,7 @@ document.addEventListener(
     "DOMContentLoaded",
     () => {
 
-        createConfetti(20);
-
-        /*
-           Make sure the first page is shown
-           when the website opens.
-        */
-
-        showScreen("password-screen");
+        updatePasswordDisplay();
 
     }
 );
