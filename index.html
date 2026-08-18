@@ -16,7 +16,29 @@
 
 <body>
 
-    <!-- Background decorations -->
+    <!-- =========================================
+         LOADING SCREEN
+    ========================================== -->
+
+    <div id="loading-screen">
+        <div class="loading-content">
+            <div class="loading-bow">🎀</div>
+
+            <p>Preparing something special...</p>
+
+            <div class="loading-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- =========================================
+         BACKGROUND
+    ========================================== -->
+
     <div class="background-glow"></div>
 
     <div class="sparkles">
@@ -30,8 +52,8 @@
         <span>✧</span>
     </div>
 
+    <!-- Only a few subtle hearts -->
     <div class="hearts">
-        <span>♥</span>
         <span>♥</span>
         <span>♥</span>
         <span>♥</span>
@@ -39,9 +61,9 @@
     </div>
 
 
-    <!-- ============================= -->
-    <!-- STAGE 0: SEALED GIFT           -->
-    <!-- ============================= -->
+    <!-- =========================================
+         STAGE 0 - SEALED GIFT
+    ========================================== -->
 
     <main id="gift-screen" class="screen active">
 
@@ -76,14 +98,12 @@
 
             <div id="envelope" class="envelope">
 
-                <div class="envelope-top"></div>
+                <div class="envelope-back"></div>
 
-                <div class="envelope-body">
-
-                    <div class="seal">♥</div>
+                <div class="envelope-paper">
 
                     <p class="envelope-small">
-                        A LITTLE SOMETHING
+                        A SECRET LITTLE SURPRISE
                     </p>
 
                     <h1>
@@ -91,13 +111,25 @@
                     </h1>
 
                     <p class="envelope-message">
-                        Do not open unless you're ready
-                        for a little surprise. 👀
+                        Open me... if you dare. 👀
                     </p>
 
                 </div>
 
+                <div class="envelope-flap"></div>
+
+                <div class="wax-seal">
+                    ♥
+                </div>
+
+                <div class="envelope-ribbon ribbon-left"></div>
+                <div class="envelope-ribbon ribbon-right"></div>
+
             </div>
+
+            <p class="hidden-code">
+                ♡ 0309 ♡
+            </p>
 
             <button id="open-gift-btn" class="luxury-button">
                 OPEN IT 💌
@@ -108,9 +140,9 @@
     </main>
 
 
-    <!-- ============================= -->
-    <!-- STAGE 1: MAIN ENTRANCE         -->
-    <!-- ============================= -->
+    <!-- =========================================
+         STAGE 1 - MAIN ENTRANCE
+    ========================================== -->
 
     <main id="entrance-screen" class="screen">
 
@@ -165,9 +197,9 @@
     </main>
 
 
-    <!-- ============================= -->
-    <!-- STAGE 2: PASSWORD              -->
-    <!-- ============================= -->
+    <!-- =========================================
+         STAGE 2 - PASSWORD
+    ========================================== -->
 
     <main id="password-screen" class="screen">
 
@@ -216,9 +248,9 @@
     </main>
 
 
-    <!-- ============================= -->
-    <!-- STAGE 3: WRONG PASSWORD        -->
-    <!-- ============================= -->
+    <!-- =========================================
+         WRONG PASSWORD POPUP
+    ========================================== -->
 
     <div id="wrong-popup" class="popup-overlay">
 
@@ -250,9 +282,9 @@
     </div>
 
 
-    <!-- ============================= -->
-    <!-- STAGE 4: SUCCESS               -->
-    <!-- ============================= -->
+    <!-- =========================================
+         SUCCESS POPUP
+    ========================================== -->
 
     <div id="success-popup" class="popup-overlay">
 
@@ -284,7 +316,18 @@
     </div>
 
 
-    <!-- Background music -->
+    <!-- =========================================
+         MUSIC CONTROL
+    ========================================== -->
+
+    <button
+        id="music-control"
+        class="music-control"
+        aria-label="Toggle background music"
+    >
+        ♫
+    </button>
+
     <audio id="background-music" loop>
         <source src="music.mp3" type="audio/mpeg">
     </audio>
