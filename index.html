@@ -2,26 +2,22 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>🎂 Birthday Secret</title>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Birthday Secret</title>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
 
+
 <body>
-
-    <!-- =====================================================
-         PREMIUM BATMAN-STYLE BACKGROUND
-    ====================================================== -->
-
-    <div class="bat-symbol">
-        🦇
-    </div>
-
-    <div class="background-glow glow-one"></div>
-    <div class="background-glow glow-two"></div>
 
 
     <!-- =====================================================
@@ -30,159 +26,246 @@
 
     <main class="entry-page">
 
+
         <!-- =================================================
-             LEFT SIDE - YOUR PHOTO
+             LEFT PANEL - YOUR PHOTO
         ================================================== -->
 
-        <section class="photo-section">
+        <section class="entry-panel photo-panel">
+
 
             <div class="photo-frame">
 
                 <!--
-                    YOUR IMAGE
+                    YOUR PHOTO
 
-                    Your file should be named:
+                    Keep your image in the same folder
+                    as index.html.
+
+                    Current filename:
                     EntryImg.jpg
 
-                    If your file is PNG, change .jpg to .png
+                    If your actual file is PNG,
+                    change .jpg to .png.
                 -->
 
                 <img
                     src="EntryImg.jpg"
-                    alt="Birthday Boy"
+                    alt="Entry Image"
                     class="entry-photo"
                 >
 
-                <div class="frame-shine"></div>
-
             </div>
 
 
-            <div class="photo-caption">
+            <!-- SAME FONT + SAME SIZE -->
 
-                <div class="caption-line"></div>
+            <div class="intimidating-dialogue">
 
-                <h1>
-                    Abey oh Chirkoot!!
-                </h1>
+                <div>
+                    ABEY OH CHIRKOOT!!
+                </div>
 
-                <p>
-                    Password Daal 🔐
-                </p>
-
-                <div class="caption-line"></div>
+                <div>
+                    PASSWORD DAAL
+                </div>
 
             </div>
+
 
         </section>
 
 
 
         <!-- =================================================
-             RIGHT SIDE - PASSWORD PANEL
+             RIGHT PANEL - PASSWORD
         ================================================== -->
 
-        <section class="password-section">
+        <section class="entry-panel password-panel">
 
-            <div class="password-card">
 
-                <div class="security-icon">
+            <div class="password-content">
+
+
+                <div class="lock-icon">
                     🔐
                 </div>
+
 
                 <div class="classified">
                     CLASSIFIED ACCESS
                 </div>
 
+
                 <h2>
-                    Welcome to<br>
-                    the Birthday Vault
+                    BIRTHDAY<br>
+                    VAULT
                 </h2>
 
-                <p class="subtitle">
-                    Only the chosen one can enter.
+
+                <p class="instruction">
+                    Enter the secret password
                 </p>
 
 
-                <!-- PASSWORD DISPLAY -->
+
+                <!-- =================================================
+                     PASSWORD DISPLAY
+                ================================================== -->
 
                 <div
                     id="password-display"
                     class="password-display"
                 >
+
                     <span id="password-dots">
-                        Enter Password
+                        ENTER PASSWORD
                     </span>
+
                 </div>
 
 
-                <!-- NUMERIC KEYPAD -->
+
+                <!-- =================================================
+                     NUMERIC KEYPAD
+                ================================================== -->
 
                 <div class="keypad">
 
-                    <button onclick="addDigit('1')">1</button>
-                    <button onclick="addDigit('2')">2</button>
-                    <button onclick="addDigit('3')">3</button>
-
-                    <button onclick="addDigit('4')">4</button>
-                    <button onclick="addDigit('5')">5</button>
-                    <button onclick="addDigit('6')">6</button>
-
-                    <button onclick="addDigit('7')">7</button>
-                    <button onclick="addDigit('8')">8</button>
-                    <button onclick="addDigit('9')">9</button>
 
                     <button
-                        class="clear-key"
-                        onclick="clearPassword()"
+                        type="button"
+                        onclick="addDigit('1')"
                     >
-                        C
+                        1
                     </button>
 
-                    <button onclick="addDigit('0')">
+
+                    <button
+                        type="button"
+                        onclick="addDigit('2')"
+                    >
+                        2
+                    </button>
+
+
+                    <button
+                        type="button"
+                        onclick="addDigit('3')"
+                    >
+                        3
+                    </button>
+
+
+                    <button
+                        type="button"
+                        onclick="addDigit('4')"
+                    >
+                        4
+                    </button>
+
+
+                    <button
+                        type="button"
+                        onclick="addDigit('5')"
+                    >
+                        5
+                    </button>
+
+
+                    <button
+                        type="button"
+                        onclick="addDigit('6')"
+                    >
+                        6
+                    </button>
+
+
+                    <button
+                        type="button"
+                        onclick="addDigit('7')"
+                    >
+                        7
+                    </button>
+
+
+                    <button
+                        type="button"
+                        onclick="addDigit('8')"
+                    >
+                        8
+                    </button>
+
+
+                    <button
+                        type="button"
+                        onclick="addDigit('9')"
+                    >
+                        9
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="control-button"
+                        onclick="clearPassword()"
+                    >
+                        CLEAR
+                    </button>
+
+
+                    <button
+                        type="button"
+                        onclick="addDigit('0')"
+                    >
                         0
                     </button>
 
+
                     <button
-                        class="back-key"
+                        type="button"
+                        class="control-button"
                         onclick="removeDigit()"
                     >
                         ←
                     </button>
 
+
                 </div>
 
 
-                <!-- UNLOCK BUTTON -->
+
+                <!-- =================================================
+                     ENTER BUTTON
+                ================================================== -->
 
                 <button
+                    type="button"
                     class="unlock-button"
                     onclick="checkPassword()"
                 >
-                    🔓 ENTER THE VAULT
+                    ENTER
                 </button>
 
 
-                <p
+                <div
                     id="password-message"
                     class="password-message"
-                ></p>
+                ></div>
 
-
-                <div class="vault-footer">
-                    BIRTHDAY SECURITY SYSTEM • 2005
-                </div>
 
             </div>
 
+
         </section>
+
 
     </main>
 
 
 
     <!-- =====================================================
-         WRONG PASSWORD MEME POPUP
+         WRONG PASSWORD POPUP
     ====================================================== -->
 
     <div
@@ -190,11 +273,13 @@
         class="popup"
     >
 
-        <div class="popup-card meme-card">
+        <div class="popup-card">
 
-            <!-- CLOSE BUTTON - TOP LEFT -->
+
+            <!-- TOP LEFT CLOSE BUTTON -->
 
             <button
+                type="button"
                 class="popup-close"
                 onclick="closeMeme()"
             >
@@ -206,21 +291,19 @@
                 ACCESS DENIED
             </div>
 
+
             <h2>
-                ABEY SAALE! 😂
+                ABEY SAALE!
             </h2>
 
 
             <!--
                 YOUR MEME
 
-                Put your meme in the same folder as this
-                HTML file.
-
-                File name:
+                File:
                 AbeySaale.jpg
 
-                If PNG, change to AbeySaale.png
+                Keep it beside index.html.
             -->
 
             <img
@@ -228,6 +311,7 @@
                 alt="Wrong password meme"
                 class="meme-image"
             >
+
 
         </div>
 
@@ -244,11 +328,13 @@
         class="popup"
     >
 
-        <div class="popup-card video-card">
+        <div class="popup-card">
 
-            <!-- CLOSE BUTTON - TOP LEFT -->
+
+            <!-- TOP LEFT CLOSE BUTTON -->
 
             <button
+                type="button"
                 class="popup-close"
                 onclick="closeWelcomeVideo()"
             >
@@ -260,27 +346,24 @@
                 ACCESS GRANTED
             </div>
 
+
             <h2>
-                🎂 Welcome to the Birthday Vault
+                WELCOME.
             </h2>
 
+
             <p>
-                You actually knew the password...
-                Interesting. 👀
+                You know the password.
             </p>
 
 
             <!--
-                WELCOME VIDEO
+                YOUR WELCOME VIDEO
 
-                Put your video in the same folder as
-                this HTML file.
-
-                File name:
+                File:
                 welcome.mp4
 
-                IMPORTANT:
-                Video will attempt to play with sound.
+                Keep it beside index.html.
             -->
 
             <video
@@ -295,17 +378,17 @@
                     type="video/mp4"
                 >
 
-                Your browser does not support video.
-
             </video>
 
 
             <button
+                type="button"
                 class="continue-button"
                 onclick="closeWelcomeVideo()"
             >
-                🎀 CONTINUE
+                CONTINUE
             </button>
+
 
         </div>
 
