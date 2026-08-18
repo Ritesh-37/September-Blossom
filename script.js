@@ -1,5 +1,5 @@
 /* =====================================================
-   🎂 BIRTHDAY SECRET — PAGE 1
+   BIRTHDAY VAULT - FIRST PAGE ONLY
 ===================================================== */
 
 
@@ -12,12 +12,11 @@ const correctPassword = "03092005";
 let enteredPassword = "";
 
 
-
 /* =====================================================
-   NUMERIC KEYPAD
+   ADD NUMBER
 ===================================================== */
 
-function pressKey(number) {
+function addDigit(number) {
 
     if (enteredPassword.length >= 8) {
         return;
@@ -30,66 +29,18 @@ function pressKey(number) {
 }
 
 
-
 /* =====================================================
-   UPDATE PASSWORD DISPLAY
+   REMOVE LAST NUMBER
 ===================================================== */
 
-function updatePasswordDisplay() {
-
-    const display =
-        document.getElementById(
-            "password-text"
-        );
-
-    const box =
-        document.getElementById(
-            "password-display"
-        );
-
-
-    if (enteredPassword.length === 0) {
-
-        display.textContent =
-            "ENTER PASSWORD";
-
-        box.classList.remove(
-            "has-password"
-        );
-
-        return;
-    }
-
-
-    display.textContent =
-        "•".repeat(
-            enteredPassword.length
-        );
-
-    box.classList.add(
-        "has-password"
-    );
-
-}
-
-
-
-/* =====================================================
-   DELETE LAST NUMBER
-===================================================== */
-
-function deleteLast() {
+function removeDigit() {
 
     enteredPassword =
-        enteredPassword.slice(
-            0,
-            -1
-        );
+        enteredPassword.slice(0, -1);
 
     updatePasswordDisplay();
 
 }
-
 
 
 /* =====================================================
@@ -103,11 +54,46 @@ function clearPassword() {
     updatePasswordDisplay();
 
     document.getElementById(
-        "password-status"
+        "password-message"
     ).textContent = "";
 
 }
 
+
+/* =====================================================
+   UPDATE PASSWORD DISPLAY
+===================================================== */
+
+function updatePasswordDisplay() {
+
+    const display =
+        document.getElementById(
+            "password-dots"
+        );
+
+
+    if (enteredPassword.length === 0) {
+
+        display.textContent =
+            "Enter Password";
+
+        display.style.letterSpacing =
+            "0px";
+
+        return;
+    }
+
+
+    display.textContent =
+        "• ".repeat(
+            enteredPassword.length
+        );
+
+
+    display.style.letterSpacing =
+        "5px";
+
+}
 
 
 /* =====================================================
@@ -116,214 +102,108 @@ function clearPassword() {
 
 function checkPassword() {
 
-    const card =
-        document.querySelector(
-            ".password-card"
-        );
-
-    const status =
+    const message =
         document.getElementById(
-            "password-status"
+            "password-message"
         );
 
 
-    if (
-        enteredPassword ===
-        correctPassword
-    ) {
+    if (enteredPassword === correctPassword) {
 
-        /* =============================================
-           CORRECT PASSWORD
-        ============================================== */
-
-        status.textContent =
+        message.textContent =
             "✓ ACCESS GRANTED";
 
-        status.style.color =
-            "#3b9b72";
+
+        message.style.color =
+            "#65ffb0";
 
 
-        card.style.boxShadow =
-            "0 0 50px rgba(80,210,150,0.25), 0 25px 80px rgba(110,65,130,0.18)";
-
-
-        setTimeout(() => {
-
-            openWelcomePopup();
-
-        }, 500);
+        playWelcomeVideo();
 
     }
 
     else {
 
-        /* =============================================
-           WRONG PASSWORD
-        ============================================== */
-
-        status.textContent =
-            "✕ WRONG PASSWORD";
-
-        status.style.color =
-            "#d3477f";
+        message.textContent =
+            "✕ ACCESS DENIED";
 
 
-        card.classList.remove(
-            "shake"
-        );
+        message.style.color =
+            "#ff547f";
 
 
-        void card.offsetWidth;
+        showMeme();
 
 
-        card.classList.add(
-            "shake"
-        );
-
+        /*
+            Clear the password after
+            wrong attempt.
+        */
 
         setTimeout(() => {
 
-            openWrongPopup();
+            clearPassword();
 
-        }, 350);
+        }, 300);
 
     }
 
 }
 
 
-
 /* =====================================================
-   WRONG PASSWORD POPUP
-===================================================== */
-
-function openWrongPopup() {
-
-    document
-        .getElementById(
-            "wrong-popup"
-        )
-        .classList.add(
-            "show"
-        );
-
-}
-
-
-function closeWrongPopup() {
-
-    document
-        .getElementById(
-            "wrong-popup"
-        )
-        .classList.remove(
-            "show"
-        );
-
-}
-
-
-
-/* =====================================================
-   WELCOME VIDEO POPUP
-===================================================== */
-
-function openWelcomePopup() {
-
-    const popup =
-        document.getElementById(
-            "welcome-popup"
-        );
-
-    const video =
-        document.getElementById(
-            "welcome-video"
-        );
-
-
-    popup.classList.add(
-        "show"
-    );
-
-
-    /*
-       Because the password button was clicked,
-       the browser normally allows video playback
-       with sound.
-    */
-
-    video.currentTime = 0;
-
-    video.play()
-        .catch(() => {
-
-            /*
-               If the browser blocks autoplay,
-               the video controls are still available.
-            */
-
-            console.log(
-                "Video autoplay was blocked by the browser."
-            );
-
-        });
-
-}
-
-
-function closeWelcomePopup() {
-
-    const popup =
-        document.getElementById(
-            "welcome-popup"
-        );
-
-    const video =
-        document.getElementById(
-            "welcome-video"
-        );
-
-
-    video.pause();
-
-    popup.classList.remove(
-        "show"
-    );
-
-}
-
-
-
-/* =====================================================
-   ESC KEY CLOSES POPUPS
+   KEYBOARD SUPPORT
 ===================================================== */
 
 document.addEventListener(
     "keydown",
     function(event) {
+
+        /*
+            Number keys
+        */
+
+        if (
+            event.key >= "0" &&
+            event.key <= "9"
+        ) {
+
+            addDigit(event.key);
+
+        }
+
+
+        /*
+            Backspace
+        */
+
+        if (
+            event.key === "Backspace"
+        ) {
+
+            removeDigit();
+
+        }
+
+
+        /*
+            Escape
+        */
 
         if (
             event.key === "Escape"
         ) {
 
-            closeWrongPopup();
+            closeMeme();
 
-            closeWelcomePopup();
+            closeWelcomeVideo();
 
         }
 
-    }
-);
 
-
-
-/* =====================================================
-   ENTER KEY
-===================================================== */
-
-document.addEventListener(
-    "keydown",
-    function(event) {
+        /*
+            Enter
+        */
 
         if (
             event.key === "Enter"
@@ -337,17 +217,104 @@ document.addEventListener(
 );
 
 
-
 /* =====================================================
-   PREVENT RIGHT CLICK
-   Optional little extra
+   WRONG PASSWORD MEME
 ===================================================== */
 
-document.addEventListener(
-    "contextmenu",
-    function(event) {
+function showMeme() {
 
-        event.preventDefault();
+    document
+        .getElementById("meme-popup")
+        .classList.add("show");
 
-    }
-);
+}
+
+
+/* =====================================================
+   CLOSE MEME
+===================================================== */
+
+function closeMeme() {
+
+    document
+        .getElementById("meme-popup")
+        .classList.remove("show");
+
+}
+
+
+/* =====================================================
+   WELCOME VIDEO
+===================================================== */
+
+function playWelcomeVideo() {
+
+    const popup =
+        document.getElementById(
+            "welcome-popup"
+        );
+
+
+    const video =
+        document.getElementById(
+            "welcome-video"
+        );
+
+
+    popup.classList.add("show");
+
+
+    /*
+        Try to start video with sound.
+        Because this function is triggered
+        by a button click, browsers normally
+        allow it.
+    */
+
+    video.currentTime = 0;
+
+    video.muted = false;
+
+
+    video.play()
+        .catch(() => {
+
+            /*
+                If browser blocks autoplay,
+                the video controls are still
+                available.
+            */
+
+            console.log(
+                "Video autoplay was blocked."
+            );
+
+        });
+
+}
+
+
+/* =====================================================
+   CLOSE WELCOME VIDEO
+===================================================== */
+
+function closeWelcomeVideo() {
+
+    const popup =
+        document.getElementById(
+            "welcome-popup"
+        );
+
+
+    const video =
+        document.getElementById(
+            "welcome-video"
+        );
+
+
+    popup.classList.remove("show");
+
+
+    video.pause();
+
+}
