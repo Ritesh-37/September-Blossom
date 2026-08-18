@@ -1,350 +1,81 @@
-/* =========================================================
-   PASSWORD
-========================================================= */
+const passwordInput = document.getElementById("password");
+const unlockButton = document.getElementById("unlockButton");
 
-const correctPassword = "0309";
+const wrongPopup = document.getElementById("wrongPopup");
+const welcomePopup = document.getElementById("welcomePopup");
 
-let enteredPassword = "";
-
-
-/* =========================================================
-   GET ELEMENTS
-========================================================= */
-
-const passwordDisplay =
-    document.getElementById("passwordDisplay");
-
-const passwordMessage =
-    document.getElementById("passwordMessage");
-
-const wrongPopup =
-    document.getElementById("wrongPopup");
-
-const successPopup =
-    document.getElementById("successPopup");
+const wrongClose = document.getElementById("wrongClose");
+const welcomeClose = document.getElementById("welcomeClose");
 
 
-/* =========================================================
-   UPDATE PASSWORD DISPLAY
-========================================================= */
+/*
+    CHANGE THE PASSWORD HERE.
 
-function updateDisplay() {
+    Example:
+    const correctPassword = "tisha";
 
-    passwordDisplay.textContent = "";
+    You can replace "tisha" with whatever password you want.
+*/
 
-    for (
-        let i = 0;
-        i < enteredPassword.length;
-        i++
-    ) {
-
-        const dot =
-            document.createElement("span");
-
-        dot.textContent = "•";
-
-        passwordDisplay.appendChild(dot);
-    }
+const correctPassword = "tisha";
 
 
-    if (enteredPassword.length > 0) {
+unlockButton.addEventListener("click", function () {
 
-        passwordDisplay.classList.add("filled");
-
-    } else {
-
-        passwordDisplay.classList.remove("filled");
-    }
-}
-
-
-/* =========================================================
-   PRESS NUMBER
-========================================================= */
-
-function pressKey(number) {
-
-    if (enteredPassword.length >= 8) {
-        return;
-    }
-
-    enteredPassword += number;
-
-    updateDisplay();
-
-    passwordMessage.textContent = "";
-}
-
-
-/* =========================================================
-   DELETE
-========================================================= */
-
-function deleteKey() {
-
-    enteredPassword =
-        enteredPassword.slice(0, -1);
-
-    updateDisplay();
-
-    passwordMessage.textContent = "";
-}
-
-
-/* =========================================================
-   CHECK PASSWORD
-========================================================= */
-
-function checkPassword() {
+    const enteredPassword = passwordInput.value.trim();
 
     if (enteredPassword === correctPassword) {
 
-        showSuccess();
+        welcomePopup.classList.add("show");
 
     } else {
 
-        showWrong();
-    }
-}
-
-
-/* =========================================================
-   WRONG PASSWORD
-========================================================= */
-
-function showWrong() {
-
-    passwordMessage.textContent = "";
-
-    passwordDisplay.animate(
-        [
-            {
-                transform: "translateX(0)"
-            },
-            {
-                transform: "translateX(-10px)"
-            },
-            {
-                transform: "translateX(10px)"
-            },
-            {
-                transform: "translateX(-7px)"
-            },
-            {
-                transform: "translateX(7px)"
-            },
-            {
-                transform: "translateX(0)"
-            }
-        ],
-        {
-            duration: 400
-        }
-    );
-
-
-    setTimeout(function() {
-
         wrongPopup.classList.add("show");
 
-    }, 250);
+    }
+
+});
 
 
-    enteredPassword = "";
+passwordInput.addEventListener("keydown", function (event) {
 
-    setTimeout(function() {
+    if (event.key === "Enter") {
+        unlockButton.click();
+    }
 
-        updateDisplay();
-
-    }, 500);
-}
+});
 
 
-/* =========================================================
-   CLOSE WRONG POPUP
-========================================================= */
-
-function closeWrongPopup() {
+wrongClose.addEventListener("click", function () {
 
     wrongPopup.classList.remove("show");
 
-    passwordMessage.textContent = "";
-}
+    passwordInput.value = "";
+    passwordInput.focus();
+
+});
 
 
-/* =========================================================
-   CORRECT PASSWORD
-========================================================= */
+welcomeClose.addEventListener("click", function () {
 
-function showSuccess() {
+    welcomePopup.classList.remove("show");
 
-    passwordDisplay.animate(
-        [
-            {
-                transform: "scale(1)"
-            },
-            {
-                transform: "scale(1.1)"
-            },
-            {
-                transform: "scale(1)"
-            }
-        ],
-        {
-            duration: 600
-        }
-    );
+});
 
 
-    setTimeout(function() {
+wrongPopup.addEventListener("click", function (event) {
 
-        successPopup.classList.add("show");
-
-    }, 400);
-}
-
-
-/* =========================================================
-   CLOSE SUCCESS POPUP
-========================================================= */
-
-function closeSuccessPopup() {
-
-    successPopup.classList.remove("show");
-
-    passwordMessage.textContent = "";
-}
-
-
-/* =========================================================
-   KEYBOARD SUPPORT
-========================================================= */
-
-document.addEventListener(
-    "keydown",
-    function(event) {
-
-        if (
-            event.key >= "0" &&
-            event.key <= "9"
-        ) {
-
-            pressKey(event.key);
-        }
-
-
-        if (
-            event.key === "Backspace"
-        ) {
-
-            deleteKey();
-        }
-
-
-        if (
-            event.key === "Enter"
-        ) {
-
-            checkPassword();
-        }
-
-
-        if (
-            event.key === "Escape"
-        ) {
-
-            closeWrongPopup();
-
-            closeSuccessPopup();
-        }
-
+    if (event.target === wrongPopup) {
+        wrongPopup.classList.remove("show");
     }
-);
+
+});
 
 
-/* =========================================================
-   CLICK OUTSIDE POPUP
-========================================================= */
+welcomePopup.addEventListener("click", function (event) {
 
-wrongPopup.addEventListener(
-    "click",
-    function(event) {
-
-        if (event.target === wrongPopup) {
-
-            closeWrongPopup();
-        }
-
+    if (event.target === welcomePopup) {
+        welcomePopup.classList.remove("show");
     }
-);
 
-
-successPopup.addEventListener(
-    "click",
-    function(event) {
-
-        if (event.target === successPopup) {
-
-            closeSuccessPopup();
-        }
-
-    }
-);
-
-
-/* =========================================================
-   SIMPLE MOUSE EFFECT
-========================================================= */
-
-document.addEventListener(
-    "mousemove",
-    function(event) {
-
-        if (window.innerWidth <= 900) {
-            return;
-        }
-
-
-        const x =
-            (event.clientX /
-            window.innerWidth) - 0.5;
-
-        const y =
-            (event.clientY /
-            window.innerHeight) - 0.5;
-
-
-        const photo =
-            document.querySelector(
-                ".photo-section"
-            );
-
-        const password =
-            document.querySelector(
-                ".password-section"
-            );
-
-
-        photo.style.transform =
-            "translate(" +
-            (x * 8) +
-            "px, " +
-            (y * 5) +
-            "px)";
-
-
-        password.style.transform =
-            "translate(" +
-            (x * -5) +
-            "px, " +
-            (y * -4) +
-            "px)";
-    }
-);
-
-
-/* =========================================================
-   INITIALIZE
-========================================================= */
-
-updateDisplay();
+});
