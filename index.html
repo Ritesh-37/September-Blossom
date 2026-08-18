@@ -5,126 +5,107 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>🎂 Birthday Surprise</title>
+    <title>🎂 Birthday Secret</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- ================================
-         FIRST PAGE ONLY
-    ================================= -->
+    <!-- =================================================
+         FIRST PAGE
+         PASSWORD ENTRY SCREEN
+    ================================================== -->
 
-    <main class="welcome-page">
+    <main class="entry-page">
 
-        <!-- LEFT SIDE : YOUR PHOTO -->
+        <!-- LEFT SIDE : PHOTO -->
+
         <section class="photo-section">
+
+            <!--
+                YOUR PHOTO GOES HERE
+
+                Current file:
+                media/EntryImg.jpg
+
+                If your image is PNG, change .jpg to .png
+            -->
 
             <div class="photo-frame">
 
-                <!--
-                =========================================
-                YOUR PHOTO GOES HERE
-
-                Later replace:
-                media/my-photo.jpg
-
-                with your actual photo file.
-                =========================================
-                -->
-
                 <img
-                    src="media/my-photo.jpg"
-                    alt="Birthday Boy"
-                    onerror="this.src='https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=600'"
+                    src="media/EntryImg.jpg"
+                    alt="My Photo"
                 >
 
             </div>
 
-            <h1>Abey oh Chirkoot!!</h1>
+            <h1>
+                Abey oh Chirkoot!! 😤
+            </h1>
 
-            <p>Password Daal 😏</p>
+            <p>
+                Password Daal 🔐
+            </p>
 
         </section>
 
 
         <!-- RIGHT SIDE : PASSWORD -->
+
         <section class="password-section">
 
             <div class="password-card">
 
-                <div class="cake">🎂</div>
-
-                <div class="small-heading">
-                    A LITTLE BIRTHDAY SECRET
+                <div class="lock">
+                    🔐
                 </div>
 
+                <p class="small-heading">
+                    CLASSIFIED ACCESS
+                </p>
+
                 <h2>
-                    Enter The Password
+                    Enter The Secret Password
                 </h2>
 
                 <p class="instruction">
-                    Only the chosen one can enter... 👀
+                    Only the chosen one can enter 👀
                 </p>
 
 
                 <!-- PASSWORD DISPLAY -->
+
                 <div
                     id="password-display"
                     class="password-display"
                 >
-                    <span>_</span>
-                    <span>_</span>
-                    <span>_</span>
-                    <span>_</span>
-                    <span>_</span>
-                    <span>_</span>
-                    <span>_</span>
-                    <span>_</span>
+                    _
                 </div>
 
 
                 <!-- NUMERIC KEYPAD -->
+
                 <div class="keypad">
 
-                    <button onclick="addNumber('1')">1</button>
-                    <button onclick="addNumber('2')">2</button>
-                    <button onclick="addNumber('3')">3</button>
+                    <button onclick="pressKey('1')">1</button>
+                    <button onclick="pressKey('2')">2</button>
+                    <button onclick="pressKey('3')">3</button>
 
-                    <button onclick="addNumber('4')">4</button>
-                    <button onclick="addNumber('5')">5</button>
-                    <button onclick="addNumber('6')">6</button>
+                    <button onclick="pressKey('4')">4</button>
+                    <button onclick="pressKey('5')">5</button>
+                    <button onclick="pressKey('6')">6</button>
 
-                    <button onclick="addNumber('7')">7</button>
-                    <button onclick="addNumber('8')">8</button>
-                    <button onclick="addNumber('9')">9</button>
+                    <button onclick="pressKey('7')">7</button>
+                    <button onclick="pressKey('8')">8</button>
+                    <button onclick="pressKey('9')">9</button>
 
-                    <button
-                        class="clear-button"
-                        onclick="clearPassword()"
-                    >
-                        C
-                    </button>
-
-                    <button onclick="addNumber('0')">
-                        0
-                    </button>
-
-                    <button
-                        class="enter-button"
-                        onclick="checkPassword()"
-                    >
-                        ✓
-                    </button>
+                    <button onclick="clearPassword()">C</button>
+                    <button onclick="pressKey('0')">0</button>
+                    <button onclick="checkPassword()">✓</button>
 
                 </div>
-
-
-                <p
-                    id="password-message"
-                    class="password-message"
-                ></p>
 
             </div>
 
@@ -133,73 +114,67 @@
     </main>
 
 
-    <!-- ================================
-         WRONG PASSWORD POPUP
-    ================================= -->
+    <!-- =================================================
+         WRONG PASSWORD MEME
+    ================================================== -->
 
     <div
-        id="wrong-popup"
-        class="popup"
+        id="meme-popup"
+        class="meme-popup"
     >
 
-        <div class="wrong-card">
-
-            <button
-                class="close-popup"
-                onclick="closeWrongPopup()"
-            >
-                ×
-            </button>
+        <div class="meme-box">
 
             <!--
-            Later you can replace this image with
-            your "Abey Saale" meme.
+                YOUR MEME GOES HERE
 
-            Example:
-            media/abey-saale.jpg
+                Current file:
+                media/AbeySaale.jpg
+
+                If your meme is PNG,
+                change .jpg to .png
             -->
 
             <img
-                src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=500"
-                alt="Wrong password meme"
+                src="media/AbeySaale.jpg"
+                alt="Abey Saale Meme"
             >
 
-            <h2>ABEY SAALE! 😂</h2>
-
-            <p>
-                Galat password daala hai!
-            </p>
+            <button onclick="closeMeme()">
+                ✕ CUT IT 😂
+            </button>
 
         </div>
 
     </div>
 
 
-    <!-- ================================
-         WELCOME VIDEO POPUP
-    ================================= -->
+    <!-- =================================================
+         WELCOME VIDEO
+    ================================================== -->
 
     <div
         id="welcome-popup"
-        class="popup"
+        class="welcome-popup"
     >
 
-        <div class="video-card">
+        <div class="welcome-box">
 
-            <h2>🎬 Welcome!</h2>
+            <h2>
+                🎉 ACCESS GRANTED!
+            </h2>
 
             <p>
-                Finally... you made it. 😏
+                Welcome, Chirkoot. 😂
             </p>
 
             <!--
-            =========================================
-            YOUR WELCOME VIDEO GOES HERE
+                FOR NOW WE USE A PLACEHOLDER VIDEO.
 
-            Put your video inside:
+                Later you can put your own video inside
+                the media folder and change the source to:
 
-            media/welcome.mp4
-            =========================================
+                media/welcome.mp4
             -->
 
             <video
@@ -217,10 +192,8 @@
 
             </video>
 
-            <button
-                onclick="continueToNextPage()"
-            >
-                ENTER THE BIRTHDAY ADVENTURE 💗
+            <button onclick="continueToNextPage()">
+                🎀 CONTINUE
             </button>
 
         </div>
@@ -228,7 +201,231 @@
     </div>
 
 
-    <script src="script.js"></script>
+    <!-- =================================================
+         FIRST PAGE JAVASCRIPT
+    ================================================== -->
+
+    <script>
+
+        /* ================================================
+           SECRET PASSWORD
+        ================================================ */
+
+        const correctPassword = "03092005";
+
+
+        let enteredPassword = "";
+
+
+        /* ================================================
+           NUMBER BUTTON
+        ================================================ */
+
+        function pressKey(number) {
+
+            if (enteredPassword.length >= 8) {
+                return;
+            }
+
+            enteredPassword += number;
+
+            updateDisplay();
+        }
+
+
+        /* ================================================
+           DISPLAY PASSWORD
+        ================================================ */
+
+        function updateDisplay() {
+
+            const display =
+                document.getElementById(
+                    "password-display"
+                );
+
+            if (enteredPassword.length === 0) {
+
+                display.textContent = "_";
+
+                return;
+            }
+
+
+            display.textContent =
+                "•".repeat(
+                    enteredPassword.length
+                );
+        }
+
+
+        /* ================================================
+           CLEAR PASSWORD
+        ================================================ */
+
+        function clearPassword() {
+
+            enteredPassword = "";
+
+            updateDisplay();
+        }
+
+
+        /* ================================================
+           CHECK PASSWORD
+        ================================================ */
+
+        function checkPassword() {
+
+            if (
+                enteredPassword ===
+                correctPassword
+            ) {
+
+                openWelcomeVideo();
+
+            }
+
+            else {
+
+                showWrongPassword();
+
+            }
+        }
+
+
+        /* ================================================
+           WRONG PASSWORD
+        ================================================ */
+
+        function showWrongPassword() {
+
+            const popup =
+                document.getElementById(
+                    "meme-popup"
+                );
+
+            popup.classList.add("show");
+
+            enteredPassword = "";
+
+            updateDisplay();
+        }
+
+
+        /* ================================================
+           CLOSE MEME
+        ================================================ */
+
+        function closeMeme() {
+
+            document
+                .getElementById(
+                    "meme-popup"
+                )
+                .classList.remove("show");
+        }
+
+
+        /* ================================================
+           CORRECT PASSWORD
+        ================================================ */
+
+        function openWelcomeVideo() {
+
+            const popup =
+                document.getElementById(
+                    "welcome-popup"
+                );
+
+            const video =
+                document.getElementById(
+                    "welcome-video"
+                );
+
+
+            popup.classList.add("show");
+
+
+            /*
+                Try to play the video
+                automatically.
+
+                Because the user has just
+                clicked the password button,
+                most browsers will allow sound.
+            */
+
+            video.currentTime = 0;
+
+            video.play()
+                .catch(() => {
+
+                    console.log(
+                        "Video autoplay was blocked."
+                    );
+
+                });
+        }
+
+
+        /* ================================================
+           NEXT PAGE
+
+           FOR NOW THIS JUST SHOWS A MESSAGE.
+
+           Later we will connect this to your
+           actual Birthday Adventure page.
+        ================================================ */
+
+        function continueToNextPage() {
+
+            alert(
+                "🎉 Page 1 complete! Next page coming soon."
+            );
+        }
+
+
+        /* ================================================
+           KEYBOARD SUPPORT
+
+           You can also type numbers from your keyboard.
+        ================================================ */
+
+        document.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (
+                    event.key >= "0" &&
+                    event.key <= "9"
+                ) {
+
+                    pressKey(event.key);
+
+                }
+
+
+                if (event.key === "Enter") {
+
+                    checkPassword();
+
+                }
+
+
+                if (
+                    event.key === "Backspace" ||
+                    event.key === "Escape"
+                ) {
+
+                    clearPassword();
+
+                }
+
+            }
+        );
+
+    </script>
 
 </body>
 
