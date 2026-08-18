@@ -1,25 +1,27 @@
 /* =========================================================
-   PASSWORD SETTINGS
+   PASSWORD
 ========================================================= */
 
-const CORRECT_PASSWORD = "0309";
+const correctPassword = "0309";
 
 let enteredPassword = "";
 
 
 /* =========================================================
-   DOM ELEMENTS
+   GET ELEMENTS
 ========================================================= */
 
-const display =
-    document.getElementById(
-        "password-display"
-    );
+const passwordDisplay =
+    document.getElementById("passwordDisplay");
 
-const message =
-    document.getElementById(
-        "password-message"
-    );
+const passwordMessage =
+    document.getElementById("passwordMessage");
+
+const wrongPopup =
+    document.getElementById("wrongPopup");
+
+const successPopup =
+    document.getElementById("successPopup");
 
 
 /* =========================================================
@@ -28,11 +30,7 @@ const message =
 
 function updateDisplay() {
 
-    display.innerHTML = "";
-
-    /*
-       Create individual animated dots.
-    */
+    passwordDisplay.textContent = "";
 
     for (
         let i = 0;
@@ -41,32 +39,21 @@ function updateDisplay() {
     ) {
 
         const dot =
-            document.createElement(
-                "span"
-            );
+            document.createElement("span");
 
         dot.textContent = "•";
 
-        dot.style.animation =
-            "dotAppear 0.25s ease";
-
-        display.appendChild(dot);
+        passwordDisplay.appendChild(dot);
     }
 
 
-    if (
-        enteredPassword.length > 0
-    ) {
+    if (enteredPassword.length > 0) {
 
-        display.classList.add(
-            "filled"
-        );
+        passwordDisplay.classList.add("filled");
 
     } else {
 
-        display.classList.remove(
-            "filled"
-        );
+        passwordDisplay.classList.remove("filled");
     }
 }
 
@@ -77,37 +64,30 @@ function updateDisplay() {
 
 function pressKey(number) {
 
-    if (
-        enteredPassword.length >= 8
-    ) {
-
+    if (enteredPassword.length >= 8) {
         return;
     }
-
 
     enteredPassword += number;
 
     updateDisplay();
 
-    clearMessage();
+    passwordMessage.textContent = "";
 }
 
 
 /* =========================================================
-   DELETE NUMBER
+   DELETE
 ========================================================= */
 
 function deleteKey() {
 
     enteredPassword =
-        enteredPassword.slice(
-            0,
-            -1
-        );
+        enteredPassword.slice(0, -1);
 
     updateDisplay();
 
-    clearMessage();
+    passwordMessage.textContent = "";
 }
 
 
@@ -117,81 +97,14 @@ function deleteKey() {
 
 function checkPassword() {
 
-    if (
-        enteredPassword ===
-        CORRECT_PASSWORD
-    ) {
+    if (enteredPassword === correctPassword) {
 
-        correctPassword();
+        showSuccess();
 
     } else {
 
-        wrongPassword();
+        showWrong();
     }
-}
-
-
-/* =========================================================
-   CORRECT PASSWORD
-========================================================= */
-
-function correctPassword() {
-
-    message.textContent =
-        "♡ Password accepted ♡";
-
-    message.style.color =
-        "#fff";
-
-
-    /*
-       Beautiful glow animation.
-    */
-
-    display.animate(
-
-        [
-            {
-                transform:
-                    "scale(1)",
-                boxShadow:
-                    "0 0 0 rgba(255,255,255,0)"
-            },
-
-            {
-                transform:
-                    "scale(1.08)",
-                boxShadow:
-                    "0 0 35px rgba(255,255,255,0.7)"
-            },
-
-            {
-                transform:
-                    "scale(1)",
-                boxShadow:
-                    "0 0 0 rgba(255,255,255,0)"
-            }
-
-        ],
-
-        {
-            duration: 700,
-            easing: "ease-out"
-        }
-    );
-
-
-    /*
-       Open success popup.
-    */
-
-    setTimeout(() => {
-
-        openPopup(
-            "success-popup"
-        );
-
-    }, 500);
 }
 
 
@@ -199,126 +112,107 @@ function correctPassword() {
    WRONG PASSWORD
 ========================================================= */
 
-function wrongPassword() {
+function showWrong() {
 
-    message.textContent =
-        "";
+    passwordMessage.textContent = "";
 
-
-    /*
-       Shake password display.
-    */
-
-    display.animate(
-
+    passwordDisplay.animate(
         [
             {
-                transform:
-                    "translateX(0)"
+                transform: "translateX(0)"
             },
-
             {
-                transform:
-                    "translateX(-10px)"
+                transform: "translateX(-10px)"
             },
-
             {
-                transform:
-                    "translateX(10px)"
+                transform: "translateX(10px)"
             },
-
             {
-                transform:
-                    "translateX(-8px)"
+                transform: "translateX(-7px)"
             },
-
             {
-                transform:
-                    "translateX(8px)"
+                transform: "translateX(7px)"
             },
-
             {
-                transform:
-                    "translateX(0)"
+                transform: "translateX(0)"
             }
-
         ],
-
         {
-            duration: 420,
-            easing: "ease-in-out"
+            duration: 400
         }
     );
 
 
-    /*
-       Show cute popup.
-    */
+    setTimeout(function() {
 
-    setTimeout(() => {
+        wrongPopup.classList.add("show");
 
-        openPopup(
-            "wrong-popup"
-        );
-
-    }, 300);
+    }, 250);
 
 
-    /*
-       Clear password.
-    */
+    enteredPassword = "";
 
-    setTimeout(() => {
-
-        enteredPassword = "";
+    setTimeout(function() {
 
         updateDisplay();
 
-    }, 700);
+    }, 500);
 }
 
 
 /* =========================================================
-   OPEN POPUP
+   CLOSE WRONG POPUP
 ========================================================= */
 
-function openPopup(id) {
+function closeWrongPopup() {
 
-    const popup =
-        document.getElementById(id);
+    wrongPopup.classList.remove("show");
 
-    popup.classList.add("show");
-
+    passwordMessage.textContent = "";
 }
 
 
 /* =========================================================
-   CLOSE POPUP
+   CORRECT PASSWORD
 ========================================================= */
 
-function closePopup(id) {
+function showSuccess() {
 
-    const popup =
-        document.getElementById(id);
+    passwordDisplay.animate(
+        [
+            {
+                transform: "scale(1)"
+            },
+            {
+                transform: "scale(1.1)"
+            },
+            {
+                transform: "scale(1)"
+            }
+        ],
+        {
+            duration: 600
+        }
+    );
 
-    popup.classList.remove("show");
 
+    setTimeout(function() {
 
-    /*
-       Clear old message.
-    */
+        successPopup.classList.add("show");
 
-    clearMessage();
+    }, 400);
 }
 
 
 /* =========================================================
-   CLEAR MESSAGE
+   CLOSE SUCCESS POPUP
 ========================================================= */
 
-function clearMessage() {
+function closeSuccessPopup() {
 
-    message.textContent = "";
+    successPopup.classList.remove("show");
+
+    passwordMessage.textContent = "";
 }
 
 
@@ -328,11 +222,7 @@ function clearMessage() {
 
 document.addEventListener(
     "keydown",
-    function (event) {
-
-        /*
-           Number keys
-        */
+    function(event) {
 
         if (
             event.key >= "0" &&
@@ -340,51 +230,32 @@ document.addEventListener(
         ) {
 
             pressKey(event.key);
-
         }
 
 
-        /*
-           Backspace
-        */
-
-        else if (
+        if (
             event.key === "Backspace"
         ) {
 
             deleteKey();
-
         }
 
 
-        /*
-           Enter
-        */
-
-        else if (
+        if (
             event.key === "Enter"
         ) {
 
             checkPassword();
-
         }
 
 
-        /*
-           Escape closes popup
-        */
-
-        else if (
+        if (
             event.key === "Escape"
         ) {
 
-            closePopup(
-                "wrong-popup"
-            );
+            closeWrongPopup();
 
-            closePopup(
-                "success-popup"
-            );
+            closeSuccessPopup();
         }
 
     }
@@ -392,99 +263,82 @@ document.addEventListener(
 
 
 /* =========================================================
-   MOUSE PARALLAX
+   CLICK OUTSIDE POPUP
+========================================================= */
+
+wrongPopup.addEventListener(
+    "click",
+    function(event) {
+
+        if (event.target === wrongPopup) {
+
+            closeWrongPopup();
+        }
+
+    }
+);
+
+
+successPopup.addEventListener(
+    "click",
+    function(event) {
+
+        if (event.target === successPopup) {
+
+            closeSuccessPopup();
+        }
+
+    }
+);
+
+
+/* =========================================================
+   SIMPLE MOUSE EFFECT
 ========================================================= */
 
 document.addEventListener(
     "mousemove",
-    function (event) {
+    function(event) {
 
-        /*
-           Don't run the effect on small
-           screens.
-        */
-
-        if (
-            window.innerWidth <= 900
-        ) {
-
+        if (window.innerWidth <= 900) {
             return;
         }
 
 
         const x =
-            (
-                event.clientX /
-                window.innerWidth
-            ) - 0.5;
-
+            (event.clientX /
+            window.innerWidth) - 0.5;
 
         const y =
-            (
-                event.clientY /
-                window.innerHeight
-            ) - 0.5;
+            (event.clientY /
+            window.innerHeight) - 0.5;
 
 
-        const left =
+        const photo =
             document.querySelector(
-                ".parallax-left"
+                ".photo-section"
+            );
+
+        const password =
+            document.querySelector(
+                ".password-section"
             );
 
 
-        const right =
-            document.querySelector(
-                ".parallax-right"
-            );
+        photo.style.transform =
+            "translate(" +
+            (x * 8) +
+            "px, " +
+            (y * 5) +
+            "px)";
 
 
-        /*
-           Very subtle movement.
-        */
-
-        left.style.transform =
-            `translate(
-                ${x * 10}px,
-                ${y * 7}px
-            )`;
-
-
-        right.style.transform =
-            `translate(
-                ${x * -7}px,
-                ${y * -5}px
-            )`;
-
-    }
-);
-
-
-/* =========================================================
-   CLOSE POPUP WHEN CLICKING OUTSIDE
-========================================================= */
-
-document.querySelectorAll(
-    ".popup-overlay"
-).forEach(
-    function (popup) {
-
-        popup.addEventListener(
-            "click",
-            function (event) {
-
-                if (
-                    event.target === popup
-                ) {
-
-                    popup.classList.remove(
-                        "show"
-                    );
-
-                }
-
-            }
-        );
-
+        password.style.transform =
+            "translate(" +
+            (x * -5) +
+            "px, " +
+            (y * -4) +
+            "px)";
     }
 );
 
@@ -493,13 +347,4 @@ document.querySelectorAll(
    INITIALIZE
 ========================================================= */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
-
-        enteredPassword = "";
-
-        updateDisplay();
-
-    }
-);
+updateDisplay();
