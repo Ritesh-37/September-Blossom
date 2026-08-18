@@ -4,6 +4,8 @@ document.addEventListener("DOMContentLoaded", function () {
        ELEMENTS
     ========================================== */
 
+    const transition = document.getElementById("pageTransition");
+
     const scene1 = document.getElementById("scene1");
     const scene2 = document.getElementById("scene2");
     const scene3 = document.getElementById("scene3");
@@ -21,25 +23,43 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const memories = document.querySelectorAll(".memory");
 
+    const pauseText = document.getElementById("pauseText");
+    const finalText = document.getElementById("finalText");
+
     const music = document.getElementById("page2Music");
     const musicButton = document.getElementById("musicButton");
+    const musicStatus = document.getElementById("musicStatus");
 
 
     /* =========================================
-       MESSAGE
-       YOU CAN PERSONALIZE THIS LATER
+       PERSONAL MESSAGE
+       EDIT THESE LATER
     ========================================== */
 
     const messages = [
         "There are some people who enter your life...",
+
         "and somehow make ordinary days feel a little more special.",
+
         "You're one of those people for me. ❤️",
+
         "And this little story is my way of showing you why."
     ];
 
 
     /* =========================================
-       SHOW ONE SCENE
+       PAGE LOAD TRANSITION
+    ========================================== */
+
+    setTimeout(function () {
+
+        transition.classList.add("fade-out");
+
+    }, 300);
+
+
+    /* =========================================
+       SHOW SCENE
     ========================================== */
 
     function showScene(scene) {
@@ -52,7 +72,9 @@ document.addEventListener("DOMContentLoaded", function () {
         ];
 
         scenes.forEach(function (item) {
+
             item.classList.remove("active");
+
         });
 
         setTimeout(function () {
@@ -60,30 +82,51 @@ document.addEventListener("DOMContentLoaded", function () {
             scene.classList.add("active");
 
         }, 100);
-
     }
 
 
     /* =========================================
-       START MUSIC
+       MUSIC
     ========================================== */
 
     function startMusic() {
 
-        music.volume = 0.35;
+        music.volume = 0;
 
-        music.play()
-            .then(function () {
+        const playPromise = music.play();
 
-                musicButton.style.display = "block";
+        if (playPromise !== undefined) {
 
-            })
-            .catch(function () {
+            playPromise
+                .then(function () {
 
-                musicButton.style.display = "block";
+                    let volume = 0;
 
-            });
+                    const fadeIn = setInterval(function () {
 
+                        volume += 0.03;
+
+                        music.volume = Math.min(volume, 0.35);
+
+                        if (volume >= 0.35) {
+
+                            clearInterval(fadeIn);
+
+                        }
+
+                    }, 100);
+
+                })
+                .catch(function () {
+
+                    /*
+                     * Some browsers block autoplay.
+                     * Music can still be started with
+                     * the music button.
+                     */
+
+                });
+        }
     }
 
 
@@ -99,13 +142,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
             musicButton.textContent = "♫";
 
+            musicStatus.textContent = "♫ Music on";
+
         } else {
 
             music.pause();
 
             musicButton.textContent = "🔇";
 
+            musicStatus.textContent = "Music off";
+
         }
+
+        musicStatus.classList.add("show");
+
+        setTimeout(function () {
+
+            musicStatus.classList.remove("show");
+
+        }, 1800);
 
     });
 
@@ -116,43 +171,52 @@ document.addEventListener("DOMContentLoaded", function () {
 
     scene1Button.addEventListener("click", function () {
 
+        startMusic();
+
         showScene(scene2);
 
-        startMusic();
 
         setTimeout(function () {
 
             messageLine1.textContent = messages[0];
+
             messageLine1.classList.add("visible");
 
         }, 700);
 
+
         setTimeout(function () {
 
             messageLine2.textContent = messages[1];
+
             messageLine2.classList.add("visible");
 
-        }, 1900);
+        }, 2000);
+
 
         setTimeout(function () {
 
             messageLine3.textContent = messages[2];
+
             messageLine3.classList.add("visible");
 
-        }, 3100);
+        }, 3300);
+
 
         setTimeout(function () {
 
             messageLine4.textContent = messages[3];
+
             messageLine4.classList.add("visible");
 
-        }, 4300);
+        }, 4600);
+
 
         setTimeout(function () {
 
             scene2Button.classList.add("show");
 
-        }, 5600);
+        }, 5900);
 
     });
 
@@ -165,6 +229,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         showScene(scene3);
 
+
         setTimeout(function () {
 
             memories.forEach(function (memory, index) {
@@ -173,7 +238,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     memory.classList.add("visible");
 
-                }, index * 500);
+                }, index * 550);
 
             });
 
@@ -190,6 +255,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
         showScene(scene4);
 
+
+        setTimeout(function () {
+
+            pauseText.classList.add("show");
+
+        }, 900);
+
+
+        setTimeout(function () {
+
+            finalText.classList.add("show");
+
+        }, 2200);
+
     });
 
 
@@ -200,7 +279,9 @@ document.addEventListener("DOMContentLoaded", function () {
     nextPageButton.addEventListener("click", function () {
 
         /*
-         * We will connect Page 3 here later.
+         * PAGE 3 WILL BE CONNECTED HERE LATER.
+         *
+         * Do not change this yet.
          */
 
         alert(
