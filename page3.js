@@ -1,784 +1,978 @@
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
+document.addEventListener("DOMContentLoaded", function () {
+
+    /* =========================================
+       ELEMENTS
+    ========================================== */
+
+    const transition =
+        document.getElementById("pageTransition");
+
+    const introScreen =
+        document.getElementById("introScreen");
+
+    const universe =
+        document.getElementById("universe");
+
+    const exploreButton =
+        document.getElementById("exploreButton");
+
+    const memoryStars =
+        document.querySelectorAll(".memory-star");
+
+    const memoryModal =
+        document.getElementById("memoryModal");
+
+    const closeMemory =
+        document.getElementById("closeMemory");
+
+    const memoryDone =
+        document.getElementById("memoryDone");
+
+    const memoryTitle =
+        document.getElementById("memoryTitle");
+
+    const memoryText =
+        document.getElementById("memoryText");
+
+    const memoryNumber =
+        document.getElementById("memoryNumber");
+
+    const memoryIcon =
+        document.getElementById("memoryIcon");
+
+    const progressText =
+        document.getElementById("progressText");
+
+    const progressFill =
+        document.getElementById("progressFill");
+
+    const universeComplete =
+        document.getElementById("universeComplete");
+
+    const continueButton =
+        document.getElementById("continueButton");
+
+    const starContainer =
+        document.getElementById("stars");
 
 
-        /* =====================================
-           ELEMENTS
-        ====================================== */
+    /* =========================================
+       CHECK REQUIRED ELEMENTS
+    ========================================== */
 
-        const introScreen =
-            document.getElementById(
-                "intro-screen"
+    if (
+        !introScreen ||
+        !universe ||
+        !exploreButton ||
+        !memoryModal
+    ) {
+        console.error(
+            "Page 3: Required HTML elements are missing."
+        );
+
+        return;
+    }
+
+
+    /* =========================================
+       MEMORY CONTENT
+    ========================================== */
+
+    const memories = [
+
+        {
+            title: "Our Beginning",
+            icon: "💫",
+            text:
+                'It all started with something so simple. I sent you a follow request... and one day, you accepted it. Then came one tiny word that started something much bigger than either of us knew... "Hi." ❤️'
+        },
+
+        {
+            title: "12.03.26",
+            icon: "📅",
+            text:
+                "12.03.26 — the day we started talking. Just a date on a calendar, but one that became the beginning of so many conversations, little moments and memories."
+        },
+
+        {
+            title: "That First Day",
+            icon: "🥹",
+            text:
+                "One of my favorite little memories... you falling asleep on my lap when we were together for the first day. Maybe it was a small moment, but it made me feel incredibly lucky."
+        },
+
+        {
+            title: "A Little Confession",
+            icon: "😂",
+            text:
+                'The first time I heard your voice, I told you that you sounded very young. Looking back... I have absolutely no idea why I thought saying that was a good idea. 😂'
+        },
+
+        {
+            title: "Something I Love",
+            icon: "✨",
+            text:
+                "I love how charismatic you are. How interactive you are. How full of life you are. You have this energy that makes being around you feel different... and I absolutely love that about you."
+        },
+
+        {
+            title: "A Secret",
+            icon: "❤️",
+            text:
+                "Here's something I hope you never forget: I'm genuinely blessed to have you as someone so close to me. Around you, I feel comfortable. I feel loved. And you have a very special place in my life."
+        }
+
+    ];
+
+
+    /* =========================================
+       STATE
+    ========================================== */
+
+    let discovered = 0;
+
+    let currentMemory = null;
+
+    const discoveredStars = [];
+
+
+    /* =========================================
+       PAGE FADE IN
+    ========================================== */
+
+    if (transition) {
+
+        setTimeout(function () {
+
+            transition.classList.add(
+                "fade-out"
             );
 
-        const quizScreen =
-            document.getElementById(
-                "quiz-screen"
+        }, 300);
+
+    }
+
+
+    /* =========================================
+       CREATE BACKGROUND STARS
+    ========================================== */
+
+    function createBackgroundStars() {
+
+        if (!starContainer) {
+            return;
+        }
+
+        for (let i = 0; i < 100; i++) {
+
+            const star =
+                document.createElement("span");
+
+            star.className =
+                "background-star";
+
+            star.textContent =
+                Math.random() > 0.8
+                    ? "✦"
+                    : "•";
+
+            star.style.left =
+                Math.random() * 100 + "%";
+
+            star.style.top =
+                Math.random() * 100 + "%";
+
+            star.style.animationDelay =
+                Math.random() * 4 + "s";
+
+            star.style.animationDuration =
+                2 +
+                Math.random() * 4 +
+                "s";
+
+            starContainer.appendChild(
+                star
             );
-
-        const resultScreen =
-            document.getElementById(
-                "result-screen"
-            );
-
-        const startQuiz =
-            document.getElementById(
-                "start-quiz"
-            );
-
-        const questionNumber =
-            document.getElementById(
-                "question-number"
-            );
-
-        const progressBar =
-            document.getElementById(
-                "progress-bar"
-            );
-
-        const question =
-            document.getElementById(
-                "question"
-            );
-
-        const questionIcon =
-            document.getElementById(
-                "question-icon"
-            );
-
-        const answerButtons =
-            document.querySelectorAll(
-                ".answer-button"
-            );
-
-        const quizMessage =
-            document.getElementById(
-                "quiz-message"
-            );
-
-        const scoreElement =
-            document.getElementById(
-                "score"
-            );
-
-        const correctCount =
-            document.getElementById(
-                "correct-count"
-            );
-
-        const wrongCount =
-            document.getElementById(
-                "wrong-count"
-            );
-
-        const resultMessage =
-            document.getElementById(
-                "result-message"
-            );
-
-        const continueButton =
-            document.getElementById(
-                "continue-button"
-            );
-
-        const confettiContainer =
-            document.getElementById(
-                "confetti-container"
-            );
-
-        const transition =
-            document.getElementById(
-                "page-transition"
-            );
-
-
-        /* =====================================
-           QUESTIONS
-        ====================================== */
-
-        const questions = [
-
-            {
-                question:
-                    "Who is more likely to start a random conversation at 2 AM? 🌙",
-
-                icon:
-                    "🌙",
-
-                answer:
-                    "Tisha"
-            },
-
-            {
-                question:
-                    "Who gets sleepy first when you're together? 😴",
-
-                icon:
-                    "😴",
-
-                answer:
-                    "Tisha"
-            },
-
-            {
-                question:
-                    "Who is more talkative? 😂",
-
-                icon:
-                    "😂",
-
-                answer:
-                    "Tisha"
-            },
-
-            {
-                question:
-                    "Who is more likely to overthink a tiny thing? 👀",
-
-                icon:
-                    "👀",
-
-                answer:
-                    "Ritesh"
-            },
-
-            {
-                question:
-                    'Who is more likely to say "I\'m fine" when they\'re clearly NOT fine? 😭',
-
-                icon:
-                    "😭",
-
-                answer:
-                    "Ritesh"
-            },
-
-            {
-                question:
-                    "Who gets more excited about little things? ✨",
-
-                icon:
-                    "✨",
-
-                answer:
-                    "Tisha"
-            },
-
-            {
-                question:
-                    "Who is more likely to steal the other's food after saying they're not hungry? 🍟",
-
-                icon:
-                    "🍟",
-
-                answer:
-                    "Tisha"
-            },
-
-            {
-                question:
-                    "Who is more dramatic when something doesn't go their way? 🎭",
-
-                icon:
-                    "🎭",
-
-                answer:
-                    "Ritesh"
-            },
-
-            {
-                question:
-                    "Who is more likely to randomly say something that makes the other person laugh? 🤭",
-
-                icon:
-                    "🤭",
-
-                answer:
-                    "Ritesh"
-            },
-
-            {
-                question:
-                    "Be honest... who fell harder? ❤️",
-
-                icon:
-                    "❤️",
-
-                answer:
-                    "Tisha"
-            }
-
-        ];
-
-
-        /* =====================================
-           STATE
-        ====================================== */
-
-        let currentQuestion = 0;
-
-        let score = 0;
-
-        let answered = false;
-
-
-        /* =====================================
-           BACKGROUND STARS
-        ====================================== */
-
-        function createStars() {
-
-            const container =
-                document.getElementById(
-                    "stars"
-                );
-
-            for (
-                let i = 0;
-                i < 80;
-                i++
-            ) {
-
-                const star =
-                    document.createElement(
-                        "span"
-                    );
-
-                star.className =
-                    "star";
-
-                star.textContent =
-                    Math.random() > .8
-                        ? "✦"
-                        : "•";
-
-                star.style.left =
-                    Math.random() *
-                    100 +
-                    "%";
-
-                star.style.top =
-                    Math.random() *
-                    100 +
-                    "%";
-
-                star.style.animationDelay =
-                    Math.random() *
-                    4 +
-                    "s";
-
-                container.appendChild(
-                    star
-                );
-
-            }
 
         }
 
-        createStars();
+    }
+
+    createBackgroundStars();
 
 
-        /* =====================================
-           INITIAL TRANSITION
-        ====================================== */
+    /* =========================================
+       SHOOTING STARS
+    ========================================== */
 
-        setTimeout(
-            function () {
+    function createShootingStar() {
 
-                transition.classList.add(
-                    "hide"
-                );
+        if (
+            !universe.classList.contains(
+                "active"
+            )
+        ) {
+            return;
+        }
 
-            },
-            300
+        const shootingStar =
+            document.createElement("div");
+
+        shootingStar.className =
+            "shooting-star";
+
+        shootingStar.style.left =
+            65 +
+            Math.random() * 35 +
+            "%";
+
+        shootingStar.style.top =
+            5 +
+            Math.random() * 35 +
+            "%";
+
+        document.body.appendChild(
+            shootingStar
         );
 
+        setTimeout(function () {
 
-        /* =====================================
-           SHOW SCREEN
-        ====================================== */
+            shootingStar.remove();
 
-        function showScreen(
-            screen
-        ) {
+        }, 1600);
 
-            document
-                .querySelectorAll(
-                    ".screen"
-                )
-                .forEach(
-                    function (item) {
-
-                        item.classList
-                            .remove(
-                                "active"
-                            );
-
-                    }
-                );
+    }
 
 
-            setTimeout(
-                function () {
+    setInterval(
+        createShootingStar,
+        5000
+    );
 
-                    screen.classList
-                        .add(
-                            "active"
+
+    /* =========================================
+       MOUSE REACTIVE STARS
+    ========================================== */
+
+    document.addEventListener(
+        "mousemove",
+        function (event) {
+
+            const mouseX =
+                event.clientX;
+
+            const mouseY =
+                event.clientY;
+
+            memoryStars.forEach(
+                function (star) {
+
+                    const rect =
+                        star.getBoundingClientRect();
+
+                    const centerX =
+                        rect.left +
+                        rect.width / 2;
+
+                    const centerY =
+                        rect.top +
+                        rect.height / 2;
+
+                    const distance =
+                        Math.sqrt(
+                            Math.pow(
+                                mouseX - centerX,
+                                2
+                            ) +
+                            Math.pow(
+                                mouseY - centerY,
+                                2
+                            )
                         );
 
-                },
-                100
+                    if (distance < 180) {
+
+                        const strength =
+                            (180 - distance) /
+                            180;
+
+                        const xDirection =
+                            centerX < mouseX
+                                ? -1
+                                : 1;
+
+                        const yDirection =
+                            centerY < mouseY
+                                ? -1
+                                : 1;
+
+                        star.style.transform =
+                            "translate(" +
+                            xDirection *
+                            strength *
+                            8 +
+                            "px, " +
+                            yDirection *
+                            strength *
+                            8 +
+                            "px) scale(" +
+                            (
+                                1 +
+                                strength *
+                                0.12
+                            ) +
+                            ")";
+
+                    } else {
+
+                        star.style.transform =
+                            "";
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+
+    /* =========================================
+       ENTER UNIVERSE
+    ========================================== */
+
+    exploreButton.addEventListener(
+        "click",
+        function () {
+
+            introScreen.classList.remove(
+                "active"
+            );
+
+            setTimeout(function () {
+
+                universe.classList.add(
+                    "active"
+                );
+
+                createShootingStar();
+
+            }, 700);
+
+        }
+    );
+
+
+    /* =========================================
+       CREATE SVG CONSTELLATION
+    ========================================== */
+
+    function getConstellationSVG() {
+
+        let svg =
+            document.getElementById(
+                "constellation-svg"
+            );
+
+        if (svg) {
+            return svg;
+        }
+
+
+        svg =
+            document.createElementNS(
+                "http://www.w3.org/2000/svg",
+                "svg"
+            );
+
+        svg.id =
+            "constellation-svg";
+
+
+        svg.style.position =
+            "fixed";
+
+        svg.style.left =
+            "0";
+
+        svg.style.top =
+            "0";
+
+        svg.style.width =
+            "100vw";
+
+        svg.style.height =
+            "100vh";
+
+        svg.style.pointerEvents =
+            "none";
+
+        svg.style.zIndex =
+            "5";
+
+        svg.style.overflow =
+            "visible";
+
+
+        document.body.appendChild(
+            svg
+        );
+
+
+        return svg;
+
+    }
+
+
+    /* =========================================
+       DRAW CONSTELLATION
+    ========================================== */
+
+    function drawConstellation() {
+
+        const svg =
+            getConstellationSVG();
+
+
+        /*
+         * Remove existing lines.
+         */
+
+        while (svg.firstChild) {
+
+            svg.removeChild(
+                svg.firstChild
             );
 
         }
 
 
-        /* =====================================
-           START QUIZ
-        ====================================== */
+        /*
+         * Need at least two
+         * discovered stars.
+         */
 
-        startQuiz.addEventListener(
-            "click",
-            function () {
+        if (
+            discoveredStars.length < 2
+        ) {
 
-                currentQuestion = 0;
+            return;
 
-                score = 0;
-
-                loadQuestion();
-
-                showScreen(
-                    quizScreen
-                );
-
-            }
-        );
+        }
 
 
-        /* =====================================
-           LOAD QUESTION
-        ====================================== */
+        /*
+         * Connect every discovered
+         * star to the next one.
+         */
 
-        function loadQuestion() {
+        for (
+            let i = 0;
+            i <
+            discoveredStars.length - 1;
+            i++
+        ) {
 
-            answered = false;
+            const firstStar =
+                memoryStars[
+                    discoveredStars[i]
+                ];
 
-            quizMessage.textContent =
-                "";
-
-
-            const current =
-                questions[
-                    currentQuestion
+            const secondStar =
+                memoryStars[
+                    discoveredStars[i + 1]
                 ];
 
 
-            questionNumber.textContent =
-                String(
-                    currentQuestion + 1
-                ).padStart(
-                    2,
-                    "0"
-                ) +
-                " / 10";
+            const firstRect =
+                firstStar.getBoundingClientRect();
+
+            const secondRect =
+                secondStar.getBoundingClientRect();
 
 
-            progressBar.style.width =
-                (
-                    (
-                        currentQuestion + 1
-                    ) /
-                    questions.length *
-                    100
-                ) +
-                "%";
+            const x1 =
+                firstRect.left +
+                firstRect.width / 2;
+
+            const y1 =
+                firstRect.top +
+                firstRect.height / 2;
 
 
-            questionIcon.textContent =
-                current.icon;
+            const x2 =
+                secondRect.left +
+                secondRect.width / 2;
+
+            const y2 =
+                secondRect.top +
+                secondRect.height / 2;
 
 
-            question.textContent =
-                current.question;
+            /*
+             * Create SVG line.
+             */
+
+            const line =
+                document.createElementNS(
+                    "http://www.w3.org/2000/svg",
+                    "line"
+                );
 
 
-            answerButtons.forEach(
-                function (button) {
+            line.setAttribute(
+                "x1",
+                x1
+            );
 
-                    button.disabled =
-                        false;
+            line.setAttribute(
+                "y1",
+                y1
+            );
 
-                    button.classList
-                        .remove(
-                            "correct",
-                            "wrong"
-                        );
+            line.setAttribute(
+                "x2",
+                x2
+            );
+
+            line.setAttribute(
+                "y2",
+                y2
+            );
+
+
+            line.setAttribute(
+                "stroke",
+                "rgba(255,255,255,0.65)"
+            );
+
+            line.setAttribute(
+                "stroke-width",
+                "1.2"
+            );
+
+            line.setAttribute(
+                "stroke-linecap",
+                "round"
+            );
+
+
+            /*
+             * Calculate line length.
+             */
+
+            const length =
+                Math.sqrt(
+                    Math.pow(
+                        x2 - x1,
+                        2
+                    ) +
+                    Math.pow(
+                        y2 - y1,
+                        2
+                    )
+                );
+
+
+            /*
+             * Drawing animation.
+             */
+
+            line.style.strokeDasharray =
+                length;
+
+            line.style.strokeDashoffset =
+                length;
+
+            line.style.filter =
+                "drop-shadow(0 0 6px rgba(255,255,255,0.8))";
+
+
+            svg.appendChild(
+                line
+            );
+
+
+            /*
+             * Trigger animation.
+             */
+
+            requestAnimationFrame(
+                function () {
+
+                    line.style.transition =
+                        "stroke-dashoffset 1.2s ease";
+
+                    line.style.strokeDashoffset =
+                        "0";
 
                 }
             );
 
         }
 
-
-        /* =====================================
-           ANSWER CLICK
-        ====================================== */
-
-        answerButtons.forEach(
-            function (button) {
-
-                button.addEventListener(
-                    "click",
-                    function () {
-
-                        if (answered) {
-                            return;
-                        }
-
-                        answered = true;
+    }
 
 
-                        const selected =
-                            button.dataset.answer;
+    /* =========================================
+       OPEN MEMORY
+    ========================================== */
 
-                        const correct =
-                            questions[
-                                currentQuestion
-                            ].answer;
+    memoryStars.forEach(
+        function (star) {
 
+            star.addEventListener(
+                "click",
+                function () {
 
-                        answerButtons
-                            .forEach(
-                                function (item) {
-
-                                    item.disabled =
-                                        true;
-
-                                }
-                            );
-
-
-                        if (
-                            selected ===
-                            correct
-                        ) {
-
-                            score++;
-
-                            button.classList
-                                .add(
-                                    "correct"
-                                );
-
-                            quizMessage.textContent =
-                                getCorrectMessage();
-
-
-                        } else {
-
-                            button.classList
-                                .add(
-                                    "wrong"
-                                );
-
-                            quizMessage.textContent =
-                                getWrongMessage();
-
-                        }
-
-
-                        setTimeout(
-                            function () {
-
-                                if (
-                                    currentQuestion <
-                                    questions.length - 1
-                                ) {
-
-                                    currentQuestion++;
-
-                                    animateNextQuestion();
-
-                                } else {
-
-                                    showResults();
-
-                                }
-
-                            },
-                            1100
+                    const index =
+                        Number(
+                            star.dataset.memory
                         );
 
+
+                    if (
+                        !memories[index]
+                    ) {
+
+                        return;
+
                     }
-                );
+
+
+                    currentMemory =
+                        index;
+
+
+                    const memory =
+                        memories[index];
+
+
+                    if (memoryTitle) {
+
+                        memoryTitle.textContent =
+                            memory.title;
+
+                    }
+
+
+                    if (memoryIcon) {
+
+                        memoryIcon.textContent =
+                            memory.icon;
+
+                    }
+
+
+                    if (memoryText) {
+
+                        memoryText.textContent =
+                            memory.text;
+
+                    }
+
+
+                    if (memoryNumber) {
+
+                        memoryNumber.textContent =
+                            "MEMORY " +
+                            String(
+                                index + 1
+                            ).padStart(
+                                2,
+                                "0"
+                            );
+
+                    }
+
+
+                    memoryModal.classList.add(
+                        "show"
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+    /* =========================================
+       DISCOVER MEMORY
+    ========================================== */
+
+    if (memoryDone) {
+
+        memoryDone.addEventListener(
+            "click",
+            function () {
+
+                if (
+                    currentMemory === null
+                ) {
+
+                    return;
+
+                }
+
+
+                const selectedStar =
+                    memoryStars[
+                        currentMemory
+                    ];
+
+
+                /*
+                 * Only count it once.
+                 */
+
+                if (
+                    !selectedStar.classList
+                        .contains(
+                            "discovered"
+                        )
+                ) {
+
+                    selectedStar.classList
+                        .add(
+                            "discovered"
+                        );
+
+
+                    discoveredStars.push(
+                        currentMemory
+                    );
+
+
+                    discovered++;
+
+
+                    updateProgress();
+
+
+                    /*
+                     * Draw constellation
+                     * after modal closes.
+                     */
+
+                    setTimeout(
+                        function () {
+
+                            drawConstellation();
+
+                        },
+                        300
+                    );
+
+                }
+
+
+                closeMemoryModal();
 
             }
         );
 
-
-        /* =====================================
-           NEXT QUESTION ANIMATION
-        ====================================== */
-
-        function animateNextQuestion() {
-
-            const card =
-                document.getElementById(
-                    "question-card"
-                );
+    }
 
 
-            card.style.opacity =
-                "0";
+    /* =========================================
+       UPDATE PROGRESS
+    ========================================== */
 
-            card.style.transform =
-                "translateX(30px)";
+    function updateProgress() {
 
+        if (progressText) {
+
+            progressText.textContent =
+                discovered +
+                " / 6 discovered";
+
+        }
+
+
+        if (progressFill) {
+
+            progressFill.style.width =
+                (
+                    discovered /
+                    memoryStars.length *
+                    100
+                ) +
+                "%";
+
+        }
+
+
+        /*
+         * All memories found.
+         */
+
+        if (
+            discovered ===
+            memoryStars.length
+        ) {
 
             setTimeout(
                 function () {
 
-                    loadQuestion();
+                    if (
+                        universeComplete
+                    ) {
 
-                    card.style.transform =
-                        "translateX(-30px)";
+                        universeComplete
+                            .classList
+                            .add(
+                                "show"
+                            );
 
-                    requestAnimationFrame(
-                        function () {
-
-                            card.style.opacity =
-                                "1";
-
-                            card.style.transform =
-                                "translateX(0)";
-
-                        }
-                    );
+                    }
 
                 },
-                350
+                1400
             );
 
         }
 
-
-        /* =====================================
-           CORRECT MESSAGES
-        ====================================== */
-
-        function getCorrectMessage() {
-
-            const messages = [
-
-                "YESS GIRLLLL 😭❤️",
-
-                "I KNEW YOU'D KNOW THAT! 👀",
-
-                "Okayyy, somebody's been paying attention. 😌",
-
-                "CORRECTTTT! 🥹",
-
-                "Look at you remembering everything! ❤️"
-
-            ];
+    }
 
 
-            return messages[
-                Math.floor(
-                    Math.random() *
-                    messages.length
-                )
-            ];
+    /* =========================================
+       CLOSE MEMORY
+    ========================================== */
 
-        }
+    function closeMemoryModal() {
 
+        memoryModal.classList.remove(
+            "show"
+        );
 
-        /* =====================================
-           WRONG MESSAGES
-        ====================================== */
+        currentMemory = null;
 
-        function getWrongMessage() {
-
-            const messages = [
-
-                "OHHHH NOOO 😭",
-
-                "SISTARRRR WHAT WAS THAT? 😂",
-
-                "I'm judging you respectfully. 👀",
-
-                "Bro really chose that answer 😭",
-
-                "We'll pretend that didn't happen. 😂"
-
-            ];
+    }
 
 
-            return messages[
-                Math.floor(
-                    Math.random() *
-                    messages.length
-                )
-            ];
+    if (closeMemory) {
 
-        }
+        closeMemory.addEventListener(
+            "click",
+            closeMemoryModal
+        );
+
+    }
 
 
-        /* =====================================
-           RESULTS
-        ====================================== */
+    /* =========================================
+       CLICK OUTSIDE MODAL
+    ========================================== */
 
-        function showResults() {
-
-            scoreElement.textContent =
-                score;
-
-            correctCount.textContent =
-                score;
-
-            wrongCount.textContent =
-                questions.length -
-                score;
-
+    memoryModal.addEventListener(
+        "click",
+        function (event) {
 
             if (
-                score === 9
+                event.target.classList
+                    .contains(
+                        "modal-backdrop"
+                    )
             ) {
 
-                resultMessage.textContent =
-                    "YOU GOT 1 WRONG SISTARRRRR 😭";
-
-            } else if (
-                score === 10
-            ) {
-
-                resultMessage.textContent =
-                    "OKAYYY PERFECT SCORE 😭❤️";
-
-            } else if (
-                score >= 7
-            ) {
-
-                resultMessage.textContent =
-                    "NOT BAD SISTARRRR 😌❤️";
-
-            } else {
-
-                resultMessage.textContent =
-                    "BROOO WE NEED TO TALK 😭😂";
+                closeMemoryModal();
 
             }
 
-
-            showScreen(
-                resultScreen
-            );
-
-
-            setTimeout(
-                createConfetti,
-                400
-            );
-
         }
+    );
 
 
-        /* =====================================
-           CONFETTI
-        ====================================== */
+    /* =========================================
+       ESCAPE KEY
+    ========================================== */
 
-        function createConfetti() {
+    document.addEventListener(
+        "keydown",
+        function (event) {
 
-            const symbols = [
-                "❤️",
-                "💕",
-                "✨",
-                "⭐",
-                "🎀",
-                "💫"
-            ];
-
-
-            for (
-                let i = 0;
-                i < 35;
-                i++
+            if (
+                event.key === "Escape"
             ) {
 
-                const piece =
-                    document.createElement(
-                        "span"
-                    );
-
-                piece.className =
-                    "confetti";
-
-                piece.textContent =
-                    symbols[
-                        Math.floor(
-                            Math.random() *
-                            symbols.length
+                if (
+                    memoryModal.classList
+                        .contains(
+                            "show"
                         )
-                    ];
+                ) {
 
+                    closeMemoryModal();
 
-                piece.style.left =
-                    Math.random() *
-                    100 +
-                    "%";
-
-
-                piece.style.animationDelay =
-                    Math.random() *
-                    .8 +
-                    "s";
-
-
-                piece.style.animationDuration =
-                    2 +
-                    Math.random() *
-                    2 +
-                    "s";
-
-
-                confettiContainer.appendChild(
-                    piece
-                );
-
-
-                setTimeout(
-                    function () {
-
-                        piece.remove();
-
-                    },
-                    4500
-                );
+                }
 
             }
 
         }
+    );
 
 
-        /* =====================================
-           CONTINUE TO PART 4
-        ====================================== */
+    /* =========================================
+       KEEP CONSTELLATION ALIGNED
+    ========================================== */
+
+    window.addEventListener(
+        "resize",
+        function () {
+
+            if (
+                discoveredStars.length >= 2
+            ) {
+
+                drawConstellation();
+
+            }
+
+        }
+    );
+
+
+    /* =========================================
+       CONTINUE TO PAGE 4
+    ========================================== */
+
+    if (continueButton) {
 
         continueButton.addEventListener(
             "click",
             function () {
 
-                transition.classList.remove(
-                    "hide"
-                );
+                if (
+                    transition
+                ) {
+
+                    transition.classList
+                        .remove(
+                            "fade-out"
+                        );
+
+                }
+
+
+                if (
+                    universeComplete
+                ) {
+
+                    universeComplete
+                        .classList
+                        .remove(
+                            "show"
+                        );
+
+                }
 
 
                 setTimeout(
                     function () {
 
                         window.location.href =
-                            "part4.html";
+                            "page4.html";
 
                     },
                     900
@@ -787,6 +981,6 @@ document.addEventListener(
             }
         );
 
-
     }
-);
+
+});
