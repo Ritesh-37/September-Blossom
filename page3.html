@@ -1,99 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <title>Our Little Universe ❤️</title>
 
-    <title>How Well Do You Know Us? ❤️</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com"
-    >
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
-    >
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Poppins:wght@300;400;500;600&display=swap"
-        rel="stylesheet"
-    >
-
-    <link
-        rel="stylesheet"
-        href="part3.css"
-    >
-
+    <link rel="stylesheet" href="page3.css">
 </head>
-
 
 <body>
 
-    <!-- ======================================
-         BACKGROUND
-    ======================================= -->
+    <!-- PAGE TRANSITION -->
 
-    <div class="background-glow glow-one"></div>
-
-    <div class="background-glow glow-two"></div>
-
-    <div id="stars"></div>
+    <div id="pageTransition"></div>
 
 
-    <!-- ======================================
-         PAGE TRANSITION
-    ======================================= -->
+    <!-- BACKGROUND -->
 
-    <div
-        id="page-transition"
-        class="page-transition"
-    ></div>
+    <div class="nebula nebula-one"></div>
+    <div class="nebula nebula-two"></div>
+    <div class="nebula nebula-three"></div>
 
 
-    <!-- ======================================
-         INTRO SCREEN
-    ======================================= -->
+    <!-- STARS -->
 
-    <section
-        id="intro-screen"
-        class="screen active"
-    >
+    <div class="stars" id="stars"></div>
+
+
+    <!-- INTRODUCTION -->
+
+    <section class="intro-screen active" id="introScreen">
 
         <div class="intro-content">
 
-            <div class="floating-icon">
-                💕
-            </div>
+            <div class="tiny-star">✦</div>
 
-            <p class="small-heading">
-                CHAPTER III • PART 3
+            <p class="eyebrow">
+                CHAPTER THREE
             </p>
 
             <h1>
-                How Well
-                <span>Do You Know Us?</span>
+                Our Little
+                <br>
+                <span>Universe</span>
             </h1>
 
-            <p class="intro-description">
-                You've discovered our memories...
-                <br>
-                now let's see if you were paying attention. 👀
+            <p class="intro-text">
+                Somewhere between all these stars...
             </p>
 
-            <button
-                id="start-quiz"
-                class="main-button"
-            >
-                LET'S FIND OUT ✨
+            <p class="intro-text">
+                there are little pieces of us.
+                ❤️
+            </p>
+
+            <button id="exploreButton" class="main-button">
+                EXPLORE THE STARS ✨
             </button>
 
         </div>
@@ -101,221 +69,259 @@
     </section>
 
 
-    <!-- ======================================
-         QUIZ SCREEN
-    ======================================= -->
+    <!-- UNIVERSE -->
 
-    <section
-        id="quiz-screen"
-        class="screen"
-    >
+    <main class="universe" id="universe">
 
-        <div class="quiz-container">
+        <div class="universe-heading">
 
-            <div class="quiz-top">
+            <p class="eyebrow">
+                TISHA'S LITTLE UNIVERSE
+            </p>
 
-                <p class="small-heading">
-                    HOW WELL DO YOU KNOW US?
-                </p>
+            <h2>
+                Find the memories...
+            </h2>
 
-                <div
-                    id="question-number"
-                    class="question-number"
-                >
-                    01 / 10
-                </div>
+            <p>
+                There are little pieces of our story
+                hidden among the stars.
+            </p>
 
-                <div class="progress-container">
+            <div class="progress">
+
+                <span id="progressText">
+                    0 / 6 discovered
+                </span>
+
+                <div class="progress-bar">
 
                     <div
-                        id="progress-bar"
-                        class="progress-bar"
-                    ></div>
+                        id="progressFill"
+                        class="progress-fill">
+                    </div>
 
                 </div>
 
             </div>
-
-
-            <div
-                id="question-card"
-                class="question-card"
-            >
-
-                <div
-                    id="question-icon"
-                    class="question-icon"
-                >
-                    👀
-                </div>
-
-                <h2 id="question">
-                    Question
-                </h2>
-
-                <p class="choose-text">
-                    Choose wisely, cutuuuu 😌
-                </p>
-
-
-                <div class="answer-buttons">
-
-                    <button
-                        class="answer-button"
-                        data-answer="Ritesh"
-                    >
-
-                        <span class="answer-icon">
-                            ❤️
-                        </span>
-
-                        <span>
-                            Ritesh
-                        </span>
-
-                    </button>
-
-
-                    <button
-                        class="answer-button"
-                        data-answer="Tisha"
-                    >
-
-                        <span class="answer-icon">
-                            💕
-                        </span>
-
-                        <span>
-                            Tisha
-                        </span>
-
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <p
-                id="quiz-message"
-                class="quiz-message"
-            ></p>
 
         </div>
 
-    </section>
+
+        <!-- STAR 1 -->
+
+        <button
+            class="memory-star star-one"
+            data-memory="0"
+            aria-label="Our Beginning">
+
+            <span class="star-glow"></span>
+            <span class="star-symbol">✦</span>
+
+            <span class="star-label">
+                Our Beginning
+            </span>
+
+        </button>
 
 
-    <!-- ======================================
-         RESULT SCREEN
-    ======================================= -->
+        <!-- STAR 2 -->
 
-    <section
-        id="result-screen"
-        class="screen"
-    >
+        <button
+            class="memory-star star-two"
+            data-memory="1"
+            aria-label="12.03.26">
 
-        <div class="result-container">
+            <span class="star-glow"></span>
+            <span class="star-symbol">✦</span>
 
-            <div
-                id="result-icon"
-                class="result-icon"
-            >
-                🏆
+            <span class="star-label">
+                12.03.26
+            </span>
+
+        </button>
+
+
+        <!-- STAR 3 -->
+
+        <button
+            class="memory-star star-three"
+            data-memory="2"
+            aria-label="That First Day">
+
+            <span class="star-glow"></span>
+            <span class="star-symbol">✦</span>
+
+            <span class="star-label">
+                That First Day
+            </span>
+
+        </button>
+
+
+        <!-- STAR 4 -->
+
+        <button
+            class="memory-star star-four"
+            data-memory="3"
+            aria-label="A Little Confession">
+
+            <span class="star-glow"></span>
+            <span class="star-symbol">✦</span>
+
+            <span class="star-label">
+                A Little Confession
+            </span>
+
+        </button>
+
+
+        <!-- STAR 5 -->
+
+        <button
+            class="memory-star star-five"
+            data-memory="4"
+            aria-label="Something I Love">
+
+            <span class="star-glow"></span>
+            <span class="star-symbol">✦</span>
+
+            <span class="star-label">
+                Something I Love
+            </span>
+
+        </button>
+
+
+        <!-- STAR 6 -->
+
+        <button
+            class="memory-star star-six"
+            data-memory="5"
+            aria-label="A Secret">
+
+            <span class="star-glow"></span>
+            <span class="star-symbol">✦</span>
+
+            <span class="star-label">
+                A Secret
+            </span>
+
+        </button>
+
+
+        <!-- FINAL MESSAGE -->
+
+        <div
+            id="universeComplete"
+            class="universe-complete">
+
+            <div class="complete-stars">
+                ✦ ✧ ✦
             </div>
 
-            <p class="small-heading">
-                YOUR REPORT CARD
+            <h2>
+                You found them all. ❤️
+            </h2>
+
+            <p>
+                But I think there are still
+                more memories to make.
             </p>
 
-            <h1>
-                You scored
-            </h1>
+            <button
+                id="continueButton"
+                class="main-button">
 
-            <div class="score">
+                CONTINUE MY ADVENTURE →
 
-                <span id="score">
-                    9
-                </span>
+            </button>
+
+        </div>
+
+    </main>
+
+
+    <!-- MEMORY MODAL -->
+
+    <div
+        id="memoryModal"
+        class="memory-modal">
+
+        <div class="modal-backdrop"></div>
+
+        <div class="memory-card">
+
+            <button
+                id="closeMemory"
+                class="close-button"
+                aria-label="Close">
+
+                ×
+
+            </button>
+
+
+            <div class="memory-icon" id="memoryIcon">
+                ✦
+            </div>
+
+            <p
+                class="memory-number"
+                id="memoryNumber">
+                MEMORY 01
+            </p>
+
+            <h2 id="memoryTitle">
+                Our Beginning
+            </h2>
+
+            <div class="memory-line"></div>
+
+            <p
+                id="memoryText"
+                class="memory-text">
+            </p>
+
+
+            <!-- PHOTO PLACEHOLDER -->
+
+            <div class="memory-photo">
+
+                <span>📷</span>
 
                 <small>
-                    / 10
+                    YOUR PHOTO WILL GO HERE
                 </small>
 
             </div>
 
-
-            <div
-                id="result-message"
-                class="result-message"
-            >
-                YOU GOT 1 WRONG SISTARRRRR 😭
-            </div>
-
-
-            <p class="result-subtext">
-                Ask Ritesh for the wrong answer.
-                <br>
-                He owns this website anyway. 😌
-            </p>
-
-
-            <div class="result-stats">
-
-                <div class="stat">
-
-                    <span id="correct-count">
-                        9
-                    </span>
-
-                    <small>
-                        CORRECT
-                    </small>
-
-                </div>
-
-
-                <div class="stat">
-
-                    <span id="wrong-count">
-                        1
-                    </span>
-
-                    <small>
-                        WRONG
-                    </small>
-
-                </div>
-
-            </div>
-
-
             <button
-                id="continue-button"
-                class="main-button"
-            >
-                OKAY, LET'S MOVE ON → ❤️
+                id="memoryDone"
+                class="memory-done">
+
+                I FOUND THIS ONE ❤️
+
             </button>
 
         </div>
 
-    </section>
+    </div>
 
 
-    <!-- ======================================
-         CONFETTI
-    ======================================= -->
+    <!-- MUSIC CONTROL -->
 
-    <div
-        id="confetti-container"
-        class="confetti-container"
-    ></div>
+    <button
+        id="musicButton"
+        class="music-button"
+        aria-label="Music">
+
+        ♫
+
+    </button>
 
 
-    <script
-        src="part3.js"
-    ></script>
+    <script src="page3.js"></script>
 
 </body>
-
 </html>
