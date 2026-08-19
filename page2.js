@@ -216,7 +216,7 @@ document.addEventListener("DOMContentLoaded", function () {
              * DO NOT CHANGE THIS YET.
              */
 
-            window.location.href = "part3.html";
+            window.location.href = "page3.html";
 
         });
 
