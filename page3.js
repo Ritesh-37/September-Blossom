@@ -3,133 +3,285 @@ document.addEventListener(
     function () {
 
 
-        /* =========================================
-           BASIC ELEMENTS
-        ========================================== */
+        /* =====================================
+           ELEMENTS
+        ====================================== */
+
+        const introScreen =
+            document.getElementById(
+                "intro-screen"
+            );
+
+        const quizScreen =
+            document.getElementById(
+                "quiz-screen"
+            );
+
+        const resultScreen =
+            document.getElementById(
+                "result-screen"
+            );
+
+        const startQuiz =
+            document.getElementById(
+                "start-quiz"
+            );
+
+        const questionNumber =
+            document.getElementById(
+                "question-number"
+            );
+
+        const progressBar =
+            document.getElementById(
+                "progress-bar"
+            );
+
+        const question =
+            document.getElementById(
+                "question"
+            );
+
+        const questionIcon =
+            document.getElementById(
+                "question-icon"
+            );
+
+        const answerButtons =
+            document.querySelectorAll(
+                ".answer-button"
+            );
+
+        const quizMessage =
+            document.getElementById(
+                "quiz-message"
+            );
+
+        const scoreElement =
+            document.getElementById(
+                "score"
+            );
+
+        const correctCount =
+            document.getElementById(
+                "correct-count"
+            );
+
+        const wrongCount =
+            document.getElementById(
+                "wrong-count"
+            );
+
+        const resultMessage =
+            document.getElementById(
+                "result-message"
+            );
+
+        const continueButton =
+            document.getElementById(
+                "continue-button"
+            );
+
+        const confettiContainer =
+            document.getElementById(
+                "confetti-container"
+            );
 
         const transition =
             document.getElementById(
-                "transition-layer"
-            );
-
-        const sections =
-            document.querySelectorAll(
-                ".chapter-section"
+                "page-transition"
             );
 
 
-        function showSection(id) {
+        /* =====================================
+           QUESTIONS
+        ====================================== */
 
-            sections.forEach(
-                function (section) {
+        const questions = [
 
-                    section.classList.remove(
-                        "active"
+            {
+                question:
+                    "Who is more likely to start a random conversation at 2 AM? 🌙",
+
+                icon:
+                    "🌙",
+
+                answer:
+                    "Tisha"
+            },
+
+            {
+                question:
+                    "Who gets sleepy first when you're together? 😴",
+
+                icon:
+                    "😴",
+
+                answer:
+                    "Tisha"
+            },
+
+            {
+                question:
+                    "Who is more talkative? 😂",
+
+                icon:
+                    "😂",
+
+                answer:
+                    "Tisha"
+            },
+
+            {
+                question:
+                    "Who is more likely to overthink a tiny thing? 👀",
+
+                icon:
+                    "👀",
+
+                answer:
+                    "Ritesh"
+            },
+
+            {
+                question:
+                    'Who is more likely to say "I\'m fine" when they\'re clearly NOT fine? 😭',
+
+                icon:
+                    "😭",
+
+                answer:
+                    "Ritesh"
+            },
+
+            {
+                question:
+                    "Who gets more excited about little things? ✨",
+
+                icon:
+                    "✨",
+
+                answer:
+                    "Tisha"
+            },
+
+            {
+                question:
+                    "Who is more likely to steal the other's food after saying they're not hungry? 🍟",
+
+                icon:
+                    "🍟",
+
+                answer:
+                    "Tisha"
+            },
+
+            {
+                question:
+                    "Who is more dramatic when something doesn't go their way? 🎭",
+
+                icon:
+                    "🎭",
+
+                answer:
+                    "Ritesh"
+            },
+
+            {
+                question:
+                    "Who is more likely to randomly say something that makes the other person laugh? 🤭",
+
+                icon:
+                    "🤭",
+
+                answer:
+                    "Ritesh"
+            },
+
+            {
+                question:
+                    "Be honest... who fell harder? ❤️",
+
+                icon:
+                    "❤️",
+
+                answer:
+                    "Tisha"
+            }
+
+        ];
+
+
+        /* =====================================
+           STATE
+        ====================================== */
+
+        let currentQuestion = 0;
+
+        let score = 0;
+
+        let answered = false;
+
+
+        /* =====================================
+           BACKGROUND STARS
+        ====================================== */
+
+        function createStars() {
+
+            const container =
+                document.getElementById(
+                    "stars"
+                );
+
+            for (
+                let i = 0;
+                i < 80;
+                i++
+            ) {
+
+                const star =
+                    document.createElement(
+                        "span"
                     );
 
-                }
-            );
+                star.className =
+                    "star";
 
+                star.textContent =
+                    Math.random() > .8
+                        ? "✦"
+                        : "•";
 
-            const target =
-                document.getElementById(id);
+                star.style.left =
+                    Math.random() *
+                    100 +
+                    "%";
 
+                star.style.top =
+                    Math.random() *
+                    100 +
+                    "%";
 
-            if (target) {
+                star.style.animationDelay =
+                    Math.random() *
+                    4 +
+                    "s";
 
-                setTimeout(
-                    function () {
-
-                        target.classList.add(
-                            "active"
-                        );
-
-                    },
-                    100
+                container.appendChild(
+                    star
                 );
 
             }
 
         }
 
-
-        function fadeTransition(callback) {
-
-            transition.classList.remove(
-                "hide"
-            );
+        createStars();
 
 
-            setTimeout(
-                function () {
-
-                    callback();
-
-                    setTimeout(
-                        function () {
-
-                            transition.classList.add(
-                                "hide"
-                            );
-
-                        },
-                        200
-                    );
-
-                },
-                700
-            );
-
-        }
-
-
-        /* =========================================
-           STARS
-        ========================================== */
-
-        const starContainer =
-            document.getElementById(
-                "stars"
-            );
-
-
-        for (
-            let i = 0;
-            i < 90;
-            i++
-        ) {
-
-            const star =
-                document.createElement(
-                    "span"
-                );
-
-            star.className =
-                "star";
-
-            star.textContent =
-                Math.random() > .8
-                    ? "✦"
-                    : "•";
-
-            star.style.left =
-                Math.random() * 100 +
-                "%";
-
-            star.style.top =
-                Math.random() * 100 +
-                "%";
-
-            star.style.animationDelay =
-                Math.random() * 4 +
-                "s";
-
-            starContainer.appendChild(
-                star
-            );
-
-        }
-
+        /* =====================================
+           INITIAL TRANSITION
+        ====================================== */
 
         setTimeout(
             function () {
@@ -143,190 +295,86 @@ document.addEventListener(
         );
 
 
-        /* =========================================
-           PART 3 — QUIZ
-        ========================================== */
+        /* =====================================
+           SHOW SCREEN
+        ====================================== */
 
-        const questions = [
+        function showScreen(
+            screen
+        ) {
 
-            {
-                text:
-                    "Who is more likely to start a random conversation at 2 AM? 🌙",
+            document
+                .querySelectorAll(
+                    ".screen"
+                )
+                .forEach(
+                    function (item) {
 
-                icon:
-                    "🌙",
+                        item.classList
+                            .remove(
+                                "active"
+                            );
 
-                answer:
-                    "Tisha"
-            },
+                    }
+                );
 
-            {
-                text:
-                    "Who gets sleepy first when you're together? 😴",
 
-                icon:
-                    "😴",
+            setTimeout(
+                function () {
 
-                answer:
-                    "Tisha"
-            },
+                    screen.classList
+                        .add(
+                            "active"
+                        );
 
-            {
-                text:
-                    "Who is more talkative? 😂",
+                },
+                100
+            );
 
-                icon:
-                    "😂",
+        }
 
-                answer:
-                    "Tisha"
-            },
 
-            {
-                text:
-                    "Who is more likely to overthink a tiny thing? 👀",
+        /* =====================================
+           START QUIZ
+        ====================================== */
 
-                icon:
-                    "👀",
+        startQuiz.addEventListener(
+            "click",
+            function () {
 
-                answer:
-                    "Ritesh"
-            },
+                currentQuestion = 0;
 
-            {
-                text:
-                    "Who is more likely to say I'm fine when they're clearly NOT fine? 😭",
+                score = 0;
 
-                icon:
-                    "😭",
+                loadQuestion();
 
-                answer:
-                    "Ritesh"
-            },
+                showScreen(
+                    quizScreen
+                );
 
-            {
-                text:
-                    "Who gets more excited about little things? ✨",
-
-                icon:
-                    "✨",
-
-                answer:
-                    "Tisha"
-            },
-
-            {
-                text:
-                    "Who is more likely to steal the other's food after saying they're not hungry? 🍟",
-
-                icon:
-                    "🍟",
-
-                answer:
-                    "Tisha"
-            },
-
-            {
-                text:
-                    "Who is more dramatic when something doesn't go their way? 🎭",
-
-                icon:
-                    "🎭",
-
-                answer:
-                    "Ritesh"
-            },
-
-            {
-                text:
-                    "Who is more likely to randomly say something that makes the other person laugh? 🤭",
-
-                icon:
-                    "🤭",
-
-                answer:
-                    "Ritesh"
-            },
-
-            {
-                text:
-                    "Be honest... who fell harder? ❤️",
-
-                icon:
-                    "❤️",
-
-                answer:
-                    "Tisha"
             }
-
-        ];
-
-
-        let currentQuestion = 0;
-
-        let quizScore = 0;
-
-        let quizLocked = false;
+        );
 
 
-        const startQuiz =
-            document.getElementById(
-                "start-quiz"
-            );
-
-        const questionText =
-            document.getElementById(
-                "question-text"
-            );
-
-        const questionIcon =
-            document.getElementById(
-                "question-icon"
-            );
-
-        const questionCount =
-            document.getElementById(
-                "question-count"
-            );
-
-        const quizProgress =
-            document.getElementById(
-                "quiz-progress"
-            );
-
-        const feedback =
-            document.getElementById(
-                "answer-feedback"
-            );
-
-        const questionCard =
-            document.getElementById(
-                "question-card"
-            );
-
-        const answerChoices =
-            document.querySelectorAll(
-                ".answer-choice"
-            );
-
+        /* =====================================
+           LOAD QUESTION
+        ====================================== */
 
         function loadQuestion() {
 
-            quizLocked = false;
+            answered = false;
 
-            const data =
+            quizMessage.textContent =
+                "";
+
+
+            const current =
                 questions[
                     currentQuestion
                 ];
 
 
-            questionText.textContent =
-                data.text;
-
-            questionIcon.textContent =
-                data.icon;
-
-            questionCount.textContent =
+            questionNumber.textContent =
                 String(
                     currentQuestion + 1
                 ).padStart(
@@ -336,31 +384,36 @@ document.addEventListener(
                 " / 10";
 
 
-            quizProgress.style.width =
+            progressBar.style.width =
                 (
                     (
                         currentQuestion + 1
                     ) /
-                    10 *
+                    questions.length *
                     100
                 ) +
                 "%";
 
 
-            feedback.textContent =
-                "";
+            questionIcon.textContent =
+                current.icon;
 
 
-            answerChoices.forEach(
+            question.textContent =
+                current.question;
+
+
+            answerButtons.forEach(
                 function (button) {
 
                     button.disabled =
                         false;
 
-                    button.classList.remove(
-                        "correct",
-                        "wrong"
-                    );
+                    button.classList
+                        .remove(
+                            "correct",
+                            "wrong"
+                        );
 
                 }
             );
@@ -368,37 +421,22 @@ document.addEventListener(
         }
 
 
-        startQuiz.addEventListener(
-            "click",
-            function () {
+        /* =====================================
+           ANSWER CLICK
+        ====================================== */
 
-                currentQuestion = 0;
-
-                quizScore = 0;
-
-                loadQuestion();
-
-                showSection(
-                    "quiz"
-                );
-
-            }
-        );
-
-
-        answerChoices.forEach(
+        answerButtons.forEach(
             function (button) {
 
                 button.addEventListener(
                     "click",
                     function () {
 
-                        if (quizLocked) {
+                        if (answered) {
                             return;
                         }
 
-
-                        quizLocked = true;
+                        answered = true;
 
 
                         const selected =
@@ -410,14 +448,15 @@ document.addEventListener(
                             ].answer;
 
 
-                        answerChoices.forEach(
-                            function (item) {
+                        answerButtons
+                            .forEach(
+                                function (item) {
 
-                                item.disabled =
-                                    true;
+                                    item.disabled =
+                                        true;
 
-                            }
-                        );
+                                }
+                            );
 
 
                         if (
@@ -425,23 +464,26 @@ document.addEventListener(
                             correct
                         ) {
 
-                            quizScore++;
+                            score++;
 
-                            button.classList.add(
-                                "correct"
-                            );
+                            button.classList
+                                .add(
+                                    "correct"
+                                );
 
-                            feedback.textContent =
-                                "YESS GIRLLLL 😭❤️";
+                            quizMessage.textContent =
+                                getCorrectMessage();
+
 
                         } else {
 
-                            button.classList.add(
-                                "wrong"
-                            );
+                            button.classList
+                                .add(
+                                    "wrong"
+                                );
 
-                            feedback.textContent =
-                                "OHHHH NOOOO 😭😂";
+                            quizMessage.textContent =
+                                getWrongMessage();
 
                         }
 
@@ -451,51 +493,21 @@ document.addEventListener(
 
                                 if (
                                     currentQuestion <
-                                    9
+                                    questions.length - 1
                                 ) {
 
                                     currentQuestion++;
 
-                                    questionCard.style.opacity =
-                                        "0";
-
-                                    questionCard.style.transform =
-                                        "translateX(30px)";
-
-
-                                    setTimeout(
-                                        function () {
-
-                                            loadQuestion();
-
-                                            questionCard.style.transform =
-                                                "translateX(-30px)";
-
-
-                                            requestAnimationFrame(
-                                                function () {
-
-                                                    questionCard.style.opacity =
-                                                        "1";
-
-                                                    questionCard.style.transform =
-                                                        "translateX(0)";
-
-                                                }
-                                            );
-
-                                        },
-                                        250
-                                    );
+                                    animateNextQuestion();
 
                                 } else {
 
-                                    showQuizResult();
+                                    showResults();
 
                                 }
 
                             },
-                            900
+                            1100
                         );
 
                     }
@@ -505,1079 +517,192 @@ document.addEventListener(
         );
 
 
-        function showQuizResult() {
+        /* =====================================
+           NEXT QUESTION ANIMATION
+        ====================================== */
 
-            document.getElementById(
-                "score-number"
-            ).textContent =
-                quizScore;
+        function animateNextQuestion() {
 
-
-            document.getElementById(
-                "correct-number"
-            ).textContent =
-                quizScore;
-
-
-            document.getElementById(
-                "wrong-number"
-            ).textContent =
-                10 - quizScore;
-
-
-            const scoreMessage =
+            const card =
                 document.getElementById(
-                    "score-message"
+                    "question-card"
                 );
 
 
-            if (quizScore === 9) {
+            card.style.opacity =
+                "0";
 
-                scoreMessage.textContent =
+            card.style.transform =
+                "translateX(30px)";
+
+
+            setTimeout(
+                function () {
+
+                    loadQuestion();
+
+                    card.style.transform =
+                        "translateX(-30px)";
+
+                    requestAnimationFrame(
+                        function () {
+
+                            card.style.opacity =
+                                "1";
+
+                            card.style.transform =
+                                "translateX(0)";
+
+                        }
+                    );
+
+                },
+                350
+            );
+
+        }
+
+
+        /* =====================================
+           CORRECT MESSAGES
+        ====================================== */
+
+        function getCorrectMessage() {
+
+            const messages = [
+
+                "YESS GIRLLLL 😭❤️",
+
+                "I KNEW YOU'D KNOW THAT! 👀",
+
+                "Okayyy, somebody's been paying attention. 😌",
+
+                "CORRECTTTT! 🥹",
+
+                "Look at you remembering everything! ❤️"
+
+            ];
+
+
+            return messages[
+                Math.floor(
+                    Math.random() *
+                    messages.length
+                )
+            ];
+
+        }
+
+
+        /* =====================================
+           WRONG MESSAGES
+        ====================================== */
+
+        function getWrongMessage() {
+
+            const messages = [
+
+                "OHHHH NOOO 😭",
+
+                "SISTARRRR WHAT WAS THAT? 😂",
+
+                "I'm judging you respectfully. 👀",
+
+                "Bro really chose that answer 😭",
+
+                "We'll pretend that didn't happen. 😂"
+
+            ];
+
+
+            return messages[
+                Math.floor(
+                    Math.random() *
+                    messages.length
+                )
+            ];
+
+        }
+
+
+        /* =====================================
+           RESULTS
+        ====================================== */
+
+        function showResults() {
+
+            scoreElement.textContent =
+                score;
+
+            correctCount.textContent =
+                score;
+
+            wrongCount.textContent =
+                questions.length -
+                score;
+
+
+            if (
+                score === 9
+            ) {
+
+                resultMessage.textContent =
                     "YOU GOT 1 WRONG SISTARRRRR 😭";
 
             } else if (
-                quizScore === 10
+                score === 10
             ) {
 
-                scoreMessage.textContent =
-                    "PERFECT SCORE?! OKAY GENIUSSS 😭❤️";
+                resultMessage.textContent =
+                    "OKAYYY PERFECT SCORE 😭❤️";
 
             } else if (
-                quizScore >= 7
+                score >= 7
             ) {
 
-                scoreMessage.textContent =
+                resultMessage.textContent =
                     "NOT BAD SISTARRRR 😌❤️";
 
             } else {
 
-                scoreMessage.textContent =
-                    "BROOOO WE NEED TO HAVE A TALK 😭😂";
+                resultMessage.textContent =
+                    "BROOO WE NEED TO TALK 😭😂";
 
             }
 
 
-            showSection(
-                "quiz-result"
-            );
-
-
-            confetti();
-
-        }
-
-
-        document
-            .getElementById(
-                "quiz-next"
-            )
-            .addEventListener(
-                "click",
-                function () {
-
-                    fadeTransition(
-                        function () {
-
-                            showSection(
-                                "balloon-section"
-                            );
-
-                            startBalloons();
-
-                        }
-                    );
-
-                }
-            );
-
-
-        /* =========================================
-           PART 4 — BALLOONS
-        ========================================== */
-
-        const balloonField =
-            document.getElementById(
-                "balloon-field"
-            );
-
-        const balloonProgress =
-            document.getElementById(
-                "balloon-progress"
-            );
-
-        const envelopeArea =
-            document.getElementById(
-                "envelope-area"
-            );
-
-        const hiddenMessage =
-            document.getElementById(
-                "balloon-hidden-message"
-            );
-
-
-        const totalBalloons = 24;
-
-        let poppedBalloons = 0;
-
-
-        function startBalloons() {
-
-            balloonField.innerHTML = "";
-
-            envelopeArea.classList.remove(
-                "show"
-            );
-
-            hiddenMessage.classList.remove(
-                "show"
-            );
-
-            poppedBalloons = 0;
-
-            balloonProgress.textContent =
-                "0 / " +
-                totalBalloons;
-
-
-            for (
-                let i = 0;
-                i < totalBalloons;
-                i++
-            ) {
-
-                createBalloon(i);
-
-            }
-
-        }
-
-
-        function createBalloon(index) {
-
-            const balloon =
-                document.createElement(
-                    "button"
-                );
-
-            balloon.className =
-                "balloon";
-
-
-            balloon.setAttribute(
-                "aria-label",
-                "Pop balloon"
-            );
-
-
-            const left =
-                5 +
-                Math.random() * 90;
-
-
-            const top =
-                20 +
-                Math.random() * 65;
-
-
-            balloon.style.left =
-                left + "%";
-
-            balloon.style.top =
-                top + "%";
-
-
-            balloon.style.setProperty(
-                "--duration",
-                (
-                    3 +
-                    Math.random() * 3
-                ) +
-                "s"
-            );
-
-
-            balloon.style.animationDelay =
-                (
-                    Math.random() * 2
-                ) +
-                "s";
-
-
-            if (
-                index === 3
-            ) {
-
-                balloon.dataset.word =
-                    "BURST";
-
-            } else if (
-                index === 8
-            ) {
-
-                balloon.dataset.word =
-                    "ALL";
-
-            } else if (
-                index === 13
-            ) {
-
-                balloon.dataset.word =
-                    "THE";
-
-            } else if (
-                index === 18
-            ) {
-
-                balloon.dataset.word =
-                    "BALLOONS";
-
-            } else if (
-                index === 22
-            ) {
-
-                balloon.dataset.word =
-                    "CUTUUUU ❤️";
-
-            }
-
-
-            balloon.addEventListener(
-                "click",
-                function () {
-
-                    popBalloon(
-                        balloon
-                    );
-
-                }
-            );
-
-
-            balloonField.appendChild(
-                balloon
-            );
-
-        }
-
-
-        function popBalloon(
-            balloon
-        ) {
-
-            if (
-                balloon.classList.contains(
-                    "pop"
-                )
-            ) {
-                return;
-            }
-
-
-            balloon.classList.add(
-                "pop"
-            );
-
-
-            poppedBalloons++;
-
-
-            balloonProgress.textContent =
-                poppedBalloons +
-                " / " +
-                totalBalloons;
-
-
-            if (
-                balloon.dataset.word
-            ) {
-
-                showHiddenWord(
-                    balloon.dataset.word
-                );
-
-            }
-
-
-            setTimeout(
-                function () {
-
-                    balloon.remove();
-
-                },
-                300
-            );
-
-
-            if (
-                poppedBalloons ===
-                totalBalloons
-            ) {
-
-                finishBalloons();
-
-            }
-
-        }
-
-
-        function showHiddenWord(
-            word
-        ) {
-
-            const wordElement =
-                document.createElement(
-                    "span"
-                );
-
-            wordElement.textContent =
-                word;
-
-
-            wordElement.style.position =
-                "fixed";
-
-            wordElement.style.left =
-                (
-                    20 +
-                    Math.random() * 60
-                ) +
-                "%";
-
-            wordElement.style.top =
-                (
-                    25 +
-                    Math.random() * 50
-                ) +
-                "%";
-
-            wordElement.style.fontSize =
-                "18px";
-
-            wordElement.style.fontWeight =
-                "600";
-
-            wordElement.style.zIndex =
-                "35";
-
-            wordElement.style.opacity =
-                "0";
-
-            wordElement.style.transition =
-                "opacity .5s ease";
-
-
-            document.body.appendChild(
-                wordElement
-            );
-
-
-            requestAnimationFrame(
-                function () {
-
-                    wordElement.style.opacity =
-                        "1";
-
-                }
+            showScreen(
+                resultScreen
             );
 
 
             setTimeout(
-                function () {
-
-                    wordElement.style.opacity =
-                        "0";
-
-                },
-                1400
-            );
-
-
-            setTimeout(
-                function () {
-
-                    wordElement.remove();
-
-                },
-                2000
+                createConfetti,
+                400
             );
 
         }
 
 
-        function finishBalloons() {
-
-            hiddenMessage.classList.add(
-                "show"
-            );
-
-
-            setTimeout(
-                function () {
-
-                    envelopeArea.classList.add(
-                        "show"
-                    );
-
-                },
-                1300
-            );
-
-        }
-
-
-        /* =========================================
-           ENVELOPE
-        ========================================== */
-
-        document
-            .getElementById(
-                "open-envelope"
-            )
-            .addEventListener(
-                "click",
-                function () {
-
-                    fadeTransition(
-                        function () {
-
-                            showSection(
-                                "letter-transition"
-                            );
-
-
-                            const giantEnvelope =
-                                document.getElementById(
-                                    "giant-envelope"
-                                );
-
-                            const fallingText =
-                                document.getElementById(
-                                    "falling-text"
-                                );
-
-
-                            fallingText.textContent =
-                                "Opening your message...";
-
-
-                            setTimeout(
-                                function () {
-
-                                    giantEnvelope.classList.add(
-                                        "suck"
-                                    );
-
-                                    fallingText.textContent =
-                                        "WHOAAAAA...";
-
-                                },
-                                800
-                            );
-
-
-                            setTimeout(
-                                function () {
-
-                                    showSection(
-                                        "love-letter"
-                                    );
-
-                                    const audio =
-                                        document.getElementById(
-                                            "love-letter-audio"
-                                        );
-
-                                    audio.volume =
-                                        .65;
-
-                                },
-                                2500
-                            );
-
-                        }
-                    );
-
-                }
-            );
-
-
-        /* =========================================
-           LETTER YES / NO
-        ========================================== */
-
-        const letterYes =
-            document.getElementById(
-                "letter-yes"
-            );
-
-        const letterNo =
-            document.getElementById(
-                "letter-no"
-            );
-
-        const letterWarning =
-            document.getElementById(
-                "letter-warning"
-            );
-
-
-        letterNo.addEventListener(
-            "click",
-            function () {
-
-                letterWarning.textContent =
-                    "ABE PURA PADH LE CHOTA KHOPDI 😭💋";
-
-
-                letterNo.animate(
-                    [
-                        {
-                            transform:
-                                "translateX(0)"
-                        },
-                        {
-                            transform:
-                                "translateX(-10px)"
-                        },
-                        {
-                            transform:
-                                "translateX(10px)"
-                        },
-                        {
-                            transform:
-                                "translateX(0)"
-                        }
-                    ],
-                    {
-                        duration: 400
-                    }
-                );
-
-            }
-        );
-
-
-        letterYes.addEventListener(
-            "click",
-            function () {
-
-                fadeTransition(
-                    function () {
-
-                        showSection(
-                            "garden"
-                        );
-
-                    }
-                );
-
-            }
-        );
-
-
-        /* =========================================
-           PART 5 — GARDEN
-        ========================================== */
-
-        const flowers =
-            document.querySelectorAll(
-                ".flower"
-            );
-
-        const gardenMessage =
-            document.getElementById(
-                "garden-message"
-            );
-
-        const gardenNext =
-            document.getElementById(
-                "garden-next"
-            );
-
-
-        let flowersFound = 0;
-
-
-        flowers.forEach(
-            function (flower) {
-
-                flower.addEventListener(
-                    "click",
-                    function () {
-
-                        if (
-                            flower.dataset.found !==
-                            "true"
-                        ) {
-
-                            flower.dataset.found =
-                                "true";
-
-                            flowersFound++;
-
-                        }
-
-
-                        gardenMessage.textContent =
-                            flower.dataset.message;
-
-
-                        gardenMessage.classList.add(
-                            "show"
-                        );
-
-
-                        setTimeout(
-                            function () {
-
-                                gardenMessage.classList.remove(
-                                    "show"
-                                );
-
-                            },
-                            2800
-                        );
-
-
-                        if (
-                            flowersFound ===
-                            flowers.length
-                        ) {
-
-                            gardenNext.disabled =
-                                false;
-
-                        }
-
-                    }
-                );
-
-            }
-        );
-
-
-        gardenNext.addEventListener(
-            "click",
-            function () {
-
-                fadeTransition(
-                    function () {
-
-                        showSection(
-                            "facts"
-                        );
-
-                    }
-                );
-
-            }
-        );
-
-
-        /* =========================================
-           PART 6 — FACT CARDS
-        ========================================== */
-
-        const facts = [
-
-            {
-                emoji: "✨",
-
-                text:
-                    "You probably don't realize how easily your energy can change the mood of a room."
-            },
-
-            {
-                emoji: "😂",
-
-                text:
-                    "You somehow manage to be extremely talkative and still leave me completely speechless sometimes."
-            },
-
-            {
-                emoji: "🥹",
-
-                text:
-                    "You are probably much more lovable than you give yourself credit for."
-            },
-
-            {
-                emoji: "🌸",
-
-                text:
-                    "You make ordinary little moments feel much more memorable than they should be."
-            },
-
-            {
-                emoji: "👀",
-
-                text:
-                    "You have absolutely no idea how cute you look when you're sleepy."
-            },
-
-            {
-                emoji: "🎙️",
-
-                text:
-                    "Your voice became familiar to me much faster than I expected."
-            },
-
-            {
-                emoji: "❤️",
-
-                text:
-                    "You have a very special place in someone's life. Hint: he owns this website."
-            },
-
-            {
-                emoji: "🌙",
-
-                text:
-                    "You can somehow make even quiet moments feel comfortable."
-            },
-
-            {
-                emoji: "💗",
-
-                text:
-                    "You don't need to try very hard to be special. You already are."
-            }
-
-        ];
-
-
-        const factGrid =
-            document.getElementById(
-                "fact-grid"
-            );
-
-        const factsProgress =
-            document.getElementById(
-                "facts-progress"
-            );
-
-        const factsNext =
-            document.getElementById(
-                "facts-next"
-            );
-
-
-        let discoveredFacts = 0;
-
-
-        facts.forEach(
-            function (fact, index) {
-
-                const card =
-                    document.createElement(
-                        "div"
-                    );
-
-                card.className =
-                    "fact-card";
-
-
-                card.innerHTML = `
-
-                    <div class="fact-inner">
-
-                        <div class="fact-front">
-
-                            ${fact.emoji}
-
-                            <span>
-                                TAP TO DISCOVER
-                            </span>
-
-                        </div>
-
-
-                        <div class="fact-back">
-
-                            ${fact.text}
-
-                        </div>
-
-                    </div>
-
-                `;
-
-
-                card.addEventListener(
-                    "click",
-                    function () {
-
-                        if (
-                            !card.classList.contains(
-                                "flipped"
-                            )
-                        ) {
-
-                            discoveredFacts++;
-
-                            factsProgress.textContent =
-                                discoveredFacts +
-                                " / 9 discovered";
-
-
-                            if (
-                                discoveredFacts ===
-                                9
-                            ) {
-
-                                factsNext.disabled =
-                                    false;
-
-                            }
-
-                        }
-
-
-                        card.classList.add(
-                            "flipped"
-                        );
-
-                    }
-                );
-
-
-                factGrid.appendChild(
-                    card
-                );
-
-            }
-        );
-
-
-        factsNext.addEventListener(
-            "click",
-            function () {
-
-                fadeTransition(
-                    function () {
-
-                        showSection(
-                            "mystery"
-                        );
-
-                    }
-                );
-
-            }
-        );
-
-
-        /* =========================================
-           PART 7 — MYSTERY BOX
-        ========================================== */
-
-        const mysteryBox =
-            document.getElementById(
-                "mystery-box"
-            );
-
-        const clickCounter =
-            document.getElementById(
-                "click-counter"
-            );
-
-        const mysteryText =
-            document.getElementById(
-                "mystery-text"
-            );
-
-
-        let mysteryClicks = 0;
-
-
-        mysteryBox.addEventListener(
-            "click",
-            function () {
-
-                mysteryClicks++;
-
-
-                clickCounter.textContent =
-                    mysteryClicks +
-                    " / 7";
-
-
-                mysteryBox.classList.remove(
-                    "shake"
-                );
-
-
-                void mysteryBox.offsetWidth;
-
-
-                mysteryBox.classList.add(
-                    "shake"
-                );
-
-
-                if (
-                    mysteryClicks === 1
-                ) {
-
-                    mysteryText.textContent =
-                        "Nothing happened. 😌";
-
-                } else if (
-                    mysteryClicks === 2
-                ) {
-
-                    mysteryText.textContent =
-                        "Try again. 👀";
-
-                } else if (
-                    mysteryClicks === 3
-                ) {
-
-                    mysteryText.textContent =
-                        "Are you sure this thing works? 😂";
-
-                } else if (
-                    mysteryClicks === 4
-                ) {
-
-                    mysteryText.textContent =
-                        "Okayyy stop bullying the box. 😭";
-
-                } else if (
-                    mysteryClicks === 5
-                ) {
-
-                    mysteryText.textContent =
-                        "Ummm... I think it moved. 👀";
-
-                } else if (
-                    mysteryClicks === 6
-                ) {
-
-                    mysteryText.textContent =
-                        "WAIT WAIT WAIT... 😳";
-
-                } else if (
-                    mysteryClicks === 7
-                ) {
-
-                    mysteryText.textContent =
-                        "OH NO. YOU BROKE THE UNIVERSE. 🕳️";
-
-                    setTimeout(
-                        startBlackHole,
-                        1000
-                    );
-
-                }
-
-            }
-        );
-
-
-        /* =========================================
-           BLACK HOLE
-        ========================================== */
-
-        function startBlackHole() {
-
-            fadeTransition(
-                function () {
-
-                    showSection(
-                        "black-hole"
-                    );
-
-
-                    setTimeout(
-                        function () {
-
-                            document
-                                .querySelector(
-                                    ".black-hole"
-                                )
-                                .style.transform =
-                                "scale(2.5)";
-
-                        },
-                        500
-                    );
-
-
-                    setTimeout(
-                        function () {
-
-                            showSection(
-                                "chapter-four"
-                            );
-
-                            confetti();
-
-                        },
-                        3000
-                    );
-
-                }
-            );
-
-        }
-
-
-        /* =========================================
-           CHAPTER 4
-        ========================================== */
-
-        document
-            .getElementById(
-                "chapter-four-button"
-            )
-            .addEventListener(
-                "click",
-                function () {
-
-                    /*
-                     * When Chapter 4 is ready,
-                     * change this to:
-                     *
-                     * window.location.href =
-                     * "chapter4.html";
-                     */
-
-                    alert(
-                        "Chapter IV is waiting for you... ❤️"
-                    );
-
-                }
-            );
-
-
-        /* =========================================
+        /* =====================================
            CONFETTI
-        ========================================== */
+        ====================================== */
 
-        function confetti() {
-
-            const container =
-                document.getElementById(
-                    "confetti"
-                );
-
+        function createConfetti() {
 
             const symbols = [
                 "❤️",
                 "💕",
                 "✨",
                 "⭐",
-                "🌸",
+                "🎀",
                 "💫"
             ];
 
 
             for (
                 let i = 0;
-                i < 40;
+                i < 35;
                 i++
             ) {
 
@@ -1617,7 +742,7 @@ document.addEventListener(
                     "s";
 
 
-                container.appendChild(
+                confettiContainer.appendChild(
                     piece
                 );
 
@@ -1634,6 +759,34 @@ document.addEventListener(
             }
 
         }
+
+
+        /* =====================================
+           CONTINUE TO PART 4
+        ====================================== */
+
+        continueButton.addEventListener(
+            "click",
+            function () {
+
+                transition.classList.remove(
+                    "hide"
+                );
+
+
+                setTimeout(
+                    function () {
+
+                        window.location.href =
+                            "part4.html";
+
+                    },
+                    900
+                );
+
+            }
+        );
+
 
     }
 );
