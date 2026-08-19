@@ -4,910 +4,465 @@
     box-sizing: border-box;
 }
 
-
 html,
 body {
     width: 100%;
     height: 100%;
 }
 
-
 body {
-
     overflow: hidden;
 
-    font-family:
-        "Poppins",
-        sans-serif;
+    font-family: Arial, sans-serif;
 
     color: white;
 
     background:
         radial-gradient(
             circle at center,
-            #21174d 0%,
-            #0c0827 45%,
-            #03030d 100%
+            #30205c,
+            #100a25 55%,
+            #05030d
         );
 }
 
 
-/* =========================================
-   BACKGROUND
-========================================= */
-
-.background-glow {
-
-    position: fixed;
-
-    width: 500px;
-    height: 500px;
-
-    border-radius: 50%;
-
-    filter: blur(120px);
-
-    opacity: .18;
-
-    pointer-events: none;
-}
-
-
-.glow-one {
-
-    top: -200px;
-    left: -150px;
-
-    background:
-        #a54f9c;
-
-}
-
-
-.glow-two {
-
-    right: -180px;
-    bottom: -200px;
-
-    background:
-        #435fa8;
-
-}
-
-
-/* =========================================
+/* =====================================
    STARS
-========================================= */
+===================================== */
 
-#stars {
-
+.stars {
     position: fixed;
-
     inset: 0;
 
     pointer-events: none;
-
 }
 
-
-.star {
+.stars::before,
+.stars::after {
+    content: "";
 
     position: absolute;
-
-    color: white;
-
-    opacity: .5;
-
-    animation:
-        twinkle
-        3s
-        ease-in-out
-        infinite;
-
-}
-
-
-@keyframes twinkle {
-
-    0%,
-    100% {
-        opacity: .15;
-        transform: scale(.8);
-    }
-
-    50% {
-        opacity: .8;
-        transform: scale(1.2);
-    }
-
-}
-
-
-/* =========================================
-   TRANSITION
-========================================= */
-
-.page-transition {
-
-    position: fixed;
-
     inset: 0;
 
-    background:
-        #02020b;
+    background-image:
+        radial-gradient(
+            white 1px,
+            transparent 1px
+        );
 
-    z-index: 1000;
+    background-size: 80px 80px;
 
-    opacity: 1;
+    opacity: 0.25;
+}
 
-    pointer-events: none;
-
-    transition:
-        opacity 1.2s ease;
-
+.stars::after {
+    background-size: 130px 130px;
+    opacity: 0.15;
 }
 
 
-.page-transition.hide {
-
-    opacity: 0;
-
-}
-
-
-/* =========================================
-   SCREEN
-========================================= */
+/* =====================================
+   SCREENS
+===================================== */
 
 .screen {
-
     position: fixed;
 
     inset: 0;
 
-    display: flex;
+    display: none;
 
     align-items: center;
-
     justify-content: center;
 
-    padding: 25px;
+    padding: 20px;
 
-    opacity: 0;
+    text-align: center;
 
-    visibility: hidden;
-
-    transform:
-        scale(.96);
-
-    transition:
-        opacity .8s ease,
-        transform .8s ease,
-        visibility .8s ease;
-
-    z-index: 10;
-
+    z-index: 2;
 }
-
 
 .screen.active {
-
-    opacity: 1;
-
-    visibility: visible;
-
-    transform:
-        scale(1);
-
+    display: flex;
 }
 
 
-/* =========================================
-   INTRO
-========================================= */
+/* =====================================
+   GENERAL
+===================================== */
 
-.intro-content {
+.content,
+.quizBox,
+.resultBox {
+    width: 100%;
+    max-width: 700px;
 
-    width:
-        min(700px, 92%);
-
-    text-align: center;
-
+    margin: auto;
 }
 
-
-.floating-icon {
-
-    font-size: 48px;
-
-    margin-bottom: 15px;
-
-    animation:
-        floatHeart
-        3s
-        ease-in-out
-        infinite;
-
-}
-
-
-@keyframes floatHeart {
-
-    0%,
-    100% {
-        transform:
-            translateY(0)
-            scale(.9);
-    }
-
-    50% {
-        transform:
-            translateY(-10px)
-            scale(1.08);
-    }
-
-}
-
-
-.small-heading {
-
-    font-size: 9px;
-
-    letter-spacing: 4px;
-
-    opacity: .55;
-
-    margin-bottom: 18px;
-
-}
-
-
-.intro-content h1 {
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        clamp(55px, 9vw, 90px);
-
-    font-weight: 400;
-
-    line-height: .9;
-
-    margin-bottom: 30px;
-
-}
-
-
-.intro-content h1 span {
-
-    display: block;
-
-    font-family:
-        "Great Vibes",
-        cursive;
-
-    font-size:
-        1.05em;
-
-}
-
-
-.intro-description {
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        clamp(20px, 4vw, 27px);
-
-    line-height: 1.35;
-
-    opacity: .75;
-
-}
-
-
-/* =========================================
-   BUTTON
-========================================= */
-
-.main-button {
-
-    margin-top: 35px;
-
-    padding:
-        15px 28px;
-
-    border:
-        none;
-
-    border-radius:
-        999px;
-
-    background:
-        white;
-
-    color:
-        #19123c;
-
-    font-family:
-        "Poppins",
-        sans-serif;
-
-    font-size: 10px;
-
-    font-weight: 600;
-
-    letter-spacing: 1.5px;
-
-    cursor: pointer;
-
-    box-shadow:
-        0 15px 40px
-        rgba(0,0,0,.35);
-
-    transition:
-        transform .25s ease,
-        box-shadow .25s ease;
-
-}
-
-
-.main-button:hover {
-
-    transform:
-        translateY(-4px);
-
-    box-shadow:
-        0 20px 50px
-        rgba(0,0,0,.5);
-
-}
-
-
-.main-button:active {
-
-    transform:
-        scale(.96);
-
-}
-
-
-/* =========================================
-   QUIZ
-========================================= */
-
-.quiz-container {
-
-    width:
-        min(700px, 94%);
-
-    text-align: center;
-
-}
-
-
-.quiz-top {
-
-    margin-bottom: 25px;
-
-}
-
-
-.question-number {
-
-    font-size: 10px;
+.chapter {
+    font-size: 11px;
 
     letter-spacing: 3px;
 
-    opacity: .6;
+    opacity: 0.55;
 
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+}
 
+.emoji {
+    font-size: 50px;
+
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-family: Georgia, serif;
+
+    font-size: clamp(45px, 9vw, 80px);
+
+    font-weight: normal;
+
+    line-height: 0.95;
+
+    margin-bottom: 30px;
+}
+
+h1 span {
+    display: block;
+
+    font-style: italic;
+
+    margin-top: 10px;
+}
+
+.description {
+    font-family: Georgia, serif;
+
+    font-size: 20px;
+
+    line-height: 1.5;
+
+    opacity: 0.75;
 }
 
 
-.progress-container {
+/* =====================================
+   BUTTON
+===================================== */
 
-    width:
-        min(300px, 80%);
+.mainButton {
+    margin-top: 35px;
 
-    height: 3px;
+    padding: 15px 28px;
 
-    margin:
-        auto;
+    border: none;
 
-    background:
-        rgba(255,255,255,.12);
+    border-radius: 30px;
 
-    border-radius:
-        999px;
+    background: white;
+
+    color: #160d32;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+}
+
+.mainButton:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 10px 30px
+        rgba(0, 0, 0, 0.35);
+}
+
+.mainButton:active {
+    transform: scale(0.96);
+}
+
+
+/* =====================================
+   QUIZ
+===================================== */
+
+.questionNumber {
+    font-size: 12px;
+
+    letter-spacing: 3px;
+
+    opacity: 0.6;
+
+    margin-bottom: 12px;
+}
+
+.progressBackground {
+    width: 280px;
+
+    max-width: 80%;
+
+    height: 4px;
+
+    margin: 0 auto 30px;
+
+    background: rgba(255, 255, 255, 0.15);
+
+    border-radius: 10px;
 
     overflow: hidden;
-
 }
 
-
-.progress-bar {
-
+#progressBar {
     width: 10%;
 
     height: 100%;
 
-    background:
-        white;
+    background: white;
 
-    box-shadow:
-        0 0 12px
-        rgba(255,255,255,.8);
-
-    transition:
-        width .5s ease;
-
+    transition: width 0.4s ease;
 }
 
 
-/* =========================================
+/* =====================================
    QUESTION CARD
-========================================= */
+===================================== */
 
-.question-card {
+.questionCard {
+    padding: 35px 25px;
 
-    padding:
-        35px 25px;
+    border-radius: 25px;
+
+    background:
+        rgba(255, 255, 255, 0.07);
 
     border:
         1px solid
-        rgba(255,255,255,.13);
-
-    border-radius:
-        28px;
-
-    background:
-        rgba(255,255,255,.055);
-
-    backdrop-filter:
-        blur(15px);
+        rgba(255, 255, 255, 0.15);
 
     box-shadow:
-        0 30px 80px
-        rgba(0,0,0,.35);
-
-    transition:
-        transform .4s ease,
-        opacity .4s ease;
-
+        0 20px 60px
+        rgba(0, 0, 0, 0.35);
 }
 
-
-.question-icon {
-
+.questionEmoji {
     font-size: 45px;
 
-    margin-bottom: 18px;
+    margin-bottom: 15px;
+}
 
+.questionCard h2 {
+    font-family: Georgia, serif;
+
+    font-size: clamp(25px, 5vw, 40px);
+
+    font-weight: normal;
+
+    line-height: 1.2;
+
+    margin-bottom: 12px;
+}
+
+.chooseText {
+    font-size: 11px;
+
+    opacity: 0.5;
+
+    margin-bottom: 25px;
 }
 
 
-.question-card h2 {
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        clamp(28px, 5vw, 43px);
-
-    font-weight: 500;
-
-    line-height: 1.15;
-
-    margin-bottom: 10px;
-
-}
-
-
-.choose-text {
-
-    font-size: 10px;
-
-    letter-spacing: 1px;
-
-    opacity: .5;
-
-    margin-bottom: 30px;
-
-}
-
-
-/* =========================================
+/* =====================================
    ANSWERS
-========================================= */
+===================================== */
 
-.answer-buttons {
+.answerArea {
+    display: grid;
 
-    display:
-        grid;
-
-    grid-template-columns:
-        1fr 1fr;
+    grid-template-columns: 1fr 1fr;
 
     gap: 15px;
-
 }
 
-
-.answer-button {
-
-    min-height: 90px;
+.answerButton {
+    min-height: 80px;
 
     border:
         1px solid
-        rgba(255,255,255,.18);
+        rgba(255, 255, 255, 0.2);
 
-    border-radius:
-        20px;
+    border-radius: 18px;
 
     background:
-        rgba(255,255,255,.06);
+        rgba(255, 255, 255, 0.06);
 
     color: white;
 
-    font-family:
-        "Poppins",
-        sans-serif;
-
-    font-size: 15px;
-
-    font-weight: 500;
+    font-size: 16px;
 
     cursor: pointer;
 
-    display:
-        flex;
-
-    flex-direction:
-        column;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    gap: 8px;
-
-    transition:
-        transform .25s ease,
-        background .25s ease,
-        border-color .25s ease;
-
+    transition: 0.25s ease;
 }
 
-
-.answer-button:hover {
+.answerButton:hover {
+    background:
+        rgba(255, 255, 255, 0.15);
 
     transform:
-        translateY(-5px);
+        translateY(-4px);
+}
 
+.answerButton:disabled {
+    cursor: default;
+}
+
+.answerButton.correct {
     background:
-        rgba(255,255,255,.13);
+        rgba(60, 200, 120, 0.3);
 
     border-color:
-        rgba(255,255,255,.4);
-
+        rgba(100, 255, 160, 0.8);
 }
 
-
-.answer-button:disabled {
-
-    cursor:
-        default;
-
-}
-
-
-.answer-icon {
-
-    font-size: 24px;
-
-}
-
-
-/* correct */
-
-.answer-button.correct {
-
+.answerButton.wrong {
     background:
-        rgba(91, 214, 148, .18);
+        rgba(255, 70, 100, 0.3);
 
     border-color:
-        rgba(120,255,180,.6);
-
+        rgba(255, 120, 140, 0.8);
 }
 
 
-/* wrong */
+/* =====================================
+   FEEDBACK
+===================================== */
 
-.answer-button.wrong {
-
-    background:
-        rgba(255,80,120,.18);
-
-    border-color:
-        rgba(255,120,150,.6);
-
-}
-
-
-/* =========================================
-   QUIZ MESSAGE
-========================================= */
-
-.quiz-message {
-
+.feedback {
     min-height: 25px;
 
     margin-top: 18px;
 
-    font-size: 12px;
-
-    font-weight: 500;
-
+    font-size: 13px;
 }
 
 
-/* =========================================
+/* =====================================
    RESULT
-========================================= */
+===================================== */
 
-.result-container {
+.resultEmoji {
+    font-size: 60px;
 
-    width:
-        min(650px, 94%);
-
-    text-align: center;
-
+    margin-bottom: 15px;
 }
 
+.resultBox h1 {
+    font-size: 45px;
 
-.result-icon {
-
-    font-size: 55px;
-
-    margin-bottom: 12px;
-
-    animation:
-        resultBounce
-        2s
-        ease-in-out
-        infinite;
-
+    margin-bottom: 5px;
 }
-
-
-@keyframes resultBounce {
-
-    0%,
-    100% {
-        transform:
-            translateY(0);
-    }
-
-    50% {
-        transform:
-            translateY(-10px);
-    }
-
-}
-
-
-.result-container h1 {
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        clamp(35px, 6vw, 50px);
-
-    font-weight: 400;
-
-}
-
 
 .score {
-
-    margin:
-        5px 0 15px;
-
+    margin-bottom: 20px;
 }
-
 
 .score span {
+    font-size: 110px;
 
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        clamp(90px, 16vw, 150px);
-
-    line-height: .8;
-
+    font-family: Georgia, serif;
 }
-
 
 .score small {
+    font-size: 30px;
 
-    font-size: 28px;
+    opacity: 0.5;
+}
 
-    opacity: .5;
+.resultBox h2 {
+    font-size: 22px;
 
+    margin-bottom: 15px;
+}
+
+.resultDescription {
+    font-family: Georgia, serif;
+
+    font-size: 20px;
+
+    line-height: 1.5;
+
+    opacity: 0.7;
 }
 
 
-.result-message {
+/* =====================================
+   STATS
+===================================== */
 
-    font-size:
-        clamp(18px, 4vw, 27px);
+.stats {
+    display: flex;
 
-    font-weight: 600;
-
-    margin:
-        20px 0 12px;
-
-}
-
-
-.result-subtext {
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size: 21px;
-
-    line-height: 1.35;
-
-    opacity: .7;
-
-}
-
-
-.result-stats {
-
-    display:
-        flex;
-
-    justify-content:
-        center;
+    justify-content: center;
 
     gap: 60px;
 
     margin-top: 25px;
-
 }
 
+.stats div {
+    display: flex;
 
-.stat {
-
-    display:
-        flex;
-
-    flex-direction:
-        column;
-
+    flex-direction: column;
 }
 
-
-.stat span {
-
+.stats strong {
     font-size: 28px;
-
-    font-weight: 600;
-
 }
 
-
-.stat small {
-
-    font-size: 8px;
+.stats span {
+    font-size: 9px;
 
     letter-spacing: 2px;
 
-    opacity: .5;
-
+    opacity: 0.5;
 }
 
 
-/* =========================================
-   CONFETTI
-========================================= */
-
-.confetti-container {
-
-    position: fixed;
-
-    inset: 0;
-
-    pointer-events: none;
-
-    overflow: hidden;
-
-    z-index: 100;
-
-}
-
-
-.confetti {
-
-    position: absolute;
-
-    top: -20px;
-
-    font-size: 18px;
-
-    animation:
-        confettiFall
-        3s
-        linear
-        forwards;
-
-}
-
-
-@keyframes confettiFall {
-
-    to {
-
-        transform:
-            translateY(110vh)
-            rotate(720deg);
-
-        opacity: 0;
-
-    }
-
-}
-
-
-/* =========================================
+/* =====================================
    MOBILE
-========================================= */
+===================================== */
 
 @media (max-width: 600px) {
 
-    .answer-buttons {
-
-        grid-template-columns:
-            1fr;
-
+    .answerArea {
+        grid-template-columns: 1fr;
     }
 
-
-    .answer-button {
-
-        min-height: 70px;
-
+    .answerButton {
+        min-height: 65px;
     }
 
-
-    .question-card {
-
-        padding:
-            30px 18px;
-
+    .questionCard {
+        padding: 25px 18px;
     }
 
+    .resultBox h2 {
+        font-size: 18px;
+    }
 
-    .result-stats {
+    .resultDescription {
+        font-size: 17px;
+    }
 
+    .stats {
         gap: 35px;
-
     }
 
 }
