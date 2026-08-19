@@ -1,792 +1,399 @@
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
+document.addEventListener("DOMContentLoaded", function () {
+
+    /* =====================================
+       GET ELEMENTS
+    ===================================== */
+
+    const introScreen =
+        document.getElementById("introScreen");
+
+    const quizScreen =
+        document.getElementById("quizScreen");
+
+    const resultScreen =
+        document.getElementById("resultScreen");
+
+    const startButton =
+        document.getElementById("startButton");
+
+    const questionNumber =
+        document.getElementById("questionNumber");
+
+    const progressBar =
+        document.getElementById("progressBar");
+
+    const questionText =
+        document.getElementById("questionText");
+
+    const questionEmoji =
+        document.getElementById("questionEmoji");
+
+    const feedback =
+        document.getElementById("feedback");
+
+    const answerButtons =
+        document.querySelectorAll(".answerButton");
+
+    const finalScore =
+        document.getElementById("finalScore");
+
+    const correctNumber =
+        document.getElementById("correctNumber");
+
+    const wrongNumber =
+        document.getElementById("wrongNumber");
+
+    const resultMessage =
+        document.getElementById("resultMessage");
+
+    const continueButton =
+        document.getElementById("continueButton");
 
 
-        /* =====================================
-           ELEMENTS
-        ====================================== */
+    /* =====================================
+       QUESTIONS
+    ===================================== */
 
-        const introScreen =
-            document.getElementById(
-                "intro-screen"
-            );
+    const questions = [
 
-        const quizScreen =
-            document.getElementById(
-                "quiz-screen"
-            );
+        {
+            text:
+                "Who is more likely to start a random conversation at 2 AM? 🌙",
 
-        const resultScreen =
-            document.getElementById(
-                "result-screen"
-            );
+            emoji:
+                "🌙",
 
-        const startQuiz =
-            document.getElementById(
-                "start-quiz"
-            );
+            answer:
+                "Tisha"
+        },
 
-        const questionNumber =
-            document.getElementById(
-                "question-number"
-            );
+        {
+            text:
+                "Who gets sleepy first when you're together? 😴",
 
-        const progressBar =
-            document.getElementById(
-                "progress-bar"
-            );
+            emoji:
+                "😴",
 
-        const question =
-            document.getElementById(
-                "question"
-            );
+            answer:
+                "Tisha"
+        },
 
-        const questionIcon =
-            document.getElementById(
-                "question-icon"
-            );
+        {
+            text:
+                "Who is more talkative? 😂",
 
-        const answerButtons =
-            document.querySelectorAll(
-                ".answer-button"
-            );
+            emoji:
+                "😂",
 
-        const quizMessage =
-            document.getElementById(
-                "quiz-message"
-            );
+            answer:
+                "Tisha"
+        },
 
-        const scoreElement =
-            document.getElementById(
-                "score"
-            );
+        {
+            text:
+                "Who is more likely to overthink a tiny thing? 👀",
 
-        const correctCount =
-            document.getElementById(
-                "correct-count"
-            );
+            emoji:
+                "👀",
 
-        const wrongCount =
-            document.getElementById(
-                "wrong-count"
-            );
+            answer:
+                "Ritesh"
+        },
 
-        const resultMessage =
-            document.getElementById(
-                "result-message"
-            );
+        {
+            text:
+                "Who is more likely to say I'm fine when they're clearly NOT fine? 😭",
 
-        const continueButton =
-            document.getElementById(
-                "continue-button"
-            );
+            emoji:
+                "😭",
 
-        const confettiContainer =
-            document.getElementById(
-                "confetti-container"
-            );
+            answer:
+                "Ritesh"
+        },
 
-        const transition =
-            document.getElementById(
-                "page-transition"
-            );
+        {
+            text:
+                "Who gets more excited about little things? ✨",
+
+            emoji:
+                "✨",
+
+            answer:
+                "Tisha"
+        },
+
+        {
+            text:
+                "Who is more likely to steal the other's food after saying they're not hungry? 🍟",
+
+            emoji:
+                "🍟",
+
+            answer:
+                "Tisha"
+        },
+
+        {
+            text:
+                "Who is more dramatic when something doesn't go their way? 🎭",
+
+            emoji:
+                "🎭",
+
+            answer:
+                "Ritesh"
+        },
+
+        {
+            text:
+                "Who is more likely to randomly say something that makes the other person laugh? 🤭",
+
+            emoji:
+                "🤭",
+
+            answer:
+                "Ritesh"
+        },
+
+        {
+            text:
+                "Be honest... who fell harder? ❤️",
+
+            emoji:
+                "❤️",
+
+            answer:
+                "Tisha"
+        }
+
+    ];
 
 
-        /* =====================================
-           QUESTIONS
-        ====================================== */
+    /* =====================================
+       VARIABLES
+    ===================================== */
 
-        const questions = [
+    let currentQuestion = 0;
 
-            {
-                question:
-                    "Who is more likely to start a random conversation at 2 AM? 🌙",
+    let score = 0;
 
-                icon:
-                    "🌙",
+    let answered = false;
 
-                answer:
-                    "Tisha"
-            },
 
-            {
-                question:
-                    "Who gets sleepy first when you're together? 😴",
+    /* =====================================
+       SHOW ONLY ONE SCREEN
+    ===================================== */
 
-                icon:
-                    "😴",
+    function showScreen(screen) {
 
-                answer:
-                    "Tisha"
-            },
+        introScreen.classList.remove("active");
 
-            {
-                question:
-                    "Who is more talkative? 😂",
+        quizScreen.classList.remove("active");
 
-                icon:
-                    "😂",
+        resultScreen.classList.remove("active");
 
-                answer:
-                    "Tisha"
-            },
+        screen.classList.add("active");
+    }
 
-            {
-                question:
-                    "Who is more likely to overthink a tiny thing? 👀",
 
-                icon:
-                    "👀",
+    /* =====================================
+       START QUIZ
+    ===================================== */
 
-                answer:
-                    "Ritesh"
-            },
+    startButton.addEventListener("click", function () {
 
-            {
-                question:
-                    'Who is more likely to say "I\'m fine" when they\'re clearly NOT fine? 😭',
+        currentQuestion = 0;
 
-                icon:
-                    "😭",
+        score = 0;
 
-                answer:
-                    "Ritesh"
-            },
+        showScreen(quizScreen);
 
-            {
-                question:
-                    "Who gets more excited about little things? ✨",
+        loadQuestion();
+    });
 
-                icon:
-                    "✨",
 
-                answer:
-                    "Tisha"
-            },
+    /* =====================================
+       LOAD QUESTION
+    ===================================== */
 
-            {
-                question:
-                    "Who is more likely to steal the other's food after saying they're not hungry? 🍟",
+    function loadQuestion() {
 
-                icon:
-                    "🍟",
+        answered = false;
 
-                answer:
-                    "Tisha"
-            },
+        feedback.textContent = "";
 
-            {
-                question:
-                    "Who is more dramatic when something doesn't go their way? 🎭",
+        const current =
+            questions[currentQuestion];
 
-                icon:
-                    "🎭",
 
-                answer:
-                    "Ritesh"
-            },
+        questionNumber.textContent =
+            String(currentQuestion + 1).padStart(2, "0")
+            + " / 10";
 
-            {
-                question:
-                    "Who is more likely to randomly say something that makes the other person laugh? 🤭",
 
-                icon:
-                    "🤭",
+        progressBar.style.width =
+            ((currentQuestion + 1) * 10) + "%";
 
-                answer:
-                    "Ritesh"
-            },
 
-            {
-                question:
-                    "Be honest... who fell harder? ❤️",
+        questionEmoji.textContent =
+            current.emoji;
 
-                icon:
-                    "❤️",
 
-                answer:
-                    "Tisha"
+        questionText.textContent =
+            current.text;
+
+
+        answerButtons.forEach(function (button) {
+
+            button.disabled = false;
+
+            button.classList.remove("correct");
+
+            button.classList.remove("wrong");
+
+        });
+
+    }
+
+
+    /* =====================================
+       ANSWER BUTTONS
+    ===================================== */
+
+    answerButtons.forEach(function (button) {
+
+        button.addEventListener("click", function () {
+
+            if (answered === true) {
+                return;
             }
 
-        ];
+            answered = true;
 
 
-        /* =====================================
-           STATE
-        ====================================== */
+            const selectedAnswer =
+                button.getAttribute("data-answer");
 
-        let currentQuestion = 0;
 
-        let score = 0;
+            const correctAnswer =
+                questions[currentQuestion].answer;
 
-        let answered = false;
 
+            answerButtons.forEach(function (item) {
 
-        /* =====================================
-           BACKGROUND STARS
-        ====================================== */
+                item.disabled = true;
 
-        function createStars() {
+            });
 
-            const container =
-                document.getElementById(
-                    "stars"
-                );
 
-            for (
-                let i = 0;
-                i < 80;
-                i++
-            ) {
+            if (selectedAnswer === correctAnswer) {
 
-                const star =
-                    document.createElement(
-                        "span"
-                    );
+                score++;
 
-                star.className =
-                    "star";
+                button.classList.add("correct");
 
-                star.textContent =
-                    Math.random() > .8
-                        ? "✦"
-                        : "•";
-
-                star.style.left =
-                    Math.random() *
-                    100 +
-                    "%";
-
-                star.style.top =
-                    Math.random() *
-                    100 +
-                    "%";
-
-                star.style.animationDelay =
-                    Math.random() *
-                    4 +
-                    "s";
-
-                container.appendChild(
-                    star
-                );
-
-            }
-
-        }
-
-        createStars();
-
-
-        /* =====================================
-           INITIAL TRANSITION
-        ====================================== */
-
-        setTimeout(
-            function () {
-
-                transition.classList.add(
-                    "hide"
-                );
-
-            },
-            300
-        );
-
-
-        /* =====================================
-           SHOW SCREEN
-        ====================================== */
-
-        function showScreen(
-            screen
-        ) {
-
-            document
-                .querySelectorAll(
-                    ".screen"
-                )
-                .forEach(
-                    function (item) {
-
-                        item.classList
-                            .remove(
-                                "active"
-                            );
-
-                    }
-                );
-
-
-            setTimeout(
-                function () {
-
-                    screen.classList
-                        .add(
-                            "active"
-                        );
-
-                },
-                100
-            );
-
-        }
-
-
-        /* =====================================
-           START QUIZ
-        ====================================== */
-
-        startQuiz.addEventListener(
-            "click",
-            function () {
-
-                currentQuestion = 0;
-
-                score = 0;
-
-                loadQuestion();
-
-                showScreen(
-                    quizScreen
-                );
-
-            }
-        );
-
-
-        /* =====================================
-           LOAD QUESTION
-        ====================================== */
-
-        function loadQuestion() {
-
-            answered = false;
-
-            quizMessage.textContent =
-                "";
-
-
-            const current =
-                questions[
-                    currentQuestion
-                ];
-
-
-            questionNumber.textContent =
-                String(
-                    currentQuestion + 1
-                ).padStart(
-                    2,
-                    "0"
-                ) +
-                " / 10";
-
-
-            progressBar.style.width =
-                (
-                    (
-                        currentQuestion + 1
-                    ) /
-                    questions.length *
-                    100
-                ) +
-                "%";
-
-
-            questionIcon.textContent =
-                current.icon;
-
-
-            question.textContent =
-                current.question;
-
-
-            answerButtons.forEach(
-                function (button) {
-
-                    button.disabled =
-                        false;
-
-                    button.classList
-                        .remove(
-                            "correct",
-                            "wrong"
-                        );
-
-                }
-            );
-
-        }
-
-
-        /* =====================================
-           ANSWER CLICK
-        ====================================== */
-
-        answerButtons.forEach(
-            function (button) {
-
-                button.addEventListener(
-                    "click",
-                    function () {
-
-                        if (answered) {
-                            return;
-                        }
-
-                        answered = true;
-
-
-                        const selected =
-                            button.dataset.answer;
-
-                        const correct =
-                            questions[
-                                currentQuestion
-                            ].answer;
-
-
-                        answerButtons
-                            .forEach(
-                                function (item) {
-
-                                    item.disabled =
-                                        true;
-
-                                }
-                            );
-
-
-                        if (
-                            selected ===
-                            correct
-                        ) {
-
-                            score++;
-
-                            button.classList
-                                .add(
-                                    "correct"
-                                );
-
-                            quizMessage.textContent =
-                                getCorrectMessage();
-
-
-                        } else {
-
-                            button.classList
-                                .add(
-                                    "wrong"
-                                );
-
-                            quizMessage.textContent =
-                                getWrongMessage();
-
-                        }
-
-
-                        setTimeout(
-                            function () {
-
-                                if (
-                                    currentQuestion <
-                                    questions.length - 1
-                                ) {
-
-                                    currentQuestion++;
-
-                                    animateNextQuestion();
-
-                                } else {
-
-                                    showResults();
-
-                                }
-
-                            },
-                            1100
-                        );
-
-                    }
-                );
-
-            }
-        );
-
-
-        /* =====================================
-           NEXT QUESTION ANIMATION
-        ====================================== */
-
-        function animateNextQuestion() {
-
-            const card =
-                document.getElementById(
-                    "question-card"
-                );
-
-
-            card.style.opacity =
-                "0";
-
-            card.style.transform =
-                "translateX(30px)";
-
-
-            setTimeout(
-                function () {
-
-                    loadQuestion();
-
-                    card.style.transform =
-                        "translateX(-30px)";
-
-                    requestAnimationFrame(
-                        function () {
-
-                            card.style.opacity =
-                                "1";
-
-                            card.style.transform =
-                                "translateX(0)";
-
-                        }
-                    );
-
-                },
-                350
-            );
-
-        }
-
-
-        /* =====================================
-           CORRECT MESSAGES
-        ====================================== */
-
-        function getCorrectMessage() {
-
-            const messages = [
-
-                "YESS GIRLLLL 😭❤️",
-
-                "I KNEW YOU'D KNOW THAT! 👀",
-
-                "Okayyy, somebody's been paying attention. 😌",
-
-                "CORRECTTTT! 🥹",
-
-                "Look at you remembering everything! ❤️"
-
-            ];
-
-
-            return messages[
-                Math.floor(
-                    Math.random() *
-                    messages.length
-                )
-            ];
-
-        }
-
-
-        /* =====================================
-           WRONG MESSAGES
-        ====================================== */
-
-        function getWrongMessage() {
-
-            const messages = [
-
-                "OHHHH NOOO 😭",
-
-                "SISTARRRR WHAT WAS THAT? 😂",
-
-                "I'm judging you respectfully. 👀",
-
-                "Bro really chose that answer 😭",
-
-                "We'll pretend that didn't happen. 😂"
-
-            ];
-
-
-            return messages[
-                Math.floor(
-                    Math.random() *
-                    messages.length
-                )
-            ];
-
-        }
-
-
-        /* =====================================
-           RESULTS
-        ====================================== */
-
-        function showResults() {
-
-            scoreElement.textContent =
-                score;
-
-            correctCount.textContent =
-                score;
-
-            wrongCount.textContent =
-                questions.length -
-                score;
-
-
-            if (
-                score === 9
-            ) {
-
-                resultMessage.textContent =
-                    "YOU GOT 1 WRONG SISTARRRRR 😭";
-
-            } else if (
-                score === 10
-            ) {
-
-                resultMessage.textContent =
-                    "OKAYYY PERFECT SCORE 😭❤️";
-
-            } else if (
-                score >= 7
-            ) {
-
-                resultMessage.textContent =
-                    "NOT BAD SISTARRRR 😌❤️";
+                feedback.textContent =
+                    "YESS! You know us too well. ❤️";
 
             } else {
 
-                resultMessage.textContent =
-                    "BROOO WE NEED TO TALK 😭😂";
+                button.classList.add("wrong");
+
+                feedback.textContent =
+                    "OHHHH NOOOO 😭😂";
 
             }
 
 
-            showScreen(
-                resultScreen
-            );
+            setTimeout(function () {
+
+                if (
+                    currentQuestion <
+                    questions.length - 1
+                ) {
+
+                    currentQuestion++;
+
+                    loadQuestion();
+
+                } else {
+
+                    showResult();
+
+                }
+
+            }, 1000);
+
+        });
+
+    });
 
 
-            setTimeout(
-                createConfetti,
-                400
-            );
+    /* =====================================
+       SHOW RESULT
+    ===================================== */
+
+    function showResult() {
+
+        const wrong =
+            questions.length - score;
+
+
+        finalScore.textContent =
+            score;
+
+
+        correctNumber.textContent =
+            score;
+
+
+        wrongNumber.textContent =
+            wrong;
+
+
+        if (score === 9) {
+
+            resultMessage.textContent =
+                "YOU GOT 1 WRONG SISTARRRRR 😭";
+
+        } else if (score === 10) {
+
+            resultMessage.textContent =
+                "PERFECT SCORE! OKAYYY GENIUS 😭❤️";
+
+        } else if (score >= 7) {
+
+            resultMessage.textContent =
+                "NOT BAD SISTARRRR 😌❤️";
+
+        } else {
+
+            resultMessage.textContent =
+                "BROOOO WE NEED TO HAVE A TALK 😭😂";
 
         }
 
 
-        /* =====================================
-           CONFETTI
-        ====================================== */
-
-        function createConfetti() {
-
-            const symbols = [
-                "❤️",
-                "💕",
-                "✨",
-                "⭐",
-                "🎀",
-                "💫"
-            ];
-
-
-            for (
-                let i = 0;
-                i < 35;
-                i++
-            ) {
-
-                const piece =
-                    document.createElement(
-                        "span"
-                    );
-
-                piece.className =
-                    "confetti";
-
-                piece.textContent =
-                    symbols[
-                        Math.floor(
-                            Math.random() *
-                            symbols.length
-                        )
-                    ];
-
-
-                piece.style.left =
-                    Math.random() *
-                    100 +
-                    "%";
-
-
-                piece.style.animationDelay =
-                    Math.random() *
-                    .8 +
-                    "s";
-
-
-                piece.style.animationDuration =
-                    2 +
-                    Math.random() *
-                    2 +
-                    "s";
-
-
-                confettiContainer.appendChild(
-                    piece
-                );
-
-
-                setTimeout(
-                    function () {
-
-                        piece.remove();
-
-                    },
-                    4500
-                );
-
-            }
-
-        }
-
-
-        /* =====================================
-           CONTINUE TO PART 4
-        ====================================== */
-
-        continueButton.addEventListener(
-            "click",
-            function () {
-
-                transition.classList.remove(
-                    "hide"
-                );
-
-
-                setTimeout(
-                    function () {
-
-                        window.location.href =
-                            "part4.html";
-
-                    },
-                    900
-                );
-
-            }
-        );
-
+        showScreen(resultScreen);
 
     }
-);
+
+
+    /* =====================================
+       CONTINUE
+    ===================================== */
+
+    continueButton.addEventListener("click", function () {
+
+        /*
+         * Part 4 will be created next.
+         *
+         * For now this sends the user to
+         * part4.html.
+         */
+
+        window.location.href = "part4.html";
+
+    });
+
+});
